@@ -1,11 +1,13 @@
+const url = '/mux/web/nordnet/seed.html';
+
 const beforeEach = client => {
   client
-    .url(client.launch_url)
+    .url(client.launch_url + url)
     .waitForElementVisible('body', 1000);
 };
 
 const displaysPage = client => {
-  client.expect.element('body').to.be.present;
+  client.expect.element('#nordnet-react-app-light').to.be.present;
   client.end();
 };
 

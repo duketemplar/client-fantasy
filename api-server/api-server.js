@@ -18,6 +18,7 @@ router.post('/next/2/accounts/:accno/orders', routes.orders.enterOrder);
 app
   .use(mount('/sc/', serve(__dirname + '/sc')))
   .use(mount('/now/', serve(__dirname + '/now')))
+  .use(mount('/mux/', serve(__dirname + '/mux')))
   .use(mount('/next', ntagMiddleware))
   .use(mount('/next/2/accounts', authenticatedMiddleware))
   .use(jsonFixtures(__dirname + '/fixtures'))
