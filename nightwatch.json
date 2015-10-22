@@ -1,28 +1,31 @@
 {
-	"src_folders" : ["e2e-tests"],
+	"src_folders" : ["e2e-tests/tests"],
 	"output_folder" : "e2e-reports",
+  "custom_commands_path" : "",
+  "custom_assertions_path" : "",
+  "page_objects_path" : "e2e-tests/page-objects",
+  "globals_path" : "",
+
+	"selenium" : {
+		"start_process" : true,
+		"server_path" : "./e2e-tests/server/selenium-server-standalone-2.48.2.jar",
+		"log_path" : "",
+		"host" : "127.0.0.1",
+		"port" : 4444
+	},
 
 	"test_settings" : {
 		"default" : {
-			"launch_url" : "https://nordnet.webfront1.ci.nordnet.se",
+			"launch_url" : "http://localhost:9000",
 			"selenium_port"  : 4444,
-			"selenium_host"  : "selenium.test.nordnet.se",
+			"selenium_host"  : "localhost",
 			"silent": true,
-			"end_session_on_fail": false,
 			"screenshots" : {
 				"enabled" : false,
-				"path" : ""
+				"path" : "e2e-screenshots"
 			},
 			"desiredCapabilities": {
-				"browserName": "chrome",
-				"javascriptEnabled": true,
-				"acceptSslCerts": true
-			}
-		},
-
-		"chrome" : {
-			"desiredCapabilities": {
-				"browserName": "chrome",
+				"browserName": "firefox",
 				"javascriptEnabled": true,
 				"acceptSslCerts": true
 			}
