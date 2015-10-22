@@ -3,15 +3,19 @@
 	"output_folder" : "e2e-reports",
   "custom_commands_path" : "",
   "custom_assertions_path" : "",
-  "page_objects_path" : "e2e-tests/page-objects",
+  "page_objects_path" : ["e2e-tests/page-objects"],
   "globals_path" : "",
 
 	"selenium" : {
 		"start_process" : true,
 		"server_path" : "./e2e-tests/server/selenium-server-standalone-2.48.2.jar",
-		"log_path" : "",
-		"host" : "127.0.0.1",
-		"port" : 4444
+		"log_path" : "e2e-tests/logs",
+		"host" : "localhost",
+		"port" : 4444,
+		"cli_args" : {
+      "webdriver.chrome.driver" : "",
+      "webdriver.ie.driver" : ""
+    }
 	},
 
 	"test_settings" : {
