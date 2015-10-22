@@ -5,3 +5,5 @@ node_modules
 reports
 coverage
 .idea
+e2e-tests/server
+e2e-tests/logs
