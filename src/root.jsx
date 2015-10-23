@@ -12,9 +12,6 @@ import React from 'react';
 // imports Redux Provider, see https://github.com/rackt/react-redux#provider-store
 import { Provider } from 'react-redux';
 
-// imports Redux DevTools, see https://github.com/gaearon/redux-devtools#redux-devtools
-import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
-
 // React container component that is responsible for loading initial data on DOM mount
 import AccountsListContainer from './accounts/app';
 
@@ -43,11 +40,13 @@ const AppWithI18N = i18n(App);
 export default function(element, intlData) {
 
   // creates Redux debug panel that is injected on the page in development mode
-  function createDebugPanel() {
-    return (<DebugPanel top right bottom>
-        <DevTools store={store} monitor={LogMonitor} />
-      </DebugPanel>
-    );
+  function createDebugPanel(store) {
+    if (DEBUG) {
+      const devtools = require('./devtools');
+      return devtools.createDebugPanel(store);
+    }
+
+    return null;
   }
 
   // Calls React.render and renders application within provided element
@@ -55,13 +54,10 @@ export default function(element, intlData) {
   // See https://github.com/rackt/react-redux#provider-store
   let rootInstance = React.render(
     <div>
-      <Provider store={store}>
-        {() => <AppWithI18N {...intlData}  />}
+      <Provider store={ store }>
+        {() => <AppWithI18N { ...intlData }  />}
       </Provider>
-      {
-        // injects Redux debug panel on the page when in development mode
-        DEBUG && createDebugPanel()
-      }
+      { createDebugPanel(store) }
     </div>,
     element
   );
@@ -69,10 +65,8 @@ export default function(element, intlData) {
   // https://github.com/gaearon/react-hot-loader/blob/master/docs/README.md#usage-with-external-react
   if (module.hot) {
     require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
-      getRootInstances: () => {
-        // Help React Hot Loader figure out the root component instances on the page:
-        return [rootInstance];
-      },
+      // Help React Hot Loader figure out the root component instances on the page:
+      getRootInstances: () => [rootInstance],
     });
   }
 }

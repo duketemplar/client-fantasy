@@ -4,7 +4,7 @@
  * See http://rackt.github.io/redux/docs/basics/Store.html for more details on Redux stores.
  */
 
-import { compose, combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 // custom reducer for accounts component
@@ -21,23 +21,12 @@ const REDUCERS = {
 
 // creates Redux store
 function finalCreateStore(middleware) {
-  /*eslint-disable */
-  return DEBUG ? finalCreateStoreDebug(middleware) : finalCreateStoreProduction(middleware);
-  /*eslint-enable */
-}
+  if (DEBUG) {
+    const devtools = require('./devtools');
+    return devtools.createStoreWithDevTools(applyMiddleware(...middleware));
+  }
 
-// creates Redux store when running in production mode
-function finalCreateStoreProduction(middleware) {
   return applyMiddleware(...middleware)(createStore);
-}
-
-// creates Redux store when running in development mode - adds redux-devtools support
-function finalCreateStoreDebug(middleware) {
-  return compose(applyMiddleware(...middleware),
-    require('redux-devtools').devTools(),
-    require('redux-devtools').persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)
-    )
-  )(createStore);
 }
 
 // combines Redux reducers using Redux utility function combineReducers
