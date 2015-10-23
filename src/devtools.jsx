@@ -1,6 +1,5 @@
 import React from 'react';
 import { compose, createStore } from 'redux';
-import { Provider } from 'react-redux';
 import { devTools, persistState} from 'redux-devtools';
 import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 
