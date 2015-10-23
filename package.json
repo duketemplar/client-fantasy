@@ -34,7 +34,7 @@
     "test:debug": "KARMA_ENV=sourcemap karma start --no-single-run --reporters mocha --browsers Chrome",
     "test:windebug": "set KARMA_ENV=sourcemap&&karma start --no-single-run --reporters mocha --browsers Chrome",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha karma.conf",
-    "pree2e-test": "mkdirp e2e-tests/logs",
+    "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "node nightwatch.js -r junit",
     "pree2e-test:install": "mkdir -p e2e-tests/server",
     "e2e-test:install": "! [ -a 'e2e-tests/server/selenium-server-standalone-2.48.2.jar' ] && npm run e2e-test:download || echo 'selenium server already installed'",
