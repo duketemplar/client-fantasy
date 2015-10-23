@@ -7,6 +7,7 @@ const beforeEach = client => {
 };
 
 const displaysPage = client => {
+  client.waitForElementVisible('body', 1000);
   client.expect.element('#nordnet-react-app-light').to.be.present;
   client.end();
 };
