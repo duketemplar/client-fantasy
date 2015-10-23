@@ -16,7 +16,7 @@
       "webdriver.chrome.driver": "",
       "webdriver.ie.driver": ""
     }
-	},
+  },
 
   "test_settings" : {
     "default": {
@@ -32,7 +32,7 @@
         "browserName": "phantomjs",
         "javascriptEnabled": true,
         "acceptSslCerts": true
-			}
-		}
-	}
+      }
+    }
+  }
 }
