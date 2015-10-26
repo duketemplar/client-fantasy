@@ -118,7 +118,7 @@
     "sinon-chai": "2.8.0",
     "style-loader": "0.12.2",
     "template-html-loader": "0.0.3",
-    "webpack": "1.9.5",
+    "webpack": "1.12.2",
     "webpack-dev-server": "1.8.2"
   }
 }
