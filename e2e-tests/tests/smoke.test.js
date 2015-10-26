@@ -1,4 +1,6 @@
-const url = '/mux/web/nordnet/seed.html';
+console.log('ENV', process.env.NIGHTWATCH_ENV);
+
+const url = ('dev' === process.env.NIGHTWATCH_ENV) ? '' : '/mux/web/nordnet/seed.html';
 
 const beforeEach = client => {
   client
