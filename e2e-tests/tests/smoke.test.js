@@ -13,37 +13,44 @@ const url = ('dev' === process.env.NIGHTWATCH_ENV) ? '' : '/mux/web/nordnet/seed
 // 3. Use screenshots
 
 
-const beforeEach = client => {
-  client
-    .url(client.launch_url + url)
-    .waitForElementVisible('body', 1000);
-};
+//const beforeEach = client => {
+//  client
+//    .url(client.launch_url + url)
+//    .waitForElementVisible('body', 1000);
+//};
 
 const displaysPage = client => {
-  client.waitForElementVisible('body', 1000);
-  client.expect.element('#nordnet-react-app-light').to.be.present;
+  client.page.accounts().gotoAccounts();
   client.end();
 };
 
 const displaysAccounts = client => {
-  client.waitForElementVisible('select', 1000);
-  client.waitForElementVisible('input', 1000);
-  client.expect.element('#nordnet-react-app-light').to.be.present;
-  client.expect.element('#login-container').to.be.present;
-  client.assert.containsText('#login-container', 'Username');
-  client.setValue('input[type=text]', 'stora');
-  client.expect.element('button').to.be.present;
-  client.click('select option[value="sv-SE"]');
-  client.waitForElementVisible('select', 1000);
-  client.click('button');
+  // some sanity checks
+  const accounts = client.page.accounts();
+  accounts.gotoAccounts();
+  accounts.login('stora', 'secret', 'sv-SE');
   client.waitForElementVisible('.accounts-list', 5000);
   client.expect.element('.accounts-list .alias').to.be.present;
   client.end();
 };
 
+//const displaysAccounts = client => {
+//  client.waitForElementVisible('select', 1000);
+//  client.waitForElementVisible('input', 1000);
+//  client.expect.element('#nordnet-react-app-light').to.be.present;
+//  client.expect.element('#login-container').to.be.present;
+//  client.assert.containsText('#login-container', 'Username');
+//  client.setValue('input[type=text]', 'stora');
+//  client.expect.element('button').to.be.present;
+//  client.click('select option[value="sv-SE"]');
+//  client.waitForElementVisible('select', 1000);
+//  client.click('button');
+//  client.waitForElementVisible('.accounts-list', 5000);
+//  client.expect.element('.accounts-list .alias').to.be.present;
+//  client.end();
+//};
 
 export default {
-  beforeEach,
-  'Page loads': displaysPage,
+//  'Page loads': displaysPage,
   'Displays accounts': displaysAccounts,
 };

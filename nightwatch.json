@@ -25,11 +25,13 @@
       "selenium_host": "localhost",
       "silent": true,
       "screenshots": {
-        "enabled": false,
+        "enabled": true,
+        "on_failure" : true,
+        "on_error" : false,
         "path": "e2e-screenshots"
       },
       "desiredCapabilities": {
-        "browserName": "phantomjs",
+        "browserName": "firefox",
         "javascriptEnabled": true,
         "acceptSslCerts": true
       }
