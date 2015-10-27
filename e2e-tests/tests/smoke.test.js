@@ -38,5 +38,5 @@ const displaysAccounts = client => {
 
 export default {
   'Page loads': displaysPage,
-  'Displays accounts': displaysAccounts,
+  'Login and displays accounts': displaysAccounts,
 };

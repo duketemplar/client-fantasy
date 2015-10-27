@@ -29,10 +29,33 @@
         "path": "e2e-screenshots"
       },
       "desiredCapabilities": {
-        "browserName": "firefox",
+        "browserName": "phantomjs",
         "javascriptEnabled": true,
         "acceptSslCerts": true
+      },
+      "globals": {
+        "use_mock_login": false
+      }
+    },
+    "ci": {
+      "launch_url": "https://nordnet.webfront1.ci.nordnet.se",
+      "globals": {
+        "relative_launch_url": "/mux/web/nordnet/seed.html"
+      }
+    },
+    "dev": {
+      "globals": {
+        "use_mock_login": true
+      }
+    },
+    "dev.firefox": {
+      "desiredCapabilities": {
+        "browserName": "firefox"
+      },
+      "globals": {
+        "use_mock_login": true
       }
     }
+
   }
 }

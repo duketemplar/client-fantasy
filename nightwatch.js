@@ -1,7 +1,12 @@
 require('babel/register');
-var nightwatch = require('nightwatch');
+const Nightwatch = require('nightwatch');
 
-var done = function() {};
-var settings = {};
-
-nightwatch.runner({ config: './nightwatch.json' }, done, settings);
+try {
+  Nightwatch.cli(function(argv) {
+    Nightwatch.runner(argv);
+  });
+} catch (ex) {
+  Logger.error('There was an error while starting the test runner:\n\n');
+  process.stderr.write(ex.stack + '\n');
+  process.exit(2);
+}
