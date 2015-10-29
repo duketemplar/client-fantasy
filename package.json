@@ -101,6 +101,7 @@
     "mkdirp": "0.5.1",
     "mocha": "2.2.4",
     "nightwatch": "0.8.3",
+    "node-libs-browser": "0.4.3",
     "node-sass": "3.3.3",
     "node-uuid": "1.4.3",
     "nodemon": "1.4.1",
