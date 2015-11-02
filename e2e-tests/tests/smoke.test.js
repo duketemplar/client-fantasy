@@ -14,8 +14,11 @@
 // 4. Use the Phantomjs REPL
 
 const displaysPage = client => {
-  // GIVEN, WHEN
-  client.page.accounts().gotoAccounts();
+  // GIVEN
+  const accounts = client.page.accounts();
+
+  // WHEN
+  accounts.gotoAccounts();
 
   // THEN
   client.expect.element('#nordnet-react-app-light').to.be.present;
