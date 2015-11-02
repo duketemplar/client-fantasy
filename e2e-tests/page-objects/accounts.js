@@ -15,9 +15,18 @@ function login(client) {
   return loginProdMode(client);
 }
 
+function getDefaultUserData(client) {
+  return {
+    username: client.globals.username || '',
+    password: client.globals.password || '',
+    locale: client.globals.locale || '',
+  };
+}
+
 function loginMockMode(client) {
-  // maybe default username/password should be moved to nightwatch.json config ?
-  return (username = 'stora', password = 'not needed', locale = 'sv-SE') => {
+  const defaultUser = getDefaultUserData(client);
+
+  return (username = defaultUser.username, password = defaultUser.password, locale = defaultUser.locale) => {
     client.waitForElementVisible('select', 1000);
     client.waitForElementVisible('input', 1000);
     client.expect.element('#login-container').to.be.present;
@@ -30,7 +39,9 @@ function loginMockMode(client) {
 }
 
 function loginProdMode(client) {
-  return (username = 'automat-se-1', password = 'Xd42pafb') => {
+  const defaultUser = getDefaultUserData(client);
+
+  return (username = defaultUser.username, password = defaultUser.password) => {
     client.expect.element('#supportNavLogin').to.be.present;
     client.click('#supportNavLogin a');
     client.waitForElementVisible('form#loginForm', 5000);

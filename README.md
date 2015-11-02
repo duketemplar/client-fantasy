@@ -10,11 +10,13 @@ This is a simple example how to use:
 
 Documentation of the example see [src/accounts/README.md](src/accounts/README.md)
 
-Useful NPM tasks;
+Useful NPM tasks (see package.json);
 
 * `npm start` start both a webpack-dev server and the next api mock server
 * `npm test` run unit tests
 * `npm run lint`
+* `npm run e2e-test` nightwatch e2e tests, see [e2e-tests/tests]
+* `npm run e2e-test:install` downloads selenium server need to run e2e test 
 
 
 In DEBUG environment (npm start) there will be a [redux debug panel](https://github.com/gaearon/redux-devtools).

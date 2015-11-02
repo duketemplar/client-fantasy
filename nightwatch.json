@@ -34,26 +34,15 @@
         "acceptSslCerts": true
       },
       "globals": {
-        "use_mock_login": false
-      }
-    },
-    "ci": {
-      "launch_url": "https://nordnet.webfront1.ci.nordnet.se",
-      "globals": {
-        "relative_launch_url": "/mux/web/nordnet/seed.html"
-      }
-    },
-    "dev": {
-      "globals": {
+        "username": "stora",
+        "password": "",
+        "locale": "sv-SE",
         "use_mock_login": true
       }
     },
-    "dev.firefox": {
+    "firefox": {
       "desiredCapabilities": {
         "browserName": "firefox"
-      },
-      "globals": {
-        "use_mock_login": true
       }
     }
 
