@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var NordnetReleasePlugin = require('nordnet-release-plugin');
 var pkg = require('./../package.json');
 
-var DEBUG = process.env.NODE_ENV === 'development';
+var DEBUG = process.env.npm_package_config_node_env === 'development';
 var VERSION = process.env.VERSION || 'dev';
 var publicPath = DEBUG ? '/' : '/sc/' + pkg.name + '/cache/' + VERSION;
 
@@ -22,9 +22,9 @@ if (DEBUG) {
   );
 } else {
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({ 
-      compress: { 
-        warnings: false 
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
       }
     }),
     new webpack.optimize.DedupePlugin(),
@@ -34,7 +34,7 @@ if (DEBUG) {
       }
     }),
     new webpack.NoErrorsPlugin(),
-    new NordnetReleasePlugin({ 
+    new NordnetReleasePlugin({
       publicPath: publicPath
     })
   );
