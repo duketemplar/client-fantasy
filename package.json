@@ -67,7 +67,7 @@
     "chai-react": "3.0.0",
     "cookies-js": "1.2.2",
     "css-loader": "0.20.2",
-    "es5-shim": "4.1.15",
+    "es5-shim": "^4.2.0",
     "es6-promise-polyfill": "1.1.1",
     "eslint": "1.7.2",
     "eslint-config-airbnb": "0.0.7",
