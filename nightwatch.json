@@ -38,11 +38,11 @@
         "password": "",
         "locale": "sv-SE",
         "use_mock_login": true
-      },
-      "ci": {
-        "globals": {
-          "relative_launch_url": "/mux/web/nordnet/seed.html"
-        }
+      }
+    },
+    "ci": {
+      "globals": {
+        "relative_launch_url": "/mux/web/nordnet/seed.html"
       }
     },
     "firefox": {
