@@ -3,6 +3,7 @@ node_modules
 *.log*
 .DS_Store
 reports
+.babel.json
 coverage
 .idea
 e2e-reports

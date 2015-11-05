@@ -32,7 +32,24 @@
         "browserName": "phantomjs",
         "javascriptEnabled": true,
         "acceptSslCerts": true
+      },
+      "globals": {
+        "username": "stora",
+        "password": "",
+        "locale": "sv-SE",
+        "use_mock_login": true
+      }
+    },
+    "ci": {
+      "globals": {
+        "relative_launch_url": "/mux/web/nordnet/seed.html"
+      }
+    },
+    "firefox": {
+      "desiredCapabilities": {
+        "browserName": "firefox"
       }
     }
+
   }
 }
