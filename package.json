@@ -36,7 +36,7 @@
     "test": "karma start",
     "pretest:debug": "npm config set nordnet-react-app-light:karma_env=sourcemap",
     "test:debug": "karma start --no-single-run --reporters mocha --browsers Chrome",
-    "pretest:tdd": "npm config set nordnet-react-app-light:karma_env=sourcemap",
+    "pretest:tdd": "npm config set nordnet-react-app-light:karma_env=coverage",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "node nightwatch.js -r junit",
