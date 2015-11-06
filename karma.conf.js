@@ -3,7 +3,7 @@ require('karma-common-js');
 const createKarmaConfig = require('./webpack/create-karma-config');
 
 function hasConfig(key) {
-  return !!(process.env.KARMA_ENV && process.env.KARMA_ENV.indexOf(key) !== -1);
+  return !!(process.env.npm_package_config_node_env && process.env.npm_package_config_node_env.indexOf(key) !== -1);
 }
 
 const sourcemap = hasConfig('sourcemap');

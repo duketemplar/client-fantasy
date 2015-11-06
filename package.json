@@ -11,16 +11,14 @@
     "api_server": {
       "host": "localhost",
       "port": 9002
-    },
-    "node_env": "production",
-    "karma_env": "coverage"
+    }
   },
   "scripts": {
     "clean": "npm-run-all clean:trash clean:mkdir",
     "clean:trash": "rimraf $npm_package_config_dist",
     "clean:mkdir": "mkdirp $npm_package_config_dist",
     "prebuild": "npm run clean",
-    "build": "npm run webpack",
+    "build": "npm config set nordnet-react-app-light:node_env=production&& npm run webpack",
     "eslint": "eslint src",
     "eslint:jenkins": "eslint src -f checkstyle -o reports/lintresult.xml",
     "jscs": "jscs -c .jscsrc src",
@@ -28,12 +26,12 @@
     "lint:jenkins": "npm-run-all jscs eslint:jenkins",
     "start:api": "nodemon --harmony ./api-server/api-server.js --port $npm_package_config_api_server_port",
     "start": "npm-run-all --parallel start:api start:webpack-dev-server",
-    "start:webpack-dev-server": "npm config set nordnet-react-app-light:node_env=development && node ./webpack/webpack-dev-server",
+    "start:webpack-dev-server": "npm config set nordnet-react-app-light:node_env=development&& node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
     "webpack": "webpack --colors --progress --config ./webpack/config",
-    "test": "karma start",
+    "test": "npm config set nordnet-react-app-light:karma_env=coverage&& karma start",
     "test:debug": "npm config set nordnet-react-app-light:karma_env=sourcemap&& karma start --no-single-run --reporters mocha --browsers Chrome",
-    "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha karma.conf",
+    "test:tdd": "npm config set nordnet-react-app-light:karma_env=coverage&& karma start --auto-watch --no-single-run --reporters mocha karma.conf",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "node nightwatch.js -r junit",
     "pree2e-test:install": "mkdir -p e2e-tests/server",
