@@ -7,7 +7,7 @@ var externals = require('./externals');
 var loaders = require('./loaders');
 var plugins = require('./plugins');
 
-var DEBUG = process.env.NODE_ENV === 'development';
+var DEBUG = process.env.npm_package_config_node_env === 'development';
 var VERSION = process.env.VERSION || 'dev';
 var publicPath = DEBUG ? '/' : '/sc/' + pkg.name + '/cache/' + VERSION;
 
