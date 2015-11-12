@@ -27,11 +27,14 @@ const displaysPage = client => {
 
 const displaysAccounts = client => {
   // GIVEN
+  const login = client.page.login();
+  login.goTo();
+  login.login();
+
   const accounts = client.page.accounts();
 
   // WHEN
   accounts.gotoAccounts();
-  accounts.login();
   client.waitForElementVisible('.accounts-list', 5000);
 
   // THEN
