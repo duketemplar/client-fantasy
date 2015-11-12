@@ -7,7 +7,7 @@
   "globals_path": "",
 
   "selenium": {
-    "start_process": true,
+    "start_process": false,
     "server_path": "./e2e-tests/server/selenium-server-standalone-2.48.2.jar",
     "log_path": "e2e-tests/logs",
     "host": "localhost",
@@ -36,14 +36,11 @@
       "globals": {
         "username": "stora",
         "password": "",
-        "locale": "sv-SE",
-        "use_mock_login": true
+        "locale": "sv-SE"
       }
     },
     "ci": {
-      "globals": {
-        "relative_launch_url": "/mux/web/nordnet/seed.html"
-      }
+      "launch_url": "https://nordnet.webfront1.ci.nordnet.se"
     },
     "firefox": {
       "desiredCapabilities": {

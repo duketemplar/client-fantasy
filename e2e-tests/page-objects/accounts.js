@@ -1,10 +1,11 @@
+const url = '/mux/web/nordnet/seed.html';
+
 function useMockLogin(client) {
-  return client.globals.use_mock_login;
+  return client.launch_url.includes('localhost');
 }
 
 function launchUrl(client) {
-  const relUrl = client.globals.relative_launch_url || '';
-  return client.launch_url + relUrl;
+  return client.launch_url + url;
 }
 
 function login(client) {

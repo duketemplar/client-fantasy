@@ -40,6 +40,8 @@
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "node nightwatch.js -r junit",
+    "e2e-test:server": "java -jar e2e-tests/server/selenium-server-standalone-2.48.2.jar",
+    "e2e-test:ci": "node nightwatch.js -e ci",
     "e2e-test:ff": "node nightwatch.js -e firefox",
     "pree2e-test:install": "mkdir -p e2e-tests/server",
     "e2e-test:install": "! [ -a 'e2e-tests/server/selenium-server-standalone-2.48.2.jar' ] && npm run e2e-test:download || echo 'selenium server already installed'",
