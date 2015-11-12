@@ -18,6 +18,16 @@
     }
   },
 
+  "test_runner" : {
+    "type" : "mocha",
+    "options" : {
+      "reporter" : "mocha-junit-reporter",
+      "reporterOptions": {
+        "mochaFile": "./e2e-reports/test-results.xml"
+      }
+    }
+  },
+
   "test_settings" : {
     "default": {
       "launch_url": "http://localhost:9000",
