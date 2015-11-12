@@ -35,8 +35,10 @@ describe('Accounts', () => {
       done();
     });
 
-    it('#nordnet-react-app-light container is present',
-      (client) => client.expect.element('.accounts-list .alias').to.be.present);
+    it('accounts list is present',
+      (client) => client.expect.element('.accounts-list').to.be.present);
+    it('alias is displayed',
+        (client) => client.expect.element('.accounts-list .alias').to.be.present);
 
     afterEach((client, done) => client.end(() => done()));
   })
