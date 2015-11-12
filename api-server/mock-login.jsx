@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import cookies from 'cookies-js';
 
 class Login extends React.Component {
@@ -77,4 +78,4 @@ const container = document.createElement('div');
 container.id = 'login-container';
 document.body.insertBefore(container, document.body.firstChild);
 
-React.render(<Login />, container);
+ReactDOM.render(<Login />, container);
