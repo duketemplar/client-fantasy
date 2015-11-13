@@ -3,7 +3,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import i18n from '../i18n.jsx';
 
-describe('i18n', () => {
+describe.only('i18n', () => {
   function renderI18NParentWithProps(Component, props) {
     const App = i18n(Component);
     const tree = TestUtils.renderIntoDocument(

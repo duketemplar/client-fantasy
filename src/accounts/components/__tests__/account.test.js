@@ -18,7 +18,7 @@ describe('accounts.components.Account', () => {
       locales: ['en-US'],
       account: {
         alias: 'foo',
-        accno: '123',
+        accno: 123,
       },
     };
 
