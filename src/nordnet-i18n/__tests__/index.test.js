@@ -1,5 +1,6 @@
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 
 import api from 'nordnet-next-api';
 import {initialize, supportedLocales, translatable, i18n} from '../index';
@@ -73,7 +74,7 @@ describe('nordnet-i18n', () => {
         locales: [],
       };
       const tree = TestUtils.renderIntoDocument(React.createElement(i18n(Parent), props));
-      return React.findDOMNode(tree);
+      return ReactDOM.findDOMNode(tree);
     }
 
     beforeEach(() => domNode = createDOMNode());

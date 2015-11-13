@@ -1,7 +1,7 @@
 import '../initialize-intl';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import i18n from '../i18n.jsx';
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
 
 describe('i18n', () => {
   function renderI18NParentWithProps(Component, props) {

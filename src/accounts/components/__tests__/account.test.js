@@ -1,8 +1,8 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import {i18n} from 'nordnet-i18n';
 import Account from '../account';
-
-const TestUtils = React.addons.TestUtils;
 
 describe('accounts.components.Account', () => {
   let node;
@@ -23,7 +23,7 @@ describe('accounts.components.Account', () => {
     };
 
     const component = TestUtils.renderIntoDocument(React.createElement(i18n(Account), props));
-    node = React.findDOMNode(component);
+    node = ReactDOM.findDOMNode(component);
   });
 
   it('translates ACCOUNTS.ACCOUNT_NUMBER', () => expect(node.textContent).to.include('Account'));
