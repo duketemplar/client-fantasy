@@ -16,5 +16,5 @@ require('intl/locale-data/jsonp/da-DK.js');
 // see http://chaijs.com/guide/styles/
 chai.config.truncateThreshold = 0;
 
-const context = require.context('./src', true, /\.js/);
+const context = require.context('./src', true, /\.test.js/);
 context.keys().forEach(context);
