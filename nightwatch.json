@@ -28,6 +28,7 @@
         "enabled": false,
         "path": "e2e-screenshots"
       },
+      "test_runner" : "mocha",
       "desiredCapabilities": {
         "browserName": "phantomjs",
         "javascriptEnabled": true,
@@ -40,13 +41,21 @@
       }
     },
     "ci": {
-      "launch_url": "https://nordnet.webfront1.ci.nordnet.se"
+      "launch_url": "https://nordnet.webfront1.ci.nordnet.se",
+      "test_runner" : {
+        "type" : "mocha",
+        "options" : {
+          "reporter" : "mocha-junit-reporter",
+          "reporterOptions": {
+            "mochaFile": "./e2e-reports/test-results.xml"
+          }
+        }
+      }
     },
     "firefox": {
       "desiredCapabilities": {
         "browserName": "firefox"
       }
     }
-
   }
 }

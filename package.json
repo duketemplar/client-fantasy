@@ -39,7 +39,7 @@
     "pretest:tdd": "npm config set nordnet-react-app-light:karma_env=coverage",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
-    "e2e-test": "node nightwatch.js -r junit",
+    "e2e-test": "node nightwatch.js",
     "e2e-test:server": "java -jar e2e-tests/server/selenium-server-standalone-2.48.2.jar",
     "e2e-test:ci": "node nightwatch.js -e ci",
     "e2e-test:ff": "node nightwatch.js -e firefox",
