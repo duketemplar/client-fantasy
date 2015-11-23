@@ -32,13 +32,14 @@ describe('Accounts', () => {
     beforeEach((client, done) => {
       login(client);
       loadAccounts(client);
+      client.waitForElementVisible('.accounts-list .alias', 1000);
       done();
     });
 
     it('accounts list is present',
       (client) => client.expect.element('.accounts-list').to.be.present);
     it('alias is displayed',
-        (client) => client.expect.element('.accounts-list .alias').to.be.present);
+      (client) => client.expect.element('.accounts-list .alias').to.be.present);
 
     afterEach((client, done) => client.end(() => done()));
   })
