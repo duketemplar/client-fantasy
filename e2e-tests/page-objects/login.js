@@ -43,13 +43,14 @@ function loginProdMode(client) {
     client.setValue('input#input1', username);
     client.setValue('input#pContent', password);
     client.click('button#login_btn');
+    client.waitForElementPresent('#container', 10000);
   };
 }
 
 function goTo(client) {
   return () => {
     client.url(client.launch_url);
-    client.waitForElementVisible('body', 10000);
+    client.waitForElementPresent('#container', 10000);
   };
 }
 

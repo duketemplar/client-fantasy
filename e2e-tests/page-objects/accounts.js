@@ -9,7 +9,7 @@ function gotoAccounts(client) {
 
   return () => {
     client.url(url);
-    client.waitForElementVisible('body', 10000);
+    client.waitForElementPresent('#nordnet-react-app-light', 10000);
   };
 }
 
