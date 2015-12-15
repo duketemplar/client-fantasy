@@ -1,8 +1,8 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import {i18n} from 'nordnet-i18n';
 import AccountListContainer from '../accounts-list-container.jsx';
-
-const TestUtils = React.addons.TestUtils;
 
 describe('accounts.components.AccountListContainer', () => {
   let node;
@@ -18,7 +18,7 @@ describe('accounts.components.AccountListContainer', () => {
 
   function getDomNode() {
     const component = TestUtils.renderIntoDocument(React.createElement(i18n(AccountListContainer), props));
-    return React.findDOMNode(component);
+    return ReactDOM.findDOMNode(component);
   }
 
   describe('when isFetching = true', () => {

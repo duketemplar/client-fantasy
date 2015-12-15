@@ -1,7 +1,7 @@
 import '../initialize-intl';
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import i18n from '../i18n.jsx';
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
 
 describe('i18n', () => {
   function renderI18NParentWithProps(Component, props) {
@@ -15,23 +15,22 @@ describe('i18n', () => {
   function createComponentWithContextTypes() {
     return React.createClass({
       contextTypes: {
-        formats: React.PropTypes.object.isRequired,
         messages: React.PropTypes.object.isRequired,
         locales: React.PropTypes.array.isRequired,
       },
+
       render() {return (<div/>); },
     });
   }
 
   const locales = [1, 2, 3];
-  const formats = {foo: 'bar'};
   const messages = {baaz: 'baaz'};
 
   let component;
 
   beforeEach(() => {
     const Component = createComponentWithContextTypes();
-    const tree = renderI18NParentWithProps(Component, {formats, locales, messages});
+    const tree = renderI18NParentWithProps(Component, {locales, messages});
     component = TestUtils.findRenderedComponentWithType(tree, Component);
   });
 

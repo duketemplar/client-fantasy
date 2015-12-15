@@ -1,8 +1,8 @@
-import React from 'react/addons';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import {i18n} from 'nordnet-i18n';
 import AccountList from '../accounts-list';
-
-const TestUtils = React.addons.TestUtils;
 
 describe('accounts.components.AccountList', () => {
   let node;
@@ -25,7 +25,7 @@ describe('accounts.components.AccountList', () => {
       accounts: [{accno: 111, alias: 'account one'}, {accno: 222, alias: 'account two'}],
     };
     const component = createComponent(AccountList, props);
-    node = React.findDOMNode(component);
+    node = ReactDOM.findDOMNode(component);
   });
 
   it('can render two accounts', () => {

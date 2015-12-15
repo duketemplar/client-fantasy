@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // imports Redux Provider, see https://github.com/rackt/react-redux#provider-store
 import { Provider } from 'react-redux';
@@ -52,10 +53,10 @@ export default function(element, intlData) {
   // Calls React.render and renders application within provided element
   // AppWithI18N is wraped in Redux <Provider /> to be able to connect React components to the Redux store.
   // See https://github.com/rackt/react-redux#provider-store
-  let rootInstance = React.render(
+  let rootInstance = ReactDOM.render(
     <div>
       <Provider store={ store }>
-        {() => <AppWithI18N { ...intlData }  />}
+        <AppWithI18N { ...intlData }  />
       </Provider>
       { createDebugPanel(store) }
     </div>,
