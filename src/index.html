@@ -6,7 +6,7 @@
 
   <!-- Example on how same styles and images as on the Nordnet web could be loaded in devevelopment mode -->
   <link rel="stylesheet" type="text/css" href="/now/master.css">
-  <title></title>
+  <title>Crs pop up test page</title>
 </head>
 <body>
   <!-- Example container element -->
@@ -44,6 +44,7 @@
       var appName = 'crs-pop-up-app';
       var domElement = document.getElementById(appName);
       if (domElement && window.Nordnet[appName]) {
+        console.log('Initialising the app...');
         window.Nordnet[appName](domElement);
       }
     })(window, document);

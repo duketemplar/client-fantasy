@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 // React container component that is responsible for loading initial data on DOM mount
-import AccountsListContainer from './accounts/app';
+import Modal from './modal/modal';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
@@ -26,7 +26,7 @@ import store from './store';
 class App extends React.Component {
   render() {
     return (
-      <AccountsListContainer {...this.props} />
+      <Modal {...this.props} />
     );
   }
 }
@@ -39,7 +39,6 @@ const AppWithI18N = i18n(App);
  * Renders application by calling React.render()
  */
 export default function(element, intlData) {
-
   // creates Redux debug panel that is injected on the page in development mode
   function createDebugPanel(store) {
     if (DEBUG) {
@@ -53,7 +52,7 @@ export default function(element, intlData) {
   // Calls React.render and renders application within provided element
   // AppWithI18N is wraped in Redux <Provider /> to be able to connect React components to the Redux store.
   // See https://github.com/rackt/react-redux#provider-store
-  let rootInstance = ReactDOM.render(
+  const rootInstance = ReactDOM.render(
     <div>
       <Provider store={ store }>
         <AppWithI18N { ...intlData }  />
@@ -65,6 +64,7 @@ export default function(element, intlData) {
 
   // https://github.com/gaearon/react-hot-loader/blob/master/docs/README.md#usage-with-external-react
   if (module.hot) {
+    console.log('Module is hot...');
     require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
       // Help React Hot Loader figure out the root component instances on the page:
       getRootInstances: () => [rootInstance],

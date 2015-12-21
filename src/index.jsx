@@ -26,6 +26,8 @@ import l10nLoader from './l10n-loader';
 // importing application root component
 import root from './root';
 
+import Modal from './modal/modal';
+import ReactDOM from 'react-dom';
 /*
  * Application start-up and initialization.
  * Ensures that application is loaded with correct localization - loads language and country from nExt API,
@@ -42,6 +44,7 @@ function initialize(element) {
       .then(l10nLoader)
       .then(root.bind(null, element));
   } catch (e) {
+    console.log('initialize of root element failed.');
     // TODO send error report to the server
   }
 }
@@ -58,6 +61,10 @@ window.Nordnet['crs-pop-up-app'] = initialize;
 // injects mock login element on the page when running in development mode
 /*eslint-disable */
 if (DEBUG) {
-  require('mock-login');
+  const attachElem = document.getElementById('crs-pop-up-app');
+  console.log('Modal: ', Modal);
+  ReactDOM.render(<Modal/>, attachElem);
+
+  //require('mock-login');
 }
 /*eslint-enable */
