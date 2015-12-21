@@ -1,4 +1,4 @@
-# nordnet-react-app-light
+# crs-pop-up-app
 
 This is a simple example how to use: 
 * Webpack

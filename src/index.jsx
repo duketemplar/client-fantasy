@@ -52,8 +52,8 @@ if (!window.Nordnet) {
 }
 
 // saves 'initialize' function in the global scope as part of 'Nordnet' object.
-// REPLACE 'nordnet-react-app-light' with your application name.
-window.Nordnet['nordnet-react-app-light'] = initialize;
+// REPLACE 'crs-pop-up-app' with your application name.
+window.Nordnet['crs-pop-up-app'] = initialize;
 
 // injects mock login element on the page when running in development mode
 /*eslint-disable */

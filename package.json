@@ -1,5 +1,5 @@
 {
-  "name": "nordnet-react-app-light",
+  "name": "crs-pop-up-app",
   "version": "0.0.1",
   "description": "Nordnet React app",
   "config": {
@@ -14,8 +14,8 @@
     }
   },
   "scripts": {
-    "env:prod": "npm config set nordnet-react-app-light:node_env=production",
-    "env:dev": "npm config set nordnet-react-app-light:node_env=development",
+    "env:prod": "npm config set crs-pop-up-app:node_env=production",
+    "env:dev": "npm config set crs-pop-up-app:node_env=development",
     "clean": "npm-run-all clean:trash clean:mkdir",
     "clean:trash": "rimraf $npm_package_config_dist",
     "clean:mkdir": "mkdirp $npm_package_config_dist",
@@ -32,11 +32,11 @@
     "start:webpack-dev-server": "node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
     "webpack": "webpack --colors --progress --config ./webpack/config",
-    "pretest": "npm config set nordnet-react-app-light:karma_env=coverage",
+    "pretest": "npm config set crs-pop-up-app:karma_env=coverage",
     "test": "karma start",
-    "pretest:debug": "npm config set nordnet-react-app-light:karma_env=sourcemap",
+    "pretest:debug": "npm config set crs-pop-up-app:karma_env=sourcemap",
     "test:debug": "karma start --no-single-run --reporters mocha --browsers Chrome",
-    "pretest:tdd": "npm config set nordnet-react-app-light:karma_env=coverage",
+    "pretest:tdd": "npm config set crs-pop-up-app:karma_env=coverage",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "node nightwatch.js",

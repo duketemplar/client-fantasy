@@ -9,7 +9,7 @@ function gotoAccounts(client) {
 
   return () => {
     client.url(url);
-    client.waitForElementPresent('#nordnet-react-app-light', 10000);
+    client.waitForElementPresent('#crs-pop-up-app', 10000);
   };
 }
 

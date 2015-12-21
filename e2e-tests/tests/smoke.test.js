@@ -22,8 +22,8 @@ describe('Accounts', () => {
       done();
     });
 
-    it('#nordnet-react-app-light container is present',
-      (client) => client.expect.element('#nordnet-react-app-light').to.be.present);
+    it('#crs-pop-up-app container is present',
+      (client) => client.expect.element('#crs-pop-up-app').to.be.present);
 
     afterEach((client, done) => client.end(() => done()));
   });
