@@ -26,7 +26,7 @@ import store from './store';
 class App extends React.Component {
   render() {
     return (
-      <Modal pane={store.getState().steps.pane} {...this.props} />
+      <Modal {...this.props} />
     );
   }
 }
