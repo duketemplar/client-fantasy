@@ -10,6 +10,7 @@ import thunkMiddleware from 'redux-thunk';
 // custom reducer for accounts component
 // REPLACE with list of your own reducers
 import accountsReducer from './accounts/reducers/accounts';
+import stepsReducer from './modal/reducers/steps';
 
 const MIDDLEWARE = [thunkMiddleware];
 
@@ -17,6 +18,7 @@ const MIDDLEWARE = [thunkMiddleware];
 // REPLACE with list of your own reducers
 const REDUCERS = {
   accounts: accountsReducer,
+  steps: stepsReducer,
 };
 
 // creates Redux store

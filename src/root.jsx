@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 // React container component that is responsible for loading initial data on DOM mount
-import Modal from './modal/modal';
+import Modal from './modal/components/modal';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';

@@ -26,7 +26,7 @@ import l10nLoader from './l10n-loader';
 // importing application root component
 import root from './root';
 
-import Modal from './modal/modal';
+import Modal from './modal/components/modal';
 import ReactDOM from 'react-dom';
 /*
  * Application start-up and initialization.
