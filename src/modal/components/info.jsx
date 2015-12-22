@@ -4,6 +4,7 @@ import store from '../../store';
 import '../modal.scss';
 
 export default class Info extends React.Component {
+
   constructor(props) {
     super(props);
   }

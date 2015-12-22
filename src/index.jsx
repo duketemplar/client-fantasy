@@ -61,8 +61,8 @@ window.Nordnet['crs-pop-up-app'] = initialize;
 // injects mock login element on the page when running in development mode
 /*eslint-disable */
 if (DEBUG) {
-  const attachElem = document.getElementById('crs-pop-up-app');
-  ReactDOM.render(<Modal/>, attachElem);
+  //const attachElem = document.getElementById('crs-pop-up-app');
+  //ReactDOM.render(<Modal pane=store.getState().steps.pane/>, attachElem);
 
   //require('mock-login');
 }
