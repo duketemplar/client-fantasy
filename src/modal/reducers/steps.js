@@ -1,34 +1,44 @@
 import React from 'react';
-import {STEP_INFO, STEP_SUMMARY, STEP_CONFIRM} from '../actions/action-types';
+import {STEP_INFO, STEP_USER_DATA, STEP_CONFIRM, STEP_SUBMITTING} from '../actions/action-types';
 import _ from 'lodash';
 
 import Info from '../components/info';
-import Summary from '../components/summary';
+import UserData from '../components/user-data';
 import Confirm from '../components/confirm';
 
-export default function(state = {step: STEP_INFO, pane: <Info/>}, action) {
+export default function(state = {name: 'info', pane: <Info/>}, action) {
+  console.log('reducer: ', action.step)
   switch (action.step) {
   case STEP_INFO:
     return _.assign({}, state,
       {
-        step: STEP_SUMMARY,
-        pane: <Summary/>,
+        name: 'info',
+        pane: <Info/>,
       }
     );
-  case STEP_SUMMARY:
+  case STEP_USER_DATA:
     return _.assign({}, state,
       {
-        step: STEP_CONFIRM,
-        pane: <Confirm/>,
+        name: 'userdata',
+        pane: <UserData/>,
       }
     );
   case STEP_CONFIRM:
     return _.assign({}, state,
       {
-        step: STEP_SUBMITTING,
+        name: 'confirm',
         pane: <Confirm/>,
       }
     );
+  case STEP_SUBMITTING:
+    throw new Error('STEP_SUBMITTING: Not implemented yet....');
+    /*
+    return _.assign({}, state,
+      {
+        pane: </>,
+      }
+    );
+    */
   default:
     return state;
   }

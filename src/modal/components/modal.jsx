@@ -8,7 +8,6 @@ class Modal extends React.Component {
   }
 
   render() {
-    console.log('Updating modal');
     return (
       <div className="modal">
         <div className="modal--shadow"></div>
@@ -20,12 +19,12 @@ class Modal extends React.Component {
   }
 }
 
-Modal.propTypes = { pane: React.PropTypes.element };
+Modal.propTypes = { steps: React.PropTypes.object };
 
-function selectedActions(state) {
+function select(state) {
   return {
     steps: state.steps,
   };
 }
 
-export default connect(selectedActions)(Modal);
+export default connect(select)(Modal);

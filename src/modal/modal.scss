@@ -47,9 +47,10 @@ $shadow-light: #f2f2f2;
 
   &--body {
     padding: 10px;
-
   }
+}
 
+.user-data, .info, .confirm {
   &--button {
     text-align: right;
   }

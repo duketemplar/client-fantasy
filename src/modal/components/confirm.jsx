@@ -12,7 +12,7 @@ export default class Confirm extends React.Component {
   render() {
     return (
       <div className="confirm">
-        <div className="confirm--header">This is new crs stuff that you need to fill in....</div>
+        <div className="confirm--header">CONFIRM: This is new crs stuff that you need to fill in....</div>
         <div className="confirm--body">The reason for this is that....something...something...</div>
         <div className="confirm--button">
           <a className="button" href="#" onClick={this.abort}>Cancel</a>
@@ -24,6 +24,6 @@ export default class Confirm extends React.Component {
 
   nextStep(e) {
     e.preventDefault();
-    store.dispatch({ step: STEP_CONFIRM});
+    store.dispatch({ step: STEP_SUBMITTING});
   }
 }
