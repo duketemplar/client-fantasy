@@ -40,7 +40,7 @@ const AppWithI18N = i18n(App);
  */
 export default function(element, intlData) {
   // creates Redux debug panel that is injected on the page in development mode
-  function createDebugPanel(store) {
+  function createDebugPanel() {
     if (DEBUG) {
       const devtools = require('./devtools');
       return devtools.createDebugPanel(store);
@@ -64,7 +64,6 @@ export default function(element, intlData) {
 
   // https://github.com/gaearon/react-hot-loader/blob/master/docs/README.md#usage-with-external-react
   if (module.hot) {
-    console.log('Module is hot...');
     require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
       // Help React Hot Loader figure out the root component instances on the page:
       getRootInstances: () => [rootInstance],

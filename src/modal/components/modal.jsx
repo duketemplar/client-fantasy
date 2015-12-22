@@ -1,5 +1,4 @@
 import React from 'react';
-import Info from './info';
 
 export default class Modal extends React.Component {
 
@@ -20,4 +19,3 @@ export default class Modal extends React.Component {
 }
 
 Modal.propTypes = { pane: React.PropTypes.element };
-Modal.defaultProps = { pane: <Info/> };

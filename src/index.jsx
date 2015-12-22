@@ -15,8 +15,6 @@ import './assets/styles/app.scss';
 import es6promise from 'es6-promise';
 es6promise.polyfill();
 
-import React from 'react';
-
 // importing localization support, using alias for nordnet-i18n which is configured in webpack (see webpack/conifg.js)
 import i18n from 'nordnet-i18n';
 
@@ -26,8 +24,6 @@ import l10nLoader from './l10n-loader';
 // importing application root component
 import root from './root';
 
-import Modal from './modal/components/modal';
-import ReactDOM from 'react-dom';
 /*
  * Application start-up and initialization.
  * Ensures that application is loaded with correct localization - loads language and country from nExt API,
@@ -44,8 +40,8 @@ function initialize(element) {
       .then(l10nLoader)
       .then(root.bind(null, element));
   } catch (e) {
-    console.log('initialize of root element failed.');
     // TODO send error report to the server
+    console.log('initialize of root element failed.');
   }
 }
 
@@ -57,13 +53,3 @@ if (!window.Nordnet) {
 // saves 'initialize' function in the global scope as part of 'Nordnet' object.
 // REPLACE 'crs-pop-up-app' with your application name.
 window.Nordnet['crs-pop-up-app'] = initialize;
-
-// injects mock login element on the page when running in development mode
-/*eslint-disable */
-if (DEBUG) {
-  //const attachElem = document.getElementById('crs-pop-up-app');
-  //ReactDOM.render(<Modal pane=store.getState().steps.pane/>, attachElem);
-
-  //require('mock-login');
-}
-/*eslint-enable */
