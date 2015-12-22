@@ -1,7 +1,7 @@
 import {STEP_INFO, STEP_SUMMARY, STEP_CONFIRM} from '../actions/action-types';
-import {_} from 'lodash';
+import _ from 'lodash';
 
-export default function(state = { step: STEP_INFO}, action) {
+export default function(state = {step: STEP_INFO}, action) {
   switch (action.step) {
   case STEP_INFO:
     return _.assign({}, state, {step: STEP_SUMMARY});

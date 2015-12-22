@@ -1,0 +1,61 @@
+$primary-dark: #444;
+$primary-light: #fff;
+$primary-face: #00A8EF;
+
+$secondary-hot: #ff685b;
+$secondary-warm: #ffdd22;
+$secondary-blunt: #d4d1cb;
+
+$shadow-dark: #aaa;
+$shadow-middle: #ddd;
+$shadow-light: #f2f2f2;
+
+.modal {
+  &--shadow {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $shadow-dark;
+    z-index: 5;
+  }
+
+  &--content {
+    margin-right: auto;
+    margin-left: auto;
+    width: 40%;
+    margin-top: 10%;
+    background: $primary-dark;
+    color: $primary-light;
+    padding: 10px;
+    z-index: 6;
+    position: relative;
+    box-shadow: 7px 7px 5px $shadow-middle;
+    border-radius: 3px;
+  }
+
+}
+
+
+.info {
+  &--header {
+    padding: 10px;
+
+  }
+
+  &--body {
+    padding: 10px;
+
+  }
+}
+
+.button {
+  color: $primary-light;
+  background: $primary-face;
+  font-weight: bold;
+  padding: 10px;
+  text-decoration: none;
+  display: inline-block;
+}

@@ -1,13 +1,8 @@
 import React from 'react';
-import { createStore } from 'redux';
 import Info from './Info';
 import Summary from './Summary';
 import Confirm from './Confirm';
-import steps from '../reducers/steps';
 import {STEP_INFO, STEP_SUMMARY, STEP_CONFIRM} from '../actions/action-types';
-
-//const store = createStore(steps);
-//store.dispatch({ step: STEP_INFO});
 
 export default class Modal extends React.Component {
 
@@ -30,10 +25,13 @@ export default class Modal extends React.Component {
   }
 
   render() {
-    //console.log('Store: ', store.getState().step);
-
     return (
-      <Info/>
+      <div className="modal">
+        <div className="modal--shadow"></div>
+        <div className="modal--content">
+          <Info/>
+        </div>
+    </div>
     );
   }
 }

@@ -1,26 +1,25 @@
 import React from 'react';
-import { createStore } from 'redux';
 import {STEP_SUMMARY} from '../actions/action-types';
-import steps from '../reducers/steps';
+import store from '../../store';
+import '../modal.scss';
 
 export default class Info extends React.Component {
   constructor(props) {
     super(props);
-
-    this.store = createStore(steps);
   }
 
   render() {
     return (
-      <div>
-        <div>This is new crs stuff that you need to fill in....</div>
-        <div>The reason for this is that....something...something...</div>
-        <div onClick={this.nextStep}>Next</div>
+      <div className="info">
+        <div className="info--header">This is new crs stuff that you need to fill in....</div>
+        <div className="info--body">The reason for this is that....something...something...</div>
+        <a className="button" href="#" onClick={this.nextStep}>Next</a>
       </div>
     );
   }
 
-  nextStep() {
-    this.store.dispatch({ step: STEP_SUMMARY});
+  nextStep(e) {
+    e.preventDefault();
+    store.dispatch({ step: STEP_SUMMARY});
   }
 }

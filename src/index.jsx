@@ -62,7 +62,6 @@ window.Nordnet['crs-pop-up-app'] = initialize;
 /*eslint-disable */
 if (DEBUG) {
   const attachElem = document.getElementById('crs-pop-up-app');
-  console.log('Modal: ', Modal);
   ReactDOM.render(<Modal/>, attachElem);
 
   //require('mock-login');
