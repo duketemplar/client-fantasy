@@ -13,7 +13,10 @@ export default class Info extends React.Component {
       <div className="info">
         <div className="info--header">This is new crs stuff that you need to fill in....</div>
         <div className="info--body">The reason for this is that....something...something...</div>
-        <a className="button" href="#" onClick={this.nextStep}>Next</a>
+        <div className="info--button">
+          <a className="button" href="#" onClick={this.abort}>Cancel</a>
+          <a className="button" href="#" onClick={this.nextStep}>Next</a>
+        </div>
       </div>
     );
   }
