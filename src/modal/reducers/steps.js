@@ -1,5 +1,5 @@
 import React from 'react';
-import {STEP_INFO, STEP_USER_DATA, STEP_CONFIRM, STEP_SUBMIT} from '../actions/action-types';
+import {STEP_INFO, STEP_USER_DATA, STEP_CONFIRM, STEP_SUBMIT, STEP_ABORT} from '../actions/action-types';
 import _ from 'lodash';
 
 import Info from '../components/info';
@@ -35,6 +35,13 @@ export default function(state = defaultState, action) {
     return _.assign({}, state,
       {
         name: 'submit',
+        pane: null,
+      }
+    );
+  case STEP_ABORT:
+    return _.assign({}, state,
+      {
+        name: 'abort',
         pane: null,
       }
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import {STEP_INFO, STEP_USER_DATA, STEP_SUBMIT} from '../actions/action-types';
+import {STEP_ABORT, STEP_INFO, STEP_USER_DATA, STEP_SUBMIT} from '../actions/action-types';
 import store from '../../store';
 import '../modal.scss';
 import _ from 'lodash';
@@ -49,7 +49,7 @@ export default class Confirm extends React.Component {
 
   abort(e) {
     e.preventDefault();
-    store.dispatch({ step: STEP_INFO});
+    store.dispatch({ step: STEP_ABORT});
   }
 
   previousStep(e) {

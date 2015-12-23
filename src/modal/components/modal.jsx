@@ -24,7 +24,6 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = { steps: React.PropTypes.object };
-Modal.propTypes = { inactive: React.PropTypes.boolean };
 
 function select(state) {
   return {
