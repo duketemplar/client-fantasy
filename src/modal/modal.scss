@@ -18,55 +18,92 @@ $shadow-light: #f2f2f2;
     height: 100%;
     top: 0;
     left: 0;
-    background: $shadow-dark;
+    background: $primary-dark;
     z-index: 5;
   }
 
   &--content {
     margin-right: auto;
     margin-left: auto;
-    width: 40%;
     margin-top: 10%;
-    background: $primary-dark;
-    color: $primary-light;
+    background: $primary-light;
+    color: $primary-dark;
     padding: 10px;
     z-index: 6;
     position: relative;
-    box-shadow: 7px 7px 5px $shadow-middle;
+    box-shadow: 2px 3px 5px $shadow-dark;
     border-radius: 3px;
+    width: 550px;
+    height: 285px;
+    position: relative;
   }
 
-}
-
-
-.info {
-  &--header {
+  .header {
     padding: 10px;
-
+    font-weight: bold;
   }
 
-  &--body {
+  .body {
     padding: 10px;
   }
-}
 
-.user-data, .info, .confirm {
-  &--button {
-    text-align: right;
+  .text {
+    padding: 5px;
   }
-}
 
-.button {
-  color: $primary-light;
-  background: $primary-face;
-  font-weight: bold;
-  padding: 10px;
-  text-decoration: none;
-  display: inline-block;
-  margin: 5px;
+  .form {
+    background: $primary-face;
 
-  &:hover {
-    background-color: $primary-light;
-    color: $primary-face;
+    label {
+      width: 40%;
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 3px;
+    }
+
+    input {
+      width: 60%;
+      display: inline-block;
+      padding: 3px;
+      background: $shadow-light;
+      box-sizing: border-box;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 40px 20px 0;
+
+    .button {
+      font-weight: bold;
+      padding: 10px;
+      text-decoration: none;
+      display: inline-block;
+      margin: 5px;
+      border: 1px solid $shadow-dark;
+
+    }
+
+    &--action {
+      color: $primary-light;
+      background: $primary-face;
+
+      &:hover {
+        color: $primary-face;
+        background-color: $primary-light;
+      }
+    }
+
+    &--cancel {
+      color: $primary-face;
+      background: $secondary-blunt;
+
+      &:hover {
+        color: $secondary-blunt;
+        background-color: $primary-face;
+      }
+    }
   }
 }

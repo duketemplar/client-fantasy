@@ -8,6 +8,12 @@ class Modal extends React.Component {
   }
 
   render() {
+    /*
+    if (this.props.inactive) {
+      return null;
+    }
+    */
+
     return (
       <div className="modal">
         <div className="modal--shadow"></div>
@@ -20,6 +26,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = { steps: React.PropTypes.object };
+Modal.propTypes = { inactive: React.PropTypes.boolean };
 
 function select(state) {
   return {

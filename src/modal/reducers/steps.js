@@ -6,7 +6,9 @@ import Info from '../components/info';
 import UserData from '../components/user-data';
 import Confirm from '../components/confirm';
 
-export default function(state = {name: 'info', pane: <Info/>}, action) {
+const defaultState = {name: 'info', pane: <Info/>};
+
+export default function(state = defaultState, action) {
   console.log('reducer: ', action.step)
   switch (action.step) {
   case STEP_INFO:
@@ -31,7 +33,8 @@ export default function(state = {name: 'info', pane: <Info/>}, action) {
       }
     );
   case STEP_SUBMITTING:
-    throw new Error('STEP_SUBMITTING: Not implemented yet....');
+    console.error('STEP_SUBMITTING: Not implemented yet....');
+    return defaultState;
     /*
     return _.assign({}, state,
       {
