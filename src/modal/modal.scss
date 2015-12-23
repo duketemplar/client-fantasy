@@ -4,6 +4,8 @@ $primary-face: #00A8EF;
 
 $secondary-hot: #ff685b;
 $secondary-warm: #ffdd22;
+$secondary-warm__fade: rgba(255, 221, 34, 0.9);
+
 $secondary-blunt: #d4d1cb;
 
 $shadow-dark: #aaa;
@@ -30,7 +32,6 @@ $shadow-light: #f2f2f2;
     color: $primary-dark;
     padding: 10px;
     z-index: 6;
-    position: relative;
     box-shadow: 2px 3px 5px $shadow-dark;
     border-radius: 3px;
     width: 550px;
@@ -72,6 +73,21 @@ $shadow-light: #f2f2f2;
       background: $shadow-light;
       box-sizing: border-box;
     }
+  }
+
+  .processing {
+    background: $secondary-warm__fade;
+    height: 80%;
+    width: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 4em;
+    z-index: 1;
+    line-height: 4em;
+    border-radius: 50%;
   }
 
   .buttons {

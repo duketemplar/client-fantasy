@@ -8,11 +8,9 @@ class Modal extends React.Component {
   }
 
   render() {
-    /*
-    if (this.props.inactive) {
+    if (this.props.steps.pane === null) {
       return null;
     }
-    */
 
     return (
       <div className="modal">

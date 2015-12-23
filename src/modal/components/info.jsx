@@ -12,8 +12,14 @@ export default class Info extends React.Component {
   render() {
     return (
       <div className="info">
-        <div className="header info--header">INFO: This is new crs stuff that you need to fill in....</div>
-        <div className="body info--body">The reason for this is that....something...something...</div>
+        <div className="header info--header">In order do proceed you must fill in some extra data.</div>
+        <div className="body info--body">
+          This is because there has been a new law, stating that all customers must
+          fill in extra information of where they live an pay taxes.
+          <br/>
+          <br/>
+          This is so the tax authorities knows what you are up to...
+        </div>
         <div className="buttons">
           <a className="button buttons--cancel" href="#" onClick={this.abort}>Cancel</a>
           <a className="button buttons--action" href="#" onClick={this.nextStep}>Next</a>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {STEP_INFO, STEP_USER_DATA, STEP_CONFIRM, STEP_SUBMITTING} from '../actions/action-types';
+import {STEP_INFO, STEP_USER_DATA, STEP_CONFIRM, STEP_SUBMIT} from '../actions/action-types';
 import _ from 'lodash';
 
 import Info from '../components/info';
@@ -9,7 +9,6 @@ import Confirm from '../components/confirm';
 const defaultState = {name: 'info', pane: <Info/>};
 
 export default function(state = defaultState, action) {
-  console.log('reducer: ', action.step)
   switch (action.step) {
   case STEP_INFO:
     return _.assign({}, state,
@@ -32,16 +31,13 @@ export default function(state = defaultState, action) {
         pane: <Confirm/>,
       }
     );
-  case STEP_SUBMITTING:
-    console.error('STEP_SUBMITTING: Not implemented yet....');
-    return defaultState;
-    /*
+  case STEP_SUBMIT:
     return _.assign({}, state,
       {
-        pane: </>,
+        name: 'submit',
+        pane: null,
       }
     );
-    */
   default:
     return state;
   }
