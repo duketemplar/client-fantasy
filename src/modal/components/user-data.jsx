@@ -12,6 +12,7 @@ export default class UserData extends React.Component {
   }
 
   render() {
+    const userdata = store.getState().user.data;
     return (
       <div className="user-data">
         <div className="header user-data--header">USER_DATA: Please fill in this</div>
@@ -19,13 +20,13 @@ export default class UserData extends React.Component {
           <div className="text">So we can register something about you</div>
           <form id="crs-data" className="form" ref={(ref) => this.userdataForm = ref}>
               <label htmlFor="tax-country">Country for tax: </label>
-              <input id="tax-country" type="text" name="taxCountry"/>
+              <input id="tax-country" type="text" name="taxCountry" defaultValue={userdata.taxCountry}/>
 
               <label htmlFor="tin">Tax Identification Number: </label>
-              <input id="tin" type="text" name="tin"/>
+              <input id="tin" type="text" name="tin" defaultValue={userdata.tin}/>
 
               <label htmlFor="company-name">Company Name: </label>
-              <input id="company-name" type="text" name="companyName"/>
+              <input id="company-name" type="text" name="companyName" defaultValue={userdata.companyName}/>
           </form>
           </div>
         <div className="buttons">
