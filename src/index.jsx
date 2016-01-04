@@ -36,6 +36,7 @@ import root from './root';
  * See index.html for more details.
  */
 function initialize(element) {
+  console.log('starting Initialization');
   try {
     i18n
       .initialize(element)
