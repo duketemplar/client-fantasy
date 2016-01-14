@@ -61,7 +61,7 @@ function requestAccountsFailure(data) {
 export default function fetchAccounts() {
   return (dispatch) => {
     dispatch(requestAccounts());
-    return api.get('/next/2/accounts').then(
+    return api.get('/api/2/accounts').then(
         ({ data }) => dispatch(requestAccountsSuccess(data)),
         ({ data }) => dispatch(requestAccountsFailure(data)));
   };
