@@ -45,6 +45,6 @@ describe('getLocale', () => {
 
     it('returns the locale from the next api', () => expect(resolvedValue).to.equal('en-gb'));
 
-    it('uses /next/2/login', () => expect(api.get).to.have.been.calledWith('/next/2/login'));
+    it('uses /api/2/login', () => expect(api.get).to.have.been.calledWith('/api/2/login'));
   });
 });

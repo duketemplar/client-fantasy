@@ -65,7 +65,7 @@ var config = {
       '/mux/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port,
       '/now/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port,
       '/sc/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port,
-      '/next/2/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port
+      '/api/2/*': 'http://' + pkg.config.api_server.host + ':' + pkg.config.api_server.port
     },
     stats: {
       colors: true

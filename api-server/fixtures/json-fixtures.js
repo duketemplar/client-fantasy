@@ -34,7 +34,7 @@ function serve(root, opts) {
 
   function isLoginRequired(path){
     return _.any(loginRequiredPaths, function(loginRequiredPath){
-      return path.indexOf('/next/2/' + loginRequiredPath) !== -1;
+      return path.indexOf('/api/2/' + loginRequiredPath) !== -1;
     });
   }
 
@@ -44,7 +44,7 @@ function serve(root, opts) {
       if (isLoginRequired(this.path)) {
         opts.root = rootPath + '/' + this.cookies.get('username');
         console.log("Login required for path: " + this.path)
-      } else if (this.path.indexOf('/next/2/login') !== -1) {
+      } else if (this.path.indexOf('/api/2/login') !== -1) {
         if (this.cookies.get('authenticated') === 'true') {
           opts.root = rootPath + '/' + this.cookies.get('username');
         } else {
