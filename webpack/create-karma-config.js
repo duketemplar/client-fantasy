@@ -10,6 +10,9 @@ const preLoadersForCodeCoverage = [
   {
     test: /\.jsx?$/,
     loader: 'babel-loader',
+    query: {
+        presets: ['react', 'es2015'],
+    },
     exclude: [
       path.resolve('./src/'),
       path.resolve('./node_modules/'),

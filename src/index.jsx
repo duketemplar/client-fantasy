@@ -4,7 +4,7 @@
 
 // importing Babel polyfills to emulate full ES6 environment
 // See https://babeljs.io/docs/usage/polyfill/
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 
 // importing styles that apply globally on the application level
 import 'normalize.css/normalize.css';
