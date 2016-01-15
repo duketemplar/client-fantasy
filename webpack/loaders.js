@@ -29,7 +29,7 @@ var sassParams = [
 ];
 
 if (DEBUG) {
-  jsxLoader = ['react-hot', 'babel-loader?optional=runtime'];
+  jsxLoader = ['react-hot', 'babel-loader'];
   sassParams.push('sourceMap', 'sourceMapContents=true');
 
   sassLoader = [
@@ -45,7 +45,7 @@ if (DEBUG) {
     'postcss-loader'
   ].join('!');
 } else {
-  jsxLoader = ['babel-loader?optional=runtime'];
+  jsxLoader = ['babel-loader'];
 
   sassLoader = [
     'style-loader',
