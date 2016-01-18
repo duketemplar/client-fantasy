@@ -46,6 +46,10 @@ function createKarmaConfig(config) {
   return {
     devtool: config.sourcemap ? 'inline-source-map' : '',
     module: {
+      // don't run babel-loader through the sinon module
+      noParse: [
+        /node_modules\/sinon\//
+      ],
       preLoaders: preLoaders,
       loaders: loaders,
     },
@@ -61,8 +65,16 @@ function createKarmaConfig(config) {
         'nordnet-i18n': path.join(__dirname, '../src/nordnet-i18n'),
         'nordnet-utils': path.join(__dirname, '../src/nordnet-utils'),
         'mock-login': path.join(__dirname, '../api-server/mock-login.jsx'),
+        'sinon': 'sinon/pkg/sinon',
       },
       extensions: ['', '.js', '.json', '.jsx'],
+    },
+    externals: {
+      jsdom: 'window',
+      cheerio: 'window',
+      'react/lib/ExecutionEnvironment': true,
+      'react/lib/ReactContext': 'window',
+      'text-encoding': 'window'
     },
   };
 }
