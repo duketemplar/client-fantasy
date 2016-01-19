@@ -1,17 +1,18 @@
 /*
  * You can use these test helper to avoid async testing of promises
  */
-export function createSuccessPromise(successValue) {
-  return {
-    then: (cb) => createSuccessPromise(cb(successValue)),
-    successValue,
-  };
-}
+ export function createSuccessPromise(value) {
+   return {
+     then: (cb) => createSuccessPromise(cb(value)),
+     catch: () => {},
+     value,
+   };
+ }
 
-export function createFailPromise(failValue) {
-  return {
-    then: (_, failCb) => createFailPromise(failCb(failValue)),
-    failValue,
-  };
-}
-
+ export function createFailPromise(value) {
+   return {
+     then: (success, fail) => createFailPromise(fail ? fail(value) : value),
+     catch: (fail) => createFailPromise(fail(value)),
+     value,
+   };
+ }
