@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import { expect } from 'chai';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';

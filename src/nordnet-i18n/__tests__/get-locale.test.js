@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import { expect } from 'chai';
 import '../initialize-intl';
 import getLocale from '../get-locale';

@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import { expect } from 'chai';
 import api from 'nordnet-next-api';
 import { createSuccessPromise, createFailPromise } from 'test-helper';
@@ -18,6 +19,7 @@ describe('accounts.actions.fetchAccounts', () => {
     const dispatch = sandbox.spy();
     fetchAccounts()(dispatch);
     const expected = { type: ACCOUNTS_REQUEST };
+    console.log('calledWith', expect(dispatch).to.have.been.calledWith);
     expect(dispatch).to.have.been.calledWith(expected);
   });
 

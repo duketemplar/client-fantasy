@@ -13,6 +13,10 @@ require('intl/locale-data/jsonp/nb-NO.js');
 require('intl/locale-data/jsonp/nn-NO.js');
 require('intl/locale-data/jsonp/da-DK.js');
 
+var chai = require('chai');
+var sinonChai = require("sinon-chai");
+chai.use(sinonChai);
+
 // see http://chaijs.com/guide/styles/
 chai.config.truncateThreshold = 0;
 

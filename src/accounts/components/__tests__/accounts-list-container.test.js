@@ -1,3 +1,4 @@
+import sinon from 'sinon';
 import { expect } from 'chai';
 import React from 'react';
 import ReactDOM from 'react-dom';
