@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 // React container component that is responsible for loading initial data on DOM mount
-import Modal from './modal/components/modal';
+import CreateCustomer from './create-customer/components/create-customer';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
@@ -26,7 +26,7 @@ import store from './store';
 class App extends React.Component {
   render() {
     return (
-      <Modal {...this.props} />
+      <CreateCustomer {...this.props} />
     );
   }
 }
