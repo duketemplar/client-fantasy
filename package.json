@@ -80,7 +80,7 @@
     "es6-promise-polyfill": "1.1.1",
     "eslint": "1.10.3",
     "eslint-config-airbnb": "3.1.0",
-    "eslint-config-nordnet": "1.1.0",
+    "eslint-config-nordnet": "1.1.1",
     "eslint-plugin-react": "3.15.0",
     "file-loader": "0.8.1",
     "html-loader": "0.3.0",
