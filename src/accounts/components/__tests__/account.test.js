@@ -1,7 +1,8 @@
+import { expect } from 'chai';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import {i18n} from 'nordnet-i18n';
+import { i18n } from 'nordnet-i18n';
 import Account from '../account';
 
 describe('accounts.components.Account', () => {
@@ -28,6 +29,6 @@ describe('accounts.components.Account', () => {
 
   it('translates ACCOUNTS.ACCOUNT_NUMBER', () => expect(node.textContent).to.include('Account'));
   it('shows account value', () => expect(node.textContent).to.include('100.00'));
-  it('shows account alias', () =>  expect(node.textContent).to.include('foo'));
-  it('shows account name', () =>  expect(node.textContent).to.include('Account: 123'));
+  it('shows account alias', () => expect(node.textContent).to.include('foo'));
+  it('shows account name', () => expect(node.textContent).to.include('Account: 123'));
 });
