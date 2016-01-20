@@ -1,4 +1,5 @@
-import {initializeLocale, supportedLocales} from '../initialize-intl';
+import { expect } from 'chai';
+import { initializeLocale, supportedLocales } from '../initialize-intl';
 
 const SUPPORTED_LOCALES = ['sv-SE', 'fi-FI', 'sv-FI', 'nb-NO', 'no-NO', 'nn-NO', 'da-DK', 'en'];
 
@@ -20,7 +21,7 @@ describe('initializeLocale', () => {
 
   describe('when sv-SE', () => {
     it('formats numbers', (done) => {
-      initializeLocale('sv-SE').then(()=> {
+      initializeLocale('sv-SE').then(() => {
         const number = 1234.56;
         const formated = new Intl.NumberFormat('se-SE').format(number);
         expect(formated).to.equal('1 234,56');
@@ -31,7 +32,7 @@ describe('initializeLocale', () => {
 
   describe('when en', () => {
     it('formats numbers', (done) => {
-      initializeLocale('en').then(()=> {
+      initializeLocale('en').then(() => {
         const number = 1234.56;
         const formated = new Intl.NumberFormat('en').format(number);
         expect(formated).to.equal('1,234.56');
@@ -43,7 +44,7 @@ describe('initializeLocale', () => {
   SUPPORTED_LOCALES.forEach((locale) => {
     describe('locale ' + locale, () => {
       it('is supported and returns the locale so we can chain the promise', (done) => {
-        initializeLocale(locale).then((res)=> {
+        initializeLocale(locale).then((res) => {
           expect(res).to.equal(locale);
           done();
         }, done).catch(done);

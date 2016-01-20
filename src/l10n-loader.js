@@ -10,4 +10,3 @@ export default function l10nLoader(locale) {
     locales: [mappedLocale],
   };
 }
-
