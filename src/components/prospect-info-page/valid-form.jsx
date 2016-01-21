@@ -13,9 +13,7 @@ export default class ValidForm extends React.Component {
 
   validate(event) {
     this.data[event.target.name] = event.target.value;
-
     this.data.valid = true;
-
     this.props.dataUpdatedCb(() => this.data);
   }
 }

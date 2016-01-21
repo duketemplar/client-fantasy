@@ -9,27 +9,22 @@ import thunkMiddleware from 'redux-thunk';
 
 // custom reducer for accounts component
 // REPLACE with list of your own reducers
-import accountsReducer from './accounts/reducers/accounts';
-import stepsReducer from './modal/reducers/steps';
-import userReducer from './modal/reducers/user';
+// import accountsReducer from './accounts/reducers/accounts';
+// import stepsReducer from './modal/reducers/steps';
+// import userReducer from './modal/reducers/user';
 
 const MIDDLEWARE = [thunkMiddleware];
 
 // defines which reducers are responsible for which parts of the state
 // REPLACE with list of your own reducers
 const REDUCERS = {
-  accounts: accountsReducer,
-  steps: stepsReducer,
-  user: userReducer,
+  // accounts: accountsReducer,
+  // steps: stepsReducer,
+  // user: userReducer,
 };
 
 // creates Redux store
 function finalCreateStore(middleware) {
-  if (DEBUG) {
-    const devtools = require('./devtools');
-    return devtools.createStoreWithDevTools(applyMiddleware(...middleware));
-  }
-
   return applyMiddleware(...middleware)(createStore);
 }
 

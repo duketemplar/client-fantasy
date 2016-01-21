@@ -7,7 +7,7 @@ export default class RegulationData extends React.Component {
 
   render() {
     return (
-      <div>Regulation Data....</div>
+      <div>Regulation Data...</div>
     );
   }
 }

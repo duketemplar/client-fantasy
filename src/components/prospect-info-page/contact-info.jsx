@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input} from 'react-bootstrap';
+import { Input } from 'react-bootstrap';
 import '../create-customer.sass';
 
 export default class ContactInfo extends React.Component {

@@ -13,23 +13,11 @@ import ReactDOM from 'react-dom';
 // imports Redux Provider, see https://github.com/rackt/react-redux#provider-store
 import { Provider } from 'react-redux';
 
-// React container component that is responsible for loading initial data on DOM mount
-import CreateCustomer from './create-customer/components/create-customer';
-
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
 
 // Redux store
 import store from './store';
-
-// Root application component
-class App extends React.Component {
-  render() {
-    return (
-      <CreateCustomer {...this.props} />
-    );
-  }
-}
 
 // Make i18n functions available to all children via React Context
 const AppWithI18N = i18n(App);
@@ -39,16 +27,6 @@ const AppWithI18N = i18n(App);
  * Renders application by calling React.render()
  */
 export default function(element, intlData) {
-  // creates Redux debug panel that is injected on the page in development mode
-  function createDebugPanel() {
-    if (DEBUG) {
-      const devtools = require('./devtools');
-      return devtools.createDebugPanel(store);
-    }
-
-    return null;
-  }
-
   // Calls React.render and renders application within provided element
   // AppWithI18N is wraped in Redux <Provider /> to be able to connect React components to the Redux store.
   // See https://github.com/rackt/react-redux#provider-store
@@ -57,7 +35,6 @@ export default function(element, intlData) {
       <Provider store={ store }>
         <AppWithI18N { ...intlData }  />
       </Provider>
-      { createDebugPanel(store) }
     </div>,
     element
   );
