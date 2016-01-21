@@ -27,7 +27,7 @@ describe('getLocale', () => {
 
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
-      const response = {data: {lang: 'en', country: 'gb'}};
+      const response = {data: {language: 'en', country: 'gb'}};
       sandbox.stub(api, 'get', () => mockPromise(response));
     });
 
