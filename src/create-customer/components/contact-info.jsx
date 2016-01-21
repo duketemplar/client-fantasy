@@ -6,12 +6,20 @@ export default class ContactInfo extends React.Component {
   constructor(props) {
     super(props);
 
-    this.data = {};
-    this.state = {
-      personalId: '',
-      firstName: '',
-      lastName: '',
-      crsAnswer: '',
+    this.data = { valid: false };
+    this.validator = {
+      personalId: {
+        regEx: /.+/,
+        valid: false,
+      },
+      firstName: {
+        regEx: /.+/,
+        valid: false,
+      },
+      lastName: {
+        regEx: /.+/,
+        valid: false,
+      },
     };
   }
 
@@ -33,10 +41,21 @@ export default class ContactInfo extends React.Component {
   }
 
   validate(event) {
-    this.data[event.target.name] = event.target.value;
+    const name = event.target.name;
+    const value = event.target.value;
+    this.data[name] = value;
 
-    this.props.handler(() => this.data);
+    for (const validate in this.validator) {
+      if (name === validate && value.match(validate.regEx)) {
+        console.log('implement this');
+      }
+    }
+
+    event.target.bsStyle = 'error';
+    this.data.valid = true;
+
+    this.props.dataUpdatedCb(() => this.data);
   }
 }
 
-ContactInfo.propTypes = { handler: React.PropTypes.func };
+ContactInfo.propTypes = { dataUpdatedCb: React.PropTypes.func };

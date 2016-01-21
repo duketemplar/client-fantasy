@@ -13,6 +13,7 @@ export default class CreateCustomer extends React.Component {
     this.state = {
       showModal: true,
       paneIndx: 0,
+      validForNextStep: false,
     };
 
     this.panes = [ContactInfo, RegulationData];
@@ -27,13 +28,13 @@ export default class CreateCustomer extends React.Component {
           </Modal.Header>
 
           <Modal.Body>
-            { React.createElement(this.panes[this.state.paneIndx], { handler: this.handler }) }
+            { React.createElement(this.panes[this.state.paneIndx], { dataUpdatedCb: this.enableNextStep.bind(this) }) }
           </Modal.Body>
 
           <Modal.Footer>
             <Button onClick={ this.close.bind(this) }>Abort</Button>
             <Button onClick={ this.previous.bind(this) } disabled={ this.state.paneIndx === 0 }>Previous Step</Button>
-            <Button onClick={ this.next.bind(this) } bsStyle="primary">Next step</Button>
+            <Button onClick={ this.next.bind(this) } disabled={ !this.state.validForNextStep } bsStyle="primary">Next step</Button>
           </Modal.Footer>
       </Modal>
       </div>
@@ -44,10 +45,12 @@ export default class CreateCustomer extends React.Component {
     this.setState({ showModal: false });
   }
 
-  handler(cb) {
+  enableNextStep(cb) {
     const data = cb();
 
-    console.log('Handler called', data);
+    if (data.valid) {
+      this.setState({ validForNextStep: true });
+    }
   }
 
   previous() {
