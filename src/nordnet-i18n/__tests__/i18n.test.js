@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import '../initialize-intl';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
@@ -7,30 +8,34 @@ describe('i18n', () => {
   function renderI18NParentWithProps(Component, props) {
     const App = i18n(Component);
     const tree = TestUtils.renderIntoDocument(
-      <App {...props}/>
+      <App { ...props }/>
     );
     return tree;
   }
 
   function createComponentWithContextTypes() {
-    return React.createClass({
-      contextTypes: {
-        messages: React.PropTypes.object.isRequired,
-        locales: React.PropTypes.array.isRequired,
-      },
+    class ComponentWithContxtTypes extends React.Component {
+      render() {
+        return (<div/>);
+      }
+    }
 
-      render() {return (<div/>); },
-    });
+    ComponentWithContxtTypes.contextTypes = {
+      messages: React.PropTypes.object.isRequired,
+      locales: React.PropTypes.array.isRequired,
+    };
+
+    return ComponentWithContxtTypes;
   }
 
   const locales = [1, 2, 3];
-  const messages = {baaz: 'baaz'};
+  const messages = { baaz: 'baaz' };
 
   let component;
 
   beforeEach(() => {
     const Component = createComponentWithContextTypes();
-    const tree = renderI18NParentWithProps(Component, {locales, messages});
+    const tree = renderI18NParentWithProps(Component, { locales, messages });
     component = TestUtils.findRenderedComponentWithType(tree, Component);
   });
 

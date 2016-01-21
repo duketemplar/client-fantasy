@@ -19,34 +19,34 @@ import { ACCOUNTS_REQUEST, ACCOUNTS_REQUEST_SUCCESS, ACCOUNTS_REQUEST_FAILURE } 
  * For each supported action type reducer returns a new state.
  * For action types that are unknow to the reducer current state is returned.
  */
-export default function accounts(state = {isFetching: false, accounts: []}, action) {
+export default function accounts(state = { isFetching: false, accounts: [] }, action) {
   switch (action.type) {
 
-  // indicates that accounts loading request is in progress
-  // returns new state
-  case ACCOUNTS_REQUEST:
-    return _.assign({}, state, {
-      isFetching: true,
-    });
+    // indicates that accounts loading request is in progress
+    // returns new state
+    case ACCOUNTS_REQUEST:
+      return _.assign({}, state, {
+        isFetching: true,
+      });
 
-  // indicates that accounts request successfully loaded data
-  // returns new state with accounts array
-  case ACCOUNTS_REQUEST_SUCCESS:
-    return _.assign({}, state, {
-      isFetching: false,
-      accounts: action.data,
-    });
+    // indicates that accounts request successfully loaded data
+    // returns new state with accounts array
+    case ACCOUNTS_REQUEST_SUCCESS:
+      return _.assign({}, state, {
+        isFetching: false,
+        accounts: action.data,
+      });
 
-  // indicates that accounts request failed
-  // returns new state with empty accounts array
-  case ACCOUNTS_REQUEST_FAILURE:
-    return _.assign({}, state, {
-      isFetching: false,
-      accounts: [],
-    });
+    // indicates that accounts request failed
+    // returns new state with empty accounts array
+    case ACCOUNTS_REQUEST_FAILURE:
+      return _.assign({}, state, {
+        isFetching: false,
+        accounts: [],
+      });
 
-  // returns current state for all other action types
-  default:
-    return state;
+      // returns current state for all other action types
+    default:
+      return state;
   }
 }

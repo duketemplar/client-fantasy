@@ -1,8 +1,10 @@
+import sinon from 'sinon';
+import { expect } from 'chai';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import fetchAccounts from '../actions/fetch-accounts';
 import accountsReducer from '../reducers/accounts';
-import {createSuccessPromise, createFailPromise} from 'test-helper';
+import { createSuccessPromise, createFailPromise } from 'test-helper';
 
 import api from 'nordnet-next-api';
 
@@ -43,7 +45,7 @@ describe('accounts.states', () => {
     beforeEach(() => {
       // given
       createAccountStore();
-      stubNextApi(createSuccessPromise({data: 'some accounts'}));
+      stubNextApi(createSuccessPromise({ data: 'some accounts' }));
       subscribeToStoreChanges();
 
       // when
@@ -51,8 +53,8 @@ describe('accounts.states', () => {
     });
 
     const EXPECTED_STATE_CHANGES_WHEN_SUCCESS = [
-      { isFetching: true, accounts: []},
-      { isFetching: false, accounts: 'some accounts'},
+      { isFetching: true, accounts: [] },
+      { isFetching: false, accounts: 'some accounts' },
     ];
 
     it('does two state changes', () => expect(stateChanges.length).to.equal(2));
@@ -70,7 +72,7 @@ describe('accounts.states', () => {
     beforeEach(() => {
       // given
       createAccountStore();
-      stubNextApi(createFailPromise({data: 'ojojoj'}));
+      stubNextApi(createFailPromise({ data: 'ojojoj' }));
       subscribeToStoreChanges();
 
       // when
@@ -78,8 +80,8 @@ describe('accounts.states', () => {
     });
 
     const EXPECTED_STATE_CHANGES_WHEN_FAILED = [
-      { isFetching: true, accounts: []},
-      { isFetching: false, accounts: []},
+      { isFetching: true, accounts: [] },
+      { isFetching: false, accounts: [] },
     ];
 
     it('does two state changes', () => expect(stateChanges.length).to.equal(2));

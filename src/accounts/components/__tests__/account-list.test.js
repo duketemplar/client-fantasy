@@ -1,7 +1,8 @@
+import { expect } from 'chai';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import {i18n} from 'nordnet-i18n';
+import { i18n } from 'nordnet-i18n';
 import AccountList from '../accounts-list';
 
 describe('accounts.components.AccountList', () => {
@@ -22,7 +23,7 @@ describe('accounts.components.AccountList', () => {
       messages,
       formats: {}, // TODO
       locales: [],
-      accounts: [{accno: 111, alias: 'account one'}, {accno: 222, alias: 'account two'}],
+      accounts: [{ accno: 111, alias: 'account one' }, { accno: 222, alias: 'account two' }],
     };
     const component = createComponent(AccountList, props);
     node = ReactDOM.findDOMNode(component);
