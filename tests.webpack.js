@@ -14,7 +14,9 @@ require('intl/locale-data/jsonp/nn-NO.js');
 require('intl/locale-data/jsonp/da-DK.js');
 
 var chai = require('chai');
-var sinonChai = require("sinon-chai");
+var dirtyChai = require('dirty-chai');
+var sinonChai = require('sinon-chai');
+chai.use(dirtyChai);
 chai.use(sinonChai);
 
 // see http://chaijs.com/guide/styles/

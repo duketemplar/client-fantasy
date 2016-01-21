@@ -19,7 +19,6 @@ describe('accounts.actions.fetchAccounts', () => {
     const dispatch = sandbox.spy();
     fetchAccounts()(dispatch);
     const expected = { type: ACCOUNTS_REQUEST };
-    console.log('calledWith', expect(dispatch).to.have.been.calledWith);
     expect(dispatch).to.have.been.calledWith(expected);
   });
 
