@@ -16,8 +16,30 @@ import { Provider } from 'react-redux';
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
 
+import ProspectInfoPage from './components/prospect-info-page';
+import CompliancePage from './components/compliance-page';
+import SignPage from './components/sign-page';
+
 // Redux store
 import store from './store';
+import routes from './routes';
+import { Router, Route, browserHistory } from 'react-router';
+
+// Root application component
+class App extends React.Component {
+  render() {
+    return (
+      <Router history={ browserHistory }>
+        <Route name="prospect-info-page" path="/" component={ ProspectInfoPage } key="contact-info" />
+        <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
+        <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance" />
+        <Route name="sign" path="/register/sign" component={ SignPage } key="sign-page" />
+
+      </Router>
+    );
+  }
+}
+
 
 // Make i18n functions available to all children via React Context
 const AppWithI18N = i18n(App);
