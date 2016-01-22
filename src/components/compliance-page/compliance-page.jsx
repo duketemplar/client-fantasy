@@ -8,7 +8,7 @@ export default class CompliancePage extends React.Component {
 
   render() {
     return (
-      <div className="create-customer">
+      <div className="compliance-answers">
 
         <Col xs={12}>
           <Row>
