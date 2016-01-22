@@ -32,7 +32,7 @@ class App extends React.Component {
       <Router history={ browserHistory }>
         <Route name="prospect-info-page" path="/" component={ ProspectInfoPage } key="contact-info" />
         <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
-        <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance" />
+        <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance-page" />
         <Route name="sign" path="/register/sign" component={ SignPage } key="sign-page" />
       </Router>
     );

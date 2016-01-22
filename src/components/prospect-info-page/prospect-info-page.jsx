@@ -44,7 +44,7 @@ export default class ProspectInfoPage extends React.Component {
   submitForm(e) {
     console.log("yolo");
     e.preventDefault();
-    this.props.history.go('regulation-info');
+    this.props.history.pushState(null, '/register/compliance');
   }
 
   close() {
