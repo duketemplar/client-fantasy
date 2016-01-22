@@ -34,12 +34,10 @@ class App extends React.Component {
         <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
         <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance" />
         <Route name="sign" path="/register/sign" component={ SignPage } key="sign-page" />
-
       </Router>
     );
   }
 }
-
 
 // Make i18n functions available to all children via React Context
 const AppWithI18N = i18n(App);
