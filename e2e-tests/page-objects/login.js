@@ -50,7 +50,9 @@ function loginProdMode(client) {
 function goTo(client) {
   return () => {
     client.url(client.launch_url);
-    client.waitForElementPresent('#container', 10000);
+    if (!useMockLogin(client)) {
+      client.waitForElementPresent('#container', 10000);
+    }
   };
 }
 

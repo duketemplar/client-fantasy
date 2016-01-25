@@ -13,6 +13,7 @@ const preLoadersForCodeCoverage = [
     query: {
         presets: ['react', 'es2015'],
     },
+    // exclude: /node_modules/,
     exclude: [
       path.resolve('./src/'),
       path.resolve('./node_modules/'),

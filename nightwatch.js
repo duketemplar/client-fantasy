@@ -1,5 +1,5 @@
 process.env.BABEL_CACHE_PATH = process.env.PWD + '/.babel.json'
-require('babel/register');
+require('babel-core/register');
 const Nightwatch = require('nightwatch');
 
 try {

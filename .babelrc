@@ -1,0 +1,8 @@
+{
+  "env": {
+    "e2e": {
+      "presets": ["react", "es2015"],
+      "plugins": ["add-module-exports"]
+    }
+  }
+}
