@@ -1,8 +1,15 @@
 import Intl from 'intl';
 import _ from 'lodash';
 
-// some browsers does not impl. correctly Intl, override it.
-global.Intl = Intl;
+// some browsers does not impl. correctly Intl, try to override it
+if (!window.Intl) {
+  try {
+    window.Intl = Intl; // eslint-disable-line no-native-reassign
+    window.IntlPolyfill = Intl;
+  } catch (err) {
+    console.error('Failed to redefine Intl: ', err);
+  }
+}
 
 const LOCALE_INITIALIZERS = {
   'sv-SE': ensuresvSE,
