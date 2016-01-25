@@ -44,10 +44,9 @@ class ProspectInfoPage extends React.Component {
     e.preventDefault();
     const action = {
       step: 'POST_PROSPECT_INFO',
-      value: -1,
+      value: '98393939339',
     };
 
-    console.log("Dispatching to store:", action);
     store.dispatch(action);
     this.props.history.pushState(null, '/register/compliance');
   }
@@ -77,7 +76,7 @@ class ProspectInfoPage extends React.Component {
 
 function reducerState(state) {
   return {
-    steps: state.steps,
+    step: state.steps,
     value: state.value,
   };
 }
