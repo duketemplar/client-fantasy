@@ -22,13 +22,13 @@ class ProspectInfoPage extends React.Component {
           <form onSubmit={ this.submitForm.bind(this) }>
             <Col xs={4}>
               <Row>
-                <Input name="firstName" type="text" label="First Name" placeholder="Marcus" />
+                <Input name="firstName" type="text" ref="firstName" label="First Name" placeholder="Marcus" />
               </Row>
               <Row>
-                <Input name="lastName" type="text" label="Last Name" placeholder="Berggren" />
+                <Input name="lastName" type="text" ref="lastName" label="Last Name" placeholder="Berggren" />
               </Row>
               <Row>
-                <Input name="civicRegistrationNumber" type="text" label="Civic Registration Number" placeholder="yyyymmdd-xxxx" />
+                <Input name="civicRegistrationNumber" type="text" ref="civicRegistrationNumber" label="Civic Registration Number" placeholder="yyyymmdd-xxxx" />
               </Row>
               <Row>
                 <Input name="submit" type="submit" />
@@ -44,7 +44,11 @@ class ProspectInfoPage extends React.Component {
     e.preventDefault();
     const action = {
       step: 'POST_PROSPECT_INFO',
-      value: '98393939339',
+      value: {
+        firstName: this.refs.firstName.getValue(),
+        lastName: this.refs.lastName.getValue(),
+        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue()
+      },
     };
 
     store.dispatch(action);
