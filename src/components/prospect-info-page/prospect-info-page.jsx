@@ -1,12 +1,11 @@
 import React from 'react';
-import { Button, Col, Row, Input   } from 'react-bootstrap';
+import { Col, Row, Input } from 'react-bootstrap';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
-import ContactInfo from './contact-info';
-import RegulationData from './regulation-data';
-import { Link, browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import store from '../../store';
 
-export default class ProspectInfoPage extends React.Component {
+class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -42,8 +41,14 @@ export default class ProspectInfoPage extends React.Component {
   }
 
   submitForm(e) {
-    console.log("yolo");
     e.preventDefault();
+    const action = {
+      step: 'POST_PROSPECT_INFO',
+      value: -1,
+    };
+
+    console.log("Dispatching to store:", action);
+    store.dispatch(action);
     this.props.history.pushState(null, '/register/compliance');
   }
 
@@ -69,3 +74,12 @@ export default class ProspectInfoPage extends React.Component {
     this.setState({ paneIndex: nextStep });
   }
 }
+
+function reducerState(state) {
+  return {
+    steps: state.steps,
+    value: state.value,
+  };
+}
+
+export default connect(reducerState)(ProspectInfoPage);
