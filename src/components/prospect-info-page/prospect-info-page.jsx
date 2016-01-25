@@ -42,12 +42,13 @@ class ProspectInfoPage extends React.Component {
 
   submitForm(e) {
     e.preventDefault();
+
     const action = {
       step: 'POST_PROSPECT_INFO',
       value: {
         firstName: this.refs.firstName.getValue(),
         lastName: this.refs.lastName.getValue(),
-        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue()
+        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
       },
     };
 
