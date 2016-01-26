@@ -1,5 +1,5 @@
 function useMockLogin(client) {
-  return client.launch_url.includes('localhost');
+  return client.launch_url.indexOf('localhost') !== -1;
 }
 
 function login(client) {
