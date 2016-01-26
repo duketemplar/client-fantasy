@@ -27,6 +27,7 @@ import { Router, Route, browserHistory } from 'react-router';
 
 // Root application component
 class App extends React.Component {
+
   render() {
     return (
       <Router history={ browserHistory }>
