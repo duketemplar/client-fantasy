@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Row, Input } from 'react-bootstrap';
+import store from '../../store';
 
 export default class CompliancePage extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class CompliancePage extends React.Component {
     );
   }
 
-  submitForm() {
+  submitForm(e) {
     e.preventDefault();
 
     const action = {
@@ -42,6 +43,10 @@ export default class CompliancePage extends React.Component {
 
     store.dispatch(action);
 
-    this.props.history.pushState(null, '/register/sign');
+    // this.props.history.pushState(null, '/register/sign');
   }
 }
+
+CompliancePage.propTypes = {
+  history: React.PropTypes.object,
+};
