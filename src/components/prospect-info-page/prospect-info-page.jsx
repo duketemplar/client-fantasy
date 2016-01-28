@@ -5,7 +5,7 @@ import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
 import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js'
-
+import nordnetNext from 'nordnet-next-api';
 
 const phoneGlyph = <Glyphicon glyph="earphone" />;
 
@@ -15,14 +15,6 @@ class ProspectInfoPage extends React.Component {
     this.state = {
       civicRegistrationNumber: ''
     };
-  }
-
-  formChanged() {
-    this.setState(
-      {
-        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue()
-      }
-    );
   }
 
   render() {
@@ -74,39 +66,38 @@ class ProspectInfoPage extends React.Component {
   submitForm(e) {
     e.preventDefault();
 
-    const action = {
-      step: 'POST_PROSPECT_INFO',
-      value: {
-        firstName: this.refs.firstName.getValue(),
-        lastName: this.refs.lastName.getValue(),
-        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
-      },
+    const prospectData = {
+      firstName: this.refs.firstName.getValue(),
+      lastName: this.refs.lastName.getValue(),
+      civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
     };
 
-    store.dispatch(action);
-    this.props.history.pushState(null, '/register/compliance');
+    this.postRegistration(prospectData);
   }
 
-  close() {
-    this.setState({ showModal: false });
-  }
+  postRegistration(registrationData) {
+    const url = '/next/2/customer-creation/registrations';
+    const params = registrationData;
+    const headers = '';
 
-  enableNextStep(cb) {
-    const data = cb();
+    nordnetNext
+    .post(url, params, headers)
+    .then(({ data }) => {
+      if (data.status === 'SUCCESS') {
+        const action = {
+          step: 'POST_PROSPECT_INFO',
+          value: registrationData,
+        };
 
-    if (data.valid) {
-      this.setState({ validForNextStep: true });
-    }
-  }
-
-  previous() {
-    const previousStep = this.state.paneIndex > 0 ? --this.state.paneIndex : this.state.paneIndex;
-    this.setState({ paneIndex: previousStep });
-  }
-
-  next() {
-    const nextStep = this.state.paneIndex < this.panes.length - 1 ? ++this.state.paneIndex : this.state.paneIndex;
-    this.setState({ paneIndex: nextStep });
+        store.dispatch(action);
+        this.props.history.pushState(null, '/register/compliance');
+      } else {
+        console.log('Prospect data is not valid! ', data.error);
+      }
+    })
+    .catch(() => {
+      throw Error(`Could not post to ${url}`);
+    });
   }
 }
 
@@ -116,5 +107,9 @@ function reducerState(state) {
     value: state.value,
   };
 }
+
+ProspectInfoPage.propTypes = {
+  history: React.PropTypes.object,
+};
 
 export default connect(reducerState)(ProspectInfoPage);

@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 const defaultState = {
-  civicNum: -1,
-  customerRegulationId: -1,
+  prospectInfo: {},
+  regulationInfo: {},
 };
 
 export default function(state = defaultState, action) {
@@ -10,13 +10,13 @@ export default function(state = defaultState, action) {
   case 'POST_PROSPECT_INFO':
     return _.assign({}, state,
       {
-        civicNum: action.value,
+        prospectInfo: action.value,
       }
     );
   case 'POST_REGULATION_DATA':
     return _.assign({}, state,
       {
-        customerRegulationId: action.value,
+        regulationInfo: action.value,
       }
     );
   default:
