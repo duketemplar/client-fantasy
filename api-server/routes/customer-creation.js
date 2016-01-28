@@ -1,13 +1,14 @@
+
 function* registrations(next) {
   const formData = this.request.body;
 
   const requiredFields = ['civicRegistrationNumber', 'firstName', 'lastName'];
 
-  var status = 'SUCCESS';
+  let status = 'SUCCESS';
   const error = [];
 
   requiredFields.forEach(field => {
-    if (formData[field] === 'undefined' || formData[field].length < 1) {
+    if (formData[field] === undefined || formData[field].length < 1) {
       status = 'FAILED';
       error.push(`${field} is empty`);
     }

@@ -28,7 +28,7 @@
     "lint:jenkins": "npm-run-all jscs eslint:jenkins",
     "prestart": "npm run env:dev",
     "start": "npm-run-all --parallel start:api start:webpack-dev-server",
-    "start:api": "nodemon --harmony ./api-server/api-server.js --port $npm_package_config_api_server_port",
+    "start:api": "nodemon --harmony --use-strict ./api-server/api-server.js --port $npm_package_config_api_server_port",
     "start:webpack-dev-server": "node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
     "webpack": "webpack --colors --progress --config ./webpack/config",

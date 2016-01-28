@@ -16,7 +16,10 @@ const app = koa();
 
 router
 .post('/next/2/accounts/:accno/orders', routes.orders.enterOrder)
-.post('/next/2/customer-creation/registrations', routes.customerCreation.registrations);
+.post('/next/2/customer-creation/registrations', routes.customerCreation.registrations)
+.post('/next/2/customer-regulation/registrations', routes.customerRegulation.registrations)
+.post('/next/2/kyc/compliance', routes.kyc.compliance)
+.post('/next/2/signicat/sign', routes.signicat.sign);
 
 app
   .use(bodyParser())
