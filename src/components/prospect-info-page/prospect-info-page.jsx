@@ -33,9 +33,6 @@ class ProspectInfoPage extends React.Component {
 
                 <Input  name="civicRegistrationNumber" type="text" 
                         ref="civicRegistrationNumber" label="Civic Registration Number"
-                        value={ this.state.civicRegistrationNumber }
-                        bsStyle={ civicRegistrationNumberValidator(this.state.civicRegistrationNumber) }
-                        onChange={ this.formChanged.bind(this) }
                         placeholder="19890101-1234" />
                 
                 <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige">
