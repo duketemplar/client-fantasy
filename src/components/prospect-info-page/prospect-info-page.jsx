@@ -1,13 +1,28 @@
 import React from 'react';
-import { Col, Row, Input } from 'react-bootstrap';
+import { Col, Row, Input, Glyphicon } from 'react-bootstrap';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
+import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js'
+
+
+const phoneGlyph = <Glyphicon glyph="earphone" />;
 
 class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      civicRegistrationNumber: ''
+    };
+  }
+
+  formChanged() {
+    this.setState(
+      {
+        civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue()
+      }
+    );
   }
 
   render() {
@@ -21,18 +36,34 @@ class ProspectInfoPage extends React.Component {
 
           <form onSubmit={ this.submitForm.bind(this) }>
             <Col xs={4}>
-              <Row>
-                <Input name="firstName" type="text" ref="firstName" label="First Name" placeholder="Marcus" />
-              </Row>
-              <Row>
-                <Input name="lastName" type="text" ref="lastName" label="Last Name" placeholder="Berggren" />
-              </Row>
-              <Row>
-                <Input name="civicRegistrationNumber" type="text" ref="civicRegistrationNumber" label="Civic Registration Number" placeholder="yyyymmdd-xxxx" />
-              </Row>
-              <Row>
+                <Input name="firstName" type="text" ref="firstName" label="First Name" placeholder="Anna" />
+                <Input name="lastName" type="text" ref="lastName" label="Last Name" placeholder="Andersson" />
+
+                <Input  name="civicRegistrationNumber" type="text" 
+                        ref="civicRegistrationNumber" label="Civic Registration Number"
+                        value={ this.state.civicRegistrationNumber }
+                        bsStyle={ civicRegistrationNumberValidator(this.state.civicRegistrationNumber) }
+                        onChange={ this.formChanged.bind(this) }
+                        placeholder="19890101-1234" />
+                
+                <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige">
+                  <option value="se">Sverige</option>
+                  <option value="dk">Danmark</option>
+                </Input>
+
+                <Input name="careof" type="text" ref="careof" label="c/o" placeholder="Anders Andersson" />
+                <Input name="address" type="text" ref="address" label="Address" placeholder="Stora Gatan 123" />
+                <Input name="zip" type="text" ref="zip" label="Zip code" placeholder="123 23" />
+                <Input name="city" type="text" ref="city" label="City" placeholder="Stockholm" />
+
+                <Input name="land" type="select" label="Country" placeholder="Sverige" >
+                  <option value="se">Sverige</option>
+                  <option value="dk">Danmark</option>
+                </Input>
+
+                <Input name="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
+                <Input name="phone" type="text" label="Phone" placeholder="+46 (0) 70 123 45 67" addonBefore={ phoneGlyph } />
                 <Input name="submit" type="submit" />
-              </Row>
             </Col>
           </form>
         </Col>
