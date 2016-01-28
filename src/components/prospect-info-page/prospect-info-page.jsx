@@ -5,7 +5,7 @@ import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
 import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js'
-import nordnetNext from 'nordnet-next-api';
+import nordnetAPI from 'nordnet-next-api';
 
 const phoneGlyph = <Glyphicon glyph="earphone" />;
 
@@ -77,24 +77,24 @@ class ProspectInfoPage extends React.Component {
     const params = registrationData;
     const headers = '';
 
-    nordnetNext
+    nordnetAPI
     .post(url, params, headers)
-    .then(({ data }) => {
-      if (data.status === 'SUCCESS') {
-        const action = {
-          step: 'POST_PROSPECT_INFO',
-          value: registrationData,
-        };
+      .then(({ data }) => {
+        if (data.status === 'SUCCESS') {
+          const action = {
+            step: 'POST_PROSPECT_INFO',
+            value: registrationData,
+          };
 
-        store.dispatch(action);
-        this.props.history.pushState(null, '/register/compliance');
-      } else {
-        console.log('Prospect data is not valid! ', data.error);
-      }
-    })
-    .catch(() => {
-      throw Error(`Could not post to ${url}`);
-    });
+          store.dispatch(action);
+          this.props.history.pushState(null, '/register/compliance');
+        } else {
+          console.log('Prospect data is not valid! ', data.error);
+        }
+      })
+      .catch(() => {
+        throw Error(`Could not post to ${url}`);
+      });
   }
 }
 

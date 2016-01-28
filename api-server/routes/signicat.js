@@ -9,14 +9,14 @@ function* sign(next) {
   };
 
   this.body = {
-    status,
-    error,
-    data,
+    status: status,
+    error: error,
+    data: data,
   };
 
   yield next;
 }
 
 module.exports = {
-  sign,
+  sign: sign,
 };

@@ -10,13 +10,13 @@ function* registrations(next) {
   requiredFields.forEach(field => {
     if (formData[field] === undefined || formData[field].length < 1) {
       status = 'FAILED';
-      error.push(`${field} is empty`);
+      error.push(field + ' is empty');
     }
   });
 
   this.body = {
-    status,
-    error,
+    status: status,
+    error: error,
     data: formData,
   };
 
