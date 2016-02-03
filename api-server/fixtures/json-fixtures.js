@@ -1,7 +1,6 @@
 var resolve = require('path').resolve;
 var assert = require('assert');
 var send = require('koa-send');
-var _ = require('lodash');
 
 module.exports = serve;
 
@@ -33,9 +32,11 @@ function serve(root, opts) {
   }
 
   function isLoginRequired(path){
-    return _.any(loginRequiredPaths, function(loginRequiredPath){
+    var index = loginRequiredPaths.findIndex(function(loginRequiredPath){
       return path.indexOf('/api/2/' + loginRequiredPath) !== -1;
     });
+
+    return index !== -1;
   }
 
   return function *serve(next){
