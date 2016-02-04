@@ -1,12 +1,11 @@
 import React from 'react';
 import { Col, Row, Input, Glyphicon } from 'react-bootstrap';
-import { PhoneInput } from '../input-fields'
-
+import { PhoneInput } from '../input-fields';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
-import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js'
+import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js';
 import nordnetAPI from 'nordnet-next-api';
 
 const phoneGlyph = <Glyphicon glyph="earphone" />;
@@ -15,7 +14,7 @@ class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      civicRegistrationNumber: ''
+      civicRegistrationNumber: '',
     };
   }
 
@@ -33,7 +32,7 @@ class ProspectInfoPage extends React.Component {
                 <Input name="firstName" type="text" ref="firstName" label="First Name" placeholder="Anna" />
                 <Input name="lastName" type="text" ref="lastName" label="Last Name" placeholder="Andersson" />
 
-                <Input  name="civicRegistrationNumber" type="text" 
+                <Input  name="civicRegistrationNumber" type="text"
                         ref="civicRegistrationNumber" label="Civic Registration Number"
                         placeholder="19890101-1234" />
 
@@ -53,7 +52,7 @@ class ProspectInfoPage extends React.Component {
                 </Input>
 
                 <Input name="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
-                <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67"0 />
+                <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67" />
                 <Input name="submit" type="submit" />
             </Col>
           </form>

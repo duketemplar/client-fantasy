@@ -1,7 +1,6 @@
 import React from 'react';
-import { formatNumber, formatNumberByType } from '../../helpers/utils'
+import { formatNumber, formatNumberByType } from '../../helpers/utils';
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
-
 
 const KEYS = {
   UP: 38,
@@ -19,10 +18,10 @@ const KEYS = {
   DEL: 46,
   CTRL: 17,
   CMD1: 91, // Chrome
-  CMD2: 224 // FF
+  CMD2: 224, // FF
 };
 
-const legibleKey = (key) => { 
+const legibleKey = key => {
   return (key >= KEYS.ZERO && key <= KEYS.NINE) || key == KEYS.BSPACE;
 };
 
@@ -41,7 +40,7 @@ class PhoneInput extends React.Component {
 
   keyDown(event) {
     this.setState({
-      lastKey: event.keyCode
+      lastKey: event.keyCode,
     });
   }
 
@@ -90,6 +89,6 @@ PhoneInput.propTypes = {
   name: React.PropTypes.string,
   label: React.PropTypes.string,
   placeholder: React.PropTypes.string,
-}
+};
 
 export default PhoneInput;

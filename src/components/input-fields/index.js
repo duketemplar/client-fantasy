@@ -1,3 +1,3 @@
-import PhoneInput from './phone-input'
+import PhoneInput from './phone-input';
 
 export { PhoneInput };

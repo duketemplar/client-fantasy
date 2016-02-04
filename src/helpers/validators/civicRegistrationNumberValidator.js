@@ -1,11 +1,14 @@
-const civicRegistrationNumberValidator = value => {
+const civicRegistrationNumberValidator = (value) => {
+  let msg;
   if (value.length > 5) {
-    return "Du måste minst skriva 5 tecken";
-  } else if (value == 'cheeze') {
-    return "Cheeze är inte acceptabelt";
+    msg =  'Du måste minst skriva 5 tecken' + value;
+  } else if (value === 'cheeze') {
+    msg = 'Cheeze är inte acceptabelt';
   } else {
-    return true;
+    msg = true;
   }
+
+  return msg;
 };
 
-export default civicRegistrationNumberValidator;
+export { civicRegistrationNumberValidator };
