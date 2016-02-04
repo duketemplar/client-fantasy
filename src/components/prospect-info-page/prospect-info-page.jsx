@@ -1,5 +1,7 @@
 import React from 'react';
 import { Col, Row, Input, Glyphicon } from 'react-bootstrap';
+import { PhoneInput } from '../input-fields'
+
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
@@ -34,7 +36,7 @@ class ProspectInfoPage extends React.Component {
                 <Input  name="civicRegistrationNumber" type="text" 
                         ref="civicRegistrationNumber" label="Civic Registration Number"
                         placeholder="19890101-1234" />
-                
+
                 <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige">
                   <option value="se">Sverige</option>
                   <option value="dk">Danmark</option>
@@ -51,7 +53,7 @@ class ProspectInfoPage extends React.Component {
                 </Input>
 
                 <Input name="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
-                <Input name="phone" type="text" label="Phone" placeholder="+46 (0) 70 123 45 67" addonBefore={ phoneGlyph } />
+                <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67"0 />
                 <Input name="submit" type="submit" />
             </Col>
           </form>
