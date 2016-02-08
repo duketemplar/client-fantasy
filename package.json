@@ -1,6 +1,6 @@
 {
   "name": "nordnet-react-app-light",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Nordnet React app",
   "config": {
     "dist": "./dist",
