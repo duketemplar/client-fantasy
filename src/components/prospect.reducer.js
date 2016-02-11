@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const defaultState = {
   prospectInfo: {},
   regulationInfo: {},
@@ -8,13 +6,13 @@ const defaultState = {
 export default function(state = defaultState, action) {
   switch (action.step) {
   case 'POST_PROSPECT_INFO':
-    return _.assign({}, state,
+    return Object.assign({}, state,
       {
         prospectInfo: action.value,
       }
     );
   case 'POST_REGULATION_DATA':
-    return _.assign({}, state,
+    return Object.assign({}, state,
       {
         regulationInfo: action.value,
       }

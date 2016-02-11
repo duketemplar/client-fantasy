@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row, Input, Glyphicon } from 'react-bootstrap';
-import { PhoneInput } from '../input-fields';
+import PhoneInput from 'react-phone';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
@@ -74,28 +74,36 @@ class ProspectInfoPage extends React.Component {
   }
 
   postRegistration(registrationData) {
-    const url = '/next/2/customer-creation/registrations';
-    const params = registrationData;
-    const headers = '';
 
-    nordnetAPI
-    .post(url, params, headers)
-      .then(({ data }) => {
-        if (data.status === 'SUCCESS') {
-          const action = {
-            step: 'POST_PROSPECT_INFO',
-            value: registrationData,
-          };
+    const action = {
+      step: 'SAVE_PROSPECT_INFO',
+      value: registrationData
+    };
 
-          store.dispatch(action);
-          this.props.history.pushState(null, '/register/compliance');
-        } else {
-          console.log('Prospect data is not valid! ', data.error);
-        }
-      })
-      .catch(() => {
-        throw Error(`Could not post to ${url}`);
-      });
+    store.dispatch(action);
+
+    // const url = '/next/2/customer-creation/registrations';
+    // const params = registrationData;
+    // const headers = '';
+
+    // nordnetAPI
+    // .post(url, params, headers)
+    //   .then(({ data }) => {
+    //     if (data.status === 'SUCCESS') {
+    //       const action = {
+    //         step: 'POST_PROSPECT_INFO',
+    //         value: registrationData,
+    //       };
+
+    //       store.dispatch(action);
+    //       this.props.history.pushState(null, '/register/compliance');
+    //     } else {
+    //       console.log('Prospect data is not valid! ', data.error);
+    //     }
+    //   })
+    //   .catch(() => {
+    //     throw Error(`Could not post to ${url}`);
+    //   });
   }
 }
 

@@ -49,7 +49,13 @@ function formatNumber(val, countryCode, addSuffix, allowExtension, isAllowedKey)
       if (isNaN(parseFloat(penultimate))) {
         // return the new value (minus that last '5' we just added)
         return test.substr(0, test.length - 1);
-      } else if (allowExtension && result && test.length <== result.length && test.indexOf(' ') === -1 && getValidationError(clean.substring(0, i - 1), countryCode) !== PhoneNumberUtil.ValidationResult.TOO_SHORT && !isAllowedKey) {
+      } else if (
+        allowExtension &&
+        result &&
+        test.length <= result.length &&
+        test.indexOf(' ') === -1 &&
+        getValidationError(clean.substring(0, i - 1), countryCode) !== PhoneNumberUtil.ValidationResult.TOO_SHORT &&
+        !isAllowedKey) {
         // else check for the case where the user already had a full valid number, and they have just hit space or 'e' (etc.) to try and add an extension - in which case we add the ext suffix.
         //
         // so we check if we're allowing extensions, and if adding this extra '5' to the number broke the formatting, and the number is not TOO_SHORT (i.e. they already have a full valid number), AND this is not an allowed key

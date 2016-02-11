@@ -54,6 +54,10 @@ var config = {
       'mock-login': path.join(__dirname, './../api-server/mock-login.jsx'),
     },
     extensions: ['', '.js', '.json', '.jsx'],
+    fallback: path.join(__dirname, './../node_modules'),
+  },
+  resolveLoader: {
+    fallback: path.join(__dirname, './../node_modules'),
   },
   devServer: {
     host: '0.0.0.0',
