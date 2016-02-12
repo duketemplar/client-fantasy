@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Input } from 'react-bootstrap';
+import { Input } from 'nordnet-ui-kit';
 import store from '../../store';
 
 export default class CompliancePage extends React.Component {

@@ -56,14 +56,17 @@
     "es6-promise": "3.0.2",
     "intl": "1.0.1",
     "nordnet-next-api": "2.1.0",
-    "normalize.css": "3.0.3",
     "react-bootstrap": "^0.28.2",
+    "nordnet-ui-kit": "0.0.5",
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-intl": "1.2.0",
     "react-redux": "4.1.1",
+    "react-bem-grid": "0.0.10",
     "redux": "3.1.2",
-    "redux-thunk": "1.0.3"
+    "redux-thunk": "1.0.3",
+    "normalize.css": "3.0.3",
+    "redux-form": "^4.1.9"
   },
   "devDependencies": {
     "autoprefixer-core": "5.1.11",

@@ -28,7 +28,11 @@ const REDUCERS = {
 // creates Redux store
 
 function finalCreateStore(middleware) {
-  const browserDevTool = typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f;
+  const browserDevTool = (
+    typeof window === 'object' &&
+    typeof window.devToolsExtension !== 'undefined' ?
+    window.devToolsExtension() : f => f
+  );
 
   return compose(applyMiddleware(...middleware), browserDevTool)(createStore);
 }

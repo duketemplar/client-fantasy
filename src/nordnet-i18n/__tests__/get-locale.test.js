@@ -30,7 +30,7 @@ describe('getLocale', () => {
     beforeEach(() => {
       sandbox = sinon.sandbox.create();
 
-      const response = { data: { lang: 'en', country: 'gb' } };
+      const response = { data: { language: 'en', country: 'gb' } };
 
       sandbox.stub(api, 'get', () => mockPromise(response));
     });
@@ -47,8 +47,12 @@ describe('getLocale', () => {
         .then(() => done(), done);
     });
 
-    it('returns the locale from the next api', () => expect(resolvedValue).to.equal('en-gb'));
+    it('returns the locale from the next api', () => {
+      expect(resolvedValue).to.equal('en-gb');
+    });
 
-    it('uses /api/2/login', () => expect(api.get).to.have.been.calledWith('/api/2/login'));
+    it('uses /next/2/login', () => {
+      expect(api.get).to.have.been.calledWith('/next/2/login');
+    });
   });
 });

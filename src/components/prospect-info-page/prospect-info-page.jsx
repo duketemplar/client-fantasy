@@ -1,5 +1,6 @@
 import React from 'react';
-import { Col, Row, Input, Glyphicon } from 'react-bootstrap';
+import { Input, Submit } from 'nordnet-ui-kit';
+import { Grid, Col, Row } from 'react-bem-grid';
 import PhoneInput from 'react-phone';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
@@ -7,8 +8,6 @@ import { connect } from 'react-redux';
 import store from '../../store';
 import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js';
 import nordnetAPI from 'nordnet-next-api';
-
-const phoneGlyph = <Glyphicon glyph="earphone" />;
 
 class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -19,8 +18,18 @@ class ProspectInfoPage extends React.Component {
   }
 
   render() {
+    const countries = [
+      {
+        value: "se",
+        label: "Sweden",
+      },
+      {
+        value: "dk",
+        label: "Denmark",
+      },
+    ];
     return (
-      <div className="create-customer">
+      <Grid className="create-customer">
 
         <Col xs={12}>
           <Row>
@@ -36,28 +45,23 @@ class ProspectInfoPage extends React.Component {
                         ref="civicRegistrationNumber" label="Civic Registration Number"
                         placeholder="19890101-1234" />
 
-                <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige">
-                  <option value="se">Sverige</option>
-                  <option value="dk">Danmark</option>
-                </Input>
+                <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige" options={ countries } />
 
                 <Input name="careof" type="text" ref="careof" label="c/o" placeholder="Anders Andersson" />
                 <Input name="address" type="text" ref="address" label="Address" placeholder="Stora Gatan 123" />
                 <Input name="zip" type="text" ref="zip" label="Zip code" placeholder="123 23" />
                 <Input name="city" type="text" ref="city" label="City" placeholder="Stockholm" />
 
-                <Input name="land" type="select" label="Country" placeholder="Sverige" >
-                  <option value="se">Sverige</option>
-                  <option value="dk">Danmark</option>
-                </Input>
+                <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
 
                 <Input name="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
                 <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67" />
-                <Input name="submit" type="submit" />
+
+                <input name="submit" type="submit" />
             </Col>
           </form>
         </Col>
-      </div>
+      </Grid>
     );
   }
 
