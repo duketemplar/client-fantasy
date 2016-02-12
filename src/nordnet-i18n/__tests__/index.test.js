@@ -1,9 +1,11 @@
+import sinon from 'sinon';
+import { expect } from 'chai';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
 import api from 'nordnet-next-api';
-import {initialize, supportedLocales, translatable, i18n} from '../index';
+import { initialize, supportedLocales, translatable, i18n } from '../index';
 
 describe('nordnet-i18n', () => {
   describe('initialize', () => {
@@ -13,11 +15,11 @@ describe('nordnet-i18n', () => {
     afterEach(() => sandbox.restore());
 
     beforeEach(() => {
-      sandbox.stub(api, 'get', () => Promise.resolve({language: 'en', country: 'gb'}));
+      sandbox.stub(api, 'get', () => Promise.resolve({ language: 'en', country: 'gb' }));
     });
 
     const element = {
-      getAttribute: (key) => ({'data-lang': 'sv', 'data-country': 'SE'})[key],
+      getAttribute: (key) => ({ 'data-lang': 'sv', 'data-country': 'SE' })[key],
     };
 
     it('resolves to the locale', (done) => {
@@ -43,7 +45,7 @@ describe('nordnet-i18n', () => {
     //  MyComponent
     class MyComponent extends React.Component {
       render() {
-        return (<h1>{this.props.getIntlMessage('SOME.KEY')}</h1>);
+        return (<h1>{ this.props.getIntlMessage('SOME.KEY') }</h1>);
       }
     }
 
@@ -68,7 +70,7 @@ describe('nordnet-i18n', () => {
     function createDOMNode() {
       const props = {
         messages: {
-          SOME: { KEY: 'Yes !'},
+          SOME: { KEY: 'Yes !' },
         },
         formats: {},
         locales: [],

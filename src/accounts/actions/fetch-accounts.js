@@ -49,11 +49,12 @@ function requestAccountsFailure(data) {
 
 /*
  * Exports async action creator. Async action creators are returning a function instead of a plain object (compare e.g. to requestAccounts).
- * By using specific middleware action creators can return a function instead of a plain object. In this case redux-thunk middleware is used later on
- * to allow returning of functions for async actions.
+ * By using specific middleware action creators can return a function instead of a plain object.
+ * In this case redux-thunk middleware is used later on to allow returning of functions for async actions.
  *
- * Function that is retunred by this async action creator is executed by redux-thunk middleware. Returned function is allowed to have side effects,
- * including asynchronous API calls. This function can also dispatch synchronous actions (e.g. requestAccountsSuccess).
+ * Function that is retunred by this async action creator is executed by redux-thunk middleware.
+ * Returned function is allowed to have side effects, including asynchronous API calls.
+ * This function can also dispatch synchronous actions (e.g. requestAccountsSuccess).
  *
  * See http://rackt.github.io/redux/docs/advanced/AsyncActions.html#async-action-creators for more details on async action creators.
  * See https://github.com/gaearon/redux-thunk for more details on redux-thunk.
@@ -61,7 +62,7 @@ function requestAccountsFailure(data) {
 export default function fetchAccounts() {
   return (dispatch) => {
     dispatch(requestAccounts());
-    return api.get('/next/2/accounts').then(
+    return api.get('/api/2/accounts').then(
         ({ data }) => dispatch(requestAccountsSuccess(data)),
         ({ data }) => dispatch(requestAccountsFailure(data)));
   };

@@ -24,7 +24,8 @@ if (DEBUG) {
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: false,
+        pure_funcs: ['console.log']
       }
     }),
     new webpack.optimize.DedupePlugin(),

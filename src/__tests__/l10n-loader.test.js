@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import { expect } from 'chai';
 import l10nLoader from '../l10n-loader';
 
 const SUPPORTED_LOCALES = ['sv-SE', 'fi-FI', 'sv-FI', 'nb-NO', 'no-NO', 'nn-NO', 'da-DK', 'en'];

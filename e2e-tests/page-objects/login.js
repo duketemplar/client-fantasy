@@ -1,5 +1,5 @@
 function useMockLogin(client) {
-  return client.launch_url.includes('localhost');
+  return client.launch_url.indexOf('localhost') !== -1;
 }
 
 function login(client) {
@@ -37,8 +37,8 @@ function loginProdMode(client) {
   const defaultUser = getDefaultUserData(client);
 
   return (username = defaultUser.username, password = defaultUser.password) => {
-    client.expect.element('#supportNavLogin').to.be.present;
-    client.click('#supportNavLogin a');
+    client.expect.element('.supportNav').to.be.present;
+    client.click('.supportNav a.login-btn');
     client.waitForElementVisible('form#loginForm', 5000);
     client.setValue('input#input1', username);
     client.setValue('input#pContent', password);
@@ -50,7 +50,9 @@ function loginProdMode(client) {
 function goTo(client) {
   return () => {
     client.url(client.launch_url);
-    client.waitForElementPresent('#container', 10000);
+    if (!useMockLogin(client)) {
+      client.waitForElementPresent('#container', 10000);
+    }
   };
 }
 

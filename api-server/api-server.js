@@ -26,8 +26,8 @@ app
   .use(mount('/sc/', serve(__dirname + '/sc')))
   .use(mount('/now/', serve(__dirname + '/now')))
   .use(mount('/mux/', serve(__dirname + '/mux')))
-  .use(mount('/next', ntagMiddleware))
-  .use(mount('/next/2/accounts', authenticatedMiddleware))
+  .use(mount('/api', ntagMiddleware))
+  .use(mount('/api/2/accounts', authenticatedMiddleware))
   .use(jsonFixtures(__dirname + '/fixtures'))
   .use(router.routes())
   .use(router.allowedMethods());
