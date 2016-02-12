@@ -12,6 +12,7 @@ const preLoadersForCodeCoverage = [
     loader: 'babel-loader',
     query: {
         presets: ['react', 'es2015'],
+        plugins: ['add-module-exports']
     },
     // exclude: /node_modules/,
     exclude: [
@@ -49,7 +50,8 @@ function createKarmaConfig(config) {
     module: {
       // don't run babel-loader through the sinon module
       noParse: [
-        /node_modules\/sinon\//
+        /node_modules\/sinon\//,
+        /node_modules\\sinon\\/
       ],
       preLoaders: preLoaders,
       loaders: loaders,

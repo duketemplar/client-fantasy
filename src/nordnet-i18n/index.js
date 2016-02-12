@@ -3,7 +3,7 @@ import { initializeLocale, supportedLocales } from './initialize-intl';
 import i18n from './i18n.jsx';
 import translatable from './translatable';
 
-module.exports = {
+export default {
   initialize: (element) => getLocale(element).then(initializeLocale),
   i18n,
   supportedLocales,
