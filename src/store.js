@@ -5,6 +5,7 @@
  */
 
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
 
 // custom reducer for accounts component
@@ -19,10 +20,7 @@ const MIDDLEWARE = [thunkMiddleware];
 // REPLACE with list of your own reducers
 const REDUCERS = {
   prospect: prospectReducer,
-
-  // accounts: accountsReducer,
-  // steps: stepsReducer,
-  // user: userReducer,
+  form: formReducer,
 };
 
 // creates Redux store

@@ -1,15 +1,34 @@
 import React from 'react';
-import { Input, Submit } from 'nordnet-ui-kit';
-import { Grid, Col, Row } from 'react-bem-grid';
-import PhoneInput from 'react-phone';
 require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
-import { civicRegistrationNumberValidator } from '../../helpers/validators/index.js';
 import nordnetAPI from 'nordnet-next-api';
+import { Input, Submit } from 'nordnet-ui-kit';
+import { Grid, Col, Row } from 'react-bem-grid';
+import PhoneInput from 'react-phone';
+import { reduxForm } from 'redux-form';
+import ValidInput from '../input/valid-input.jsx';
+
+
+export const fields = ['firstName', 'lastName', 'civicRegistrationNumber', 'country', 'careOf', 'zipCode', 'city', 'citizenship', 'email'];
+
+const validate = values => {
+  const errors = {};
+
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  }
+
+  if (!values.lastName) {
+    errors.lastName = 'Required';
+  }
+
+  return errors;
+}
 
 class ProspectInfoPage extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +47,9 @@ class ProspectInfoPage extends React.Component {
         label: "Denmark",
       },
     ];
+
+    const {fields: {lastName, firstName, civicRegistrationNumber}, resetForm, handleSubmit, submitting } = this.props;
+
     return (
       <Grid className="create-customer">
 
@@ -35,29 +57,51 @@ class ProspectInfoPage extends React.Component {
           <Row>
             <h1>Becoming a customer - Contact Info</h1>
           </Row>
+          <form onSubmit={ this.props.handleSubmit } /* onChange={ this.formChanged.bind(this) } */ >
+            <Col xs={6}>
 
-          <form onSubmit={ this.submitForm.bind(this) }>
-            <Col xs={4}>
-                <Input name="firstName" type="text" ref="firstName" label="First Name" placeholder="Anna" />
-                <Input name="lastName" type="text" ref="lastName" label="Last Name" placeholder="Andersson" />
+                <ValidInput type="text" label="First name" placeholder="First name" fieldBinding={ firstName } />
 
-                <Input  name="civicRegistrationNumber" type="text"
-                        ref="civicRegistrationNumber" label="Civic Registration Number"
-                        placeholder="19890101-1234" />
+                <ValidInput type="text" label="Last name" placeholder="Last name" fieldBinding={ lastName } />
 
-                <Input name="citizenship" type="select" label="Citizenship" placeholder="Sverige" options={ countries } />
+                <ValidInput type="text" label="Civic registration number" placeholder="19890101-1234" fieldBinding={ civicRegistrationNumber } />
 
-                <Input name="careof" type="text" ref="careof" label="c/o" placeholder="Anders Andersson" />
-                <Input name="address" type="text" ref="address" label="Address" placeholder="Stora Gatan 123" />
-                <Input name="zip" type="text" ref="zip" label="Zip code" placeholder="123 23" />
+                <Input  name="citizenship"
+                        type="select"
+                        label="Citizenship"
+                        placeholder="Sverige"
+                        options={ countries }
+                        />
+
+                <Input  name="careof"
+                        type="text"
+                        ref="careof"
+                        label="c/o"
+                        placeholder="Anders Andersson" 
+                        />
+
+                <Input  name="address"
+                        type="text"
+                        ref="address"
+                        label="Address"
+                        placeholder="Stora Gatan 123"
+                        />
+
+                <Input  type="text"
+                        label="Zip code" 
+                        placeholder="123 23"
+                        />
+
+
                 <Input name="city" type="text" ref="city" label="City" placeholder="Stockholm" />
 
                 <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
 
-                <Input name="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
+                <Input name="email" ref="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
+
                 <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67" />
 
-                <input name="submit" type="submit" />
+                <input name="submit" type="submit"  />
             </Col>
           </form>
         </Col>
@@ -65,26 +109,47 @@ class ProspectInfoPage extends React.Component {
     );
   }
 
+  formChanged(e) {
+    const prospectData = { 
+      firstName: {
+        value: this.refs.firstName.getValue(),
+      },
+      lastName: {
+        value: this.refs.lastName.getValue(),
+      },
+      email: {
+        value: this.refs.email.getValue(),
+      }
+    };
+
+    const action = {
+      type: "UPDATE_PROSPECT_INFO",
+      value: prospectData,
+    }
+
+    store.dispatch(action);
+  }
+
   submitForm(e) {
     e.preventDefault();
 
-    const prospectData = {
-      firstName: this.refs.firstName.getValue(),
-      lastName: this.refs.lastName.getValue(),
-      civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
-    };
+    // const prospectData = {
+    //   firstName: this.refs.firstName.getValue(),
+    //   lastName: this.refs.lastName.getValue(),
+    //   civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
+    // };
 
-    this.postRegistration(prospectData);
+    // this.postRegistration(prospectData);
   }
 
-  postRegistration(registrationData) {
+  // postRegistration(registrationData) {
 
-    const action = {
-      step: 'SAVE_PROSPECT_INFO',
-      value: registrationData
-    };
+  //   const action = {
+  //     step: 'SAVE_PROSPECT_INFO',
+  //     value: registrationData
+  //   };
 
-    store.dispatch(action);
+  //   store.dispatch(action);
 
     // const url = '/next/2/customer-creation/registrations';
     // const params = registrationData;
@@ -108,7 +173,7 @@ class ProspectInfoPage extends React.Component {
     //   .catch(() => {
     //     throw Error(`Could not post to ${url}`);
     //   });
-  }
+  // }
 }
 
 function reducerState(state) {
@@ -119,7 +184,18 @@ function reducerState(state) {
 }
 
 ProspectInfoPage.propTypes = {
+  firstName: React.PropTypes.object,
   history: React.PropTypes.object,
+  fields: React.PropTypes.object.isRequired,
+  handleSubmit: React.PropTypes.func.isRequired,
+  resetForm: React.PropTypes.func.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
 };
 
-export default connect(reducerState)(ProspectInfoPage);
+// export default connect(reducerState)(ProspectInfoPage);
+
+export default reduxForm({
+  form: 'foobar',
+  fields,
+  validate,
+})(ProspectInfoPage);

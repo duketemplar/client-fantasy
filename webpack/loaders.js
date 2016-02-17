@@ -29,7 +29,7 @@ var sassParams = [
 ];
 
 if (DEBUG) {
-  jsxLoader = ['react-hot', 'babel?presets[]=react,presets[]=es2015&plugins[]=add-module-exports'];
+  jsxLoader = ['react-hot', 'babel?presets[]=react&presets[]=es2015&plugins[]=add-module-exports'];
   sassParams.push('sourceMap', 'sourceMapContents=true');
 
   sassLoader = [
@@ -45,7 +45,7 @@ if (DEBUG) {
     'postcss-loader'
   ].join('!');
 } else {
-  jsxLoader = ['babel?presets[]=react,presets[]=es2015&plugins[]=add-module-exports'];
+  jsxLoader = ['babel?presets[]=react&presets[]=es2015&plugins[]=add-module-exports'];
 
   sassLoader = [
     'style-loader',
@@ -64,7 +64,7 @@ if (DEBUG) {
 var loaders = [
   {
     test: /\.jsx?$/,
-    exclude: /node_modules/,
+    exclude: /node_modules|react-phone|nordnet-ui-kit/,
     loaders: jsxLoader
   },
   {

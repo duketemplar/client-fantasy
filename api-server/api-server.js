@@ -15,11 +15,11 @@ const pkg = require('./../package.json');
 const app = koa();
 
 router
-.post('/next/2/accounts/:accno/orders', routes.orders.enterOrder)
-.post('/next/2/customer-creation/registrations', routes.customerCreation.registrations)
-.post('/next/2/customer-regulation/registrations', routes.customerRegulation.registrations)
-.post('/next/2/kyc/compliance', routes.kyc.compliance)
-.post('/next/2/signicat/sign', routes.signicat.sign);
+.post('/api/2/accounts/:accno/orders', routes.orders.enterOrder)
+.post('/api/2/customer-creation/registrations', routes.customerCreation.registrations)
+.post('/api/2/customer-regulation/registrations', routes.customerRegulation.registrations)
+.post('/api/2/kyc/compliance', routes.kyc.compliance)
+.post('/api/2/signicat/sign', routes.signicat.sign);
 
 app
   .use(bodyParser())
