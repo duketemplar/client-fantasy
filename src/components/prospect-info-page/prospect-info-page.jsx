@@ -10,25 +10,30 @@ import PhoneInput from 'react-phone';
 import { reduxForm } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 
+import lengthValidator from '../../utils/validators/length-validator';
+import notBlankValidator from '../../utils/validators/not-blank-validator';
+
+import combineValidators from '../../utils/validators/combine-validators';
 
 export const fields = ['firstName', 'lastName', 'civicRegistrationNumber', 'country', 'careOf', 'zipCode', 'city', 'citizenship', 'email'];
 
 const validate = values => {
-  const errors = {};
-
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  }
-
-  if (!values.lastName) {
-    errors.lastName = 'Required';
-  }
-
-  return errors;
-}
+  return combineValidators(
+    values,
+    {
+      firstName: [
+        [notBlankValidator, "Must be filled in."],
+        [lengthValidator, 3, "Must be at least 3 characters."],
+      ],
+      lastName: [
+        [notBlankValidator, "Must be filled in."],
+        [lengthValidator, 3, "Must be at least 3 characters."],
+      ]
+    }
+  );
+};
 
 class ProspectInfoPage extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
