@@ -92,7 +92,6 @@ class ProspectInfoPage extends React.Component {
                         placeholder="123 23"
                         />
 
-
                 <Input name="city" type="text" ref="city" label="City" placeholder="Stockholm" />
 
                 <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
