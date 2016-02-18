@@ -1,4 +1,4 @@
-const combineValidators = (values, fieldsValidators) => {
+const combineValidators = (fieldsValidators, values) => {
   const errors = {};
 
   Object.keys(fieldsValidators).forEach((key) => {

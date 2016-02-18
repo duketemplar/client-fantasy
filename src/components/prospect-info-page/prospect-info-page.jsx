@@ -9,29 +9,44 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import PhoneInput from 'react-phone';
 import { reduxForm } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
+import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
 
-import lengthValidator from '../../utils/validators/length-validator';
-import notBlankValidator from '../../utils/validators/not-blank-validator';
-
-import combineValidators from '../../utils/validators/combine-validators';
-
-export const fields = ['firstName', 'lastName', 'civicRegistrationNumber', 'country', 'careOf', 'zipCode', 'city', 'citizenship', 'email'];
-
-const validate = values => {
-  return combineValidators(
-    values,
-    {
-      firstName: [
-        [notBlankValidator, "Must be filled in."],
-        [lengthValidator, 3, "Must be at least 3 characters."],
-      ],
-      lastName: [
-        [notBlankValidator, "Must be filled in."],
-        [lengthValidator, 3, "Must be at least 3 characters."],
-      ]
-    }
-  );
+export const fields = {
+  firstName: [
+    [regexValidator, /^[a-zA-Z.\s]+$/, "Must only contain letters"],
+    [notBlankValidator, "Must be filled in."],
+    [lengthValidator, 3, "Must be at least 2 characters."],
+  ],
+  lastName: [
+    [notBlankValidator, "Must be filled in."],
+    [lengthValidator, 3, "Must be at least 2 characters."],
+  ],
+  civicRegistrationNumber: [
+    [notBlankValidator, "Must be filled in"],
+    [lengthValidator, 10, "Must be at least 10 characters"],
+  ],
+  zipCode: [
+    [notBlankValidator, "Must be filled in"],
+    [lengthValidator, 4, "Must be at least 4 characters"],
+  ],
+  city: [
+    [notBlankValidator, "Must be filled in"],
+    [lengthValidator, 2, "Must be at least 2 characters"],
+  ],
+  address: [
+    [notBlankValidator, "Must be filled in"],
+    [lengthValidator, 2, "Must be at least 2 characters"],
+  ],
+  careOf: [
+    [lengthValidator, 2, "Must be at least 2 characters"],
+  ],
+  email: [
+    [notBlankValidator, "Must not be blank."],
+    [emailValidator, "Must be a valid email"],
+  ]
 };
+
+const validate = combineValidators.bind(null, fields);
 
 class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -53,7 +68,7 @@ class ProspectInfoPage extends React.Component {
       },
     ];
 
-    const {fields: {lastName, firstName, civicRegistrationNumber}, resetForm, handleSubmit, submitting } = this.props;
+    const {fields: { lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email }, resetForm, handleSubmit, submitting } = this.props;
 
     return (
       <Grid className="create-customer">
@@ -78,30 +93,17 @@ class ProspectInfoPage extends React.Component {
                         options={ countries }
                         />
 
-                <Input  name="careof"
-                        type="text"
-                        ref="careof"
-                        label="c/o"
-                        placeholder="Anders Andersson" 
-                        />
+                <ValidInput type="text" label="C/o" placeholder="C/o" fieldBinding={ careOf } />
 
-                <Input  name="address"
-                        type="text"
-                        ref="address"
-                        label="Address"
-                        placeholder="Stora Gatan 123"
-                        />
+                <ValidInput type="text" label="Address" placeholder="Address" fieldBinding={ address } />
 
-                <Input  type="text"
-                        label="Zip code" 
-                        placeholder="123 23"
-                        />
+                <ValidInput type="text" label="Zip code" placeholder="Zip code" fieldBinding={ zipCode } />
 
                 <Input name="city" type="text" ref="city" label="City" placeholder="Stockholm" />
 
                 <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
 
-                <Input name="email" ref="email" type="text" label="E-mail" placeholder="anna.svensson@email.com" addonBefore="@" />
+                <ValidInput type="email" label="E-mail" placeholder="E-mail" fieldBinding={ email } />
 
                 <PhoneInput label="Phone" name="phone" placeholder="070 123 45 67" />
 
@@ -200,6 +202,6 @@ ProspectInfoPage.propTypes = {
 
 export default reduxForm({
   form: 'foobar',
-  fields,
-  validate,
+  fields: Object.keys(fields),
+  validate: validate,
 })(ProspectInfoPage);
