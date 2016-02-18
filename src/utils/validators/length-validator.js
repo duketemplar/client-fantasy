@@ -1,10 +1,12 @@
 
 const lengthValidator = (length, message, value) => {
-  if (value === undefined)
+  if (value === undefined) {
     return null;
+  }
 
-  if (value.length < length)
+  if (value.length < length) {
     return message;
+  }
 
   return null;
 };
