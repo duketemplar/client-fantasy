@@ -22,7 +22,7 @@ import SignPage from './components/sign-page';
 
 // Redux store
 import store from './store';
-import { Router, browserHistory } from 'react-router';
+import { Router, hashHistory } from 'react-router';
 const Route = require('react-router').Route; // es6 import gives errors, es6 will work if vendor version is updated.
 
 // Root application component
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={ browserHistory }>
+      <Router history={ hashHistory }>
         <Route name="prospect-info-page" path="/" component={ ProspectInfoPage } key="contact-info-page" />
         <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
         <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance-page" />

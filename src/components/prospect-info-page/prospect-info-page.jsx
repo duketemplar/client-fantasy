@@ -1,5 +1,4 @@
 import React from 'react';
-require('bootstrap/dist/css/bootstrap.css');
 import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
@@ -102,7 +101,7 @@ class ProspectInfoPage extends React.Component {
   }
 
   // formChanged(e) {
-  //   const prospectData = { 
+  //   const prospectData = {
   //     firstName: {
   //       value: this.refs.firstName.getValue(),
   //     },
