@@ -121,7 +121,7 @@ class ProspectInfoPage extends React.Component {
   }
 
   // formChanged(e) {
-  //   const prospectData = { 
+  //   const prospectData = {
   //     firstName: {
   //       value: this.refs.firstName.getValue(),
   //     },
