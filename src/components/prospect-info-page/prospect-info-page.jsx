@@ -53,7 +53,6 @@ class ProspectInfoPage extends React.Component {
   }
 
   submitForm() {
-    console.log(this.context);
     this.context.router.push({
       pathname: '/register/compliance',
     });
