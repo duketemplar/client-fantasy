@@ -29,7 +29,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={ hashHistory } location="history" >
+      <Router history={ hashHistory }>
         <Route name="prospect-info-page" path="/" component={ ProspectInfoPage } key="contact-info-page" />
         <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
         <Route name="compliance" path="/register/compliance" component={ CompliancePage } key="compliance-page" />
