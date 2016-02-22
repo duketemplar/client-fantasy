@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import store from '../../store';
 import nordnetAPI from 'nordnet-next-api';
 import { Grid, Col, Row } from 'react-bem-grid';
-import PhoneInput from 'react-phone';
 import { reduxForm } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
 import { Input } from 'nordnet-ui-kit';
-
 
 export const fields = {
   firstName: [
@@ -54,6 +52,13 @@ class ProspectInfoPage extends React.Component {
     super(props);
   }
 
+  submitForm() {
+    console.log(this.context);
+    this.context.router.push({
+      pathname: '/register/compliance',
+    });
+  }
+
   render() {
     const countries = [
       {
@@ -66,16 +71,23 @@ class ProspectInfoPage extends React.Component {
       },
     ];
 
-    const {fields: { lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email }, resetForm, handleSubmit, submitting } = this.props;
+    const {
+      fields: {
+        lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email, city
+      },
+      resetForm, handleSubmit, submitting
+    } = this.props;
 
     return (
       <Grid className="create-customer">
 
         <Col xs={12}>
           <Row>
-            <h1>Becoming a customer - Contact Info</h1>
+            <h1>
+              Enter your personal info
+            </h1>
           </Row>
-          <form onSubmit={ this.props.handleSubmit } /* onChange={ this.formChanged.bind(this) } */ >
+          <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
                 <ValidInput type="text" label="First name" placeholder="First name" fieldBinding={ firstName } />
                 <ValidInput type="text" label="Last name" placeholder="Last name" fieldBinding={ lastName } />
@@ -94,6 +106,14 @@ class ProspectInfoPage extends React.Component {
                 <ValidInput type="text" label="City" placeholder="City" fieldBinding={ city } />
                 <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
                 <ValidInput type="email" label="E-mail" placeholder="E-mail" fieldBinding={ email } />
+
+                <button type="submit" disabled={ submitting }>
+                  { submitting ? <i/> : <i/> } Submit
+                </button>
+
+                <button type="button" disabled={ submitting } onClick={ resetForm }>
+                  Clear values
+                </button>
             </Col>
           </form>
         </Col>
@@ -175,6 +195,10 @@ ProspectInfoPage.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
   resetForm: React.PropTypes.func.isRequired,
   submitting: React.PropTypes.bool.isRequired,
+};
+
+ProspectInfoPage.contextTypes = {
+  router: React.PropTypes.func.isRequired,
 };
 
 export default reduxForm({
