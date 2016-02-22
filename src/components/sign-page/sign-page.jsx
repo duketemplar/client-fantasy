@@ -6,7 +6,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 const docs = [
   { name: 'Agreement Banking', url: 'waiiit-for-it' },
   { name: 'Agreement Trading', url: 'waiiit-for-it' },
-  { name: 'Agreement Your First Born.', url: 'waiiit-for-it' },
+  { name: 'Agreement Your First Born', url: 'waiiit-for-it' },
 ];
 
 export default class SignPage extends React.Component {
@@ -20,15 +20,18 @@ export default class SignPage extends React.Component {
 
   renderDocuments() {
     return (
-      <ul>
-      { docs.map((doc, indx) => {
-        return (
-          <li key={ indx }>
-            <a href={ doc.url }>{ doc.name }</a>
-          </li>
-        );
-      })}
-      </ul>
+      <div>
+        <h3>The following documents needs to be signed to complete the process</h3>
+        <ul>
+        { docs.map((doc, indx) => {
+          return (
+            <li key={ indx }>
+              <a href={ doc.url }>{ doc.name }</a>
+            </li>
+            );
+        })}
+        </ul>
+      </div>
     );
   }
 
@@ -37,12 +40,11 @@ export default class SignPage extends React.Component {
     return (
       <div className="sign-page" style={ { width: '768px' }}>
         <Grid>
-          <Row>
+          <Row xsCenter>
             <Col xs={12}>
-              <h2>The following documents needs to be signed to complete the process</h2>
               { this.renderDocuments() }
             </Col>
-            <Col xs={12} xsOffset={11}>
+            <Col xs={12}>
               <Button primary onClick={ handleSign }>Sign</Button>
             </Col>
           </Row>
