@@ -65,7 +65,7 @@ class ProspectInfoPage extends React.Component {
       },
     ];
 
-    const {fields: { lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email }, resetForm, handleSubmit, submitting } = this.props;
+    const {fields: { lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email, city, }, resetForm, handleSubmit, submitting } = this.props;
 
     return (
       <Grid className="create-customer">
