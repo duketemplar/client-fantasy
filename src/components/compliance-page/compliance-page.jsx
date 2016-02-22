@@ -11,21 +11,13 @@ export default class CompliancePage extends React.Component {
     return (
       <div className="compliance-answers">
 
-        <Col xs={12}>
-          <Row>
-            <h1>Becoming a customer - Regulation Info</h1>
-          </Row>
+        <h1>Becoming a customer - Regulation Info</h1>
 
-          <form onSubmit={ this.submitForm.bind(this) }>
-            <Col xs={4}>
-              <Row>
-                <Input name="taxCountry" type="text" ref="taxCountry" label="Tax Country" placeholder="Papau New Guinea" />
-                <Input name="tin" type="text" ref="taxIdentificationNumber" label="Tax Identification Number" placeholder="234.23.000-WARREN-G" />
-                <Input name="submit" type="submit" />
-              </Row>
-            </Col>
-          </form>
-        </Col>
+        <form onSubmit={ this.submitForm.bind(this) }>
+          <Input name="taxCountry" type="text" ref="taxCountry" label="Tax Country" placeholder="Papau New Guinea" />
+          <Input name="tin" type="text" ref="taxIdentificationNumber" label="Tax Identification Number" placeholder="234.23.000-WARREN-G" />
+          <Input name="submit" type="submit" />
+        </form>
       </div>
     );
   }
