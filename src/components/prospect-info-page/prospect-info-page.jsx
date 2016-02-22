@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import store from '../../store';
 import nordnetAPI from 'nordnet-next-api';
 import { Grid, Col, Row } from 'react-bem-grid';
-import { reduxForm } from 'redux-form';
+import { reduxForm, getValues  } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
 import { Input } from 'nordnet-ui-kit';
@@ -45,17 +45,13 @@ export const fields = {
   ]
 };
 
-const validate = combineValidators.bind(null, fields);
+const saveProspectURL = '/api/2/customer-creation/prospect';
+
+const validate = combineValidators(fields);
 
 class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  submitForm() {
-    this.context.router.push({
-      pathname: '/register/compliance',
-    });
   }
 
   render() {
@@ -120,75 +116,29 @@ class ProspectInfoPage extends React.Component {
     );
   }
 
-  // formChanged(e) {
-  //   const prospectData = {
-  //     firstName: {
-  //       value: this.refs.firstName.getValue(),
-  //     },
-  //     lastName: {
-  //       value: this.refs.lastName.getValue(),
-  //     },
-  //     email: {
-  //       value: this.refs.email.getValue(),
-  //     }
-  //   };
-
-  //   const action = {
-  //     type: "UPDATE_PROSPECT_INFO",
-  //     value: prospectData,
-  //   }
-
-  //   store.dispatch(action);
-  // }
-
-  // submitForm(e) {
-    // e.preventDefault();
-
-    // const prospectData = {
-    //   firstName: this.refs.firstName.getValue(),
-    //   lastName: this.refs.lastName.getValue(),
-    //   civicRegistrationNumber: this.refs.civicRegistrationNumber.getValue(),
-    // };
-
-    // this.postRegistration(prospectData);
-  // }
-
-  // postRegistration(registrationData) {
-
-  //   const action = {
-  //     step: 'SAVE_PROSPECT_INFO',
-  //     value: registrationData
-  //   };
-
-  //   store.dispatch(action);
-
-    // const url = '/next/2/customer-creation/registrations';
-    // const params = registrationData;
-    // const headers = '';
-
-    // nordnetAPI
-    // .post(url, params, headers)
-    //   .then(({ data }) => {
-    //     if (data.status === 'SUCCESS') {
-    //       const action = {
-    //         step: 'POST_PROSPECT_INFO',
-    //         value: registrationData,
-    //       };
-
-    //       store.dispatch(action);
-    //       this.props.history.pushState(null, '/register/compliance');
-    //     } else {
-    //       console.log('Prospect data is not valid! ', data.error);
-    //     }
-    //   })
-    //   .catch(() => {
-    //     throw Error(`Could not post to ${url}`);
-    //   });
-  // }
+  submitForm() {
+    return new Promise((resolve, reject) => {
+      nordnetAPI
+        .post(saveProspectURL, getValues(store.getState().form.prospectInfo), '')
+        .then(({status, data}) => {
+          if (status == 200) {
+            resolve();
+          } else {
+            reject()
+          }
+        }).then(() => {
+          this.context.router.push({
+            pathname: '/register/compliance',
+          });
+        }).catch((error) => {
+          throw Error(`Could not post to ${saveProspectURL}`);
+          reject();
+        });
+    });
+  }
 }
 
 ProspectInfoPage.propTypes = {
-  firstName: React.PropTypes.object,
   history: React.PropTypes.object,
   fields: React.PropTypes.object.isRequired,
   handleSubmit: React.PropTypes.func.isRequired,
