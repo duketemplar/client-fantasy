@@ -8,7 +8,6 @@ export default class ValidInput extends React.Component {
   }
 
   helpTextFor(field) {
-    console.log(field);
     return field.touched && field.error ? field.error : '';
   }
 
