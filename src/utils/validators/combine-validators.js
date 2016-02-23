@@ -1,18 +1,20 @@
-const combineValidators = (fieldsValidators, values) => {
-  const errors = {};
+const combineValidators = (fieldsValidators) => {
+  return (values) => {
+    const errors = {};
 
-  Object.keys(fieldsValidators).forEach((key) => {
-    fieldsValidators[key].some(validationSpec => {
-      const error = validationSpec[0].bind(null, ...validationSpec.slice(1))(values[key]);
+    Object.keys(fieldsValidators).forEach((key) => {
+      fieldsValidators[key].some(validationSpec => {
+        const error = validationSpec[0].bind(null, ...validationSpec.slice(1))(values[key]);
 
-      if (error) {
-        errors[key] = error;
-        return true;
-      }
+        if (error) {
+          errors[key] = error;
+          return true;
+        }
+      });
     });
-  });
 
-  return errors;
+    return errors;
+  };
 };
 
 export default combineValidators;
