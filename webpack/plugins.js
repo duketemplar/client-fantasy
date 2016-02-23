@@ -17,7 +17,8 @@ if (DEBUG) {
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
         DEBUG: DEBUG
-      }
+      },
+      SERVICE_CUSTOMER_CREATION: JSON.stringify("http://service-customer-creation.ci.nordnet.se/service-customer-creation/v1/")
     })
   );
 } else {

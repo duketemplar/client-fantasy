@@ -45,8 +45,6 @@ export const fields = {
   ]
 };
 
-const saveProspectURL = '/api/2/customer-creation/prospect';
-
 const validate = combineValidators(fields);
 
 class ProspectInfoPage extends React.Component {
@@ -118,7 +116,7 @@ class ProspectInfoPage extends React.Component {
   submitForm() {
     return new Promise((resolve, reject) => {
       nordnetAPI
-        .post(saveProspectURL, getValues(store.getState().form.prospectInfo), '')
+        .post(SERVICE_CUSTOMER_CREATION + 'prospect', getValues(store.getState().form.prospectInfo), '')
         .then(({status, data}) => {
           if (status == 200) {
             resolve();
@@ -130,8 +128,8 @@ class ProspectInfoPage extends React.Component {
             pathname: '/register/compliance',
           });
         }).catch((error) => {
-          throw Error(`Could not post to ${saveProspectURL}`);
           reject();
+          throw Error(`Could not post to ${saveProspectURL}`);
         });
     });
   }
