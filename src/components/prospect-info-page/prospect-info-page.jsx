@@ -8,7 +8,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { reduxForm, getValues  } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
-import { Input } from 'nordnet-ui-kit';
+import { Input, Button } from 'nordnet-ui-kit';
 
 export const fields = {
   firstName: [
@@ -44,8 +44,6 @@ export const fields = {
     [emailValidator, "Must be a valid email"],
   ]
 };
-
-const saveProspectURL = '/api/2/customer-creation/prospect';
 
 const validate = combineValidators(fields);
 
@@ -84,31 +82,30 @@ class ProspectInfoPage extends React.Component {
           </Row>
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
-                <ValidInput type="text" label="First name" placeholder="First name" fieldBinding={ firstName } />
-                <ValidInput type="text" label="Last name" placeholder="Last name" fieldBinding={ lastName } />
-                <ValidInput type="text" label="Civic registration number" placeholder="19890101-1234" fieldBinding={ civicRegistrationNumber } />
+                <ValidInput type="text" label="First name" fieldBinding={ firstName } />
+                <ValidInput type="text" label="Last name" fieldBinding={ lastName } />
+                <ValidInput type="text" label="Civic registration number" fieldBinding={ civicRegistrationNumber } />
 
                 <Input  name="citizenship"
                         type="select"
                         label="Citizenship"
-                        placeholder="Citizenship"
                         options={ countries }
                         />
 
-                <ValidInput type="text" label="C/o" placeholder="C/o" fieldBinding={ careOf } />
-                <ValidInput type="text" label="Address" placeholder="Address" fieldBinding={ address } />
-                <ValidInput type="text" label="Zip code" placeholder="Zip code" fieldBinding={ zipCode } />
-                <ValidInput type="text" label="City" placeholder="City" fieldBinding={ city } />
-                <Input name="land" type="select" label="Country" placeholder="Sverige" options={ countries } />
-                <ValidInput type="email" label="E-mail" placeholder="E-mail" fieldBinding={ email } />
+                <ValidInput type="text" label="C/o" fieldBinding={ careOf } />
+                <ValidInput type="text" label="Address" fieldBinding={ address } />
+                <ValidInput type="text" label="Zip code" fieldBinding={ zipCode } />
+                <ValidInput type="text" label="City" fieldBinding={ city } />
+                <Input name="land" type="select" label="Country" options={ countries } />
+                <ValidInput type="email" label="E-mail" fieldBinding={ email } />
 
-                <button type="submit" disabled={ submitting }>
+                <Button type="submit" disabled={ submitting }>
                   { submitting ? <i/> : <i/> } Submit
-                </button>
+                </Button>
 
-                <button type="button" disabled={ submitting } onClick={ resetForm }>
+                <Button disabled={ submitting } onClick={ resetForm }>
                   Clear values
-                </button>
+                </Button>
             </Col>
           </form>
         </Col>
@@ -119,7 +116,7 @@ class ProspectInfoPage extends React.Component {
   submitForm() {
     return new Promise((resolve, reject) => {
       nordnetAPI
-        .post(saveProspectURL, getValues(store.getState().form.prospectInfo), '')
+        .post(SERVICE_CUSTOMER_CREATION + 'prospect', getValues(store.getState().form.prospectInfo), '')
         .then(({status, data}) => {
           if (status == 200) {
             resolve();
@@ -131,8 +128,8 @@ class ProspectInfoPage extends React.Component {
             pathname: '/register/compliance',
           });
         }).catch((error) => {
-          throw Error(`Could not post to ${saveProspectURL}`);
           reject();
+          throw Error(`Could not post to ${saveProspectURL}`);
         });
     });
   }
