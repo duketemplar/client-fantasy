@@ -62,6 +62,9 @@ class CompliancePage extends React.Component {
   }
 
   submitForm() {
+    this.context.router.push({
+      pathname: "/register/pick-account",
+    });
   }
 }
 

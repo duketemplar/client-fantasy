@@ -5,6 +5,7 @@ var pkg = require('./../package.json');
 var DEBUG = process.env.npm_package_config_node_env === 'development';
 var VERSION = process.env.VERSION || 'dev';
 var publicPath = DEBUG ? '/' : '/sc/' + pkg.name + '/cache/' + VERSION;
+var buildConfig = require('./build-config');
 
 var plugins = [
   new webpack.optimize.OccurenceOrderPlugin()
@@ -18,7 +19,7 @@ if (DEBUG) {
         NODE_ENV: JSON.stringify('development'),
         DEBUG: DEBUG
       },
-      SERVICE_CUSTOMER_CREATION: JSON.stringify("http://service-customer-creation.ci.nordnet.se/service-customer-creation/v1/")
+      "endpoints": buildConfig,
     })
   );
 } else {
