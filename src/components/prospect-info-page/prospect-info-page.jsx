@@ -1,6 +1,4 @@
 import React from 'react';
-require('bootstrap/dist/css/bootstrap.css');
-import '../create-customer.sass';
 import { connect } from 'react-redux';
 import store from '../../store';
 import nordnetAPI from 'nordnet-next-api';
