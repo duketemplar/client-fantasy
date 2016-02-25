@@ -18,10 +18,6 @@ export const fields = {
     [notBlankValidator, "Must be filled in."],
     [lengthValidator, 3, "Must be at least 2 characters."],
   ],
-  civicRegistrationNumber: [
-    [notBlankValidator, "Must be filled in"],
-    [lengthValidator, 10, "Must be at least 10 characters"],
-  ],
   zipCode: [
     [notBlankValidator, "Must be filled in"],
     [lengthValidator, 4, "Must be at least 4 characters"],
@@ -82,25 +78,16 @@ class ProspectInfoPage extends React.Component {
             <Col xs={6}>
                 <ValidInput type="text" label="First name" fieldBinding={ firstName } />
                 <ValidInput type="text" label="Last name" fieldBinding={ lastName } />
-                <ValidInput type="text" label="Civic registration number" fieldBinding={ civicRegistrationNumber } />
-
-                <Input  name="citizenship"
-                        type="select"
-                        label="Citizenship"
-                        options={ countries }
-                        />
-
+                <Input name="citizenship" type="select" label="Citizenship" options={ countries } />
                 <ValidInput type="text" label="C/o" fieldBinding={ careOf } />
                 <ValidInput type="text" label="Address" fieldBinding={ address } />
                 <ValidInput type="text" label="Zip code" fieldBinding={ zipCode } />
                 <ValidInput type="text" label="City" fieldBinding={ city } />
                 <Input name="land" type="select" label="Country" options={ countries } />
                 <ValidInput type="email" label="E-mail" fieldBinding={ email } />
-
                 <Button type="submit" disabled={ submitting }>
                   { submitting ? <i/> : <i/> } Submit
                 </Button>
-
                 <Button disabled={ submitting } onClick={ resetForm }>
                   Clear values
                 </Button>
