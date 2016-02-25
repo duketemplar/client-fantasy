@@ -116,7 +116,7 @@ class ProspectInfoPage extends React.Component {
   submitForm() {
     return new Promise((resolve, reject) => {
       nordnetAPI
-        .post(SERVICE_CUSTOMER_CREATION + 'prospect', getValues(store.getState().form.prospectInfo), '')
+        .post(endpoints.SERVICE_CUSTOMER_CREATION + '/prospect', getValues(store.getState().form.prospectInfo), '')
         .then(({status, data}) => {
           if (status == 200) {
             resolve();
@@ -129,7 +129,7 @@ class ProspectInfoPage extends React.Component {
           });
         }).catch((error) => {
           reject();
-          throw Error(`Could not post to ${saveProspectURL}`);
+          throw Error(`Could not post to ${ endpoints.SERVICE_CUSTOMER_CREATION + '/prospect' }`);
         });
     });
   }
