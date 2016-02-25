@@ -35,7 +35,7 @@
     "test": "karma start",
     "pretest:debug": "npm config set crs-pop-up-app:karma_env=sourcemap",
     "test:debug": "karma start --no-single-run --reporters mocha --browsers Chrome",
-    "pretest:tdd": "npm config set crs-pop-up-app:karma_env=coverage",
+    "pretest:tdd": "npmcopy-html config set crs-pop-up-app:karma_env=coverage",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "BABEL_ENV=e2e node nightwatch.js",
@@ -48,7 +48,9 @@
     "pree2e-test:install": "mkdir -p e2e-tests/server",
     "e2e-test:install": "! [ -a 'e2e-tests/server/selenium-server-standalone-2.48.2.jar' ] && npm run e2e-test:download || echo 'selenium server already installed'",
     "e2e-test:download": "cd e2e-tests/server && curl -sS -O 'http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar'",
-    "prepush": "npm run validate"
+    "prepush": "npm run validate",
+    "postbuild": "npm run copy-html",
+    "copy-html": "/bin/cp ./src/index.html ./dist/init/index.html"
   },
   "dependencies": {
     "classnames": "2.2.0",
