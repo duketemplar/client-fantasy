@@ -6,10 +6,9 @@ export default class SignPage extends React.Component {
   }
 
   render() {
-    const handler = this.validate.bind(this);
-
     return (
       <div className="sign-page">
+        <h1> Sign </h1>
       </div>
     );
   }
