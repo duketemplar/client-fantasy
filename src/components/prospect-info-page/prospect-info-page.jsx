@@ -85,10 +85,8 @@ class ProspectInfoPage extends React.Component {
                 <ValidInput type="text" label="City" fieldBinding={ city } />
                 <Input name="land" type="select" label="Country" options={ countries } />
                 <ValidInput type="email" label="E-mail" fieldBinding={ email } />
-                <Button type="submit" primary disabled={ submitting }>
                   { submitting ? <i/> : <i/> } Submit
                 </Button>
-                <Button secondary disabled={ submitting } onClick={ resetForm }>
                   Clear values
                 </Button>
             </Col>
