@@ -9,7 +9,7 @@ function gotoAccounts(client) {
 
   return () => {
     client.url(url);
-    client.waitForElementPresent('#crs-pop-up-app', 10000);
+    client.waitForElementPresent('#webapp-customer-registration', 10000);
   };
 }
 

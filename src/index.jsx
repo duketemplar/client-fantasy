@@ -56,5 +56,4 @@ if (!window.Nordnet) {
 }
 
 // saves 'initialize' function in the global scope as part of 'Nordnet' object.
-// REPLACE 'crs-pop-up-app' with your application name.
 window.Nordnet['webapp-customer-registration'] = initialize;
