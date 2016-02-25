@@ -22,8 +22,8 @@ describe('Accounts', () => {
       done();
     });
 
-    it('#crs-pop-up-app container is present',
-      (client) => client.expect.element('#crs-pop-up-app').to.be.present);
+    it('#webapp-customer-registration container is present',
+      (client) => client.expect.element('#webapp-customer-registration').to.be.present);
 
     afterEach((client, done) => client.end(() => done()));
   });

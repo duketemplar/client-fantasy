@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 http.post = require('http-post');
 
-var projectName = 'crs-pop-up-app';
+var projectName = 'webapp-customer-registration';
 
 var files = fs.readdirSync(path.join('src', 'l10n'));
 console.log(files);

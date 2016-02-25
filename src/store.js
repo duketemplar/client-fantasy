@@ -9,7 +9,6 @@ import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
 
 // custom reducer for accounts component
-// REPLACE with list of your own reducers
 // import accountsReducer from './accounts/reducers/accounts';
 // import stepsReducer from './modal/reducers/steps';
 import prospectReducer from './components/prospect.reducer';
@@ -17,7 +16,6 @@ import prospectReducer from './components/prospect.reducer';
 const MIDDLEWARE = [thunkMiddleware];
 
 // defines which reducers are responsible for which parts of the state
-// REPLACE with list of your own reducers
 const REDUCERS = {
   prospect: prospectReducer,
   form: formReducer,
