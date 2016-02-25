@@ -13,7 +13,7 @@
   <!-- When data-lang and data-country attributes are on set on the container element,
         application will try to load them from nExt API instead. This ensures that application always start with correct localization.
         "id" on the container element should match your application name. -->
-  <div id="crs-pop-up-app"></div>
+  <div id="webapp-customer-registration"></div>
 
   <!-- Example container that shows how data-lang and data-country attributes could be set. -->
   <!-- <div id="nordnet-react-app" data-lang="fi" data-country="FI"></div> -->
@@ -41,7 +41,7 @@
         REPLACE 'crs-pop-up-app' with your application name. -->
   <script>
     (function(window, document) {
-      var appName = 'crs-pop-up-app';
+      var appName = 'webapp-customer-registration';
       var domElement = document.getElementById(appName);
       if (domElement && window.Nordnet[appName]) {
         console.log('Initialising the app...');

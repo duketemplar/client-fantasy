@@ -21,7 +21,6 @@ export default class SignPage extends React.Component {
     const params = { signUrls: docs.map(doc => doc.url) };
 
     headers.contentType = 'application/json; charset=utf-8';
-
     nordnetAPI
     .post(url, params, headers)
       .then(({ data }) => {
