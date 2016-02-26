@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from 'nordnet-ui-kit';
+import { Input, Button } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import store from '../../store';
@@ -47,13 +47,12 @@ class CompliancePage extends React.Component {
 
               <ValidInput type="text" label="Tax identification number" placeholder="Tax identification number" fieldBinding={ taxTin } />
 
-              <button type="submit" disabled={ submitting }>
+              <Button type="submit" primary disabled={ submitting }>
                 { submitting ? <i/> : <i/> } Submit
-              </button>
-
-              <button type="button" disabled={ submitting } onClick={ resetForm }>
+              </Button>
+              <Button secondary disabled={ submitting } onClick={ resetForm }>
                 Clear values
-              </button>
+              </Button>
             </Col>
           </form>
         </Col>

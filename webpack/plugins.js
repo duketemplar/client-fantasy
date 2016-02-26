@@ -34,7 +34,8 @@ if (DEBUG) {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
-      }
+      },
+      "endpoints": buildConfig,
     }),
     new webpack.NoErrorsPlugin(),
     new NordnetReleasePlugin({
