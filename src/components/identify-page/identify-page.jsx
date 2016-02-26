@@ -18,7 +18,7 @@ class IdentifyPage extends React.Component {
           <Col xs={ 6 }>
             <form onSubmit={ this.handleSubmit.bind(this) } >
               <Input type="text" label="National registration number" />
-              <Button type="submit">
+              <Button primary type="submit">
                 Submit
               </Button>
             </form>
