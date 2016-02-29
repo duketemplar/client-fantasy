@@ -32,9 +32,7 @@ export default class SignPage extends React.Component {
     .then(({ data }) => {
       if (data.status === 'SIGNED') {
         console.log('Singning completed, id: ', data.signID); // eslint-disable-line no-console
-        window.setTimeout(() => {
-          _this.context.router.push('/');
-        }, 2000);
+        _this.context.router.push('/');
       } else {
         console.log('Prospect data is not valid! ', data.error); // eslint-disable-line no-console
       }

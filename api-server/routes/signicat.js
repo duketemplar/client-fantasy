@@ -12,6 +12,8 @@ function* sign(next) {
   };
 
   yield next;
+
+  yield (done) => { setTimeout(done, 2000); }; // delaying the response to simulate signicat processing.
 }
 
 module.exports = {
