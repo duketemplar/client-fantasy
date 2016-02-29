@@ -26,20 +26,21 @@ export default class SignPage extends React.Component {
 
     headers.contentType = 'application/json; charset=utf-8';
 
+    const _this = this;
     nordnetAPI
     .post(url, params, headers)
     .then(({ data }) => {
       if (data.status === 'SIGNED') {
-        console.log('Singning completed, id: ', data.signID);
+        console.log('Singning completed, id: ', data.signID); // eslint-disable-line no-console
         window.setTimeout(() => {
-          window.location = 'https://nordnet.web-konkar.test.nordnet.se/mux/login/startSE.html?cmpi=start-loggain';
+          _this.context.router.push('/');
         }, 2000);
       } else {
-        console.log('Prospect data is not valid! ', data.error);
+        console.log('Prospect data is not valid! ', data.error); // eslint-disable-line no-console
       }
     })
-    .catch(() => {
-      throw Error(`Could not post to ${url}`);
+    .catch((error) => {
+      throw Error(`Could not post to ${url}: ${error.message}`);
     });
   }
 
@@ -67,6 +68,13 @@ export default class SignPage extends React.Component {
 
   render() {
     const handleSign = this.handleSign.bind(this);
+    const signButtonProps = {};
+    if (this.state.waitingForSignicat) {
+      Object.assign(signButtonProps, { secondary: true, disabled: true, type: 'success' });
+    } else {
+      Object.assign(signButtonProps, { primary: true });
+    }
+
     return (
       <div className="sign-page" style={ { width: '768px' }}>
         <Grid>
@@ -76,7 +84,7 @@ export default class SignPage extends React.Component {
               { this.renderDocuments() }
               </Col>
               <Col xs={12}>
-                { this.state.waitingForSignicat ? <div>Signing....</div> : <Button primary onClick={ handleSign }>Sign</Button> }
+                <Button onClick={ handleSign } { ...signButtonProps }>Sign</Button>
               </Col>
             </Row>
           </Row>
@@ -85,3 +93,7 @@ export default class SignPage extends React.Component {
     );
   }
 }
+
+SignPage.contextTypes = {
+  router: React.PropTypes.func.isRequired,
+};

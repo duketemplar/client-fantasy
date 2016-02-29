@@ -22,8 +22,8 @@ export default function getLocale(element) {
 
   return api
   .get('/api/2/login')
-  .then(({ data }) => `${data.lang}-${data.country}`)
-  .catch((error) => {
+  .then(({ status, data }) => {
+    return status !== 200 ? getLocaleFromHost() : `${data.lang}-${data.country}`;
     console.log('Failed to load locale via next: ', error.message, '...getting it from hostname instead'); // eslint-disable-line no-console
     return getLocaleFromHost();
   });
