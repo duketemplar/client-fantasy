@@ -16,10 +16,11 @@ export default class ValidInput extends React.Component {
   }
 
   render() {
-    const { fieldBinding, ...rest } = this.props;
+    const { fieldBinding, prefilled, ...rest } = this.props;
 
     return (
-      <Input  helpText={ this.helpTextFor(fieldBinding) }
+      <Input  disabled={ !!prefilled }
+              helpText={ this.helpTextFor(fieldBinding) }
               hasError={ this.errorFor(fieldBinding) }
               { ...rest }
               { ...fieldBinding }

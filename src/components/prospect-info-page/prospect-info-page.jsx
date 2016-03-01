@@ -18,7 +18,7 @@ export const fields = {
     [notBlankValidator, "Must be filled in."],
     [lengthValidator, 3, "Must be at least 2 characters."],
   ],
-  zipCode: [
+  postalCode: [
     [notBlankValidator, "Must be filled in"],
     [lengthValidator, 4, "Must be at least 4 characters"],
   ],
@@ -37,6 +37,9 @@ export const fields = {
     [notBlankValidator, "Must not be blank."],
     [emailValidator, "Must be a valid email"],
   ],
+  nationalRegistrationNumber: [
+    [notBlankValidator, "Must not be blank."],
+  ],
 };
 
 const validate = combineValidators(fields);
@@ -44,26 +47,23 @@ const validate = combineValidators(fields);
 class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      prefill: {},
+    };
   }
 
   componentDidMount() {
     const prefill = store.getState().prospect.identification;
-
-    console.log("prefill: ", prefill);
+    
+    this.setState({
+      prefill: prefill,
+    });
 
     if (!prefill) {
       return;
     }
 
-    store.dispatch({ type: "PROSPECT_PREFILL", value: prefill});
-
-    // const inputs = [].slice.call(document.getElementsByTagName('form')[0].querySelectorAll('input[name]'));
-
-    // inputs.forEach(elem => {
-    //   if (prefill[elem.name]) {
-    //     elem.value = prefill[elem.name];
-    //   }
-    // });
+    store.dispatch({ type: "PROSPECT_PREFILL", value: prefill });
   }
 
   render() {
@@ -80,7 +80,7 @@ class ProspectInfoPage extends React.Component {
 
     const {
       fields: {
-        lastName, firstName, civicRegistrationNumber, careOf, address, zipCode, email, city
+        lastName, firstName, civicRegistrationNumber, careOf, address, postalCode, email, city, nationalRegistrationNumber
       },
       resetForm, handleSubmit, submitting
     } = this.props;
@@ -96,14 +96,19 @@ class ProspectInfoPage extends React.Component {
           </Row>
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
-                <ValidInput type="text" label="First name" fieldBinding={ firstName } />
-                <ValidInput type="text" label="Last name" fieldBinding={ lastName } />
+                <ValidInput prefilled={ this.state.prefill.nationalRegistrationNumber } type="text" label="National registration number" fieldBinding={ nationalRegistrationNumber } />
+                <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
+                <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
+                
                 <Input name="citizenship" type="select" label="Citizenship" options={ countries } />
+                
                 <ValidInput type="text" label="C/o" fieldBinding={ careOf } />
-                <ValidInput type="text" label="Address" fieldBinding={ address } />
-                <ValidInput type="text" label="Zip code" fieldBinding={ zipCode } />
-                <ValidInput type="text" label="City" fieldBinding={ city } />
+                <ValidInput prefilled={ this.state.prefill.address }type="text" label="Address" fieldBinding={ address } />
+                <ValidInput prefilled={ this.state.prefill.postalCode } type="text" label="Postal code" fieldBinding={ postalCode } />
+                <ValidInput prefilled={ this.state.prefill.city } type="text" label="City" fieldBinding={ city } />
+                
                 <Input name="land" type="select" label="Country" options={ countries } />
+
                 <ValidInput type="email" label="E-mail" fieldBinding={ email } />
                 <Button type="submit" primary disabled={ submitting }>
                   { submitting ? <i/> : <i/> } Submit
