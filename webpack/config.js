@@ -12,7 +12,7 @@ var VERSION = process.env.VERSION || 'dev';
 var publicPath = DEBUG ? '/' : '/sc/' + pkg.name + '/cache/' + VERSION;
 
 var entry = {
-  index: ['./index.jsx']
+  index: ['./index.jsx'],
 };
 
 if (DEBUG) {

@@ -1,5 +1,5 @@
 {
-  "name": "crs-pop-up-app",
+  "name": "webapp-customer-registration",
   "version": "0.0.1",
   "description": "Nordnet React app",
   "config": {
@@ -14,8 +14,8 @@
     }
   },
   "scripts": {
-    "env:prod": "npm config set crs-pop-up-app:node_env=production",
-    "env:dev": "npm config set crs-pop-up-app:node_env=development",
+    "env:prod": "npm config set webapp-customer-registration:node_env=production",
+    "env:dev": "npm config set webapp-customer-registration:node_env=development",
     "clean": "npm-run-all clean:trash clean:mkdir",
     "clean:trash": "rimraf $npm_package_config_dist",
     "clean:mkdir": "mkdirp $npm_package_config_dist",
@@ -31,11 +31,11 @@
     "start:webpack-dev-server": "node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
     "webpack": "webpack --colors --progress --config ./webpack/config",
-    "pretest": "npm config set crs-pop-up-app:karma_env=coverage",
+    "pretest": "npm config set webapp-customer-registration:karma_env=coverage",
     "test": "karma start",
-    "pretest:debug": "npm config set crs-pop-up-app:karma_env=sourcemap",
+    "pretest:debug": "npm config set webapp-customer-registration:karma_env=sourcemap",
     "test:debug": "karma start --no-single-run --reporters mocha --browsers Chrome",
-    "pretest:tdd": "npm config set crs-pop-up-app:karma_env=coverage",
+    "pretest:tdd": "npmcopy-html config set webapp-customer-registration:karma_env=coverage",
     "test:tdd": "karma start --auto-watch --no-single-run --reporters mocha",
     "pree2e-test": "mkdirp e2e-tests/logs && mkdirp e2e-tests/page-objects",
     "e2e-test": "BABEL_ENV=e2e node nightwatch.js",
@@ -48,10 +48,11 @@
     "pree2e-test:install": "mkdir -p e2e-tests/server",
     "e2e-test:install": "! [ -a 'e2e-tests/server/selenium-server-standalone-2.48.2.jar' ] && npm run e2e-test:download || echo 'selenium server already installed'",
     "e2e-test:download": "cd e2e-tests/server && curl -sS -O 'http://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar'",
-    "prepush": "npm run validate"
+    "prepush": "npm run validate",
+    "postbuild": "npm run copy-html",
+    "copy-html": "/bin/cp ./src/index.html ./dist/init/index.html"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
     "classnames": "2.2.0",
     "es6-promise": "3.0.2",
     "intl": "1.0.1",
@@ -60,7 +61,6 @@
     "normalize.css": "3.0.3",
     "react": "0.14.7",
     "react-bem-grid": "0.0.10",
-    "react-bootstrap": "^0.28.2",
     "react-dom": "0.14.7",
     "react-intl": "1.2.0",
     "react-redux": "4.1.1",
@@ -78,6 +78,7 @@
     "babel-polyfill": "6.3.14",
     "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "6.3.13",
+    "babel-preset-stage-2": "6.5.0",
     "chai": "3.3.0",
     "chai-array": "0.0.2",
     "chai-react": "3.0.0",

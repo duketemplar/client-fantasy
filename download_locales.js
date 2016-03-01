@@ -2,7 +2,7 @@ var http = require('http');
 var path = require('path');
 var fs = require('fs');
 
-var projectName = 'crs-pop-up-app';
+var projectName = 'webapp-customer-registration';
 var locales = ['en-GB', 'sv-SE', 'da-DK', 'no-NB', 'fi-FI'];
 
 locales.forEach(function(locale){

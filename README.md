@@ -1,4 +1,4 @@
-# crs-pop-up-app
+# webapp-customer-registration
 
 This is a simple example how to use: 
 * Webpack

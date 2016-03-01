@@ -1,52 +1,86 @@
 import React from 'react';
-import { Input } from 'nordnet-ui-kit';
+import { Input, Button } from 'nordnet-ui-kit';
+import { Grid, Col, Row } from 'react-bem-grid';
+import { connect } from 'react-redux';
 import store from '../../store';
+import { reduxForm, getValues  } from 'redux-form';
+import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
+import ValidInput from '../input/valid-input.jsx';
 
-export default class CompliancePage extends React.Component {
+export const fields = {
+  taxCountry: [
+    [notBlankValidator, "Must be filled in."],
+    [lengthValidator, 3, "Must be at least 2 characters."],
+  ],
+  taxTin: [
+    [notBlankValidator, "Must be filled in."],
+    [lengthValidator, 3, "Must be at least 2 characters."],
+  ],
+};
+
+const validate = combineValidators(fields);
+
+class CompliancePage extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+    const {
+      fields: {
+        taxCountry,
+        taxTin,
+      },
+      resetForm, handleSubmit, submitting
+    } = this.props;
+
     return (
-      <div className="compliance-answers">
+      <Grid className="compliance-info">
+        <Col xs={ 12 }>
+          <h1>
+            Becoming a customer - Regulation Info
+          </h1>
 
-        <Col xs={12}>
-          <Row>
-            <h1>Becoming a customer - Regulation Info</h1>
-          </Row>
+          <form onSubmit={ handleSubmit(this.submitForm.bind(this)) }>
+            <Col xs={ 6 }>
+              <ValidInput type="text" label="Tax country" placeholder="Tax country" fieldBinding={ taxCountry } />
 
-          <form onSubmit={ this.submitForm.bind(this) }>
-            <Col xs={4}>
-              <Row>
-                <Input name="taxCountry" type="text" ref="taxCountry" label="Tax Country" placeholder="Papau New Guinea" />
-                <Input name="tin" type="text" ref="taxIdentificationNumber" label="Tax Identification Number" placeholder="234.23.000-WARREN-G" />
-                <Input name="submit" type="submit" />
-              </Row>
+              <ValidInput type="text" label="Tax identification number" placeholder="Tax identification number" fieldBinding={ taxTin } />
+
+              <Button type="submit" primary disabled={ submitting }>
+                { submitting ? <i/> : <i/> } Submit
+              </Button>
+              <Button secondary disabled={ submitting } onClick={ resetForm }>
+                Clear values
+              </Button>
             </Col>
           </form>
         </Col>
-      </div>
+      </Grid>
     );
   }
 
-  submitForm(e) {
-    e.preventDefault();
-
-    const action = {
-      step: 'POST_COMPLIANCE_INFO',
-      value: {
-        firstName: this.refs.taxCountry.getValue(),
-        lastName: this.refs.taxIdentificationNumber.getValue(),
-      },
-    };
-
-    store.dispatch(action);
-
-    // this.props.history.pushState(null, '/register/sign');
+  submitForm() {
+    this.context.router.push({
+      pathname: "/register/pick-account",
+    });
   }
 }
 
 CompliancePage.propTypes = {
   history: React.PropTypes.object,
+  handleSubmit: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.object.isRequired,
+  resetForm: React.PropTypes.func.isRequired,
+  submitting: React.PropTypes.bool.isRequired,
 };
+
+CompliancePage.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
+export default reduxForm({
+  form: 'complianceInfo',
+  fields: Object.keys(fields),
+  validate: validate,
+})(CompliancePage);

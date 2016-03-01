@@ -8,10 +8,11 @@ import 'babel-polyfill';
 
 // importing styles that apply globally on the application level
 import 'normalize.css/normalize.css';
-import './assets/styles/app.scss';
 
 import 'nordnet-ui-kit/dist/nordnet-ui-kit.css';
 import 'react-bem-grid/dist/Grid.css';
+
+import './base.scss';
 
 // using ES6 native promises and enabling polyfill if native Promises are not supported
 // See https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
@@ -55,5 +56,4 @@ if (!window.Nordnet) {
 }
 
 // saves 'initialize' function in the global scope as part of 'Nordnet' object.
-// REPLACE 'crs-pop-up-app' with your application name.
-window.Nordnet['crs-pop-up-app'] = initialize;
+window.Nordnet['webapp-customer-registration'] = initialize;

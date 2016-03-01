@@ -8,7 +8,7 @@ describe('Page', () => {
     ssnpage.launchUrl();
     // const test = client.expect.element('#crs-pop-up-app').to.be.present;
     console.log('test');
-    ssnpage.passSsn()
+    ssnpage.passSsn();
   });
 
 //     it('#crs-pop-up-app container is present',
