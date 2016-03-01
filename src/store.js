@@ -19,10 +19,19 @@ const MIDDLEWARE = [thunkMiddleware];
 const REDUCERS = {
   prospect: prospectReducer,
   form: formReducer.plugin({
-    prospectInfo: (state = {}, action) => {
+    prospectInfo: (state, action) => {
       switch (action.type) {
         case 'IDENTIFIED_PERSON':
-          return Object.assign({}, state, action.value);
+          const transformedData = {};
+
+          Object.keys(action.value).forEach(key => {
+            transformedData[key] = { value: action.value[key] };
+          });
+
+          return {
+            ...state,
+            ...transformedData,
+          };
         default:
           return state;
       }
