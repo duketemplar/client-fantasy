@@ -11,18 +11,26 @@ import thunkMiddleware from 'redux-thunk';
 // custom reducer for accounts component
 // import accountsReducer from './accounts/reducers/accounts';
 // import stepsReducer from './modal/reducers/steps';
-import prospectReducer from './components/prospect.reducer';
-
+import prospectReducer from './reducers/prospect.reducer';
+// import prefillReducer from './reducers/prefill.reducer';
 const MIDDLEWARE = [thunkMiddleware];
 
 // defines which reducers are responsible for which parts of the state
 const REDUCERS = {
   prospect: prospectReducer,
-  form: formReducer,
+  form: formReducer.plugin({
+    prospectInfo: (state = {}, action) => {
+      switch (action.type) {
+        case 'IDENTIFIED_PERSON':
+          return Object.assign({}, state, action.value);
+        default:
+          return state;
+      }
+    },
+  }),
 };
 
 // creates Redux store
-
 function finalCreateStore(middleware) {
   const browserDevTool = (
     typeof window === 'object' &&

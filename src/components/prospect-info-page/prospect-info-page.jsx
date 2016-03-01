@@ -36,7 +36,7 @@ export const fields = {
   email: [
     [notBlankValidator, "Must not be blank."],
     [emailValidator, "Must be a valid email"],
-  ]
+  ],
 };
 
 const validate = combineValidators(fields);
@@ -44,6 +44,26 @@ const validate = combineValidators(fields);
 class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    const prefill = store.getState().prospect.identification;
+
+    console.log("prefill: ", prefill);
+
+    if (!prefill) {
+      return;
+    }
+
+    store.dispatch({ type: "PROSPECT_PREFILL", value: prefill});
+
+    // const inputs = [].slice.call(document.getElementsByTagName('form')[0].querySelectorAll('input[name]'));
+
+    // inputs.forEach(elem => {
+    //   if (prefill[elem.name]) {
+    //     elem.value = prefill[elem.name];
+    //   }
+    // });
   }
 
   render() {
