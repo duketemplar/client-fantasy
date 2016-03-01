@@ -12,27 +12,15 @@ import thunkMiddleware from 'redux-thunk';
 // import accountsReducer from './accounts/reducers/accounts';
 // import stepsReducer from './modal/reducers/steps';
 import prospectReducer from './reducers/prospect.reducer';
-// import prefillReducer from './reducers/prefill.reducer';
+import prefillReducer from './reducers/prefill.reducer';
+
 const MIDDLEWARE = [thunkMiddleware];
 
 // defines which reducers are responsible for which parts of the state
 const REDUCERS = {
   prospect: prospectReducer,
   form: formReducer.plugin({
-    prospectInfo: (state = {}, action) => {
-      switch (action.type) {
-        case 'IDENTIFIED_PERSON':
-          const formData = {};
-
-          Object.keys(action.value).forEach(key => {
-            formData[key] = { value: action.value[key] };
-          });
-
-          return Object.assign({}, state, formData);
-        default:
-          return state;
-      }
-    },
+    prospectInfo: prefillReducer,
   }),
 };
 
