@@ -1,39 +1,37 @@
 module.exports = (client) => {
-  const url = '/sc/webapp-customer-registration/init/';
-  const startpage = '/mux/login/startSE.html?cmpi=start-loggain';
+  const url = '/sc/webapp-customer-registration/init/#/';
+//  const startpage = '/mux/login/startSE.html?cmpi=start-loggain';
   return {
     launchUrl() {
-      client.url(client.launchUrl + startpage);
-      client.waitForElementVisible()
-      return client.url(client.launch_url + url)
-                  .waitForElementVisible('#webapp-customer-registration', 1500);
-        // const konkar = "https://nordnet.web-konkar.test.nordnet.se/sc/webapp-customer-registration/init/#/?_k=low7s2"
+      // client.url(client.launchUrl + startpage);
+      return client
+        .url(client.launch_url + url)
+        .waitForElementVisible('#webapp-customer-registration', 1500);
     },
-    passSsn() {
-      return function foo() {
-        client.waitForElementVisible('#webapp-customer-registration', 1500);
-        client.click('#national-registration-number');
-        client.setValue('#national-registration-number', '195503034257');
-        // client.click('here goes the submit button');
-      };
-    //   return client => {
-    //     client.waitForElementVisible('#webapp-customer-registration', 1500);
-    //     client.click('#national-registration-number');
-    //     client.setValue('#national-registration-number', '195503034257');
-    //     client.click('here goes the submit button');
-    //   };
+
+    passSsn(Ssn) {
+      return client
+      .waitForElementVisible('#webapp-customer-registration', 1500)
+      .click('#national-registration-number')
+      // client.setValue(`#national-registration-number, ${Ssn}`);
+      .setValue('#national-registration-number', Ssn)
+      .pause(2000)
+      .click('button.identify__submit');
     },
-    //
-    // fillFields() {
-    //   return client => {
-    //     client.waitForElementVisible('#webapp-customer-registration', 1500);
-    //     client.setValue(#,Test);
-    //     client.setValue(#,);
-    //     client.setValue(#,);
-    //     client.setValue(#,);
-    //     client.setValue(#,);
-    //     client.click(#submit button goes here)
-    //   };
-    // },
+
+    fillFields() {
+      return client
+      .waitForElementVisible('#webapp-customer-registration', 1500)
+      .setValue('#first-name', 'Nancy')
+      .setValue('#last-name', 'Crawford')
+      // .setValue('#citizenship', 'first-name')
+      .setValue('#c/o', 'Nancy Crawford')
+      .setValue('#address', 'Testvägen 105')
+      .setValue('#zip-code', '12458')
+      .setValue('#city', 'Stockholm')
+      .setValue('#country', 'Sweden')
+      .setValue('#e-mail', 'konkar@nordnet.se');
+      // client.click(#submit button goes here)
+    },
   };
 };

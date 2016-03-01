@@ -20,7 +20,7 @@
 
   "test_settings" : {
     "default": {
-      "launch_url": "https://nordnet.web-konkar.test.nordnet.se",
+      "launch_url": "http://localhost:9000",
       "selenium_port": 4444,
       "selenium_host": "localhost",
       "silent": true,
