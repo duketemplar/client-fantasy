@@ -68,8 +68,8 @@ export class ProspectInfoPage extends React.Component {
   getCustomerCreationUri(hostName) {
     const mapHost = {
       local: '/api/2/customer-creation',
-      test: 'http://service-customer-creation1.ci.nordnet.se:8080/service-customer-creation/v1',
-      ci: 'http://service-customer-creation1.ci.nordnet.se:8080/service-customer-creation/v1',
+      test: 'http://service-customer-creation.test.nordnet.se/v1',
+      ci: 'http://service-customer-creation.ci.nordnet.se/v1',
     };
 
     const environment = encodeURI(hostName.split('.').slice(-3, -2).pop());

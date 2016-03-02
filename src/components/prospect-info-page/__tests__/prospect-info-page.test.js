@@ -12,11 +12,11 @@ describe('Prospect info page', () => {
       },
       {
         hostname: 'https://nordnet.webfront1.ci.nordnet.se',
-        expected: 'http://service-customer-creation1.ci.nordnet.se:8080/service-customer-creation/v1',
+        expected: 'http://service-customer-creation.ci.nordnet.se/v1',
       },
       {
         hostname: 'https://nordnet.web-konkar.test.nordnet.se',
-        expected: 'http://service-customer-creation1.ci.nordnet.se:8080/service-customer-creation/v1',
+        expected: 'http://service-customer-creation.test.nordnet.se/v1',
       },
     ];
 
