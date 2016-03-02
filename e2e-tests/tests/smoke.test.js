@@ -13,7 +13,6 @@ describe('Social serurity number page', () => {
   it('takes ssn forward to contact info', (client) => {
     const ssnpage = client.page.ssn();
     ssnpage.passSsn('19640117-8600');
-    // ssnpage.fillFields();
     client.pause(5000);
   });
 });

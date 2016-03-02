@@ -15,20 +15,5 @@ module.exports = (client) => {
       .pause(2000)
       .click('button.identify__submit');
     },
-
-    fillFields() {
-      return client
-      .waitForElementVisible('#webapp-customer-registration', 1500)
-      .setValue('#first-name', 'Nancy')
-      .setValue('#last-name', 'Crawford')
-      // .setValue('#citizenship', 'first-name')
-      .setValue('#c/o', 'Nancy Crawford')
-      .setValue('#address', 'Testvägen 105')
-      .setValue('#zip-code', '12458')
-      .setValue('#city', 'Stockholm')
-      .setValue('#country', 'Sweden')
-      .setValue('#e-mail', 'konkar@nordnet.se');
-      // client.click(#submit button goes here)
-    },
   };
 };
