@@ -18,6 +18,7 @@ module.exports = (client) => {
 
     isUrl(url) {
       return client
+        .waitForElementVisible('.grid__col--xs-12', 1500)
         .assert.urlContains(url);
     },
   };
