@@ -15,5 +15,10 @@ module.exports = (client) => {
       .setValue('#national-registration-number', Ssn)
       .click('button.identify__submit');
     },
+
+    isUrl(url) {
+      return client
+        .assert.urlContains(url);
+    },
   };
 };

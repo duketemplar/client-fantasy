@@ -1,4 +1,4 @@
-describe('Social serurity number page', () => {
+describe('User', () => {
   beforeEach((client, done) => {
     const nrnpage = client.page.nationalRegistrationNumber();
     nrnpage.goTo();
@@ -10,8 +10,10 @@ describe('Social serurity number page', () => {
     done();
   });
 
-  it('takes ssn forward to contact info', (client) => {
+  it('submits the national registrationn number', (client) => {
     const nrnpage = client.page.nationalRegistrationNumber();
     nrnpage.nationalRegistrationNumber('19640117-8600');
+    client.pause(10000);
+    nrnpage.isUrl('contact-info?_k');
   });
 });
