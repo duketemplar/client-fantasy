@@ -124,14 +124,12 @@ export class ProspectInfoPage extends React.Component {
         <Col xs={12}>
           <Row>
             <h1>
-            Enter your personal info
+              Enter your personal info
             </h1>
           </Row>
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
-              <ValidInput prefilled={ this.state.prefill.nationalRegistrationNumber } type="text"
-                label="National registration number" fieldBinding={ nationalRegistrationNumber }
-              />
+              <ValidInput prefilled={ this.state.prefill.nationalRegistrationNumber } type="text" label="National registration number" fieldBinding={ nationalRegistrationNumber } />
               <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
               <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
 
