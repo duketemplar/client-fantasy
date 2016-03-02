@@ -1,9 +1,7 @@
 module.exports = (client) => {
   const url = '/sc/webapp-customer-registration/init/#/';
-//  const startpage = '/mux/login/startSE.html?cmpi=start-loggain';
   return {
     launchUrl() {
-      // client.url(client.launchUrl + startpage);
       return client
         .url(client.launch_url + url)
         .waitForElementVisible('#webapp-customer-registration', 1500);
@@ -13,7 +11,6 @@ module.exports = (client) => {
       return client
       .waitForElementVisible('#webapp-customer-registration', 1500)
       .click('#national-registration-number')
-      // client.setValue(`#national-registration-number, ${Ssn}`);
       .setValue('#national-registration-number', Ssn)
       .pause(2000)
       .click('button.identify__submit');
