@@ -5,7 +5,6 @@ var pkg = require('./../package.json');
 var DEBUG = process.env.npm_package_config_node_env === 'development';
 var VERSION = process.env.VERSION || 'dev';
 var publicPath = DEBUG ? '/' : '/sc/' + pkg.name + '/cache/' + VERSION;
-var buildConfig = require('./build-config');
 
 var plugins = [
   new webpack.optimize.OccurenceOrderPlugin()
@@ -17,9 +16,8 @@ if (DEBUG) {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
-        DEBUG: DEBUG
+        DEBUG: DEBUG,
       },
-      "endpoints": buildConfig,
     })
   );
 } else {
@@ -27,15 +25,14 @@ if (DEBUG) {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-        pure_funcs: ['console.log']
-      }
+        pure_funcs: ['console.log'],
+      },
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       },
-      "endpoints": buildConfig,
     }),
     new webpack.NoErrorsPlugin(),
     new NordnetReleasePlugin({
