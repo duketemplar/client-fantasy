@@ -1,6 +1,5 @@
 module.exports = (client) => {
   const url = '/sc/webapp-customer-registration/init/#/';
-
   return {
     goTo() {
       return client
@@ -8,11 +7,11 @@ module.exports = (client) => {
         .waitForElementVisible('#webapp-customer-registration', 1500);
     },
 
-    nationalRegistrationNumber(Ssn) {
+    nationalRegistrationNumber(number) {
       return client
       .waitForElementVisible('#webapp-customer-registration', 1500)
       .click('#national-registration-number')
-      .setValue('#national-registration-number', Ssn)
+      .setValue('#national-registration-number', number)
       .click('button.identify__submit');
     },
 
