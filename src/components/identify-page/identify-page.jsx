@@ -19,7 +19,6 @@ const validate = combineValidators(fields);
 class IdentifyPage extends React.Component {
   constructor(props) {
     super(props);
-    window.api = nordnetAPI;
   }
 
   getCustomerCreationUri(hostName) {
