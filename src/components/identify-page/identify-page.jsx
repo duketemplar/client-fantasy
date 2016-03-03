@@ -40,12 +40,12 @@ class IdentifyPage extends React.Component {
 
   render() {
     return (
-      <Grid className="identify-page">
+      <Grid className="identify">
         <Row xsMiddle xsCenter>
           <Col xs={ 6 }>
             <form onSubmit={ this.handleSubmit.bind(this) } >
               <Input type="text" ref="nationalRegistrationNumber" label="National registration number" />
-              <Button primary type="submit">
+              <Button className="identify__submit" primary type="submit">
                 Submit
               </Button>
             </form>
