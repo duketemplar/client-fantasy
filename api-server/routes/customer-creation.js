@@ -1,6 +1,4 @@
 function* prospect(next) {
-  const formData = this.request.body;
-
   this.body = {
     createdAt: "2016-03-02T15:35:03.138Z",
     id: "1234",
