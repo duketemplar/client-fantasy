@@ -17,7 +17,7 @@ export const fields = {
     [notBlankValidator, 'Must be filled in.'],
     [lengthValidator, 3, 'Must be at least 2 characters.'],
   ],
-  postalCode: [
+  zip: [
     [notBlankValidator, 'Must be filled in'],
     [lengthValidator, 4, 'Must be at least 4 characters'],
   ],
@@ -25,7 +25,11 @@ export const fields = {
     [notBlankValidator, 'Must be filled in'],
     [lengthValidator, 2, 'Must be at least 2 characters'],
   ],
-  address: [
+  address1: [
+    [notBlankValidator, 'Must be filled in'],
+    [lengthValidator, 2, 'Must be at least 2 characters'],
+  ],
+  address2: [
     [notBlankValidator, 'Must be filled in'],
     [lengthValidator, 2, 'Must be at least 2 characters'],
   ],
@@ -36,9 +40,15 @@ export const fields = {
     [notBlankValidator, 'Must not be blank.'],
     [emailValidator, 'Must be a valid email'],
   ],
-  nationalRegistrationNumber: [
+  natregno: [
     [notBlankValidator, 'Must not be blank.'],
   ],
+  citizen: [
+    [notBlankValidator, 'Must not be blank.'],
+  ],
+  country: [
+    [notBlankValidator, 'Must not be blank.'],
+  ]
 };
 
 const validate = combineValidators(fields);
@@ -58,11 +68,9 @@ export class ProspectInfoPage extends React.Component {
       prefill,
     });
 
-    if (!prefill) {
-      return;
+    if (prefill) {
+      store.dispatch({ type: "PROSPECT_PREFILL", value: prefill });
     }
-
-    store.dispatch({ type: 'PROSPECT_PREFILL', value: prefill });
   }
 
   getCustomerCreationUri(hostName) {
@@ -78,7 +86,7 @@ export class ProspectInfoPage extends React.Component {
   }
 
   submitForm() {
-    const customerCreationURI = this.getCustomerCreationUri(location.host) + '/prospect';
+    const customerCreationURI = this.getCustomerCreationUri(location.host) + '/prospects';
     return new Promise((resolve, reject) => {
       nordnetAPI
         .post(customerCreationURI, getValues(store.getState().form.prospectInfo), '')
@@ -113,14 +121,13 @@ export class ProspectInfoPage extends React.Component {
 
     const {
       fields: {
-        lastName, firstName, careOf, address, postalCode, email, city, nationalRegistrationNumber,
+        lastName, firstName, careOf, address1, address2, zip, email, city, natregno, citizen, country,
       },
       resetForm, handleSubmit, submitting,
     } = this.props;
 
     return (
       <Grid className="create-customer">
-
         <Col xs={12}>
           <Row>
             <h1>
@@ -129,19 +136,15 @@ export class ProspectInfoPage extends React.Component {
           </Row>
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
-              <ValidInput prefilled={ this.state.prefill.nationalRegistrationNumber } type="text" label="National registration number" fieldBinding={ nationalRegistrationNumber } />
+              <ValidInput prefilled={ this.state.prefill.natregno } type="text" label="National registration number" fieldBinding={ natregno } />
               <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
               <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
-
-              <Input name="citizenship" type="select" label="Citizenship" options={ countries } />
-
-              <ValidInput type="text" label="C/o" fieldBinding={ careOf } />
-              <ValidInput prefilled={ this.state.prefill.address }type="text" label="Address" fieldBinding={ address } />
-              <ValidInput prefilled={ this.state.prefill.postalCode } type="text" label="Postal code" fieldBinding={ postalCode } />
+              <ValidInput prefilled={ this.state.prefill.citizenship } type="select" label="Citizenship" options={ countries } fieldBinding={ citizen } />
+              <ValidInput prefilled={ this.state.prefill.address1 } type="text" label="Address" fieldBinding={ address1 } />
+              <ValidInput prefilled={ this.state.prefill.address2 } type="text" label="C/o" fieldBinding={ address2 } />
+              <ValidInput prefilled={ this.state.prefill.zip } type="text" label="Postal code" fieldBinding={ zip } />
               <ValidInput prefilled={ this.state.prefill.city } type="text" label="City" fieldBinding={ city } />
-
-              <Input name="land" type="select" label="Country" options={ countries } />
-
+              <ValidInput prefilled={ this.state.prefill.country } type="select" label="Country" options={ countries } fieldBinding={ country } />
               <ValidInput type="email" label="E-mail" fieldBinding={ email } />
               <Button type="submit" primary disabled={ submitting }>
                 { submitting ? <i/> : <i/> } Submit
