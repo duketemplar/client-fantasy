@@ -8,12 +8,12 @@ import { combineValidators, lengthValidator, notBlankValidator, emailValidator, 
 import { Input, Button } from 'nordnet-ui-kit';
 
 export const fields = {
-  firstName: [
+  first_name: [
     [regexValidator, /^[a-zA-Z.\s]+$/, 'Must only contain letters'],
     [notBlankValidator, 'Must be filled in.'],
     [lengthValidator, 3, 'Must be at least 2 characters.'],
   ],
-  lastName: [
+  last_name: [
     [notBlankValidator, 'Must be filled in.'],
     [lengthValidator, 3, 'Must be at least 2 characters.'],
   ],
@@ -121,7 +121,7 @@ export class ProspectInfoPage extends React.Component {
 
     const {
       fields: {
-        lastName, firstName, careOf, address1, address2, zip, email, city, natregno, citizen, country,
+        last_name, first_name, careOf, address1, address2, zip, email, city, natregno, citizen, country,
       },
       resetForm, handleSubmit, submitting,
     } = this.props;
@@ -137,8 +137,8 @@ export class ProspectInfoPage extends React.Component {
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
               <ValidInput prefilled={ this.state.prefill.natregno } type="text" label="National registration number" fieldBinding={ natregno } />
-              <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
-              <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
+              <ValidInput prefilled={ this.state.prefill.first_name } type="text" label="First name" fieldBinding={ first_name } />
+              <ValidInput prefilled={ this.state.prefill.last_name } type="text" label="Last name" fieldBinding={ last_name } />
               <ValidInput prefilled={ this.state.prefill.citizenship } type="select" label="Citizenship" options={ countries } fieldBinding={ citizen } />
               <ValidInput prefilled={ this.state.prefill.address1 } type="text" label="Address" fieldBinding={ address1 } />
               <ValidInput prefilled={ this.state.prefill.address2 } type="text" label="C/o" fieldBinding={ address2 } />

@@ -38,7 +38,7 @@ class IdentifyPage extends React.Component {
     const natRegNo = getValues(store.getState().form.identify).natregno;
 
     this.lookup(natRegNo).then(result => {
-      store.dispatch({ type: "IDENTIFIED_PERSON", value: result.prospect });
+      store.dispatch({ type: "IDENTIFIED_PERSON", value: result });
     }).then(() => {
       router.push('/register/contact-info');
     })
