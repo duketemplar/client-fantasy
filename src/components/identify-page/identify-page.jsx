@@ -48,16 +48,18 @@ class IdentifyPage extends React.Component {
   }
 
   lookup(natregno) {
+    const header = { 'Content-type': 'application/json'};
       return new Promise((resolve, reject) => {
         nordnetAPI
-          .post(this.getCustomerCreationUri(location.host) + '/prospects', { natregno: natregno }, '')
+          .post(this.getCustomerCreationUri(location.host) + '/prospects', { natregno: natregno }, header)
           .then(({status, data}) => {
             if (status == 200) {
               resolve(data);
             } else {
               reject();
             }
-          });
+          })
+          .catch(e => console.log(e));
       });
   }
 
@@ -103,4 +105,3 @@ export default reduxForm({
   fields: Object.keys(fields),
   validate: validate,
 })(IdentifyPage);
-
