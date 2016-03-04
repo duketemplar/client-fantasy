@@ -87,9 +87,10 @@ export class ProspectInfoPage extends React.Component {
 
   submitForm() {
     const customerCreationURI = this.getCustomerCreationUri(location.host) + '/prospects';
+    const header = { 'Content-type': 'application/json'};
     return new Promise((resolve, reject) => {
       nordnetAPI
-        .post(customerCreationURI, getValues(store.getState().form.prospectInfo), '')
+        .post(customerCreationURI, getValues(store.getState().form.prospectInfo), header)
         .then(({ status }) => {
           if (status === 200) {
             resolve();
