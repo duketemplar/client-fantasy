@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input, Button } from 'nordnet-ui-kit';
-import { Grid, Col, Row } from 'react-bem-grid';
+import { Grid, Col, Radio } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import store from '../../store';
 import { reduxForm, getValues  } from 'redux-form';
@@ -42,10 +42,10 @@ class CompliancePage extends React.Component {
           </h1>
 
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) }>
+            <h2>"Are you american sitizen, tax or obligated to report income-tax return in other country then Sweden?"</h2>
             <Col xs={ 6 }>
-              <ValidInput type="text" label="Tax country" placeholder="Tax country" fieldBinding={ taxCountry } />
-
-              <ValidInput type="text" label="Tax identification number" placeholder="Tax identification number" fieldBinding={ taxTin } />
+              <Radio label="No" />
+              <Radio label="Yes" />
 
               <Button type="submit" primary disabled={ submitting }>
                 { submitting ? <i/> : <i/> } Submit
