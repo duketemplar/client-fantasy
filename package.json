@@ -26,7 +26,7 @@
     "lint": "npm-run-all eslint",
     "lint:jenkins": "npm-run-all eslint:jenkins",
     "prestart": "npm run env:dev",
-    "start": "npm-run-all --parallel start:api start:webpack-dev-server",
+    "start": "NODE_ENV=development npm-run-all --parallel start:api start:webpack-dev-server",
     "start:api": "nodemon --harmony --use-strict ./api-server/api-server.js --port $npm_package_config_api_server_port",
     "start:webpack-dev-server": "node ./webpack/webpack-dev-server",
     "validate": "npm-run-all lint test",
