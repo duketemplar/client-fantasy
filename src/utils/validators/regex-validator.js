@@ -1,10 +1,6 @@
 
 const regexValidator = (regex, message, value) => {
-  if (value === undefined) {
-    return null;
-  }
-
-  if (!value.match(regex)) {
+  if (value === undefined || !value.match(regex)) {
     return message;
   }
 
