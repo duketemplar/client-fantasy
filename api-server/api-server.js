@@ -16,8 +16,8 @@ const app = koa();
 
 router
 .post('/api/2/accounts/:accno/orders', routes.orders.enterOrder)
-.post('/api/2/customer-creation/prospects', routes.customerCreation.prospect)
-.post('/api/2/customer-regulation/registrations', routes.customerRegulation.registrations)
+.post('/api/2/customer-creation/prospects', routes.customerCreation.createProspect)
+.put('/api/2/customer-creation/prospects/:prospectId', routes.customerCreation.updateProspect)
 .post('/api/2/kyc/compliance', routes.kyc.compliance)
 .post('/api/2/signicat/sign', routes.signicat.sign);
 
@@ -32,4 +32,4 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(pkg.config.api_server.port);
+app.listen(pkg.config.api_server.port); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
