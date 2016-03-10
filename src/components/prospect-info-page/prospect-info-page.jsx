@@ -1,3 +1,6 @@
+/* jscs:disable maximumLineLength */
+/* eslint-disable max-len */
+
 import React from 'react';
 import store from '../../store';
 import nordnetAPI from 'nordnet-next-api';
@@ -5,15 +8,16 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { reduxForm, getValues } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
-import { Input, Button } from 'nordnet-ui-kit';
+import { Button } from 'nordnet-ui-kit';
+import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
 
 export const fields = {
-  first_name: [
+  firstName: [
     [regexValidator, /^[a-zA-Z.\s]+$/, 'Must only contain letters'],
     [notBlankValidator, 'Must be filled in.'],
     [lengthValidator, 3, 'Must be at least 2 characters.'],
   ],
-  last_name: [
+  lastName: [
     [notBlankValidator, 'Must be filled in.'],
     [lengthValidator, 3, 'Must be at least 2 characters.'],
   ],
@@ -48,7 +52,7 @@ export const fields = {
   ],
   country: [
     [notBlankValidator, 'Must not be blank.'],
-  ]
+  ],
 };
 
 const validate = combineValidators(fields);
@@ -69,28 +73,17 @@ export class ProspectInfoPage extends React.Component {
     });
 
     if (prefill) {
-      store.dispatch({ type: "PROSPECT_PREFILL", value: prefill });
+      store.dispatch({ type: 'PROSPECT_PREFILL', value: prefill });
     }
   }
 
-  getCustomerCreationUri(hostName) {
-    const mapHost = {
-      local: '/api/2/customer-creation',
-      test: 'http://service-customer-creation.test.nordnet.se/v1',
-      ci: 'http://service-customer-creation.ci.nordnet.se/v1',
-    };
-
-    const environment = encodeURI(hostName.split('.').slice(-3, -2).pop());
-
-    return mapHost[environment] ? mapHost[environment] : mapHost.local;
-  }
-
   submitForm() {
-    const customerCreationURI = this.getCustomerCreationUri(location.host) + '/prospects';
-    const header = { 'Content-type': 'application/json'};
+    const prospectId = store.getState().prospect.meta.prospectId;
+    const customerCreationURI = `${CUSTOMER_CREATION_URI}/prospects/${prospectId}`;
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
     return new Promise((resolve, reject) => {
       nordnetAPI
-        .post(customerCreationURI, getValues(store.getState().form.prospectInfo), header)
+        .put(customerCreationURI, getValues(store.getState().form.prospectInfo), header)
         .then(({ status }) => {
           if (status === 200) {
             resolve();
@@ -103,7 +96,7 @@ export class ProspectInfoPage extends React.Component {
           });
         }).catch((error) => {
           reject();
-          throw Error(`Could not post to ${ customerCreationURI }, ${error.message}`);
+          throw Error(`Could not post to ${customerCreationURI}, ${error.message}`);
         });
     });
   }
@@ -122,7 +115,7 @@ export class ProspectInfoPage extends React.Component {
 
     const {
       fields: {
-        last_name, first_name, careOf, address1, address2, zip, email, city, natregno, citizen, country,
+        lastName, firstName, address1, address2, zip, email, city, natregno, citizen, country,  // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
       },
       resetForm, handleSubmit, submitting,
     } = this.props;
@@ -138,8 +131,8 @@ export class ProspectInfoPage extends React.Component {
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
               <ValidInput prefilled={ this.state.prefill.natregno } type="text" label="National registration number" fieldBinding={ natregno } />
-              <ValidInput prefilled={ this.state.prefill.first_name } type="text" label="First name" fieldBinding={ first_name } />
-              <ValidInput prefilled={ this.state.prefill.last_name } type="text" label="Last name" fieldBinding={ last_name } />
+              <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
+              <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
               <ValidInput prefilled={ this.state.prefill.citizenship } type="select" label="Citizenship" options={ countries } fieldBinding={ citizen } />
               <ValidInput prefilled={ this.state.prefill.address1 } type="text" label="Address" fieldBinding={ address1 } />
               <ValidInput prefilled={ this.state.prefill.address2 } type="text" label="C/o" fieldBinding={ address2 } />
