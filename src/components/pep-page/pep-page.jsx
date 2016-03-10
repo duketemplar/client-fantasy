@@ -2,16 +2,16 @@ import './pep-page.scss';
 import React from 'react';
 import { Button } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
-// import store from '../../store';
-import { reduxForm } from 'redux-form';
+import store from '../../store';
+import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
-// import nordnetAPI from 'nordnet-next-api';
-// import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
+import nordnetAPI from 'nordnet-next-api';
+import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
 
 export const fields = {
   pep: [
     [notBlankValidator, 'This question needs to be answered.'],
-    [regexValidator, /^(yes|no)$/, 'This question needs to be answered.'],
+    [regexValidator, /^(true|false)$/, 'This question needs to be answered.'],
   ],
 };
 
@@ -23,8 +23,28 @@ class PepPage extends React.Component {
   }
 
   submitForm() {
-    this.context.router.push({
-      pathname: '/register/pick-account',
+    const prospectId = store.getState().prospect.meta.prospectId;
+    const pep = getValues(store.getState().form.pepInfo).pep;
+
+    const regulationData = {
+      is_pep: pep,
+    };
+
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
+
+    return new Promise((resolve, reject) => {
+      nordnetAPI
+        .put(CUSTOMER_CREATION_URI + `/prospects/${prospectId}`, { regulation: regulationData }, header)
+        .then(({ status }) => {
+          if (status === 200) {
+            this.context.router.push({
+              pathname: '/register/pick-account',
+            });
+          } else {
+            reject();
+          }
+        })
+        .catch(error => console.log(error)); // eslint-disable-line no-console
     });
   }
 
@@ -56,17 +76,17 @@ class PepPage extends React.Component {
               <Col xs={ 5 }>
                 <label>No&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
-                  name="pep" value="yes" label="yes"
-                  checked={ pep.value === 'yes' }
-                  className="compliance__pep--yes"
+                  name="pep" value="false" label="false"
+                  checked={ pep.value === 'false' }
+                  className="compliance__pep--no"
                 />
               </Col>
               <Col xs={ 6 } xsOffset={ 1 }>
                 <label>Yes&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
-                  name="pep" value="no" label="no"
-                  checked={ pep.value === 'no' }
-                  className="compliance__pep--no"
+                  name="pep" value="true" label="true"
+                  checked={ pep.value === 'true' }
+                  className="compliance__pep--yes"
                 />
               </Col>
             </Row>
@@ -108,7 +128,7 @@ PepPage.contextTypes = {
 };
 
 export default reduxForm({
-  form: 'pep',
+  form: 'pepInfo',
   fields: Object.keys(fields),
   validate,
 })(PepPage);
