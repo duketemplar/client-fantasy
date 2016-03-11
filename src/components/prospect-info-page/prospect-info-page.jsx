@@ -37,9 +37,6 @@ export const fields = {
     [notBlankValidator, 'Must be filled in'],
     [lengthValidator, 2, 'Must be at least 2 characters'],
   ],
-  careOf: [
-    [lengthValidator, 2, 'Must be at least 2 characters'],
-  ],
   email: [
     [notBlankValidator, 'Must not be blank.'],
     [emailValidator, 'Must be a valid email'],
@@ -81,23 +78,23 @@ export class ProspectInfoPage extends React.Component {
     const prospectId = store.getState().prospect.meta.prospectId;
     const customerCreationURI = `${CUSTOMER_CREATION_URI}/prospects/${prospectId}`;
     const header = { 'Content-type': 'application/json; charset=utf-8' };
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       nordnetAPI
         .put(customerCreationURI, getValues(store.getState().form.prospectInfo), header)
         .then(({ status }) => {
           if (status === 200) {
             resolve();
-          } else {
-            reject();
           }
-        }).then(() => {
+        })
+        .then(() => {
           this.context.router.push({
             pathname: '/register/compliance',
           });
-        }).catch((error) => {
-          reject();
+        })
+        .catch((error) => {
           throw Error(`Could not post to ${customerCreationURI}, ${error.message}`);
-        });
+        })
+        .catch(() => resolve());
     });
   }
 

@@ -35,15 +35,13 @@ class IdentifyPage extends React.Component {
       /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
     };
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       nordnetAPI
       .post(CUSTOMER_CREATION_URI + '/prospects', prospectData, header)
       .then(({ status, data }) => {
         if (status === 200) {
           store.dispatch({ type: 'PROSPECT_CREATED', value: { prospectId: data.prospect_id } }); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
           store.dispatch({ type: 'IDENTIFIED_PERSON', value: data });
-        } else {
-          reject();
         }
       })
       .then(() => {
@@ -51,7 +49,8 @@ class IdentifyPage extends React.Component {
       })
       .catch(e => {
         console.log(e.stack); // eslint-disable-line no-console
-      });
+      })
+      .then(() => resolve());
     });
   }
 

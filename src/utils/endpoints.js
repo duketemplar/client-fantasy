@@ -1,3 +1,4 @@
+/* jscs:disable maximumLineLength */
 function getNordnetAPIURI(hostname) {
   const nordnetAPImap = {
     local: '/api/2',
@@ -15,4 +16,5 @@ const nordnetAPIURI = getNordnetAPIURI(location.hostname);
 export default {
   getNordnetAPIURI,
   CUSTOMER_CREATION_URI: `${nordnetAPIURI}/customer-creation`,
+  MANUAL_FLOW_OPEN_ISK_PATH: '/mux/web/nordnet/blikund.html?inhibit_nc=1&depa_typ=isk&agandeskap=private',
 };
