@@ -2,8 +2,8 @@ import './pep-page.scss';
 import React from 'react';
 import { Button } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
-import store from '../../store';
 import { reduxForm, getValues } from 'redux-form';
+import { connect } from 'react-redux';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
@@ -11,7 +11,7 @@ import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
 export const fields = {
   pep: [
     [notBlankValidator, 'This question needs to be answered.'],
-    [regexValidator, /^(true|false)$/, 'This question needs to be answered.'],
+    [regexValidator, /^(true|false)$/, 'The answer provided is not a valid choice.'],
   ],
 };
 
@@ -23,14 +23,12 @@ class PepPage extends React.Component {
   }
 
   submitForm() {
-    const prospectId = store.getState().prospect.meta.prospectId;
-    const pep = getValues(store.getState().form.pepInfo).pep;
-
+    const prospectId = this.props.prospectId;
+    const pep = getValues(this.props.form.pepInfo).pep;
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
     const regulationData = {
       is_pep: pep,
     };
-
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
 
     return new Promise((resolve, reject) => {
       nordnetAPI
@@ -69,11 +67,17 @@ class PepPage extends React.Component {
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) }>
             <Row>
               <Col xs={ 12 }>
-                <h2>"Are you a politically exposed person?"</h2>
+                <h2>
+                  Har du, eller har du tidigare haft: en hög politisk statlig befattning eller
+                  är nära familjemedlem eller medarbetare med en person i ovanstående befattning?
+                </h2>
+                <p>
+                  För ytterligare information var god se blanketten <a href="https://www.nordnet.se/pdf/se/pep.pdf">här</a>.
+                </p>
               </Col>
             </Row>
             <Row>
-              <Col xs={ 5 }>
+              <Col xs={ 1 }>
                 <label>No&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
                   name="pep" value="false" label="false"
@@ -81,7 +85,7 @@ class PepPage extends React.Component {
                   className="compliance__pep--no"
                 />
               </Col>
-              <Col xs={ 6 } xsOffset={ 1 }>
+              <Col xs={ 1 } xsOffset={ 0 }>
                 <label>Yes&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
                   name="pep" value="true" label="true"
@@ -118,9 +122,11 @@ class PepPage extends React.Component {
 
 PepPage.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
-  fields: React.PropTypes.object.isRequired,
   submitting: React.PropTypes.bool.isRequired,
   resetForm: React.PropTypes.func.isRequired,
+  fields: React.PropTypes.object.isRequired,
+  form: React.PropTypes.object.isRequired,
+  prospectId: React.PropTypes.string,
 };
 
 PepPage.contextTypes = {
@@ -131,4 +137,11 @@ export default reduxForm({
   form: 'pepInfo',
   fields: Object.keys(fields),
   validate,
-})(PepPage);
+})(connect(select)(PepPage));
+
+function select(store) {
+  return {
+    prospectId: store.prospect.meta.prospectId,
+    pepInfo: store.form.pepInfo,
+  };
+}
