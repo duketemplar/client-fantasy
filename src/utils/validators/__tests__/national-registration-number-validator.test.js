@@ -1,8 +1,15 @@
 import nationalRegistrationNumberValidator from '../national-registration-number-validator';
 import { assert } from 'chai';
 
-describe("National registration number validator", () => {
-  let validSE, validNO, validFI, validDK, invalidSE, invalidNO, invalidFI, invalidDK;
+describe('National registration number validator', () => {
+  let validSE;
+  let validNO;
+  let validFI;
+  let validDK;
+  let invalidSE;
+  let invalidNO;
+  let invalidFI;
+  let invalidDK;
 
   beforeEach(() => {
     validSE = [
@@ -69,7 +76,7 @@ describe("National registration number validator", () => {
   });
 
   it('validates accurate national registration numbers', () => {
-    [ ...validSE, ...validFI, ...validDK, ...validNO ].forEach((natRegNo) => {
+    [...validSE, ...validFI, ...validDK, ...validNO].forEach((natRegNo) => {
       assert.isNull(
         nationalRegistrationNumberValidator(natRegNo[0], 'Failed', natRegNo[1]),
         `Valid national registration number did not pass, nationality: ${natRegNo[0]} number: ${natRegNo[1]}`
@@ -78,7 +85,7 @@ describe("National registration number validator", () => {
   });
 
   it('does not validate invalid national registration numbers', () => {
-    [ ...invalidSE, ...invalidNO  /*, ...invalidFI, ...invalidDK, */].forEach((natRegNo) => {
+    [...invalidSE, ...invalidNO, ...invalidFI, ...invalidDK].forEach((natRegNo) => {
       const isValid = nationalRegistrationNumberValidator(natRegNo[0], 'Failed', natRegNo[1]);
       assert.isString(
         isValid,
@@ -97,5 +104,4 @@ describe("National registration number validator", () => {
     assert(nationalRegistrationNumberValidator('fi', 'failed', undefined) === null, 'it failed to pass an empty value');
     assert(nationalRegistrationNumberValidator('no', 'failed', null) === null, 'it failed to pass an empty value');
   });
-
 });
