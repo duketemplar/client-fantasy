@@ -7,7 +7,7 @@ import store from '../../store';
 import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordenetAPI from 'nordnet-next-api';
-import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export const fields = {
   taxableOutsideJurisdiction: [
@@ -24,6 +24,7 @@ class CompliancePage extends React.Component {
   }
 
   submitForm() {
+    const router = this.context.router;
     const prospectId = store.getState().prospect.meta.prospectId; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
     const taxableOutsideJurisdiction = getValues(store.getState().form.complianceInfo).taxableOutsideJurisdiction;
 
@@ -35,20 +36,30 @@ class CompliancePage extends React.Component {
 
     const header = { 'Content-type': 'application/json; charset=utf-8' };
 
-    return new Promise((resolve, reject) => {
-      nordenetAPI
-      .put(CUSTOMER_CREATION_URI + `/prospects/${prospectId}`, { regulation: regulationData }, header)
-      .then(({ status }) => {
-        if (status === 200) {
-          this.context.router.push({
-            pathname: '/register/pep',
-          });
-        } else {
-          reject();
-        }
-      })
-      .catch(error => console.log(error)); // eslint-disable-line no-console
-    });
+    function updateRegulation() {
+      return new Promise((resolve) => {
+        nordenetAPI
+        .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, { regulation: regulationData }, header)
+        .then(({ status }) => {
+          if (status === 200) {
+            router.push({
+              pathname: '/register/pick-account',
+            });
+          }
+        })
+        .catch(error => {
+          console.info('Could not update regulation details:', error); // eslint-disable-line no-console
+        })
+        .then(() => resolve()); // releasing the submitting prop
+      });
+    }
+
+    function redirectToManualFlow() {
+      window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+      return false;
+    }
+
+    return taxableOutsideJurisdiction === 'yes' ? redirectToManualFlow() : updateRegulation();
   }
 
   render() {
@@ -89,11 +100,11 @@ class CompliancePage extends React.Component {
             </Row>
             <Row>
               <Col xs={12}>
-                <Button className="compliance__submit" type="submit" primary disabled={ submitting }>
-                  { submitting ? <i/> : <i/> } Submit
-                </Button>
                 <Button secondary disabled={ submitting } onClick={ resetForm }>
                   Clear values
+                </Button>
+                <Button className="compliance__submit" type="submit" primary disabled={ submitting }>
+                  { submitting ? <i/> : <i/> } Submit
                 </Button>
               </Col>
               </Row>
