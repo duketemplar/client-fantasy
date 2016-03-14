@@ -9,7 +9,7 @@ import { reduxForm, getValues } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
 import { Button } from 'nordnet-ui-kit';
-import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_URI } from '../../utils/endpoints';
 
 export const fields = {
   firstName: [
@@ -35,9 +35,6 @@ export const fields = {
   ],
   address2: [
     [notBlankValidator, 'Must be filled in'],
-    [lengthValidator, 2, 'Must be at least 2 characters'],
-  ],
-  careOf: [
     [lengthValidator, 2, 'Must be at least 2 characters'],
   ],
   email: [
@@ -79,25 +76,25 @@ export class ProspectInfoPage extends React.Component {
 
   submitForm() {
     const prospectId = store.getState().prospect.meta.prospectId;
-    const customerCreationURI = `${CUSTOMER_CREATION_URI}/prospects/${prospectId}`;
+    const customerCreationURI = `${CUSTOMERS_PROSPECTS_URI}/${prospectId}`;
     const header = { 'Content-type': 'application/json; charset=utf-8' };
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       nordnetAPI
         .put(customerCreationURI, getValues(store.getState().form.prospectInfo), header)
         .then(({ status }) => {
           if (status === 200) {
             resolve();
-          } else {
-            reject();
           }
-        }).then(() => {
+        })
+        .then(() => {
           this.context.router.push({
             pathname: '/register/compliance',
           });
-        }).catch((error) => {
-          reject();
+        })
+        .catch((error) => {
           throw Error(`Could not post to ${customerCreationURI}, ${error.message}`);
-        });
+        })
+        .catch(() => resolve());
     });
   }
 

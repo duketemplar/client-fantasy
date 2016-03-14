@@ -16,8 +16,8 @@ const app = koa();
 
 router
 .post('/api/2/accounts/:accno/orders', routes.orders.enterOrder)
-.post('/api/2/customer-creation/prospects', routes.customerCreation.createProspect)
-.put('/api/2/customer-creation/prospects/:prospectId', routes.customerCreation.updateProspect)
+.post('/api/2/customers/prospects', routes.customerCreation.createProspect)
+.put('/api/2/customers/prospects/:prospectId', routes.customerCreation.updateProspect)
 .post('/api/2/kyc/compliance', routes.kyc.compliance)
 .post('/api/2/signicat/sign', routes.signicat.sign);
 

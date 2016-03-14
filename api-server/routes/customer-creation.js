@@ -19,6 +19,8 @@ let prospect = {
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 };
 
+const LATENCY_MS = 500;
+
 function* createProspect(next) {
   const requiredParams = ['national_id_number', 'national_id_number_country_code'];
   if (!checkRequiredParams(requiredParams, this.request.body)) {
@@ -29,12 +31,14 @@ function* createProspect(next) {
     this.status = 200;
   }
 
+  yield (done) => { setTimeout(done, LATENCY_MS); }; // delaying the response to simulate signicat processing.
+
   yield next;
 }
 
 function* updateProspect(next) {
-  if (this.params.prospectId !== prospect.prospect_id) { // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-    this.body = { updateProspect: `Prospect id = ${this.prams.prospectId} not found.` };
+  if (!this.params.prospectId || this.params.prospectId !== prospect.prospect_id) { // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+    this.body = { updateProspect: 'Prospect id not found.' };
     this.status = 400;
   } else {
     const data = this.request.body;
@@ -50,6 +54,8 @@ function* updateProspect(next) {
   }
 
   yield next;
+
+  yield (done) => { setTimeout(done, LATENCY_MS); }; // delaying the response to simulate signicat processing.
 }
 
 function checkRequiredParams(requiredParams, body) {
