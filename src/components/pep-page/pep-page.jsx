@@ -27,7 +27,7 @@ class PepPage extends React.Component {
     const router = this.context.router;
     const prospectId = store.getState().prospect.meta.prospectId;
     const regulationData = {
-      is_pep: pep === 'yes',
+      is_pep: pep !== 'no',
     };
 
     return new Promise((resolve) => {
@@ -54,7 +54,7 @@ class PepPage extends React.Component {
 
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep === 'yes' ? this.redirectToManualFlow() : this.updateRegulation(pep);
+    return pep !== 'no' ? this.redirectToManualFlow() : this.updateRegulation(pep);
   }
 
   render() {
