@@ -22,39 +22,39 @@ class PepPage extends React.Component {
     super(props);
   }
 
-  submitForm() {
+  updateRegulation(pep) {
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
     const router = this.context.router;
     const prospectId = store.getState().prospect.meta.prospectId;
-    const pep = getValues(store.getState().form.pepInfo).pep;
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
     const regulationData = {
-      is_pep: pep,
+      is_pep: pep === 'true',
     };
 
-    function updateRegulation() {
-      return new Promise((resolve) => {
-        nordnetAPI
-          .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`, { regulation: regulationData }, header)
-          .then(({ status }) => {
-            if (status === 200) {
-              router.push({
-                pathname: '/register/pick-account',
-              });
-            }
-          })
-          .catch(error => {
-            console.info('Could not update regulation details:', error); // eslint-disable-line no-console
-          })
-          .then(() => resolve());
-      });
-    }
+    return new Promise((resolve) => {
+      nordnetAPI
+        .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`, { regulation: regulationData }, header)
+        .then(({ status }) => {
+          if (status === 200) {
+            router.push({
+              pathname: '/register/pick-account',
+            });
+          }
+        })
+        .catch(error => {
+          console.info('Could not update regulation details:', error); // eslint-disable-line no-console
+        })
+        .then(() => resolve());
+    });
+  }
 
-    function redirectToManualFlow() {
-      window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-      return false;
-    }
+  redirectToManualFlow() {
+    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+    return false;
+  }
 
-    return pep === 'true' ? redirectToManualFlow() : updateRegulation();
+  submitForm() {
+    const pep = getValues(store.getState().form.pepInfo).pep;
+    return pep === 'true' ? this.redirectToManualFlow() : this.updateRegulation(pep);
   }
 
   render() {
