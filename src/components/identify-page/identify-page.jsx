@@ -9,7 +9,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator } from '../../utils/validators';
 import store from '../../store';
-import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_URI } from '../../utils/endpoints';
 
 export const fields = {
   natregno: [
@@ -37,7 +37,7 @@ class IdentifyPage extends React.Component {
 
     return new Promise((resolve) => {
       nordnetAPI
-      .post(CUSTOMER_CREATION_URI + '/prospects', prospectData, header)
+      .post(CUSTOMERS_PROSPECTS_URI, prospectData, header)
       .then(({ status, data }) => {
         if (status === 200) {
           store.dispatch({ type: 'PROSPECT_CREATED', value: { prospectId: data.prospect_id } }); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers

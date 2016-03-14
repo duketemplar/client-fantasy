@@ -15,6 +15,6 @@ const nordnetAPIURI = getNordnetAPIURI(location.hostname);
 
 export default {
   getNordnetAPIURI,
-  CUSTOMER_CREATION_URI: `${nordnetAPIURI}/customer-creation`,
+  CUSTOMERS_PROSPECTS_URI: `${nordnetAPIURI}/customers/prospects`,
   MANUAL_FLOW_OPEN_ISK_PATH: '/mux/web/nordnet/blikund.html?inhibit_nc=1&depa_typ=isk&agandeskap=private',
 };

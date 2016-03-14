@@ -7,7 +7,7 @@ import store from '../../store';
 import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordenetAPI from 'nordnet-next-api';
-import { CUSTOMER_CREATION_URI, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_URI, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export const fields = {
   taxableOutsideJurisdiction: [
@@ -39,7 +39,7 @@ class CompliancePage extends React.Component {
     function updateRegulation() {
       return new Promise((resolve) => {
         nordenetAPI
-        .put(CUSTOMER_CREATION_URI + `/prospects/${prospectId}`, { regulation: regulationData }, header)
+        .put(CUSTOMERS_PROSPECTS_URI + `/${prospectId}`, { regulation: regulationData }, header)
         .then(({ status }) => {
           if (status === 200) {
             router.push({
