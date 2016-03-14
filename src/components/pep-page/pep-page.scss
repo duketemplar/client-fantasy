@@ -1,0 +1,24 @@
+.compliance__pep--yes,
+.compliance__pep--no {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.compliance__pep--error {
+  position: absolute;
+}
+
+.compliance__pep--button {
+  margin-top: 20px;
+
+  .compliance__submit {
+    margin-right: 20px;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}

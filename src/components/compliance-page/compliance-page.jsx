@@ -6,7 +6,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import store from '../../store';
 import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
-import nordenetAPI from 'nordnet-next-api';
+import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export const fields = {
@@ -38,12 +38,12 @@ class CompliancePage extends React.Component {
 
     function updateRegulation() {
       return new Promise((resolve) => {
-        nordenetAPI
+        nordnetAPI
         .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, { regulation: regulationData }, header)
         .then(({ status }) => {
           if (status === 200) {
             router.push({
-              pathname: '/register/pick-account',
+              pathname: '/register/pep',
             });
           }
         })
