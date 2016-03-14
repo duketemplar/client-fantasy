@@ -3,10 +3,10 @@ import React from 'react';
 import { Button } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { reduxForm, getValues } from 'redux-form';
-import { connect } from 'react-redux';
+import store from '../../store';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMER_CREATION_URI } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export const fields = {
   pep: [
@@ -23,27 +23,38 @@ class PepPage extends React.Component {
   }
 
   submitForm() {
-    const prospectId = this.props.prospectId;
-    const pep = getValues(this.props.form.pepInfo).pep;
+    const router = this.context.router;
+    const prospectId = store.getState().prospect.meta.prospectId;
+    const pep = getValues(store.getState().form.pepInfo).pep;
     const header = { 'Content-type': 'application/json; charset=utf-8' };
     const regulationData = {
       is_pep: pep,
     };
 
-    return new Promise((resolve, reject) => {
-      nordnetAPI
-        .put(CUSTOMER_CREATION_URI + `/prospects/${prospectId}`, { regulation: regulationData }, header)
-        .then(({ status }) => {
-          if (status === 200) {
-            this.context.router.push({
-              pathname: '/register/pick-account',
-            });
-          } else {
-            reject();
-          }
-        })
-        .catch(error => console.log(error)); // eslint-disable-line no-console
-    });
+    function updateRegulation() {
+      return new Promise((resolve) => {
+        nordnetAPI
+          .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`, { regulation: regulationData }, header)
+          .then(({ status }) => {
+            if (status === 200) {
+              router.push({
+                pathname: '/register/pick-account',
+              });
+            }
+          })
+          .catch(error => {
+            console.info('Could not update regulation details:', error); // eslint-disable-line no-console
+          })
+          .then(() => resolve());
+      });
+    }
+
+    function redirectToManualFlow() {
+      window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+      return false;
+    }
+
+    return pep === 'true' ? redirectToManualFlow() : updateRegulation();
   }
 
   render() {
@@ -137,11 +148,4 @@ export default reduxForm({
   form: 'pepInfo',
   fields: Object.keys(fields),
   validate,
-})(connect(select)(PepPage));
-
-function select(store) {
-  return {
-    prospectId: store.prospect.meta.prospectId,
-    pepInfo: store.form.pepInfo,
-  };
-}
+})(PepPage);
