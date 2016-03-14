@@ -11,11 +11,11 @@ describe('Prospect info page', () => {
       },
       {
         host: 'https://nordnet.webfront1.ci.nordnet.se',
-        expected: 'http://eservice-nnapi.ci.nordnet.se:80/api/2',
+        expected: 'https://eservice-nnapi.ci.nordnet.se:80/api/2',
       },
       {
         host: 'https://nordnet.web-konkar.test.nordnet.se',
-        expected: 'http://eservice-nnapi.test.nordnet.se:80/api/2',
+        expected: 'https://eservice-nnapi.test.nordnet.se:80/api/2',
       },
     ];
 
