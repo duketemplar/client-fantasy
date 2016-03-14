@@ -19,11 +19,16 @@ let prospect = {
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 };
 
-const LATENCY_MS = 500;
+const LATENCY_MS = 300;
 
 function* createProspect(next) {
   const requiredParams = ['national_id_number', 'national_id_number_country_code'];
-  if (!checkRequiredParams(requiredParams, this.request.body)) {
+  const optionalParams = ['first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'phone_number', 'email', 'citizen', 'tax_country', 'regulation_id'];
+  const requestBody = this.request.body;
+  const hasRequiredParams = isKeysInObject(requiredParams, requestBody);
+  const hasUnsupportedParams = doesObjectContainExtraKeys([...requiredParams, ...optionalParams], requestBody);
+
+  if (!hasRequiredParams || hasUnsupportedParams) {
     this.body = { createProspect: 'Failed on required parameter check', missing: requiredParams };
     this.status = 400;
   } else {
@@ -37,8 +42,13 @@ function* createProspect(next) {
 }
 
 function* updateProspect(next) {
-  if (!this.params.prospectId || this.params.prospectId !== prospect.prospect_id) { // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-    this.body = { updateProspect: 'Prospect id not found.' };
+  const optionalParams = ['first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'phone_number', 'email', 'citizen', 'tax_country', 'regulation_id'];
+  const requestBody = this.request.body;
+  const doesProspectIdMatch = this.params.prospectId && this.params.prospectId === prospect.prospect_id; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+  const hasUnsupportedParams = doesObjectContainExtraKeys(optionalParams, requestBody);
+
+  if (!doesProspectIdMatch || hasUnsupportedParams) {
+    this.body = { updateProspect: `Prospect id valid: ${doesProspectIdMatch}, unsupported params: ${hasUnsupportedParams}.` };
     this.status = 400;
   } else {
     const data = this.request.body;
@@ -58,17 +68,18 @@ function* updateProspect(next) {
   yield (done) => { setTimeout(done, LATENCY_MS); }; // delaying the response to simulate signicat processing.
 }
 
-function checkRequiredParams(requiredParams, body) {
-  let checkOk = false;
+function doesObjectContainExtraKeys(restrictedKeys, object) {
+  const objectKeys = Object.keys(object);
+  const hasExtraKey = !objectKeys.every(key => restrictedKeys.indexOf(key) !== -1);
 
-  const recievedParams = Object.keys(body);
-  if (body) {
-    checkOk = recievedParams.some(recievedParam => {
-      return requiredParams.indexOf(recievedParam) !== -1;
-    });
-  }
+  return hasExtraKey;
+}
 
-  return checkOk;
+function isKeysInObject(requiredKeys, object) {
+  const objectKeys = Object.keys(object);
+  const objectHasKeys = requiredKeys.every(requiredKey => objectKeys.indexOf(requiredKey) !== -1);
+
+  return objectHasKeys;
 }
 
 module.exports = {

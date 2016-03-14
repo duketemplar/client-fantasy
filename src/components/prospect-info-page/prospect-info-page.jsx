@@ -12,42 +12,11 @@ import { Button } from 'nordnet-ui-kit';
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 
 export const fields = {
-  firstName: [
-    [regexValidator, /^[a-zA-Z.\s]+$/, 'Must only contain letters'],
-    [notBlankValidator, 'Must be filled in.'],
-    [lengthValidator, 3, 'Must be at least 2 characters.'],
-  ],
-  lastName: [
-    [notBlankValidator, 'Must be filled in.'],
-    [lengthValidator, 3, 'Must be at least 2 characters.'],
-  ],
-  zip: [
-    [notBlankValidator, 'Must be filled in'],
-    [lengthValidator, 4, 'Must be at least 4 characters'],
-  ],
-  city: [
-    [notBlankValidator, 'Must be filled in'],
-    [lengthValidator, 2, 'Must be at least 2 characters'],
-  ],
-  address1: [
-    [notBlankValidator, 'Must be filled in'],
-    [lengthValidator, 2, 'Must be at least 2 characters'],
-  ],
-  address2: [
-    [notBlankValidator, 'Must be filled in'],
-    [lengthValidator, 2, 'Must be at least 2 characters'],
-  ],
   email: [
     [notBlankValidator, 'Must not be blank.'],
     [emailValidator, 'Must be a valid email'],
   ],
-  natregno: [
-    [notBlankValidator, 'Must not be blank.'],
-  ],
   citizen: [
-    [notBlankValidator, 'Must not be blank.'],
-  ],
-  country: [
     [notBlankValidator, 'Must not be blank.'],
   ],
 };
@@ -112,7 +81,7 @@ export class ProspectInfoPage extends React.Component {
 
     const {
       fields: {
-        lastName, firstName, address1, address2, zip, email, city, natregno, citizen, country,  // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+        email, citizen,
       },
       resetForm, handleSubmit, submitting,
     } = this.props;
@@ -127,15 +96,7 @@ export class ProspectInfoPage extends React.Component {
           </Row>
           <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
             <Col xs={6}>
-              <ValidInput prefilled={ this.state.prefill.natregno } type="text" label="National registration number" fieldBinding={ natregno } />
-              <ValidInput prefilled={ this.state.prefill.firstName } type="text" label="First name" fieldBinding={ firstName } />
-              <ValidInput prefilled={ this.state.prefill.lastName } type="text" label="Last name" fieldBinding={ lastName } />
               <ValidInput prefilled={ this.state.prefill.citizenship } type="select" label="Citizenship" options={ countries } fieldBinding={ citizen } />
-              <ValidInput prefilled={ this.state.prefill.address1 } type="text" label="Address" fieldBinding={ address1 } />
-              <ValidInput prefilled={ this.state.prefill.address2 } type="text" label="C/o" fieldBinding={ address2 } />
-              <ValidInput prefilled={ this.state.prefill.zip } type="text" label="Postal code" fieldBinding={ zip } />
-              <ValidInput prefilled={ this.state.prefill.city } type="text" label="City" fieldBinding={ city } />
-              <ValidInput prefilled={ this.state.prefill.country } type="select" label="Country" options={ countries } fieldBinding={ country } />
               <ValidInput type="email" label="E-mail" fieldBinding={ email } />
               <Button type="submit" primary disabled={ submitting }>
                 { submitting ? <i/> : <i/> } Submit
