@@ -7,12 +7,18 @@ import ValidInput from '../input/valid-input.jsx';
 import nordnetAPI from 'nordnet-next-api';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { reduxForm, getValues } from 'redux-form';
-import { combineValidators, notBlankValidator } from '../../utils/validators';
+import { combineValidators, notBlankValidator, nationalRegistrationNumberValidator } from '../../utils/validators';
 import store from '../../store';
 import { CUSTOMERS_PROSPECTS_URI } from '../../utils/endpoints';
 
+const checkNationality = () => {
+  const tld = window.location.hostname.substr(-2, 2).match(/(se|fi|dk|no)/);
+  return tld === undefined ? tld[0] : 'se';
+};
+
 export const fields = {
   natregno: [
+    [nationalRegistrationNumberValidator, checkNationality(), 'Must be a real national registration number'],
     [notBlankValidator, 'Must be filled in.'],
   ],
 };
@@ -26,11 +32,11 @@ class IdentifyPage extends React.Component {
 
   submitForm() {
     const router = this.context.router;
-    const natRegNum = getValues(store.getState().form.identify).natregno;
+    const natRegNo = getValues(store.getState().form.identify).natregno;
     const header = { 'Content-type': 'application/json; charset=utf-8' };
     const prospectData = {
       /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-      national_id_number: natRegNum,
+      national_id_number: natRegNo,
       national_id_number_country_code: 'se',
       /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
     };
