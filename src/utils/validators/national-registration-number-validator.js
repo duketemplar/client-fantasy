@@ -7,7 +7,7 @@ const dkValidator = (value) => {
 };
 
 const fiValidator = (value) => {
-  return value.match(/^\d{6}-?\d{3}[0-9a-zA-Z?]/);
+  return value.match(/^\d{6}-?\d{3}[0-9a-zA-Z]{1}$/);
 };
 
 const noValidator = (value) => {

@@ -69,7 +69,7 @@ describe('National registration number validator', () => {
 
     invalidDK = [
       ['dk', '010123-011'],
-      ['dk', '0101230201'],
+      ['dk', '010123020'],
       ['dk', '010123-02128'],
       ['dk', '00123-0#52'],
     ];
@@ -89,7 +89,7 @@ describe('National registration number validator', () => {
       const isValid = nationalRegistrationNumberValidator(natRegNo[0], 'Failed', natRegNo[1]);
       assert.isString(
         isValid,
-        `Invalid national registration number did passed, nationality: ${natRegNo[0]} number: ${natRegNo[1]}`
+        `Invalid national registration number passed, nationality: ${natRegNo[0]} number: ${natRegNo[1]}`
       );
     });
   });
