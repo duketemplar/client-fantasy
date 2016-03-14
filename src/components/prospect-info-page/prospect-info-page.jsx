@@ -9,7 +9,7 @@ import { reduxForm, getValues } from 'redux-form';
 import ValidInput from '../input/valid-input.jsx';
 import { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator } from '../../utils/validators';
 import { Button } from 'nordnet-ui-kit';
-import { CUSTOMERS_PROSPECTS_URI } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 
 export const fields = {
   firstName: [
@@ -76,7 +76,7 @@ export class ProspectInfoPage extends React.Component {
 
   submitForm() {
     const prospectId = store.getState().prospect.meta.prospectId;
-    const customerCreationURI = `${CUSTOMERS_PROSPECTS_URI}/${prospectId}`;
+    const customerCreationURI = `${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`;
     const header = { 'Content-type': 'application/json; charset=utf-8' };
     return new Promise((resolve) => {
       nordnetAPI
