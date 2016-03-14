@@ -11,7 +11,7 @@ import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils
 export const fields = {
   pep: [
     [notBlankValidator, 'This question needs to be answered.'],
-    [regexValidator, /^(true|false)$/, 'The answer provided is not a valid choice.'],
+    [regexValidator, /^(yes|no)$/, 'The answer provided is not a valid choice.'],
   ],
 };
 
@@ -27,7 +27,7 @@ class PepPage extends React.Component {
     const router = this.context.router;
     const prospectId = store.getState().prospect.meta.prospectId;
     const regulationData = {
-      is_pep: pep === 'true',
+      is_pep: pep === 'yes',
     };
 
     return new Promise((resolve) => {
@@ -54,7 +54,7 @@ class PepPage extends React.Component {
 
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep === 'true' ? this.redirectToManualFlow() : this.updateRegulation(pep);
+    return pep === 'yes' ? this.redirectToManualFlow() : this.updateRegulation(pep);
   }
 
   render() {
@@ -91,16 +91,16 @@ class PepPage extends React.Component {
               <Col xs={ 1 }>
                 <label>No&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
-                  name="pep" value="false" label="false"
-                  checked={ pep.value === 'false' }
+                  name="pep" value="no" label="no"
+                  checked={ pep.value === 'no' }
                   className="compliance__pep--no"
                 />
               </Col>
               <Col xs={ 1 } xsOffset={ 0 }>
                 <label>Yes&nbsp;&nbsp;</label>
                 <input type="radio" { ...pep }
-                  name="pep" value="true" label="true"
-                  checked={ pep.value === 'true' }
+                  name="pep" value="yes" label="yes"
+                  checked={ pep.value === 'yes' }
                   className="compliance__pep--yes"
                 />
               </Col>
