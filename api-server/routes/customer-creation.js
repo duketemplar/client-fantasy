@@ -1,3 +1,5 @@
+const helpers = require('../helpers');
+
 /* jscs:disable maximumLineLength */
 let prospect = {
   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
@@ -22,10 +24,9 @@ let prospect = {
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 };
 
-const LATENCY_MS = 300;
 const requiredParams = [
   'national_id_number',
-  'national_id_number_country_code'
+  'national_id_number_country_code',
 ];
 
 const optionalParams = [
@@ -45,8 +46,8 @@ const optionalParams = [
 
 function* createProspect(next) {
   const requestBody = this.request.body;
-  const hasRequiredParams = isKeysInObject(requiredParams, requestBody);
-  const hasUnsupportedParams = doesObjectContainExtraKeys([...requiredParams, ...optionalParams], requestBody);
+  const hasRequiredParams = helpers.isKeysInObject(requiredParams, requestBody);
+  const hasUnsupportedParams = helpers.doesObjectContainExtraKeys([...requiredParams, ...optionalParams], requestBody);
 
   if (!hasRequiredParams || hasUnsupportedParams) {
     this.body = { createProspect: 'Failed on required parameter check', missing: requiredParams };
@@ -56,15 +57,15 @@ function* createProspect(next) {
     this.status = 200;
   }
 
-  yield (done) => { setTimeout(done, LATENCY_MS); }; // delaying the response to simulate signicat processing.
-
   yield next;
+
+  yield helpers.delayResponse();
 }
 
 function* updateProspect(next) {
   const requestBody = this.request.body;
   const doesProspectIdMatch = this.params.prospectId && this.params.prospectId === prospect.prospect_id; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-  const hasUnsupportedParams = doesObjectContainExtraKeys(optionalParams, requestBody);
+  const hasUnsupportedParams = helpers.doesObjectContainExtraKeys(optionalParams, requestBody);
 
   if (!doesProspectIdMatch || hasUnsupportedParams) {
     this.body = { updateProspect: `Prospect id valid: ${doesProspectIdMatch}, unsupported params: ${hasUnsupportedParams}.` };
@@ -84,21 +85,7 @@ function* updateProspect(next) {
 
   yield next;
 
-  yield (done) => { setTimeout(done, LATENCY_MS); }; // delaying the response to simulate signicat processing.
-}
-
-function doesObjectContainExtraKeys(restrictedKeys, object) {
-  const objectKeys = Object.keys(object);
-  const hasExtraKey = !objectKeys.every(key => restrictedKeys.indexOf(key) !== -1);
-
-  return hasExtraKey;
-}
-
-function isKeysInObject(requiredKeys, object) {
-  const objectKeys = Object.keys(object);
-  const objectHasKeys = requiredKeys.every(requiredKey => objectKeys.indexOf(requiredKey) !== -1);
-
-  return objectHasKeys;
+  yield helpers.delayResponse();
 }
 
 module.exports = {
