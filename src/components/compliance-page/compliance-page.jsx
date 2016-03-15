@@ -10,6 +10,7 @@ import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import ValidInput from '../input/valid-input';
 import TitledSelect from './titled-select';
+import './compliance-page.scss';
 
 export const fields = {
   taxableOutsideJurisdiction: [
@@ -202,6 +203,12 @@ class CompliancePage extends React.Component {
                   field={ politicallyExposedPerson }
                   options={ yesNoOptions }
                   />
+              </Col>
+              <Col xs={ 12 } >
+                <div className="hr"></div>
+                <Row>
+                  <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
+                </Row>
               </Col>
             </Row>
 
