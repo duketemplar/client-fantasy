@@ -6,7 +6,8 @@ import { reduxForm, getValues } from 'redux-form';
 import store from '../../store';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
+import InfoPage from '../../components/info-page';
 
 export const fields = {
   pep: [
@@ -20,6 +21,9 @@ const validate = combineValidators(fields);
 class PepPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showInfo: false,
+    };
   }
 
   updateRegulation(pep) {
@@ -47,14 +51,18 @@ class PepPage extends React.Component {
     });
   }
 
-  redirectToManualFlow() {
-    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-    return false;
+  redirectToManualFlow(show) {
+    this.setState({ showInfo: show });
+  }
+
+  showInfo() {
+    const didClose = () => { this.redirectToManualFlow(false); };
+    return <InfoPage didClose={ didClose } />;
   }
 
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep !== 'no' ? this.redirectToManualFlow() : this.updateRegulation(pep);
+    return pep !== 'no' ? this.redirectToManualFlow(true) : this.updateRegulation(pep);
   }
 
   render() {
@@ -126,6 +134,7 @@ class PepPage extends React.Component {
             </Row>
           </form>
         </Row>
+        { this.state.showInfo && this.showInfo() }
       </Grid>
     );
   }

@@ -1,17 +1,19 @@
 import './info-page.scss';
 import React from 'react';
 import { Button } from 'nordnet-ui-kit';
+import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export default class InfoPage extends React.Component {
   accept() {
-    console.log('accept');
+    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
   }
 
   decline() {
-    console.log('decline');
+    this.props.didClose();
   }
 
   render() {
+    const f = () => { this.decline(); };
     return (
       <div>
         <div className="compliance__bkg"></div>
@@ -35,10 +37,14 @@ export default class InfoPage extends React.Component {
           </ul>
           <div className="compliance__info--buttons">
             <Button primary onClick={ this.accept }>Fortsätt</Button>
-            <Button secondary onClick={ this.decline }>Tillbaka</Button>
+            <Button secondary onClick={ f }>Tillbaka</Button>
           </div>
         </div>
       </div>
     );
   }
 }
+
+InfoPage.propTypes = {
+  didClose: React.PropTypes.func.isRequired,
+};
