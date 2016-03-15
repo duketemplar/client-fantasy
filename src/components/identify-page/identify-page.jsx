@@ -46,8 +46,10 @@ class IdentifyPage extends React.Component {
       .post(CUSTOMERS_PROSPECTS_PATH, prospectData, header)
       .then(({ status, data }) => {
         if (status === 200) {
-          store.dispatch({ type: 'PROSPECT_CREATED', value: { prospectId: data.prospect_id } }); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-          store.dispatch({ type: 'IDENTIFIED_PERSON', value: data });
+          store.dispatch({
+            type: 'PROSPECT_CREATED',
+            value: data.prospect_id, // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+          });
         }
       })
       .then(() => {

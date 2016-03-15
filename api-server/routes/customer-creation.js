@@ -2,6 +2,8 @@
 let prospect = {
   /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
   prospect_id: 'd7145e77-7dc7-4325-bd70-488af0104007',
+  automatic: true,
+  /* NOT IMPLEMENTED YET
   address1: 'Stora gatan 23',
   address2: 'Annika Andersson',
   citizen: 'se',
@@ -16,14 +18,32 @@ let prospect = {
   regulationId: '4321',
   taxCountry: 'se',
   zip: '123 45',
+  */
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 };
 
 const LATENCY_MS = 300;
+const requiredParams = [
+  'national_id_number',
+  'national_id_number_country_code'
+];
+
+const optionalParams = [
+  'first_name',
+  'last_name',
+  'address1',
+  'address2',
+  'city',
+  'zip_code',
+  'country',
+  'phone_number',
+  'email',
+  'citizen',
+  'tax_country',
+  'regulation_id',
+];
 
 function* createProspect(next) {
-  const requiredParams = ['national_id_number', 'national_id_number_country_code'];
-  const optionalParams = ['first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'phone_number', 'email', 'citizen', 'tax_country', 'regulation_id'];
   const requestBody = this.request.body;
   const hasRequiredParams = isKeysInObject(requiredParams, requestBody);
   const hasUnsupportedParams = doesObjectContainExtraKeys([...requiredParams, ...optionalParams], requestBody);
@@ -42,7 +62,6 @@ function* createProspect(next) {
 }
 
 function* updateProspect(next) {
-  const optionalParams = ['first_name', 'last_name', 'address1', 'address2', 'city', 'zip_code', 'country', 'phone_number', 'email', 'citizen', 'tax_country', 'regulation_id'];
   const requestBody = this.request.body;
   const doesProspectIdMatch = this.params.prospectId && this.params.prospectId === prospect.prospect_id; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
   const hasUnsupportedParams = doesObjectContainExtraKeys(optionalParams, requestBody);
@@ -56,7 +75,7 @@ function* updateProspect(next) {
     this.body = {
       /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
       prospect_id: prospect.prospect_id,
-      support_automatic: true,
+      support_automatic: prospect.automatic,
       /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
     };
 

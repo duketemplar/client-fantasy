@@ -60,21 +60,22 @@ class CompliancePage extends React.Component {
 
   submitForm() {
     const router = this.context.router;
-    const prospectId = store.getState().prospect.meta.prospectId; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+    const prospectId = store.getState().prospect.prospectId; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
     const taxableOutsideJurisdiction = getValues(store.getState().form.complianceInfo).taxableOutsideJurisdiction;
 
     /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
     const regulationData = {
       taxable_outside_jurisdiction: taxableOutsideJurisdiction,
     };
-    /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 
     const header = { 'Content-type': 'application/json; charset=utf-8' };
+    const data = { regulation_id: -1 };
+    /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 
     function updateRegulation() {
       return new Promise((resolve) => {
         nordnetAPI
-        .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, { regulation: regulationData }, header)
+        .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, data, header)
         .then(({ status }) => {
           if (status === 200) {
             router.push({

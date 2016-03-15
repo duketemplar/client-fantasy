@@ -1,18 +1,12 @@
 const defaultState = {
-  meta: {},
-  identification: {},
+  prospectId: undefined,
 };
 
 export default function (state = defaultState, action) {
   switch (action.type) {
-    case 'IDENTIFIED_PERSON':
-      return Object.assign({}, state, {
-        identification: action.value,
-      });
-
     case 'PROSPECT_CREATED':
       return Object.assign({}, state, {
-        meta: action.value,
+        prospectId: action.value,
       });
     default:
       return state;
