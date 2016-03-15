@@ -205,7 +205,7 @@ class CompliancePage extends React.Component {
                   />
               </Col>
               <Col xs={ 12 } >
-                <div className="hr"></div>
+                <div className="horizontal-rule"></div>
                 <Row>
                   <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
                 </Row>
