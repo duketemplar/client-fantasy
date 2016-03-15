@@ -22,6 +22,7 @@ import CompliancePage from './components/compliance-page';
 import PepPage from './components/pep-page';
 import AccountPicker from './components/account-picker';
 import SignPage from './components/sign-page';
+import InfoPage from './components/info-page';
 
 // Redux store
 import store from './store';
@@ -40,6 +41,7 @@ class App extends React.Component {
         <Route name="pep"                path="/register/pep"          component={ PepPage }          key="pep-page" />
         <Route name="account-picker"     path="/register/pick-account" component={ AccountPicker }    key="account-picker" />
         <Route name="sign"               path="/register/sign"         component={ SignPage }         key="sign-page" />
+        <Route name="info" path="/info" component={ InfoPage } key="info" />
       </Router>
     );
   }
