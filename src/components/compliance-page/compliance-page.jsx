@@ -7,7 +7,7 @@ import store from '../../store';
 import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH, CUSTOMERS_REGULATIONS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import ValidInput from '../input/valid-input';
 import TitledSelect from './titled-select';
 import './compliance-page.scss';
@@ -60,33 +60,32 @@ class CompliancePage extends React.Component {
 
   submitForm() {
     const router = this.context.router;
-    const prospectId = store.getState().prospect.prospectId; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
     const taxableOutsideJurisdiction = getValues(store.getState().form.complianceInfo).taxableOutsideJurisdiction;
-
-    /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-    const regulationData = {
-      taxable_outside_jurisdiction: taxableOutsideJurisdiction,
-    };
-
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
-    const data = { regulation_id: -1 };
-    /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+    const _this = this;
 
     function updateRegulation() {
       return new Promise((resolve) => {
-        nordnetAPI
-        .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, data, header)
-        .then(({ status }) => {
-          if (status === 200) {
+        const regulationData = {
+          /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+          tax_info: {
+            taxable_outside_jurisdiction: taxableOutsideJurisdiction,
+          },
+          /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+        };
+
+        _this.updateRegulation(regulationData)
+        .then(regulationId => {
+          const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+          _this.updateProspect(prospectData)
+          .then(() => {
             router.push({
               pathname: '/register/pep',
             });
-          }
+          })
+          .catch(error => console.log(error)); // eslint-disable-line no-console
         })
-        .catch(error => {
-          console.info('Could not update regulation details:', error); // eslint-disable-line no-console
-        })
-        .then(() => resolve()); // releasing the submitting prop
+        .catch(error => console.log(error)) // eslint-disable-line no-console
+        .then(() => resolve()); // tell redux form to change submitting state
       });
     }
 
@@ -96,6 +95,43 @@ class CompliancePage extends React.Component {
     }
 
     return taxableOutsideJurisdiction === 'yes' ? redirectToManualFlow() : updateRegulation();
+  }
+
+  updateProspect(prospectData) {
+    const prospectId = store.getState().prospect.prospectId;
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
+
+    return new Promise((resolve, reject) => {
+      nordnetAPI
+      .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, prospectData, header)
+      .then(({ status }) => {
+        if (status === 200) {
+          resolve();
+        } else {
+          reject(new Error('Could not update prospect.'));
+        }
+      })
+      .catch(error => {
+        console.info('Could not update prospect details:', error); // eslint-disable-line no-console
+      });
+    });
+  }
+
+  updateRegulation(regulationData) {
+    const header = { 'Content-type': 'application/json; charset=utf-8' };
+
+    return new Promise((resolve, reject) => {
+      nordnetAPI
+      .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          resolve(data.regulation_id); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+        } else {
+          reject(new Error('No regulation id recieved.'));
+        }
+      })
+      .catch(e => console.log(e)); // eslint-disable-line no-console
+    });
   }
 
   render() {

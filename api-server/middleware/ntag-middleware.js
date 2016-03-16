@@ -9,10 +9,12 @@ var GET = 'GET';
 var ntagMiddleware = function *(next) {
 
   if (this.method !== GET && this.get('ntag') !== state.getCurrentNtag()) {
-      this.throw(403, 'ntag does not match');
+    this.throw(403, 'ntag does not match');
   }
 
-  this.set('ntag', state.bumpNtag());
+  if (this.method === GET && !this.get('ntag')) {
+    this.set('ntag', state.bumpNtag());
+  }
 
   yield next;
 };
