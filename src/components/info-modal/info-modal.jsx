@@ -29,6 +29,8 @@ export default class InfoModal extends React.Component {
     if (!this.state.showInfo) {
       return null;
     }
+
+    const accept = this.accept;
     const closeInfoBox = this.toggleInfoBox.bind(this, false);
 
     return (
@@ -53,7 +55,7 @@ export default class InfoModal extends React.Component {
             </li>
           </ul>
           <div className="compliance__info--buttons">
-            <Button primary onClick={ this.accept }>Continue</Button>
+            <Button primary onClick={ accept }>Continue</Button>
             <Button secondary onClick={ closeInfoBox }>Cancel</Button>
           </div>
         </div>
