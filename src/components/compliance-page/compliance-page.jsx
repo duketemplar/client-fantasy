@@ -59,42 +59,43 @@ class CompliancePage extends React.Component {
   }
 
   submitForm() {
-    const router = this.context.router;
     const taxableOutsideJurisdiction = getValues(store.getState().form.complianceInfo).taxableOutsideJurisdiction;
+
+    return taxableOutsideJurisdiction === 'yes' ? this.redirectToManualFlow() : this.updateProspectWithRegulation(taxableOutsideJurisdiction);
+  }
+
+  redirectToManualFlow() {
+    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+    return false;
+  }
+
+  updateProspectWithRegulation(taxableOutsideJurisdiction) {
     const _this = this;
+    const router = this.context.router;
 
-    function updateRegulation() {
-      return new Promise((resolve) => {
-        const regulationData = {
-          /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-          tax_info: {
-            taxable_outside_jurisdiction: taxableOutsideJurisdiction,
-          },
-          /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-        };
+    return new Promise((resolve) => {
+      const regulationData = {
+        /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+        tax_info: {
+          taxable_outside_jurisdiction: taxableOutsideJurisdiction,
+        },
+        /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+      };
 
-        _this.updateRegulation(regulationData)
-        .then(regulationId => {
-          const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-          _this.updateProspect(prospectData)
-          .then(() => {
-            router.push({
-              pathname: '/register/pep',
-            });
-          })
-          .catch(error => console.log(error)); // eslint-disable-line no-console
+      _this.validateRegulation(regulationData)
+      .then(regulationId => {
+        const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+        _this.updateProspect(prospectData)
+        .then(() => {
+          router.push({
+            pathname: '/register/pep',
+          });
         })
-        .catch(error => console.log(error)) // eslint-disable-line no-console
-        .then(() => resolve()); // tell redux form to change submitting state
-      });
-    }
-
-    function redirectToManualFlow() {
-      window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-      return false;
-    }
-
-    return taxableOutsideJurisdiction === 'yes' ? redirectToManualFlow() : updateRegulation();
+        .catch(error => console.log(error)); // eslint-disable-line no-console
+      })
+      .catch(error => console.log(error)) // eslint-disable-line no-console
+      .then(() => resolve()); // tell redux form to change submitting state
+    });
   }
 
   updateProspect(prospectData) {
@@ -111,13 +112,11 @@ class CompliancePage extends React.Component {
           reject(new Error('Could not update prospect.'));
         }
       })
-      .catch(error => {
-        console.info('Could not update prospect details:', error); // eslint-disable-line no-console
-      });
+      .catch(error => reject(error));
     });
   }
 
-  updateRegulation(regulationData) {
+  validateRegulation(regulationData) {
     const header = { 'Content-type': 'application/json; charset=utf-8' };
 
     return new Promise((resolve, reject) => {
@@ -130,7 +129,7 @@ class CompliancePage extends React.Component {
           reject(new Error('No regulation id recieved.'));
         }
       })
-      .catch(e => console.log(e)); // eslint-disable-line no-console
+      .catch(error => reject(error));
     });
   }
 

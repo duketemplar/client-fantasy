@@ -1,45 +1,57 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+/* jscs:disable maximumLineLength */
 const helpers = require('../helpers');
 
 const validStructure = {
-  address_country: 'String',
-  customer_type: 'String',
-  jurisdiction: 'String',
+  address_country: 'dk',
+  customer_type: 'individual',
+  jurisdiction: 'se',
+  kyc: {
+    economic_origin: 'string',
+    employment_classification: 'string',
+    savings_purpose: 'string',
+    yearly_income: 0,
+    yearly_income_currency: 'sek',
+    yearly_insert: 0,
+    yearly_insert_currency: 'sek',
+  },
+  pep: {
+    is_pep: true,
+  },
   tax_info: {
     atyids: [
-      'Int',
+      1,
     ],
-    birth_country: 'String',
-    birth_place: 'String',
-    default_tax_country: 'String',
-    entity_type: 'String',
-    giin: 'String',
-    is_financial_institute: 'Boolean',
+    birth_country: 'dk',
+    birth_place: 'string',
+    default_tax_country: 'dk',
+    entity_type: 'active',
+    giin: 'string',
+    is_financial_institute: true,
     jurisdictions: [
       {
-        country: 'String',
-        tax_identification_number: 'String',
-      },
-      {
-        country: 'String',
-        tax_identification_number: 'String',
-      },
-      {
-        country: 'String',
-        tax_identification_number: 'String',
+        country: 'dk',
+        tax_identification_number: 'string',
       },
     ],
-    taxable_in_jurisdiction: 'Boolean',
-    taxable_outside_jurisdiction: 'Boolean',
+    taxable_in_jurisdiction: true,
+    taxable_outside_jurisdiction: true,
   },
 };
 
 function* validateRegulation(next) {
   const requestData = this.request.body;
 
-  if (!requestData.tax_info || !requestData.tax_info.taxable_outside_jurisdiction) {
+  let hasRequiredParams = false;
+  if (requestData.tax_info) {
+    hasRequiredParams = helpers.isKeysInObject(['taxable_outside_jurisdiction'], requestData.tax_info);
+  } else if (requestData.pep) {
+    hasRequiredParams = helpers.isKeysInObject(['is_pep'], requestData.pep);
+  }
+
+  if (!hasRequiredParams) {
     this.status = 400;
-    this.body = { fail: 'Missing tax_info.taxable_outside_jurisdiction' };
+    this.body = { fail: 'Missing required parameter.' };
   } else {
     this.staus = 200;
     this.body = {

@@ -2,7 +2,7 @@
 import reducer from '../prospect.reducer';
 import { expect } from 'chai';
 
-describe.only('prospect.reducer', () => {
+describe('prospect.reducer', () => {
   it('updates the store for action: PROSPECT_CREATED', () => {
     const initialState = undefined;
     const action = {
