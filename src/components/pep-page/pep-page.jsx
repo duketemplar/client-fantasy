@@ -7,7 +7,7 @@ import store from '../../store';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
-import InfoPage from '../../components/info-page';
+import InfoModal from '../../components/info-modal';
 
 export const fields = {
   pep: [
@@ -51,18 +51,18 @@ class PepPage extends React.Component {
     });
   }
 
-  redirectToManualFlow(show) {
+  toggleInfoBox(show) {
     this.setState({ showInfo: show });
   }
 
   showInfo() {
-    const didClose = () => { this.redirectToManualFlow(false); };
-    return <InfoPage didClose={ didClose } />;
+    const didClose = () => { this.toggleInfoBox(false); };
+    return <InfoModal didClose={ didClose } />;
   }
 
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep !== 'no' ? this.redirectToManualFlow(true) : this.updateRegulation(pep);
+    return pep !== 'no' ? this.toggleInfoBox(true) : this.updateRegulation(pep);
   }
 
   render() {
@@ -87,11 +87,11 @@ class PepPage extends React.Component {
             <Row>
               <Col xs={ 12 }>
                 <h2>
-                  Har du, eller har du tidigare haft: en hög politisk statlig befattning eller
-                  är nära familjemedlem eller medarbetare med en person i ovanstående befattning?
+                  Have you, or have you ever had: a high political or government office position
+                  or are a close family member or an employee of a person in the above position?
                 </h2>
                 <p>
-                  För ytterligare information var god se blanketten <a href="https://www.nordnet.se/pdf/se/pep.pdf">här</a>.
+                  For further information, please see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.
                 </p>
               </Col>
             </Row>
