@@ -4,20 +4,36 @@ import { Button } from 'nordnet-ui-kit';
 import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 
 export default class InfoModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showInfo: props.showInfo,
+    };
+  }
+
+  componentWillReceiveProps({ showInfo }) {
+    this.setState({
+      showInfo,
+    });
+  }
+
   accept() {
     window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
   }
 
-  decline() {
-    this.props.didClose();
+  toggleInfoBox(show) {
+    this.setState({ showInfo: show });
   }
 
   render() {
-    const decline = () => { this.decline(); };
+    if (!this.state.showInfo) {
+      return null;
+    }
+    const closeInfoBox = this.toggleInfoBox.bind(this, false);
 
     return (
       <div>
-        <div className="compliance__bkg"></div>
+        <div className="compliance__bkg" onClick={ closeInfoBox }></div>
         <div className="compliance__info">
           <h1>
             We need to know more about you!
@@ -38,7 +54,7 @@ export default class InfoModal extends React.Component {
           </ul>
           <div className="compliance__info--buttons">
             <Button primary onClick={ this.accept }>Continue</Button>
-            <Button secondary onClick={ decline }>Cancel</Button>
+            <Button secondary onClick={ closeInfoBox }>Cancel</Button>
           </div>
         </div>
       </div>
@@ -47,5 +63,5 @@ export default class InfoModal extends React.Component {
 }
 
 InfoModal.propTypes = {
-  didClose: React.PropTypes.func.isRequired,
+  showInfo: React.PropTypes.bool.isRequired,
 };

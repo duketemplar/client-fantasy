@@ -51,18 +51,9 @@ class PepPage extends React.Component {
     });
   }
 
-  toggleInfoBox(show) {
-    this.setState({ showInfo: show });
-  }
-
-  showInfo() {
-    const didClose = () => { this.toggleInfoBox(false); };
-    return <InfoModal didClose={ didClose } />;
-  }
-
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep !== 'no' ? this.toggleInfoBox(true) : this.updateRegulation(pep);
+    return pep !== 'no' ? this.setState({ showInfo: true }) : this.updateRegulation(pep);
   }
 
   render() {
@@ -134,7 +125,7 @@ class PepPage extends React.Component {
             </Row>
           </form>
         </Row>
-        { this.state.showInfo && this.showInfo() }
+        <InfoModal showInfo={ this.state.showInfo } />
       </Grid>
     );
   }
