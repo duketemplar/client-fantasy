@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'nordnet-ui-kit';
 
 
-export default class ValidInput extends React.Component {
+class ValidInput extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -19,12 +19,20 @@ export default class ValidInput extends React.Component {
     const { fieldBinding, prefilled, ...rest } = this.props;
 
     return (
-      <Input  disabled={ !!prefilled }
-              helpText={ this.helpTextFor(fieldBinding) }
-              hasError={ this.errorFor(fieldBinding) }
-              { ...rest }
-              { ...fieldBinding }
-              />
+      <Input
+        disabled={ !!prefilled }
+        helpText={ this.helpTextFor(fieldBinding) }
+        hasError={ this.errorFor(fieldBinding) }
+        { ...rest }
+        { ...fieldBinding }
+        />
     );
   }
 }
+
+ValidInput.propTypes = {
+    fieldBinding: React.PropTypes.object.isRequired,
+    prefilled: React.PropTypes.bool,
+};
+
+export default ValidInput;
