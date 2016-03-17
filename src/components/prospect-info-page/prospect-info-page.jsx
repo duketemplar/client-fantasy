@@ -29,14 +29,6 @@ export class ProspectInfoPage extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    const prefill = store.getState().prospect.identification;
-
-    if (prefill) {
-      store.dispatch({ type: 'PROSPECT_PREFILL', value: prefill });
-    }
-  }
-
   submitForm() {
     const prospectId = store.getState().prospect.prospectId;
     const form = getValues(store.getState().form.prospectInfo);

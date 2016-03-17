@@ -1,5 +1,6 @@
 const defaultState = {
-  prospectId: undefined,
+  prospectId: null,
+  regulationId: null,
 };
 
 export default function (state = defaultState, action) {
@@ -7,6 +8,10 @@ export default function (state = defaultState, action) {
     case 'PROSPECT_CREATED':
       return Object.assign({}, state, {
         prospectId: action.value,
+      });
+    case 'REGULATION_VALIDATED':
+      return Object.assign({}, state, {
+        regulationId: action.value,
       });
     default:
       return state;

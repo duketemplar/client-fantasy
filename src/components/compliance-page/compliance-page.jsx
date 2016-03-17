@@ -59,9 +59,33 @@ class CompliancePage extends React.Component {
   }
 
   submitForm() {
-    const taxableOutsideJurisdiction = getValues(store.getState().form.complianceInfo).taxableOutsideJurisdiction;
+    const complianceInfo = getValues(store.getState().form.complianceInfo);
 
-    return taxableOutsideJurisdiction === 'yes' ? this.redirectToManualFlow() : this.updateProspectWithRegulation(taxableOutsideJurisdiction);
+    if (complianceInfo.taxableOutsideJurisdiction === 'yes') {
+      this.redirectToManualFlow();
+    } else {
+      return this.continueToNextStep(complianceInfo);
+    }
+  }
+
+  continueToNextStep(complianceInfo) {
+    const _this = this;
+    const regulationData = {
+      /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
+      tax_info: {
+        taxable_outside_jurisdiction: complianceInfo.taxableOutsideJurisdiction,
+      },
+      /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
+    };
+
+    return new Promise((resolve) => {
+      _this
+      .validateRegulation(regulationData)
+      .then(_this.updateProspect)
+      .then(this.context.router.push.bind(null, { pathname: '/register/pep' }))
+      .catch(error => console.log(error)) // eslint-disable-line no-console
+      .then(resolve); // make redux form change state of submitting
+    });
   }
 
   redirectToManualFlow() {
@@ -69,37 +93,10 @@ class CompliancePage extends React.Component {
     return false;
   }
 
-  updateProspectWithRegulation(taxableOutsideJurisdiction) {
-    const _this = this;
-    const router = this.context.router;
-
-    return new Promise((resolve) => {
-      const regulationData = {
-        /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-        tax_info: {
-          taxable_outside_jurisdiction: taxableOutsideJurisdiction,
-        },
-        /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-      };
-
-      _this.validateRegulation(regulationData)
-      .then(regulationId => {
-        const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-        _this.updateProspect(prospectData)
-        .then(() => {
-          router.push({
-            pathname: '/register/pep',
-          });
-        })
-        .catch(error => console.log(error)); // eslint-disable-line no-console
-      })
-      .catch(error => console.log(error)) // eslint-disable-line no-console
-      .then(() => resolve()); // tell redux form to change submitting state
-    });
-  }
-
-  updateProspect(prospectData) {
+  updateProspect() {
     const prospectId = store.getState().prospect.prospectId;
+    const regulationId = store.getState().prospect.regulationId;
+    const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
     const header = { 'Content-type': 'application/json; charset=utf-8' };
 
     return new Promise((resolve, reject) => {
@@ -124,7 +121,8 @@ class CompliancePage extends React.Component {
       .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
       .then(({ status, data }) => {
         if (status === 200) {
-          resolve(data.regulation_id); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+          store.dispatch({ type: 'REGULATION_VALIDATED', value: data.regulation_id }); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+          resolve();
         } else {
           reject(new Error('No regulation id recieved.'));
         }
@@ -250,11 +248,11 @@ class CompliancePage extends React.Component {
 
             <Row>
               <Col xs={12}>
-                <Button secondary disabled={ submitting } onClick={ resetForm }>
-                  Clear values
-                </Button>
                 <Button className="compliance__submit" type="submit" primary disabled={ submitting }>
                   { submitting ? <i/> : <i/> } Submit
+                </Button>
+                <Button secondary disabled={ submitting } onClick={ resetForm }>
+                  Clear values
                 </Button>
               </Col>
               </Row>
@@ -277,8 +275,13 @@ CompliancePage.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export default reduxForm({
+const CompliancePageReduxForm = reduxForm({
   form: 'complianceInfo',
   fields: Object.keys(fields),
   validate,
 })(CompliancePage);
+
+export {
+  CompliancePageReduxForm as default,
+  CompliancePage,
+};
