@@ -6,7 +6,8 @@ import { reduxForm, getValues } from 'redux-form';
 import store from '../../store';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMERS_PROSPECTS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
+import InfoModal from '../../components/info-modal';
 
 export const fields = {
   pep: [
@@ -20,6 +21,9 @@ const validate = combineValidators(fields);
 class PepPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showInfo: false,
+    };
   }
 
   updateRegulation(pep) {
@@ -47,14 +51,9 @@ class PepPage extends React.Component {
     });
   }
 
-  redirectToManualFlow() {
-    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-    return false;
-  }
-
   submitForm() {
     const pep = getValues(store.getState().form.pepInfo).pep;
-    return pep !== 'no' ? this.redirectToManualFlow() : this.updateRegulation(pep);
+    return pep !== 'no' ? this.setState({ showInfo: true }) : this.updateRegulation(pep);
   }
 
   render() {
@@ -79,11 +78,11 @@ class PepPage extends React.Component {
             <Row>
               <Col xs={ 12 }>
                 <h2>
-                  Har du, eller har du tidigare haft: en hög politisk statlig befattning eller
-                  är nära familjemedlem eller medarbetare med en person i ovanstående befattning?
+                  Have you, or have you ever had: a high political or government office position
+                  or are a close family member or an employee of a person in the above position?
                 </h2>
                 <p>
-                  För ytterligare information var god se blanketten <a href="https://www.nordnet.se/pdf/se/pep.pdf">här</a>.
+                  For further information, please see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.
                 </p>
               </Col>
             </Row>
@@ -126,6 +125,7 @@ class PepPage extends React.Component {
             </Row>
           </form>
         </Row>
+        <InfoModal showInfo={ this.state.showInfo } />
       </Grid>
     );
   }
