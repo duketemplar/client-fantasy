@@ -2,36 +2,29 @@ import './info-modal.scss';
 import React from 'react';
 import { Button } from 'nordnet-ui-kit';
 import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { connect } from 'react-redux';
+import { toggleModal } from '../../actions';
 
-export default class InfoModal extends React.Component {
+class InfoModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showInfo: props.showInfo,
-    };
-  }
-
-  componentWillReceiveProps({ showInfo }) {
-    this.setState({
-      showInfo,
-    });
   }
 
   accept() {
     window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
   }
 
-  toggleInfoBox(show) {
-    this.setState({ showInfo: show });
+  hide() {
+    this.props.dispatch(toggleModal(false));
   }
 
   render() {
-    if (!this.state.showInfo) {
+    if (!this.props.showModal) {
       return null;
     }
 
     const accept = this.accept;
-    const closeInfoBox = this.toggleInfoBox.bind(this, false);
+    const closeInfoBox = this.hide.bind(this, false);
 
     return (
       <div>
@@ -64,6 +57,14 @@ export default class InfoModal extends React.Component {
   }
 }
 
+function select(state) {
+  return {
+    showModal: state.showModal,
+  }
+}
+
 InfoModal.propTypes = {
   showInfo: React.PropTypes.bool.isRequired,
 };
+
+export default connect(select)(InfoModal)

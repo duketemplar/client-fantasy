@@ -2,28 +2,11 @@
 /* eslint-disable max-len */
 import './identify-page.scss';
 import React from 'react';
-import { Button } from 'nordnet-ui-kit';
-import ValidInput from '../input/valid-input.jsx';
-import nordnetAPI from 'nordnet-next-api';
+import { Button, Input } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
-import { reduxForm, getValues } from 'redux-form';
+import { connect } from 'react-redux';
 import { combineValidators, notBlankValidator, nationalRegistrationNumberValidator } from '../../utils/validators';
-import store from '../../store';
-import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
-
-const checkNationality = () => {
-  const tld = window.location.hostname.substr(-2, 2).match(/(se|fi|dk|no)/);
-  return tld === undefined ? tld[0] : 'se';
-};
-
-export const fields = {
-  natregno: [
-    [nationalRegistrationNumberValidator, checkNationality(), 'Must be a real national registration number'],
-    [notBlankValidator, 'Must be filled in.'],
-  ],
-};
-
-const validate = combineValidators(fields);
+import { changeProspect, createOrUpdateProspect } from '../../actions'
 
 class IdentifyPage extends React.Component {
   constructor(props) {
@@ -31,52 +14,35 @@ class IdentifyPage extends React.Component {
   }
 
   submitForm() {
-    const router = this.context.router;
-    const natRegNo = getValues(store.getState().form.identify).natregno;
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
-    const prospectData = {
-      /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-      national_id_number: natRegNo,
-      national_id_number_country_code: 'se',
-      /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-    };
+    this.props.dispatch(createOrUpdateProspect());
+  }
 
-    return new Promise((resolve) => {
-      nordnetAPI
-      .post(CUSTOMERS_PROSPECTS_PATH, prospectData, header)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          store.dispatch({
-            type: 'PROSPECT_CREATED',
-            value: data.prospect_id, // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-          });
-        }
-      })
-      .then(() => {
-        router.push('/register/contact-info');
-      })
-      .catch(e => {
-        console.log(e.stack); // eslint-disable-line no-console
-      })
-      .then(() => resolve());
-    });
+  handleChange(e) {
+    this.props.dispatch(changeProspect({
+      natRegNo: e.target.value,
+    }));
+  }
+
+  notBlank(value) {
+    return value !== undefined && value !== null && value !== '';
   }
 
   render() {
     const {
-      fields: {
-        natregno,
-      },
-      handleSubmit, submitting,
+      prospect,
+      prospect_validations,
     } = this.props;
+
+    const hasError = prospect_validations.natRegNo != null;
 
     return (
       <Grid className="identify">
         <Row xsMiddle xsCenter>
           <Col xs={ 6 }>
-            <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
-              <ValidInput type="text" label="National registration number" fieldBinding={ natregno } />
-              <Button className="identify__submit" primary type="submit" disabled={ submitting }>
+            <form onSubmit={ this.submitForm.bind(this) } >
+              <Input type="text" label="National registration number" value={ prospect.natRegNo } onChange={ this.handleChange.bind(this) } hasError={ hasError } hasSuccess={ !hasError && this.notBlank(prospect.natRegNo) } />
+              { this.props.prospect_validations.natRegNo }
+              <Button className="identify__submit" primary type="submit">
                 Submit
               </Button>
             </form>
@@ -89,18 +55,17 @@ class IdentifyPage extends React.Component {
 
 IdentifyPage.propTypes = {
   history: React.PropTypes.object,
-  fields: React.PropTypes.object.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired,
-  resetForm: React.PropTypes.func.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
 };
 
 IdentifyPage.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export default reduxForm({
-  form: 'identify',
-  fields: Object.keys(fields),
-  validate,
-})(IdentifyPage);
+function select(state) {
+  return {
+    prospect: state.prospect,
+    prospect_validations: state.prospect_validations,
+  };
+}
+
+export default connect(select)(IdentifyPage);

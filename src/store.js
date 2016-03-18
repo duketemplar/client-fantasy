@@ -8,18 +8,9 @@ import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import thunkMiddleware from 'redux-thunk';
 
-// custom reducer for accounts component
-// import accountsReducer from './accounts/reducers/accounts';
-// import stepsReducer from './modal/reducers/steps';
-import prospectReducer from './reducers/prospect.reducer';
+import reducers from './reducers';
 
 const MIDDLEWARE = [thunkMiddleware];
-
-// defines which reducers are responsible for which parts of the state
-const REDUCERS = {
-  prospect: prospectReducer,
-  form: formReducer,
-};
 
 // creates Redux store
 function finalCreateStore(middleware) {
@@ -32,8 +23,7 @@ function finalCreateStore(middleware) {
   return compose(applyMiddleware(...middleware), browserDevTool)(createStore);
 }
 
-// combines Redux reducers using Redux utility function combineReducers
-const reducers = combineReducers(REDUCERS);
+console.log("reducers", reducers)
 
 // exports initialised Redux store that is used globally in the application
 export default finalCreateStore(MIDDLEWARE)(reducers);
