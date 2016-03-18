@@ -3,9 +3,8 @@ import { CompliancePage } from '../compliance-page';
 import nnAPI from 'nordnet-next-api';
 import sinon from 'sinon';
 import store from '../../../store';
-import { expect } from 'chai';
 
-describe.only('Compliance Page rest calls', () => {
+describe('Compliance Page rest calls', () => {
   let sandbox;
   let compliancePage;
 

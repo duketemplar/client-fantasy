@@ -12,6 +12,7 @@ describe('prospect.reducer', () => {
 
     const expectedState = {
       prospectId: 123,
+      regulationId: null,
     };
 
     expect(reducer(initialState, action)).to.eql(expectedState);

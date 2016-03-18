@@ -8,7 +8,6 @@ import { reduxForm, getValues } from 'redux-form';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH, CUSTOMERS_REGULATIONS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
-import ValidInput from '../input/valid-input';
 import TitledSelect from './titled-select';
 import './compliance-page.scss';
 
@@ -23,16 +22,7 @@ export const fields = {
   employment: [
     [notBlankValidator, 'This question needs to be answered.'],
   ],
-  purpose: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
   income: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],  
-  sourceOfFunds: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],  
-  yearlyDeposits: [
     [notBlankValidator, 'This question needs to be answered.'],
   ],
   sourceOfFunds: [
@@ -48,7 +38,7 @@ export const fields = {
 
 const yesNoOptions = [
   { label: 'Yes', value: 'yes' },
-  { label: 'No', value: 'no' }
+  { label: 'No', value: 'no' },
 ];
 
 const validate = combineValidators(fields);
@@ -82,7 +72,7 @@ class CompliancePage extends React.Component {
       _this
       .validateRegulation(regulationData)
       .then(_this.updateProspect)
-      .then(this.context.router.push.bind(null, { pathname: '/register/pep' }))
+      .then(_this.context.router.push.bind(null, { pathname: '/register/pep' }))
       .catch(error => console.log(error)) // eslint-disable-line no-console
       .then(resolve); // make redux form change state of submitting
     });
@@ -138,7 +128,6 @@ class CompliancePage extends React.Component {
         taxableOutsideJurisdiction,
         USCitizen,
         employment,
-        purpose,
         income,
         sourceOfFunds,
         yearlyDeposits,
@@ -162,26 +151,26 @@ class CompliancePage extends React.Component {
             <Row>
               <Col xs={6}>
                 <TitledSelect
-                  title='1. Are you obligated to report tax outside of Sweden?'
+                  title="1. Are you obligated to report tax outside of Sweden?"
                   field={ taxableOutsideJurisdiction }
                   options={ yesNoOptions }
-                  />
+                />
 
                 <TitledSelect
-                  title='2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?'
+                  title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
                   field={ USCitizen }
                   options={ yesNoOptions }
-                  />
+                />
 
                 <TitledSelect
-                  title='3. What is your employment status?'
+                  title="3. What is your employment status?"
                   field={ employment }
                   options={ [
                     { label: 'Unemployed', value: 'unemployed' },
                     { label: 'Employed', value: 'employed' },
-                    { label: 'Self employed', value: 'self employed' }
+                    { label: 'Self employed', value: 'self employed' },
                   ]}
-                  />
+                />
                 <TitledSelect
                   title="4. What is your yearly income?"
                   field={ income }
@@ -192,20 +181,20 @@ class CompliancePage extends React.Component {
                       { label: '500,000 SEK or more', value: '500,000 SEK or more' },
                     ]
                   }
-                  />
+                />
 
                 <Row>
                   <h5>
                     5. What is the purpose of your savings with Nordnet?
                   </h5>
                   <Col xs={ 3 }>
-                    <Checkbox label='Financial safety'/>
-                    <Checkbox label='Private consumption'/>
-                    <Checkbox label='For next of kin, e.g. children'/>
+                    <Checkbox label="Financial safety"/>
+                    <Checkbox label="Private consumption"/>
+                    <Checkbox label="For next of kin, e.g. children"/>
                   </Col>
                   <Col xs={ 3 }>
-                    <Checkbox label='Pension'/>
-                    <Checkbox label='Trading'/>
+                    <Checkbox label="Pension"/>
+                    <Checkbox label="Trading"/>
                   </Col>
                 </Row>
               </Col>
@@ -220,7 +209,7 @@ class CompliancePage extends React.Component {
                       { label: 'Self acquired', value: 'self acquired' },
                     ]
                   }
-                  />
+                />
                 <TitledSelect
                   title="7. What is the approximate yearly value of your deposits into this account?"
                   field={ yearlyDeposits }
@@ -231,12 +220,12 @@ class CompliancePage extends React.Component {
                       { label: '500,000 SEK or more', value: '500,000 SEK or more' },
                     ]
                   }
-                  />
+                />
                 <TitledSelect
                   title="8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?"
                   field={ politicallyExposedPerson }
                   options={ yesNoOptions }
-                  />
+                />
               </Col>
               <Col xs={ 12 } >
                 <div className="horizontal-rule"></div>
