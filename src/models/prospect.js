@@ -16,7 +16,7 @@ class Prospect extends Base {
 }
 
 Prospect.validators = {
-  natRegNo: [
+  national_id_number: [
     (value) => nationalRegistrationNumberValidator(getNationality(), 'Must be a real national registration number', value),
     (value) => notBlankValidator('Must be filled in.', value),
   ],

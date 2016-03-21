@@ -22,7 +22,7 @@ class IdentifyPage extends React.Component {
 
   handleChange(e) {
     this.props.dispatch(changeProspect({
-      natRegNo: e.target.value,
+      national_id_number: e.target.value,
     }));
   }
 
@@ -31,7 +31,7 @@ class IdentifyPage extends React.Component {
   }
 
   hasErrors() {
-    return this.props.prospectValidations.natRegNo !== null && this.props.prospectValidations.natRegNo !== undefined;
+    return this.props.prospectValidations.national_id_number !== null && this.props.prospectValidations.national_id_number !== undefined;
   }
 
   render() {
@@ -50,10 +50,10 @@ class IdentifyPage extends React.Component {
               <Input
                 type="text"
                 label="National registration number"
-                value={ prospect.natRegNo }
+                value={ prospect.national_id_number }
                 onChange={ this.handleChange }
                 hasError={ hasError }
-                hasSuccess={ !hasError && this.notBlank(prospect.natRegNo) }
+                hasSuccess={ !hasError && this.notBlank(prospect.national_id_number) }
                 helpText={ prospectValidations.natRegNo }
               />
               <Button className="identify__submit" primary type="submit">
