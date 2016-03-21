@@ -10,8 +10,8 @@ import './compliance-page.scss';
 import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from '../../actions';
 
 const yesNoOptions = [
-  { label: 'Yes', value: true },
-  { label: 'No', value: false },
+  { label: 'Yes', value: 'true' },
+  { label: 'No', value: 'false' },
 ];
 
 class CompliancePage extends React.Component {

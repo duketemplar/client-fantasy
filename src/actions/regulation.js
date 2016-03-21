@@ -1,6 +1,13 @@
+import nordnetAPI from 'nordnet-ui-kit';
+import { CUSTOMERS_REGULATIONS_PATH } from '../utils/endpoints';
+import { createOrUpdateProspect } from './';
+
 const CHANGE_REGULATION = 'CHANGE_REGULATION';
+const RECEIVED_REGULATION = 'RECEIVED_REGULATION';
 const CHANGE_PEP = 'CHANGE_PEP';
 const CHANGE_KYC = 'CHANGE_KYC';
+
+const header = { 'Content-type': 'application/json; charset=utf-8' };
 
 function createOrUpdateRegulation() {
   return function action(dispatch, getState) {
@@ -21,25 +28,19 @@ function updateRegulation() {
       pep,
       regulation,
     } = state;
-    const data = { ...regulation, kyc, pep };
-    console.log('update: ', data); // eslint-disable-line no-console
+    const regulationData = { ...regulation, kyc, pep };
 
-    // Use action
-    // const header = { 'Content-type': 'application/json; charset=utf-8' };
-    //
-    // return new Promise((resolve, reject) => {
-    //   nordnetAPI
-    //   .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
-    //   .then(({ status, data }) => {
-    //     if (status === 200) {
-    //       store.dispatch({ type: 'REGULATION_VALIDATED', value: data.regulation_id });
-    //       resolve();
-    //     } else {
-    //       reject(new Error('No regulation id recieved.'));
-    //     }
-    //   })
-    //   .catch(error => reject(error));
-    // });
+    nordnetAPI
+      .put(CUSTOMERS_REGULATIONS_PATH + `/${state.regulation.id}`, regulationData, header)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          dispatch(receivedRegulation(data));
+          dispatch(createOrUpdateProspect());
+        } else {
+          // Do something
+        }
+      })
+      .catch(error => error);
   };
 }
 
@@ -53,6 +54,13 @@ function createRegulation() {
     } = state;
     const data = { ...regulation, kyc, pep };
     console.log('create: ', data); // eslint-disable-line no-console
+  };
+}
+
+function receivedRegulation(regulation) {
+  return {
+    type: RECEIVED_REGULATION,
+    regulation,
   };
 }
 
@@ -82,7 +90,9 @@ export default {
   changePep,
   changeKyc,
   createOrUpdateRegulation,
+  receivedRegulation,
   CHANGE_REGULATION,
   CHANGE_PEP,
   CHANGE_KYC,
+  RECEIVED_REGULATION,
 };
