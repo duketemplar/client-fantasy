@@ -1,3 +1,4 @@
+/* jscs:disable maximumLineLength */
 import './pep-page.scss';
 import React from 'react';
 import { Button } from 'nordnet-ui-kit';
@@ -6,7 +7,7 @@ import { reduxForm, getValues } from 'redux-form';
 import store from '../../store';
 import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
 import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
+import { CUSTOMERS_REGULATIONS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import InfoModal from '../../components/info-modal';
 
 export const fields = {
@@ -29,14 +30,15 @@ class PepPage extends React.Component {
   updateRegulation(pep) {
     const header = { 'Content-type': 'application/json; charset=utf-8' };
     const router = this.context.router;
-    const prospectId = store.getState().prospect.meta.prospectId;
     const regulationData = {
-      is_pep: pep !== 'no',
+      pep: {
+        is_pep: pep !== 'no', // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
+      },
     };
 
     return new Promise((resolve) => {
       nordnetAPI
-        .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`, { regulation: regulationData }, header)
+        .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
         .then(({ status }) => {
           if (status === 200) {
             router.push({

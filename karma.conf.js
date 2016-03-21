@@ -35,7 +35,7 @@ module.exports = function(config) {
     // https://github.com/kastork/react-karma-rewire-webpack
     singleRun: true, //just run once by default
 
-    frameworks: ['mocha', 'chai-sinon'], //use the mocha test framework
+    frameworks: ['mocha', 'chai-as-promised', 'chai-sinon', 'es5-shim', 'es6-shim', 'chai'], //use the mocha test framework
 
     files: [
       'tests.webpack.js', //just load this file

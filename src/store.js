@@ -12,16 +12,13 @@ import thunkMiddleware from 'redux-thunk';
 // import accountsReducer from './accounts/reducers/accounts';
 // import stepsReducer from './modal/reducers/steps';
 import prospectReducer from './reducers/prospect.reducer';
-import prefillReducer from './reducers/prefill.reducer';
 
 const MIDDLEWARE = [thunkMiddleware];
 
 // defines which reducers are responsible for which parts of the state
 const REDUCERS = {
   prospect: prospectReducer,
-  form: formReducer.plugin({
-    prospectInfo: prefillReducer,
-  }),
+  form: formReducer,
 };
 
 // creates Redux store
