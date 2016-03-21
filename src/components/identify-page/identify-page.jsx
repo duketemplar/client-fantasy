@@ -54,7 +54,7 @@ class IdentifyPage extends React.Component {
                 onChange={ this.handleChange }
                 hasError={ hasError }
                 hasSuccess={ !hasError && this.notBlank(prospect.national_id_number) }
-                helpText={ prospectValidations.natRegNo }
+                helpText={ prospectValidations.national_id_number }
               />
               <Button className="identify__submit" primary type="submit">
                 Submit
