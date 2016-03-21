@@ -6,4 +6,12 @@ import regexValidator from './regex-validator';
 import nationalRegistrationNumberValidator from './national-registration-number-validator';
 import validate from './validation';
 
-export { combineValidators, lengthValidator, notBlankValidator, emailValidator, regexValidator, nationalRegistrationNumberValidator, validate };
+export {
+  combineValidators,
+  lengthValidator,
+  notBlankValidator,
+  emailValidator,
+  regexValidator,
+  nationalRegistrationNumberValidator,
+  validate,
+};

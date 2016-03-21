@@ -10,4 +10,4 @@ function showModal(state = false, action) {
 
 export default {
   showModal,
-}
+};

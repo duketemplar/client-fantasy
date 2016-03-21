@@ -1,4 +1,4 @@
-const TOGGLE_MODAL = "TOGGLE_MODAL";
+const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 function toggleModal(show) {
   return {
@@ -10,4 +10,4 @@ function toggleModal(show) {
 export default {
   toggleModal,
   TOGGLE_MODAL,
-}
+};

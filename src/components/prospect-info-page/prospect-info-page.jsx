@@ -2,7 +2,6 @@
 /* eslint-disable max-len */
 
 import React from 'react';
-import nordnetAPI from 'nordnet-next-api';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { Button, Input } from 'nordnet-ui-kit';
@@ -11,6 +10,7 @@ import { createOrUpdateProspect, changeProspect } from '../../actions';
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   submitForm() {
@@ -23,18 +23,15 @@ export class ProspectInfoPage extends React.Component {
     this.props.dispatch(changeProspect(change));
   }
 
-  render() {
-    const countries = [
-      {
-        value: 'se',
-        label: 'Sweden',
-      },
-      {
-        value: 'dk',
-        label: 'Denmark',
-      },
-    ];
+  buildHandleChange(key) {
+    return (e) => this.handleChange(key, e);
+  }
 
+  hasError(key) {
+    return this.props.prospectValidations[key] !== null && this.props.prospectValidations[key] !== undefined;
+  }
+
+  render() {
     return (
       <Grid className="create-customer">
         <Col xs={12}>
@@ -43,11 +40,25 @@ export class ProspectInfoPage extends React.Component {
               Enter your personal info
             </h1>
           </Row>
-          <form onSubmit={ this.submitForm.bind(this) } >
+          <form onSubmit={ this.submitForm } >
             <Col xs={6}>
-              <ValidInput type="text" label="Phone Number" fieldBinding={ phoneNumber } />
-              <ValidInput type="email" label="E-mail" fieldBinding={ email } />
-              <Button type="submit" primary disabled={ }>
+              <Input
+                type="text"
+                label="Phone Number"
+                value={ this.props.prospect.phoneNumber }
+                onChange={ this.buildHandleChange('phoneNumber') }
+                helpText={ this.props.prospectValidations.phoneNumber }
+                hasError={ this.hasError('phoneNumber') }
+              />
+              <Input
+                type="email"
+                label="E-mail"
+                value={ this.props.prospect.email }
+                onChange={ this.buildHandleChange('email') }
+                helpText={ this.props.prospectValidations.email }
+                hasError={ this.hasError('email') }
+              />
+              <Button type="submit" primary >
                 Submit
               </Button>
               <Button secondary>
@@ -63,6 +74,9 @@ export class ProspectInfoPage extends React.Component {
 
 ProspectInfoPage.propTypes = {
   history: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
+  prospect: React.PropTypes.object,
+  prospectValidations: React.PropTypes.object,
 };
 
 ProspectInfoPage.contextTypes = {
@@ -72,7 +86,8 @@ ProspectInfoPage.contextTypes = {
 function select(state) {
   return {
     prospect: state.prospect,
-  }
+    prospectValidations: state.prospectValidations,
+  };
 }
 
 export default connect(select)(ProspectInfoPage);

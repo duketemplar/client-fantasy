@@ -4,8 +4,7 @@
  * See http://rackt.github.io/redux/docs/basics/Store.html for more details on Redux stores.
  */
 
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import reducers from './reducers';
@@ -22,8 +21,6 @@ function finalCreateStore(middleware) {
 
   return compose(applyMiddleware(...middleware), browserDevTool)(createStore);
 }
-
-console.log("reducers", reducers)
 
 // exports initialised Redux store that is used globally in the application
 export default finalCreateStore(MIDDLEWARE)(reducers);

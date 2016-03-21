@@ -5,42 +5,37 @@ import { Button } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import InfoModal from '../../components/info-modal';
-import { changeRegulation, toggleModal } from '../../actions';
-
-// export const fields = {
-//   pep: [
-//     [notBlankValidator, 'This question needs to be answered.'],
-//     [regexValidator, /^(yes|no)$/, 'The answer provided is not a valid choice.'],
-//   ],
-// };
-
-// const validate = combineValidators(fields);
+import { changePep, toggleModal } from '../../actions';
 
 class PepPage extends React.Component {
   constructor(props) {
     super(props);
+    this.submitForm = this.submitForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   updateRegulation() {
-    
+
   }
 
   handleChange(e) {
-    this.props.dispatch(changeRegulation({
-      pep: {
-        is_pep: e.target.value !== 'no',
-      }
+    this.props.dispatch(changePep({
+      is_pep: e.target.value !== 'no',
     }));
   }
 
   submitForm() {
-    const regulation = this.props.regulation;
+    const pep = this.props.pep;
 
-    if (regulation.pep === undefined) {
-      return;
+    if (pep.is_pep) {
+      this.props.dispatch(toggleModal(true));
+    } else {
+      this.updateRegulation();
     }
-    
-    regulation.pep.is_pep ? this.props.dispatch(toggleModal(true)) : this.updateRegulation();
+  }
+
+  isPep() {
+    return this.props.pep.is_pep;
   }
 
   render() {
@@ -54,7 +49,7 @@ class PepPage extends React.Component {
           </Col>
         </Row>
         <Row>
-          <form onSubmit={ this.submitForm.bind(this) }>
+          <form onSubmit={ this.submitForm }>
             <Row>
               <Col xs={ 12 }>
                 <h2>
@@ -71,18 +66,18 @@ class PepPage extends React.Component {
                 <label>No&nbsp;&nbsp;</label>
                 <input type="radio"
                   name="pep" value="no" label="no"
-                  checked={ this.props.regulation.pep && !this.props.regulation.pep.is_pep }
+                  checked={ this.props.pep.is_pep !== undefined && !this.isPep() }
                   className="compliance__pep--no"
-                  onChange={ this.handleChange.bind(this) }
+                  onChange={ this.handleChange }
                 />
               </Col>
               <Col xs={ 1 } xsOffset={ 0 }>
                 <label>Yes&nbsp;&nbsp;</label>
                 <input type="radio"
                   name="pep" value="yes" label="yes"
-                  checked={ this.props.regulation.pep && this.props.regulation.pep.is_pep }
+                  checked={ this.isPep() }
                   className="compliance__pep--yes"
-                  onChange={ this.handleChange.bind(this) }
+                  onChange={ this.handleChange }
                 />
               </Col>
             </Row>
@@ -107,6 +102,8 @@ class PepPage extends React.Component {
 }
 
 PepPage.propTypes = {
+  dispatch: React.PropTypes.func,
+  pep: React.PropTypes.object,
 };
 
 PepPage.contextTypes = {
@@ -115,7 +112,7 @@ PepPage.contextTypes = {
 
 function select(state) {
   return {
-    regulation: state.regulation,
+    pep: state.pep,
   };
 }
 

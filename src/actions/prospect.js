@@ -1,5 +1,6 @@
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH } from '../utils/endpoints';
+import { Prospect } from '../models';
 
 const CREATE_PROSPECT = "CREATE_PROSPECT"
 const RECEIVED_PROSPECT = "RECEIVED_PROSPECT"
@@ -26,7 +27,7 @@ function updateProspect() {
       .put(`${CUSTOMERS_PROSPECTS_PATH}/` + prospect.prospect_id, { ...prospect }, header)
       .then((data) => {
         if (data.status === 200) {
-          dispatch(receivedProspect(data.data));
+          dispatch(receivedProspect(new Prospect(data.data)));
         }
       })
       .catch(error => {
@@ -42,7 +43,7 @@ function createProspect() {
       .post(`${CUSTOMERS_PROSPECTS_PATH}`, { ...prospect }, header)
       .then((data) => {
         if (data.status === 200) {
-          dispatch(receivedProspect(data.data));
+          dispatch(receivedProspect(new Prospect(data.data)));
         }
       })
       .catch(error => {

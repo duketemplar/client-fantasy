@@ -5,12 +5,15 @@ import React from 'react';
 import { Button, Input } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
-import { combineValidators, notBlankValidator, nationalRegistrationNumberValidator } from '../../utils/validators';
-import { changeProspect, createOrUpdateProspect } from '../../actions'
+import { changeProspect, createOrUpdateProspect } from '../../actions';
 
 class IdentifyPage extends React.Component {
   constructor(props) {
     super(props);
+
+    this.submitForm = this.submitForm.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.hasErrors = this.hasErrors.bind(this);
   }
 
   submitForm() {
@@ -27,21 +30,32 @@ class IdentifyPage extends React.Component {
     return value !== undefined && value !== null && value !== '';
   }
 
+  hasErrors() {
+    return this.props.prospectValidations.natRegNo !== null && this.props.prospectValidations.natRegNo !== undefined;
+  }
+
   render() {
     const {
       prospect,
-      prospect_validations,
+      prospectValidations,
     } = this.props;
 
-    const hasError = prospect_validations.natRegNo != null;
+    const hasError = this.hasErrors();
 
     return (
       <Grid className="identify">
         <Row xsMiddle xsCenter>
           <Col xs={ 6 }>
-            <form onSubmit={ this.submitForm.bind(this) } >
-              <Input type="text" label="National registration number" value={ prospect.natRegNo } onChange={ this.handleChange.bind(this) } hasError={ hasError } hasSuccess={ !hasError && this.notBlank(prospect.natRegNo) } />
-              { this.props.prospect_validations.natRegNo }
+            <form onSubmit={ this.submitForm } >
+              <Input
+                type="text"
+                label="National registration number"
+                value={ prospect.natRegNo }
+                onChange={ this.handleChange }
+                hasError={ hasError }
+                hasSuccess={ !hasError && this.notBlank(prospect.natRegNo) }
+                helpText={ prospectValidations.natRegNo }
+              />
               <Button className="identify__submit" primary type="submit">
                 Submit
               </Button>
@@ -55,6 +69,9 @@ class IdentifyPage extends React.Component {
 
 IdentifyPage.propTypes = {
   history: React.PropTypes.object,
+  prospect: React.PropTypes.object,
+  prospectValidations: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
 };
 
 IdentifyPage.contextTypes = {
@@ -64,7 +81,7 @@ IdentifyPage.contextTypes = {
 function select(state) {
   return {
     prospect: state.prospect,
-    prospect_validations: state.prospect_validations,
+    prospectValidations: state.prospectValidations,
   };
 }
 
