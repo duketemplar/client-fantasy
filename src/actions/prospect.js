@@ -1,27 +1,27 @@
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH } from '../utils/endpoints';
-import { Prospect } from '../models';
+import { Prospect } from '../models';
 
-const CREATE_PROSPECT = "CREATE_PROSPECT"
-const RECEIVED_PROSPECT = "RECEIVED_PROSPECT"
-const CHANGE_PROSPECT = "CHANGE_PROSPECT"
+const CREATE_PROSPECT = 'CREATE_PROSPECT';
+const RECEIVED_PROSPECT = 'RECEIVED_PROSPECT';
+const CHANGE_PROSPECT = 'CHANGE_PROSPECT';
 const header = { 'Content-type': 'application/json; charset=utf-8' };
 
 function changeProspect(fieldsToChange) {
   return {
     type: CHANGE_PROSPECT,
     fieldsToChange,
-  }
+  };
 }
 
 function createOrUpdateProspect() {
-  return function(dispatch, getState) {
+  return function action(dispatch, getState) {
     dispatch(getState().prospect.prospect_id ? updateProspect() : createProspect());
-  }
+  };
 }
 
 function updateProspect() {
-  return function(dispatch, getState) {
+  return function action(dispatch, getState) {
     const prospect = getState().prospect;
     nordnetAPI
       .put(`${CUSTOMERS_PROSPECTS_PATH}/` + prospect.prospect_id, { ...prospect }, header)
@@ -33,11 +33,11 @@ function updateProspect() {
       .catch(error => {
         console.error('Could not update regulation details:', error); // eslint-disable-line no-console
       });
-  }
+  };
 }
 
 function createProspect() {
-  return function(dispatch, getState) {
+  return function action(dispatch, getState) {
     const prospect = getState().prospect;
     nordnetAPI
       .post(`${CUSTOMERS_PROSPECTS_PATH}`, { ...prospect }, header)
@@ -49,15 +49,15 @@ function createProspect() {
       .catch(error => {
         console.error('Could not update regulation details:', error); // eslint-disable-line no-console
       });
-  }
-};
+  };
+}
 
 function receivedProspect(prospect) {
   return {
     type: RECEIVED_PROSPECT,
-    prospect
-  }
-};
+    prospect,
+  };
+}
 
 export default {
   createProspect,
@@ -67,4 +67,4 @@ export default {
   CREATE_PROSPECT,
   RECEIVED_PROSPECT,
   CHANGE_PROSPECT,
-}
+};
