@@ -3,6 +3,7 @@ import { CompliancePage } from '../compliance-page';
 import nnAPI from 'nordnet-next-api';
 import sinon from 'sinon';
 import store from '../../../store';
+import { expect } from 'chai';
 
 describe('Compliance Page rest calls', () => {
   let sandbox;
@@ -54,6 +55,41 @@ describe('Compliance Page rest calls', () => {
 
       return compliancePage
       .validateRegulation().should.be.rejected;
+    });
+  });
+
+  describe('doing an prospect update with regulation id', () => {
+    it('should first get the regulation id then do the prospect update', () => {
+      sandbox.stub(nnAPI, 'post', () => {
+        return new Promise(resolve => {
+          setTimeout(
+            resolve.bind(null,
+              { status: 200,
+                data: { regulation_id: 123 },
+              }), 500);
+        });
+      });
+
+      sandbox.stub(nnAPI, 'put', () => {
+        return new Promise(resolve => {
+          setTimeout(
+            resolve.bind(null,
+              { status: 200 }),
+            100);
+        });
+      });
+
+      const validateRegulationSpy = sandbox.spy(compliancePage, 'validateRegulation');
+      const updateProspectSpy = sandbox.spy(compliancePage, 'updateProspect');
+
+      const complianceInfo = { taxableOutsideJurisdiction: 'no' };
+
+      return compliancePage
+      .completeComlianceUpdate(complianceInfo)
+      .then(null, null, validateRegulationSpy)
+      .then(() => {
+        expect(validateRegulationSpy).has.been.calledBefore(updateProspectSpy);
+      });
     });
   });
 });

@@ -50,16 +50,22 @@ class CompliancePage extends React.Component {
 
   submitForm() {
     const complianceInfo = getValues(store.getState().form.complianceInfo);
+    const router = this.context.router;
 
     if (complianceInfo.taxableOutsideJurisdiction === 'yes') {
       this.redirectToManualFlow();
     } else {
-      return this.continueToNextStep(complianceInfo);
+      return new Promise(resolve => {
+        this
+        .completeComlianceUpdate(complianceInfo)
+        .then(() => { router.push({ pathname: '/register/pep' }); })
+        .catch(error => console.log('Compliance info could not be updated.', error)) // eslint-disable-line no-console
+        .then(resolve); // redux form change the subbmitting state when it recieves a resolved promise.
+      });
     }
   }
 
-  continueToNextStep(complianceInfo) {
-    const _this = this;
+  completeComlianceUpdate(complianceInfo) {
     const regulationData = {
       /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
       tax_info: {
@@ -68,13 +74,11 @@ class CompliancePage extends React.Component {
       /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
     };
 
-    return new Promise((resolve) => {
-      _this
+    return new Promise((resolve, reject) => {
+      this
       .validateRegulation(regulationData)
-      .then(_this.updateProspect)
-      .then(_this.context.router.push.bind(null, { pathname: '/register/pep' }))
-      .catch(error => console.log(error)) // eslint-disable-line no-console
-      .then(resolve); // make redux form change state of submitting
+      .then(this.updateProspect)
+      .then(resolve, error => reject(error));
     });
   }
 
