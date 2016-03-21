@@ -3,83 +3,25 @@
 import React from 'react';
 import { Button, Checkbox } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
-import store from '../../store';
-import { reduxForm, getValues } from 'redux-form';
-import { combineValidators, notBlankValidator, regexValidator } from '../../utils/validators';
-import nordnetAPI from 'nordnet-next-api';
-import { CUSTOMERS_PROSPECTS_PATH, CUSTOMERS_REGULATIONS_PATH, MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { connect } from 'react-redux';
 import TitledSelect from './titled-select';
+import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import './compliance-page.scss';
-
-export const fields = {
-  taxableOutsideJurisdiction: [
-    [notBlankValidator, 'This question needs to be answered.'],
-    [regexValidator, /^(yes|no)$/, 'This question needs to be answered.'],
-  ],
-  USCitizen: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-  employment: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-  income: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-  sourceOfFunds: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-  yearlyDeposits: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-  politicallyExposedPerson: [
-    [notBlankValidator, 'This question needs to be answered.'],
-  ],
-};
+import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from '../../actions';
 
 const yesNoOptions = [
-  { label: 'Yes', value: 'yes' },
-  { label: 'No', value: 'no' },
+  { label: 'Yes', value: true },
+  { label: 'No', value: false },
 ];
-
-const validate = combineValidators(fields);
 
 class CompliancePage extends React.Component {
   constructor(props) {
     super(props);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   submitForm() {
-    const complianceInfo = getValues(store.getState().form.complianceInfo);
-    const router = this.context.router;
-
-    if (complianceInfo.taxableOutsideJurisdiction === 'yes') {
-      this.redirectToManualFlow();
-    } else {
-      return new Promise(resolve => {
-        this
-        .completeComlianceUpdate(complianceInfo)
-        .then(() => { router.push({ pathname: '/register/pep' }); })
-        .catch(error => console.log('Compliance info could not be updated.', error)) // eslint-disable-line no-console
-        .then(resolve); // redux form change the subbmitting state when it recieves a resolved promise.
-      });
-    }
-  }
-
-  completeComlianceUpdate(complianceInfo) {
-    const regulationData = {
-      /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-      tax_info: {
-        taxable_outside_jurisdiction: complianceInfo.taxableOutsideJurisdiction,
-      },
-      /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-    };
-
-    return new Promise((resolve, reject) => {
-      this
-      .validateRegulation(regulationData)
-      .then(this.updateProspect)
-      .then(resolve, error => reject(error));
-    });
+    this.props.dispatch(createOrUpdateRegulation());
   }
 
   redirectToManualFlow() {
@@ -87,59 +29,29 @@ class CompliancePage extends React.Component {
     return false;
   }
 
-  updateProspect() {
-    const prospectId = store.getState().prospect.prospectId;
-    const regulationId = store.getState().prospect.regulationId;
-    const prospectData = { regulation_id: regulationId }; // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
-
-    return new Promise((resolve, reject) => {
-      nordnetAPI
-      .put(CUSTOMERS_PROSPECTS_PATH + `/${prospectId}`, prospectData, header)
-      .then(({ status }) => {
-        if (status === 200) {
-          resolve();
-        } else {
-          reject(new Error('Could not update prospect.'));
-        }
-      })
-      .catch(error => reject(error));
-    });
+  handleChange(key, value, actionGenerator) {
+    const change = {};
+    change[key] = value;
+    this.props.dispatch(actionGenerator(change));
   }
 
-  validateRegulation(regulationData) {
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
+  buildHandleChange(key, actionGenerator, transform) {
+    return (e) => {
+      let value;
+      if (transform) {
+        value = transform(e);
+      } else {
+        value = e.target.value;
+      }
+      this.handleChange(key, value, actionGenerator);
+    };
+  }
 
-    return new Promise((resolve, reject) => {
-      nordnetAPI
-      .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
-      .then(({ status, data }) => {
-        if (status === 200) {
-          store.dispatch({ type: 'REGULATION_VALIDATED', value: data.regulation_id }); // jscs:ignore requireCamelCaseOrUpperCaseIdentifiers
-          resolve();
-        } else {
-          reject(new Error('No regulation id recieved.'));
-        }
-      })
-      .catch(error => reject(error));
-    });
+  safeBooleanToString(bool) {
+    return bool !== undefined && bool.toString();
   }
 
   render() {
-    const {
-      fields:
-      {
-        taxableOutsideJurisdiction,
-        USCitizen,
-        employment,
-        income,
-        sourceOfFunds,
-        yearlyDeposits,
-        politicallyExposedPerson,
-      },
-      resetForm, handleSubmit, submitting,
-    } = this.props;
-
     return (
       <Grid className="compliance">
         <Row>
@@ -150,25 +62,28 @@ class CompliancePage extends React.Component {
           </Col>
         </Row>
         <Row>
-            <form onSubmit={ handleSubmit(this.submitForm.bind(this)) }>
+            <form onSubmit={ this.submitForm }>
 
             <Row>
               <Col xs={6}>
                 <TitledSelect
                   title="1. Are you obligated to report tax outside of Sweden?"
-                  field={ taxableOutsideJurisdiction }
+                  value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
                   options={ yesNoOptions }
+                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'false') }
                 />
 
                 <TitledSelect
                   title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
-                  field={ USCitizen }
+                  value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
+                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'false') }
                   options={ yesNoOptions }
                 />
 
                 <TitledSelect
                   title="3. What is your employment status?"
-                  field={ employment }
+                  value={ this.props.kyc.employment_classification }
+                  onChange={ this.buildHandleChange('employment_classification', changeKyc) }
                   options={ [
                     { label: 'Unemployed', value: 'unemployed' },
                     { label: 'Employed', value: 'employed' },
@@ -177,7 +92,8 @@ class CompliancePage extends React.Component {
                 />
                 <TitledSelect
                   title="4. What is your yearly income?"
-                  field={ income }
+                  value={ this.props.kyc.yearly_income }
+                  onChange={ this.buildHandleChange('yearly_income', changeKyc) }
                   options={
                     [
                       { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
@@ -206,7 +122,8 @@ class CompliancePage extends React.Component {
               <Col xs={6}>
                 <TitledSelect
                   title="6. From where does your funds, and or securities, originate?"
-                  field={ sourceOfFunds }
+                  value={ this.props.kyc.economic_origin }
+                  onChange={ this.buildHandleChange('economic_origin', changeKyc) }
                   options={
                     [
                       { label: 'Inheritance', value: 'inheritance' },
@@ -216,7 +133,8 @@ class CompliancePage extends React.Component {
                 />
                 <TitledSelect
                   title="7. What is the approximate yearly value of your deposits into this account?"
-                  field={ yearlyDeposits }
+                  value={ this.props.kyc.yearly_insert }
+                  onChange={ this.buildHandleChange('yearly_insert', changeKyc) }
                   options={
                     [
                       { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
@@ -227,7 +145,8 @@ class CompliancePage extends React.Component {
                 />
                 <TitledSelect
                   title="8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?"
-                  field={ politicallyExposedPerson }
+                  value={ this.safeBooleanToString(this.props.pep.is_pep) }
+                  onChange={ this.buildHandleChange('is_pep', changePep, (e) => e.target.value !== 'false') }
                   options={ yesNoOptions }
                 />
               </Col>
@@ -241,10 +160,10 @@ class CompliancePage extends React.Component {
 
             <Row>
               <Col xs={12}>
-                <Button className="compliance__submit" type="submit" primary disabled={ submitting }>
-                  { submitting ? <i/> : <i/> } Submit
+                <Button className="compliance__submit" type="submit" primary >
+                  Submit
                 </Button>
-                <Button secondary disabled={ submitting } onClick={ resetForm }>
+                <Button secondary>
                   Clear values
                 </Button>
               </Col>
@@ -258,23 +177,22 @@ class CompliancePage extends React.Component {
 
 CompliancePage.propTypes = {
   history: React.PropTypes.object,
-  handleSubmit: React.PropTypes.func.isRequired,
-  fields: React.PropTypes.object.isRequired,
-  resetForm: React.PropTypes.func.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
+  kyc: React.PropTypes.object,
+  regulation: React.PropTypes.object,
+  pep: React.PropTypes.object,
+  dispatch: React.PropTypes.func,
 };
 
 CompliancePage.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-const CompliancePageReduxForm = reduxForm({
-  form: 'complianceInfo',
-  fields: Object.keys(fields),
-  validate,
-})(CompliancePage);
+function select(state) {
+  return {
+    kyc: state.kyc,
+    regulation: state.regulation,
+    pep: state.pep,
+  };
+}
 
-export {
-  CompliancePageReduxForm as default,
-  CompliancePage,
-};
+export default connect(select)(CompliancePage);
