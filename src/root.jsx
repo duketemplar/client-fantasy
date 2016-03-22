@@ -25,7 +25,7 @@ import SignPage from './components/sign-page';
 
 // Redux store
 import store from './store';
-import { Router, browserHistory, Route, hashHistory } from 'react-router';
+import { Router, Route, hashHistory } from 'react-router';
 
 // Root application component
 class App extends React.Component {
@@ -52,14 +52,14 @@ const AppWithI18N = i18n(App);
  * Exports function that is be executed when locale is resolved and localization data is available.
  * Renders application by calling React.render()
  */
-export default function(element, intlData) {
+export default function (element, intlData) {
   // Calls React.render and renders application within provided element
   // AppWithI18N is wraped in Redux <Provider /> to be able to connect React components to the Redux store.
   // See https://github.com/rackt/react-redux#provider-store
   const rootInstance = ReactDOM.render(
     <div>
       <Provider store={ store }>
-        <AppWithI18N { ...intlData }  />
+        <AppWithI18N { ...intlData } />
       </Provider>
     </div>,
     element

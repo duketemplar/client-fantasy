@@ -1,5 +1,5 @@
 import React from 'react';
-import ValidInput from '../input/valid-input';
+import { Input } from 'nordnet-ui-kit';
 
 class TitledSelect extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class TitledSelect extends React.Component {
 
   render() {
     const {
-      field,
+      value,
       options,
       ...rest,
     } = this.props;
@@ -18,15 +18,16 @@ class TitledSelect extends React.Component {
         <h5>
           { this.props.title }
         </h5>
-        <ValidInput type="select" options={ options } fieldBinding={ field } label="" { ...rest } />
+        <Input type="select" options={ options } value={ value } label="" { ...rest } />
       </span>
     );
   }
 }
 
 TitledSelect.propTypes = {
-  field: React.PropTypes.object.isRequired,
+  value: React.PropTypes.object.isRequired,
   options: React.PropTypes.array.isRequired,
-}
+  title: React.PropTypes.string,
+};
 
 export default TitledSelect;

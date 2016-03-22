@@ -1,20 +1,49 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-import reducer from '../prospect.reducer';
+import reducers from '../prospect.reducer';
 import { expect } from 'chai';
+import { Prospect } from '../../models';
+import { changeProspect, RECEIVED_PROSPECT } from '../../actions';
 
 describe('prospect.reducer', () => {
-  it('updates the store for action: PROSPECT_CREATED', () => {
+  it('should initialize the state for prospect', () => {
     const initialState = undefined;
-    const action = {
-      type: 'PROSPECT_CREATED',
-      value: 123,
-    };
 
-    const expectedState = {
-      prospectId: 123,
-      regulationId: null,
-    };
+    expect(reducers.prospect(initialState, { type: '@@init' })).to.eql(new Prospect());
+  });
 
-    expect(reducer(initialState, action)).to.eql(expectedState);
+  it('should update only the parts changed', () => {
+    const initialState = new Prospect({
+      id: 'this-is-id',
+      email: 'test@test.se',
+    });
+
+    const action = changeProspect({ email: 'test-new@test.se', phoneNumber: '12345' });
+
+    expect(reducers.prospect(initialState, action)).to.eql(new Prospect({
+      id: 'this-is-id',
+      email: 'test-new@test.se',
+      phoneNumber: '12345',
+    }));
+  });
+
+  it('should merge propsects on recieved', () => {
+    const initialState = new Prospect({
+      id: 'this-is-id',
+      email: 'test@test.se',
+    });
+
+    const action = { type: RECEIVED_PROSPECT, prospect: { email: 'test-new@test.se', phoneNumber: '12345', id: 'this-is-id-new' } };
+
+    expect(reducers.prospect(initialState, action)).to.eql(new Prospect({
+      id: 'this-is-id-new',
+      email: 'test-new@test.se',
+      phoneNumber: '12345',
+    }));
+  });
+
+  it('should initialize the state for prospectValidations', () => {
+    const initialState = undefined;
+
+    expect(reducers.prospectValidations(initialState, { type: '@@init' })).to.eql({});
   });
 });

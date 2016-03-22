@@ -2,72 +2,36 @@
 /* eslint-disable max-len */
 
 import React from 'react';
-import store from '../../store';
-import nordnetAPI from 'nordnet-next-api';
 import { Grid, Col, Row } from 'react-bem-grid';
-import { reduxForm, getValues } from 'redux-form';
-import ValidInput from '../input/valid-input.jsx';
-import { combineValidators, lengthValidator, notBlankValidator, emailValidator } from '../../utils/validators';
-import { Button } from 'nordnet-ui-kit';
-import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
-
-export const fields = {
-  phoneNumber: [
-    [notBlankValidator, 'Must be filled in.'],
-    [lengthValidator, 7, 'Must be at least 7 characters.'],
-  ],
-  email: [
-    [notBlankValidator, 'Must not be blank.'],
-    [emailValidator, 'Must be a valid email'],
-  ],
-};
-
-const validate = combineValidators(fields);
+import { connect } from 'react-redux';
+import { Button, Input } from 'nordnet-ui-kit';
+import { createOrUpdateProspect, changeProspect } from '../../actions';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
+    this.submitForm = this.submitForm.bind(this);
   }
 
   submitForm() {
-    const prospectId = store.getState().prospect.prospectId;
-    const form = getValues(store.getState().form.prospectInfo);
-    const customerCreationURI = `${CUSTOMERS_PROSPECTS_PATH}/${prospectId}`;
-    const header = { 'Content-type': 'application/json; charset=utf-8' };
-    const data = {
-      /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-      email: form.email,
-      phone_number: form.phoneNumber,
-      /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
-    };
-    return new Promise((resolve) => {
-      nordnetAPI
-        .put(customerCreationURI, data, header)
-        .then(({ status }) => {
-          if (status === 200) {
-            resolve();
-          }
-        })
-        .then(() => {
-          this.context.router.push({
-            pathname: '/register/compliance',
-          });
-        })
-        .catch((error) => {
-          throw Error(`Could not post to ${customerCreationURI}, ${error.message}`);
-        })
-        .catch(() => resolve());
-    });
+    this.props.dispatch(createOrUpdateProspect());
+  }
+
+  handleChange(key, e) {
+    const change = {};
+    change[key] = e.target.value;
+    this.props.dispatch(changeProspect(change));
+  }
+
+  buildHandleChange(key) {
+    return (e) => this.handleChange(key, e);
+  }
+
+  hasError(key) {
+    return this.props.prospectValidations[key] !== null && this.props.prospectValidations[key] !== undefined;
   }
 
   render() {
-    const {
-      fields: {
-        phoneNumber, email,
-      },
-      resetForm, handleSubmit, submitting,
-    } = this.props;
-
     return (
       <Grid className="create-customer">
         <Col xs={12}>
@@ -76,14 +40,28 @@ export class ProspectInfoPage extends React.Component {
               Enter your personal info
             </h1>
           </Row>
-          <form onSubmit={ handleSubmit(this.submitForm.bind(this)) } >
+          <form onSubmit={ this.submitForm } >
             <Col xs={6}>
-              <ValidInput type="text" label="Phone Number" fieldBinding={ phoneNumber } />
-              <ValidInput type="email" label="E-mail" fieldBinding={ email } />
-              <Button type="submit" primary disabled={ submitting }>
-                { submitting ? <i/> : <i/> } Submit
+              <Input
+                type="text"
+                label="Phone Number"
+                value={ this.props.prospect.phoneNumber }
+                onChange={ this.buildHandleChange('phoneNumber') }
+                helpText={ this.props.prospectValidations.phoneNumber }
+                hasError={ this.hasError('phoneNumber') }
+              />
+              <Input
+                type="email"
+                label="E-mail"
+                value={ this.props.prospect.email }
+                onChange={ this.buildHandleChange('email') }
+                helpText={ this.props.prospectValidations.email }
+                hasError={ this.hasError('email') }
+              />
+              <Button type="submit" primary >
+                Submit
               </Button>
-              <Button secondary disabled={ submitting } onClick={ resetForm }>
+              <Button secondary>
                 Clear values
               </Button>
             </Col>
@@ -96,18 +74,20 @@ export class ProspectInfoPage extends React.Component {
 
 ProspectInfoPage.propTypes = {
   history: React.PropTypes.object,
-  fields: React.PropTypes.object.isRequired,
-  handleSubmit: React.PropTypes.func.isRequired,
-  resetForm: React.PropTypes.func.isRequired,
-  submitting: React.PropTypes.bool.isRequired,
+  dispatch: React.PropTypes.func,
+  prospect: React.PropTypes.object,
+  prospectValidations: React.PropTypes.object,
 };
 
 ProspectInfoPage.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export default reduxForm({
-  form: 'prospectInfo',
-  fields: Object.keys(fields),
-  validate,
-})(ProspectInfoPage);
+function select(state) {
+  return {
+    prospect: state.prospect,
+    prospectValidations: state.prospectValidations,
+  };
+}
+
+export default connect(select)(ProspectInfoPage);
