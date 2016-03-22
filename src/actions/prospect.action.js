@@ -16,7 +16,7 @@ function changeProspect(fieldsToChange) {
 
 function createOrUpdateProspect() {
   return function action(dispatch, getState) {
-    dispatch(getState().prospect.prospect_id ? updateProspect() : createProspect());
+    dispatch(getState().prospect.id ? updateProspect() : createProspect());
   };
 }
 
@@ -29,7 +29,7 @@ function updateProspect() {
     };
 
     nordnetAPI
-      .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospect.prospect_id}`, prospectData, header)
+      .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospect.id}`, prospectData, header)
       .then(({ status, data }) => {
         if (status === 200) {
           dispatch(receivedProspect(new Prospect(data)));
