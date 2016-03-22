@@ -145,8 +145,8 @@ class CompliancePage extends React.Component {
                 />
                 <TitledSelect
                   title="8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?"
-                  value={ this.safeBooleanToString(this.props.pep.is_pep) }
-                  onChange={ this.buildHandleChange('is_pep', changePep, (e) => e.target.value !== 'false') }
+                  value={ this.safeBooleanToString(this.props.pep.isPep) }
+                  onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'false') }
                   options={ yesNoOptions }
                 />
               </Col>

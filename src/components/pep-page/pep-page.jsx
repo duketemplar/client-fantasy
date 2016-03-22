@@ -20,14 +20,14 @@ class PepPage extends React.Component {
 
   handleChange(e) {
     this.props.dispatch(changePep({
-      is_pep: e.target.value !== 'no',
+      isPep: e.target.value !== 'no',
     }));
   }
 
   submitForm() {
     const pep = this.props.pep;
 
-    if (pep.is_pep) {
+    if (pep.isPep) {
       this.props.dispatch(toggleModal(true));
     } else {
       this.updateRegulation();
@@ -35,7 +35,7 @@ class PepPage extends React.Component {
   }
 
   isPep() {
-    return this.props.pep.is_pep;
+    return this.props.pep.isPep;
   }
 
   render() {
@@ -66,7 +66,7 @@ class PepPage extends React.Component {
                 <label>No&nbsp;&nbsp;</label>
                 <input type="radio"
                   name="pep" value="no" label="no"
-                  checked={ this.props.pep.is_pep !== undefined && !this.isPep() }
+                  checked={ this.props.pep.isPep !== undefined && !this.isPep() }
                   className="compliance__pep--no"
                   onChange={ this.handleChange }
                 />

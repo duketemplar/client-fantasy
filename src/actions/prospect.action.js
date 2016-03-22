@@ -23,11 +23,16 @@ function createOrUpdateProspect() {
 function updateProspect() {
   return function action(dispatch, getState) {
     const prospect = getState().prospect;
+    const prospectData = {
+      phone_number: prospect.phoneNumber,
+      email: prospect.email,
+    };
+
     nordnetAPI
-      .put(`${CUSTOMERS_PROSPECTS_PATH}/` + prospect.prospect_id, { ...prospect }, header)
-      .then((data) => {
-        if (data.status === 200) {
-          dispatch(receivedProspect(new Prospect(data.data)));
+      .put(`${CUSTOMERS_PROSPECTS_PATH}/${prospect.prospect_id}`, prospectData, header)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          dispatch(receivedProspect(new Prospect(data)));
         }
       })
       .catch(error => {
@@ -39,11 +44,16 @@ function updateProspect() {
 function createProspect() {
   return function action(dispatch, getState) {
     const prospect = getState().prospect;
+    const prospectData = {
+      national_id_number: prospect.nationalIdNumber,
+      national_id_number_country_code: prospect.nationalIdNumberCountryCode,
+    };
+
     nordnetAPI
-      .post(`${CUSTOMERS_PROSPECTS_PATH}`, { ...prospect }, header)
-      .then((data) => {
-        if (data.status === 200) {
-          dispatch(receivedProspect(new Prospect(data.data)));
+      .post(CUSTOMERS_PROSPECTS_PATH, prospectData, header)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          dispatch(receivedProspect(new Prospect(data)));
         }
       })
       .catch(error => {

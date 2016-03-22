@@ -1,6 +1,6 @@
-import customerCreation from './prospect.js';
-import modal from './modal.js';
-import regulation from './regulation.js';
+import customerCreation from './prospect.action.js';
+import modal from './modal.action.js';
+import regulation from './regulation.action.js';
 
 export default {
   ...customerCreation,

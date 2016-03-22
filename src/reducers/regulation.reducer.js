@@ -1,10 +1,10 @@
 import { CHANGE_REGULATION, CHANGE_PEP, CHANGE_KYC } from '../actions';
-import { Pep, Kyc } from '../models';
+import { Pep, Kyc, Regulation } from '../models';
 import { validate } from '../utils/validators';
 
-function regulation(state = {}, action) {
+function regulation(state = new Regulation(), action) {
   if (action.type === CHANGE_REGULATION) {
-    return Object.assign({}, state, action.fieldsToChange);
+    return Object.assign(new Regulation(), state, action.fieldsToChange);
   }
 
   return state;

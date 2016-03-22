@@ -28,10 +28,20 @@ function updateRegulation() {
       pep,
       regulation,
     } = state;
-    const regulationData = { ...regulation, kyc, pep };
+    const regulationData = {
+      taxable_in_jurisdiction: regulation.taxableInJurisdiction,
+      taxableOutsideJurisdiction: regulation.taxableOutsideJurisdiction,
+      pep: {
+        is_pep: pep.isPep,
+      },
+      kyc: {
+        some_key: kyc.some_key,
+      },
+      ...regulation,
+    };
 
     nordnetAPI
-      .put(CUSTOMERS_REGULATIONS_PATH + `/${state.regulation.id}`, regulationData, header)
+      .put(`${CUSTOMERS_REGULATIONS_PATH}/${state.regulation.id}`, regulationData, header)
       .then(({ status, data }) => {
         if (status === 200) {
           dispatch(receivedRegulation(data));

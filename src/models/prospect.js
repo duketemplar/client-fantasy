@@ -11,12 +11,12 @@ import Base from './base';
 class Prospect extends Base {
   constructor(props) {
     super(props);
-    this.national_id_number_country_code = getNationality();
+    this.nationalIdNumberCountryCode = getNationality();
   }
 }
 
 Prospect.validators = {
-  national_id_number: [
+  nationalIdNumber: [
     (value) => nationalRegistrationNumberValidator(getNationality(), 'Must be a real national registration number', value),
     (value) => notBlankValidator('Must be filled in.', value),
   ],

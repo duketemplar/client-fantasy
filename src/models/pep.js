@@ -10,7 +10,7 @@ class Pep extends Base {
 }
 
 Pep.validators = {
-  is_pep: [
+  isPep: [
     (value) => notBlankValidator('This question needs to be answered.', value),
   ],
 };
