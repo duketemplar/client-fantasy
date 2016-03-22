@@ -10,8 +10,8 @@ import './compliance-page.scss';
 import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from '../../actions';
 
 const yesNoOptions = [
-  { label: 'Yes', value: 'true' },
-  { label: 'No', value: 'false' },
+  { label: 'Yes', value: 'yes' },
+  { label: 'No', value: 'no' },
 ];
 
 class CompliancePage extends React.Component {
@@ -48,7 +48,17 @@ class CompliancePage extends React.Component {
   }
 
   safeBooleanToString(bool) {
-    return bool !== undefined && bool.toString();
+    let ret;
+
+    if (bool === true) {
+      ret = 'yes';
+    } else if (bool === false) {
+      ret = 'no';
+    } else {
+      ret = '';
+    }
+
+    return ret;
   }
 
   render() {
@@ -70,13 +80,13 @@ class CompliancePage extends React.Component {
                   title="1. Are you obligated to report tax outside of Sweden?"
                   value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
                   options={ yesNoOptions }
-                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'false') }
+                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
                 />
 
                 <TitledSelect
                   title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
                   value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
-                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'false') }
+                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
                   options={ yesNoOptions }
                 />
 
@@ -146,7 +156,7 @@ class CompliancePage extends React.Component {
                 <TitledSelect
                   title="8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?"
                   value={ this.safeBooleanToString(this.props.pep.isPep) }
-                  onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'false') }
+                  onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
                   options={ yesNoOptions }
                 />
               </Col>
