@@ -1,4 +1,4 @@
-import nordnetAPI from 'nordnet-ui-kit';
+import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_REGULATIONS_PATH } from '../utils/endpoints';
 import { createOrUpdateProspect } from './';
 
@@ -12,7 +12,7 @@ const header = { 'Content-type': 'application/json; charset=utf-8' };
 function createOrUpdateRegulation() {
   return function action(dispatch, getState) {
     const regulation = getState().regulation;
-    if (regulation.id !== undefined) {
+    if (regulation.id !== undefined && regulation.id !== null) {
       dispatch(updateRegulation());
     } else {
       dispatch(createRegulation());
@@ -62,8 +62,19 @@ function createRegulation() {
       pep,
       regulation,
     } = state;
-    const data = { ...regulation, kyc, pep };
-    console.log('create: ', data); // eslint-disable-line no-console
+    const regulationData = { ...regulation, kyc, pep };
+
+    nordnetAPI
+      .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
+      .then(({ status, data }) => {
+        if (status === 200) {
+          dispatch(receivedRegulation(data));
+          dispatch(createOrUpdateProspect());
+        } else {
+          // Do something
+        }
+      })
+      .catch(error => error);
   };
 }
 
@@ -101,6 +112,8 @@ export default {
   changeKyc,
   createOrUpdateRegulation,
   receivedRegulation,
+  createRegulation,
+  updateRegulation,
   CHANGE_REGULATION,
   CHANGE_PEP,
   CHANGE_KYC,

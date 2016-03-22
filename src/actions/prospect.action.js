@@ -71,6 +71,7 @@ function receivedProspect(prospect) {
 
 export default {
   createProspect,
+  updateProspect,
   receivedProspect,
   createOrUpdateProspect,
   changeProspect,
