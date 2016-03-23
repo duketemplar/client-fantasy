@@ -18,6 +18,7 @@ class IdentifyPage extends React.Component {
 
   submitForm() {
     this.props.dispatch(createOrUpdateProspect());
+    this.context.router.push('/begin'); // TODO: wait for an answer that everything is ok...
   }
 
   handleChange(e) {

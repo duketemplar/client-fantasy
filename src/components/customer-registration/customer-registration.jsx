@@ -1,0 +1,27 @@
+import React from 'react';
+import Section from './registration-section';
+import IdentifyPage from '../identify-page';
+import ProspectInfoPage from '../prospect-info-page';
+import CompliancePage from '../compliance-page';
+import PepPage from '../pep-page';
+import AccountPicker from '../account-picker';
+import SignPage from '../sign-page';
+
+
+export default class CustomerRegistration extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className="customer-registration">
+        <Section element={ ProspectInfoPage } />
+        <Section element={ CompliancePage } />
+        <Section element={ PepPage } />
+        <Section element={ AccountPicker } />
+        <Section element={ SignPage } />
+      </div>
+    );
+  }
+}

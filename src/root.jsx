@@ -15,14 +15,8 @@ import { Provider } from 'react-redux';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
-
+import CustomerRegistration from './components/customer-registration';
 import IdentifyPage from './components/identify-page';
-import ProspectInfoPage from './components/prospect-info-page';
-import CompliancePage from './components/compliance-page';
-import PepPage from './components/pep-page';
-import AccountPicker from './components/account-picker';
-import SignPage from './components/sign-page';
-
 // Redux store
 import store from './store';
 import { Router, Route, hashHistory } from 'react-router';
@@ -33,13 +27,8 @@ class App extends React.Component {
   render() {
     return (
       <Router history={ hashHistory }>
-        <Route name="prospect-info-page" path="/"                      component={ IdentifyPage }     key="identify-page" />
-        <Route name="identify-page"      path="/identify"              component={ IdentifyPage }     key="identify-page" />
-        <Route name="prospect-info-page" path="/register/contact-info" component={ ProspectInfoPage } key="prospect-info-page" />
-        <Route name="compliance"         path="/register/compliance"   component={ CompliancePage }   key="compliance-page" />
-        <Route name="pep"                path="/register/pep"          component={ PepPage }          key="pep-page" />
-        <Route name="account-picker"     path="/register/pick-account" component={ AccountPicker }    key="account-picker" />
-        <Route name="sign"               path="/register/sign"         component={ SignPage }         key="sign-page" />
+        <Route name="prospectcustomer-info-page" path="/" component={ IdentifyPage } key="identify-page" />
+        <Route name="customer-registration" path="/begin" component={ CustomerRegistration } key="customer-registration" />
       </Router>
     );
   }
