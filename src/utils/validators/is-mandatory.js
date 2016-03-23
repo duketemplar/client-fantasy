@@ -1,7 +1,9 @@
+import { isEmptyValue } from './is-empty-value';
+
 const isMandatory = (message, value) => {
-  if (value) {
-    return null;
+  if (isEmptyValue(value)) {
+    return message;
   }
-  return message;
+  return null;
 };
 export default isMandatory;
