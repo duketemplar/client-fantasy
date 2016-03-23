@@ -3,12 +3,12 @@ import { expect } from 'chai';
 import { Kyc } from '../../models';
 import { changeKyc } from '../../actions';
 
-describe('kyc.reducer', () => {
+describe('regulation.reducer', () => {
   it('should initialize kyc', () => {
     expect(reducers.kyc(undefined, { type: '@@init' })).to.eql(new Kyc());
   });
 
-  it('should update only changed fields', () => {
+  it('should update only changed kyc fields', () => {
     const initialState = new Kyc({
       employment: false,
       income: 'cash money',
@@ -23,7 +23,7 @@ describe('kyc.reducer', () => {
     }));
   });
 
-  it('should validate changed fields', () => {
+  it('should validate changed kyc fields', () => {
     const initialState = {};
     const action = changeKyc({
       employment: null,

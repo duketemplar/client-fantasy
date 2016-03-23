@@ -25,7 +25,7 @@ Prospect.validators = {
     (value) => requiredFieldValidator('Must be filled in.', value),
   ],
   phoneNumber: [
-    (value) => lengthValidator(7, 'Must be a real phonenumber', value),
+    (value) => lengthValidator(7, 'Must be a real phonenumber.', value),
   ],
   email: [
     (value) => requiredFieldValidator('Must be filled in.', value),
