@@ -1,13 +1,7 @@
-const emailValidator = (message, value) => {
-  if (value === null || value === undefined) {
-    return null;
+const emailValidator = (errorMessage, email) => {
+  if (!email || !email.match(/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.+-]+\.[a-zA-Z]{2,4}$/)) {
+    return errorMessage;
   }
-
-  if (value.length < 5) {
-    return message;
-  }
-
   return null;
 };
-
 export default emailValidator;
