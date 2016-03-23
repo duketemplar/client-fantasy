@@ -1,7 +1,7 @@
 import { formatPhoneNumber } from '../phone-number-formatter';
 import { expect } from 'chai';
 
-describe.only('Phone number formatter', () => {
+describe('Phone number formatter', () => {
   let validSE;
   let inValidSE;
   beforeEach(() => {
