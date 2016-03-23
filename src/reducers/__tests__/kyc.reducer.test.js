@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { Kyc } from '../../models';
 import { changeKyc } from '../../actions';
 
-describe('regulation.reducer', () => {
+describe('kyc.reducer', () => {
   it('should initialize kyc', () => {
     expect(reducers.kyc(undefined, { type: '@@init' })).to.eql(new Kyc());
   });

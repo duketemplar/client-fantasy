@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { Pep } from '../../models';
 import { changePep } from '../../actions';
 
-describe('regulation.reducer', () => {
+describe('pep.reducer', () => {
   it('should initialize pep', () => {
     expect(reducers.pep(undefined, { type: '@@init' })).to.eql(new Pep());
   });
