@@ -30,14 +30,16 @@ function updateRegulation() {
     } = state;
     const regulationData = {
       taxable_in_jurisdiction: regulation.taxableInJurisdiction,
-      taxableOutsideJurisdiction: regulation.taxableOutsideJurisdiction,
+      taxable_outside_jurisdiction: regulation.taxableOutsideJurisdiction,
       pep: {
         is_pep: pep.isPep,
       },
       kyc: {
         some_key: kyc.some_key,
       },
-      ...regulation,
+      tax_info: {
+
+      },
     };
 
     nordnetAPI

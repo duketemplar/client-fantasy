@@ -15,7 +15,7 @@ import { expect, assert } from 'chai'; // ??
 import { CUSTOMERS_REGULATIONS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
 
-describe.only('regulation.action', () => {
+describe('regulation.action', () => {
   let sandbox;
 
   beforeEach(() => {

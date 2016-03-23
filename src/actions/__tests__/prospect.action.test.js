@@ -12,6 +12,7 @@ import nnAPI from 'nordnet-next-api';
 import { expect, assert } from 'chai'; // ??
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
+import { Prospect } from '../../models';
 
 describe('prospect actions', () => {
   let sandbox;
@@ -68,26 +69,49 @@ describe('prospect actions', () => {
   });
 
   it('should be able to create prospect', () => {
-    const nnAPIPostStub = mockNNAPI({ id: 'an-id' }, 'post', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ prospect: { id: 'id' } });
+    const nnAPIPostStub = mockNNAPI({ prospect_id: 'an-id' }, 'post', sandbox, nnAPI);
+    const getStateStub = sandbox.stub().returns({ prospect: {
+      nationalIdNumber: '199008121234',
+      nationalIdNumberCountryCode: 'SE',
+    } });
 
     const action = createProspect();
+    const dispatch = sinon.spy(getDispatch(getStateStub));
 
-    action(getDispatch(getStateStub), getStateStub);
+    action(dispatch, getStateStub);
 
     assert(nnAPIPostStub.called, 'did not call POST on nn api');
-    expect(nnAPIPostStub.calledWith(CUSTOMERS_PROSPECTS_PATH, sinon.match.any, sinon.match.any));
+    sinon.assert.calledWith(nnAPIPostStub, CUSTOMERS_PROSPECTS_PATH, {
+      national_id_number: '199008121234',
+      national_id_number_country_code: 'SE',
+      citizen: undefined,
+      email: undefined,
+      phone_number: undefined,
+    },
+      sinon.match.any
+    );
   });
 
   it('should be able to update prospect', () => {
     const nnAPIPutStub = mockNNAPI({ id: 'an-id' }, 'put', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ prospect: { id: 'id' } });
+    const getStateStub = sandbox.stub().returns({ prospect: {
+      id: 'a-id',
+      phoneNumber: '+467012345678',
+      email: 'test@test.test',
+      citizen: 'SE',
+    } });
 
     const action = updateProspect();
 
     action(getDispatch(getStateStub), getStateStub);
 
     assert(nnAPIPutStub.called, 'did not call PUT on nn api');
-    expect(nnAPIPutStub.calledWith(CUSTOMERS_PROSPECTS_PATH + '/id', sinon.match.any, sinon.match.any));
+    sinon.assert.calledWith(nnAPIPutStub, CUSTOMERS_PROSPECTS_PATH + '/a-id', {
+      phone_number: '+467012345678',
+      email: 'test@test.test',
+      citizen: 'SE',
+    },
+      sinon.match.any
+    );
   });
 });

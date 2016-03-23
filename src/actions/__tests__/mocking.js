@@ -1,9 +1,14 @@
 function mockNNAPI(ret, method, sandbox, nnAPI) {
-  return sandbox.stub(nnAPI, method, () => {
-    return new Promise((resolve) => {
-      resolve({ status: 200, data: ret });
-    });
+  const promise = new Promise((resolve) => {
+    resolve({ status: 200, data: ret });
   });
+
+  const stub = sandbox.stub(nnAPI, method, () => {
+    return promise;
+  });
+
+  stub.promise = promise;
+  return stub;
 }
 
 function getDispatch(getState) {
