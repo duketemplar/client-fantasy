@@ -12,7 +12,6 @@ import nnAPI from 'nordnet-next-api';
 import { expect, assert } from 'chai'; // ??
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
-import { Prospect } from '../../models';
 
 describe('prospect actions', () => {
   let sandbox;
