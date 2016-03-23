@@ -10,10 +10,14 @@ import Base from './base';
 
 class Prospect extends Base {
   constructor(props) {
-    super(props);
+    super(props, Prospect.keyTranslations);
     this.nationalIdNumberCountryCode = getNationality();
   }
 }
+
+Prospect.keyTranslations = {
+  prospect_id: 'id',
+};
 
 Prospect.validators = {
   nationalIdNumber: [

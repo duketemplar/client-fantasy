@@ -26,6 +26,7 @@ function updateProspect() {
     const prospectData = {
       phone_number: prospect.phoneNumber,
       email: prospect.email,
+      citizen: prospect.citizen,
     };
 
     nordnetAPI
@@ -47,6 +48,9 @@ function createProspect() {
     const prospectData = {
       national_id_number: prospect.nationalIdNumber,
       national_id_number_country_code: prospect.nationalIdNumberCountryCode,
+      phone_number: prospect.phoneNumber,
+      email: prospect.email,
+      citizen: prospect.citizen,
     };
 
     nordnetAPI
@@ -71,6 +75,7 @@ function receivedProspect(prospect) {
 
 export default {
   createProspect,
+  updateProspect,
   receivedProspect,
   createOrUpdateProspect,
   changeProspect,
