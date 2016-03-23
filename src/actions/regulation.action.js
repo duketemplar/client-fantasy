@@ -1,6 +1,7 @@
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_REGULATIONS_PATH } from '../utils/endpoints';
 import { createOrUpdateProspect } from './';
+import getNationality from '../utils/nationality';
 
 const CHANGE_REGULATION = 'CHANGE_REGULATION';
 const RECEIVED_REGULATION = 'RECEIVED_REGULATION';
@@ -20,27 +21,32 @@ function createOrUpdateRegulation() {
   };
 }
 
+function getRegulationData(state) {
+  const {
+    kyc,
+    pep,
+    taxInfo,
+  } = state;
+  return {
+    customer_type: 'individual',
+    jurisdiction: getNationality(),
+    pep: {
+      is_pep: pep.isPep,
+    },
+    kyc: {
+      savings_purpuse: kyc.savingsPurpuse,
+    },
+    tax_info: {
+      taxable_in_jurisdiction: taxInfo.taxableInJurisdiction,
+      taxable_outside_jurisdiction: taxInfo.taxableOutsideJurisdiction,
+    },
+  };
+}
+
 function updateRegulation() {
   return function action(dispatch, getState) {
     const state = getState();
-    const {
-      kyc,
-      pep,
-      regulation,
-    } = state;
-    const regulationData = {
-      taxable_in_jurisdiction: regulation.taxableInJurisdiction,
-      taxable_outside_jurisdiction: regulation.taxableOutsideJurisdiction,
-      pep: {
-        is_pep: pep.isPep,
-      },
-      kyc: {
-        some_key: kyc.some_key,
-      },
-      tax_info: {
-
-      },
-    };
+    const regulationData = getRegulationData(state);
 
     nordnetAPI
       .put(`${CUSTOMERS_REGULATIONS_PATH}/${state.regulation.id}`, regulationData, header)
@@ -59,12 +65,7 @@ function updateRegulation() {
 function createRegulation() {
   return function action(dispatch, getState) {
     const state = getState();
-    const {
-      kyc,
-      pep,
-      regulation,
-    } = state;
-    const regulationData = { ...regulation, kyc, pep };
+    const regulationData = getRegulationData(state);
 
     nordnetAPI
       .post(CUSTOMERS_REGULATIONS_PATH, regulationData, header)
