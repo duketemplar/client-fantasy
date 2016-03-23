@@ -27,10 +27,10 @@ describe('regulation.action', () => {
   });
 
   it('should be able to change kyc', () => {
-    const action = changeKyc({ savings_purpose: 'exteminate' });
+    const action = changeKyc({ savings_purpose: 'exterminate' });
     expect(action).to.be.eql({
       type: CHANGE_KYC,
-      fieldsToChange: { savings_purpose: 'exteminate' },
+      fieldsToChange: { savings_purpose: 'exterminate' },
     });
   });
 
