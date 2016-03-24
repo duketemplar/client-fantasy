@@ -1,4 +1,3 @@
-// import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 import libPhoneNumber from 'google-libphonenumber';
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
 

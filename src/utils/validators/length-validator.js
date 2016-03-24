@@ -1,8 +1,10 @@
+import { isEmptyValue } from './is-empty-value';
 
-const lengthValidator = (length, errorMessage, value) => {
-  if (!value) {
+const lengthValidator = (maxLength, errorMessage, value) => {
+  const valueLength = value.toString().length;
+  if (isEmptyValue(value)) {
     return null;
-  } else if (value.length < length) {
+  } else if (valueLength < maxLength) {
     return errorMessage;
   }
   return null;
