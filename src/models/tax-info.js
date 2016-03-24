@@ -4,6 +4,9 @@ import Base from './base';
 class TaxInfo extends Base {
   constructor(props) {
     super(props);
+    if (this.taxableInJurisdiction === undefined) {
+      this.taxableInJurisdiction = true;
+    }
   }
 }
 

@@ -5,7 +5,11 @@ import {
 } from '../utils/validators';
 
 class Kyc extends Base {
-
+  constructor(props) {
+    super(props);
+    this.yearlyIncomeCurrency = 'SEK';
+    this.yearlyInsertCurrency = 'SEK';
+  }
 }
 
 Kyc.validators = {

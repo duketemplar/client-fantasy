@@ -1,7 +1,6 @@
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_REGULATIONS_PATH } from '../utils/endpoints';
 import { createOrUpdateProspect } from './';
-import getNationality from '../utils/nationality';
 
 const CHANGE_REGULATION = 'CHANGE_REGULATION';
 const RECEIVED_REGULATION = 'RECEIVED_REGULATION';
@@ -25,16 +24,24 @@ function getRegulationData(state) {
   const {
     kyc,
     pep,
+    regulation,
     taxInfo,
   } = state;
+
   return {
-    customer_type: 'individual',
-    jurisdiction: getNationality(),
+    customer_type: regulation.customerType,
+    jurisdiction: regulation.jurisdiction,
     pep: {
       is_pep: pep.isPep,
     },
     kyc: {
       savings_purpuse: kyc.savingsPurpuse,
+      economic_origin: kyc.economicOrigin,
+      employment_classification: kyc.employmentClassification,
+      yearly_income: kyc.yearlyIncome,
+      yearly_income_currency: kyc.yearlyIncomeCurrency,
+      yearly_insert: kyc.yearlyInsert,
+      yearly_insert_currency: kyc.yearlyInsertCurrency,
     },
     tax_info: {
       taxable_in_jurisdiction: taxInfo.taxableInJurisdiction,
