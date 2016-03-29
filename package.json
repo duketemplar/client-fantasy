@@ -55,6 +55,7 @@
   "dependencies": {
     "classnames": "2.2.0",
     "es6-promise": "3.0.2",
+    "google-libphonenumber": "1.0.15",
     "intl": "1.0.1",
     "nordnet-next-api": "2.2.1",
     "nordnet-ui-kit": "0.0.13",

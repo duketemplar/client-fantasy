@@ -1,13 +1,11 @@
-const emailValidator = (message, value) => {
-  if (value === null || value === undefined) {
+import { isEmptyValue } from './is-empty-value';
+
+const emailValidator = (errorMessage, email) => {
+  if (isEmptyValue(email)) {
     return null;
+  } else if (!email.match(/^[a-zA-Z0-9._+-]+@[a-zA-Z0-9.+-]+\.[a-zA-Z]{2,4}$/)) {
+    return errorMessage;
   }
-
-  if (value.length < 5) {
-    return message;
-  }
-
   return null;
 };
-
 export default emailValidator;

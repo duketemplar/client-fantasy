@@ -1,5 +1,7 @@
+import { isValidCivicRegnoSE } from './national-registration-number-validator-SE';
+
 const seValidator = (value) => {
-  return value.match(/^(\d{6,8})-?\d{4}$/);
+  return isValidCivicRegnoSE(value);
 };
 
 const dkValidator = (value) => {

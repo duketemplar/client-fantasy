@@ -1,13 +1,9 @@
+import { isEmptyValue } from './is-empty-value';
 
-const lengthValidator = (length, message, value) => {
-  if (value === undefined) {
-    return null;
+const lengthValidator = (minLength, errorMessage, value) => {
+  if (isEmptyValue(value) || typeof(value) === 'boolean' || value.toString().length < minLength) {
+    return errorMessage;
   }
-
-  if (value.length < length) {
-    return message;
-  }
-
   return null;
 };
 

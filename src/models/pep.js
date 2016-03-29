@@ -1,6 +1,6 @@
 import Base from './base';
 import {
-  notBlankValidator,
+  requiredFieldValidator,
 } from '../utils/validators';
 
 class Pep extends Base {
@@ -11,7 +11,7 @@ class Pep extends Base {
 
 Pep.validators = {
   isPep: [
-    (value) => notBlankValidator('This question needs to be answered.', value),
+    (value) => requiredFieldValidator('This question needs to be answered.', value),
   ],
 };
 
