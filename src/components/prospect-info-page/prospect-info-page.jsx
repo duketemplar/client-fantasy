@@ -58,13 +58,19 @@ export class ProspectInfoPage extends React.Component {
                 helpText={ this.props.prospectValidations.email }
                 hasError={ this.hasError('email') }
               />
-              <Button type="submit" primary >
-                Submit
-              </Button>
-              <Button secondary>
-                Clear values
-              </Button>
             </Col>
+            <Row>
+              <Col xs={12}>
+                <div className="compliance__buttons">
+                  <Button className="compliance__submit" type="submit" primary >
+                    Submit
+                  </Button>
+                  <Button secondary>
+                    Clear values
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </form>
         </Col>
       </Grid>

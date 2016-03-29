@@ -83,7 +83,7 @@ class PepPage extends React.Component {
             </Row>
             <Row>
               <Col xs={12}>
-                <div className="compliance__pep--button">
+                <div className="compliance__buttons">
                   <Button className="compliance__submit" type="submit" primary >
                     Submit
                   </Button>

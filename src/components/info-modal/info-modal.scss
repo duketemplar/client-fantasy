@@ -1,6 +1,6 @@
 .compliance__bkg {
   display: block;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -9,7 +9,7 @@
 
   &::after {
     display: block;
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;

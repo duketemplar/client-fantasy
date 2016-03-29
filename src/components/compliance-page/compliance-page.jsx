@@ -113,19 +113,17 @@ class CompliancePage extends React.Component {
                   }
                 />
 
-                <Row>
+                <Row className="checkbox__question">
                   <h5>
                     5. What is the purpose of your savings with Nordnet?
                   </h5>
-                  <Col xs={ 3 }>
-                    <Checkbox label="Financial safety"/>
-                    <Checkbox label="Private consumption"/>
-                    <Checkbox label="For next of kin, e.g. children"/>
-                  </Col>
-                  <Col xs={ 3 }>
-                    <Checkbox label="Pension"/>
-                    <Checkbox label="Trading"/>
-                  </Col>
+                </Row>
+                <Row className="checkbox__row">
+                  <Checkbox label="Financial safety"/>
+                  <Checkbox label="Private consumption"/>
+                  <Checkbox label="For next of kin, e.g. children"/>
+                  <Checkbox label="Pension"/>
+                  <Checkbox label="Trading"/>
                 </Row>
               </Col>
 
@@ -160,22 +158,28 @@ class CompliancePage extends React.Component {
                   options={ yesNoOptions }
                 />
               </Col>
-              <Col xs={ 12 } >
-                <div className="horizontal-rule"></div>
-                <Row>
-                  <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
-                </Row>
-              </Col>
+            </Row>
+            <Row>
+              <Row>
+                <Col xs={ 12 } >
+                  <div className="horizontal-rule"></div>
+                  <Row className="checkbox__confirm">
+                    <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
+                  </Row>
+                </Col>
+              </Row>
             </Row>
 
             <Row>
               <Col xs={12}>
-                <Button className="compliance__submit" type="submit" primary >
-                  Submit
-                </Button>
-                <Button secondary>
-                  Clear values
-                </Button>
+                <div className="compliance__buttons">
+                  <Button className="compliance__submit" type="submit" primary >
+                    Submit
+                  </Button>
+                  <Button secondary>
+                    Clear values
+                  </Button>
+                </div>
               </Col>
               </Row>
             </form>

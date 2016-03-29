@@ -45,9 +45,18 @@ class AccountPicker extends React.Component {
                 <h1> Aktie & Fonddepå </h1>
               </Col>
             </Row>
-            <Button type="submit" primary>
-              Submit
-            </Button>
+            <Row>
+              <Col xs={12}>
+                <div className="compliance__buttons">
+                  <Button className="compliance__submit" type="submit" primary >
+                    Submit
+                  </Button>
+                  <Button secondary>
+                    Clear values
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </form>
         </Col>
       </Grid>
