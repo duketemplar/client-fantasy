@@ -18,7 +18,6 @@ export default class CustomerRegistration extends React.Component {
       <div className="customer-registration">
         <Section element={ ProspectInfoPage } />
         <Section element={ CompliancePage } />
-        <Section element={ PepPage } />
         <Section element={ AccountPicker } />
         <Section element={ SignPage } />
       </div>

@@ -51,7 +51,7 @@ class IdentifyPage extends React.Component {
                 value={ prospect.nationalIdNumber }
                 onChange={ this.handleChange }
                 hasError={ hasError }
-                hasSuccess={ !hasError && requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
+                hasSuccess={ !hasError && !requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
                 helpText={ prospectValidations.nationalIdNumber }
               />
               <Button className="identify__submit" primary type="submit">
