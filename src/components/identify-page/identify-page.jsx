@@ -37,7 +37,6 @@ class IdentifyPage extends React.Component {
       prospectValidations,
     } = this.props;
 
-
     const hasError = this.hasErrors();
 
     return (
