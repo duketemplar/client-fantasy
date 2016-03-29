@@ -61,6 +61,16 @@ class CompliancePage extends React.Component {
     return ret;
   }
 
+  pepTitleText() {
+    return (
+      <p>
+        8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?
+        <br /><br />
+        <span style={ { 'font-weight': 'normal' } }>For further information, please see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
+      </p>
+    );
+  }
+
   render() {
     return (
       <Grid className="compliance">
@@ -152,7 +162,7 @@ class CompliancePage extends React.Component {
                   }
                 />
                 <TitledSelect
-                  title="8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?"
+                  title={ this.pepTitleText() }
                   value={ this.safeBooleanToString(this.props.pep.isPep) }
                   onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
                   options={ yesNoOptions }

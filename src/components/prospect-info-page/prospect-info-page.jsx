@@ -6,6 +6,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { Button, Input } from 'nordnet-ui-kit';
 import { createOrUpdateProspect, changeProspect } from '../../actions';
+import { requiredFieldValidator } from '../../utils/validators';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ export class ProspectInfoPage extends React.Component {
                 onChange={ this.buildHandleChange('phoneNumber') }
                 helpText={ this.props.prospectValidations.phoneNumber }
                 hasError={ this.hasError('phoneNumber') }
+                hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
               />
               <Input
                 type="email"
@@ -57,6 +59,7 @@ export class ProspectInfoPage extends React.Component {
                 onChange={ this.buildHandleChange('email') }
                 helpText={ this.props.prospectValidations.email }
                 hasError={ this.hasError('email') }
+                hasSuccess={ !this.hasError('email') && !requiredFieldValidator('Must be filled in.', this.props.prospect.email) }
               />
             </Col>
             <Row>
