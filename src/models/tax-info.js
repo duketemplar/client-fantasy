@@ -1,4 +1,4 @@
-import { notBlankValidator } from '../utils/validators';
+import { requiredFieldValidator } from '../utils/validators';
 import Base from './base';
 
 class TaxInfo extends Base {
@@ -12,10 +12,10 @@ class TaxInfo extends Base {
 
 TaxInfo.validators = {
   taxableOutsideJurisdiction: [
-    (value) => notBlankValidator('Must be filled in.', value),
+    (value) => requiredFieldValidator('Must be filled in.', value),
   ],
   taxableInJurisdiction: [
-    (value) => notBlankValidator('Must be filled in.', value),
+    (value) => requiredFieldValidator('Must be filled in.', value),
   ],
 };
 

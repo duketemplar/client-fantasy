@@ -21,7 +21,7 @@ Prospect.keyTranslations = {
 
 Prospect.validators = {
   nationalIdNumber: [
-    (value) => nationalRegistrationNumberValidator(getNationality(), 'Must be a real national registration number', value),
+    (value) => nationalRegistrationNumberValidator(getNationality(), 'Must be a real national registration number.', value),
     (value) => requiredFieldValidator('Must be filled in.', value),
   ],
   phoneNumber: [
@@ -29,10 +29,10 @@ Prospect.validators = {
   ],
   email: [
     (value) => requiredFieldValidator('Must be filled in.', value),
-    (value) => emailValidator('not a valid email', value),
+    (value) => emailValidator('Not a valid email.', value),
   ],
   firstName: [
-    (value) => regexValidator(/^[a-zA-Z.\s]+$/, 'Must only contain letters', value),
+    (value) => regexValidator(/^[a-zA-Z.\s]+$/, 'Must only contain letters.', value),
     (value) => requiredFieldValidator('Must be filled in.', value),
     (value) => lengthValidator(3, 'Must be at least 2 characters.', value),
   ],
