@@ -5,10 +5,11 @@ describe('Validate email', () => {
   const ErrorMessage = 'some error message';
   const validEmail = 'valid@email.se';
   const inValidEmail = 'in@Valid';
-  it('It is ok to be empty? Who can read this in the future? Valid email returns the same!', () => {
+
+  it('It is ok to be empty string', () => {
     expect(emailValidator(ErrorMessage, '')).to.equal(null);
   });
-  it('It is ok to be undefined? Who can read this in the future? Valid email returns the same!', () => {
+  it('It is ok to be have value undefined', () => {
     expect(emailValidator(ErrorMessage, undefined)).to.equal(null);
   });
   it('Is NOT a valid email', () => {

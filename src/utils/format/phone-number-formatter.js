@@ -8,7 +8,7 @@ import { PhoneNumberFormat, PhoneNumberUtil } from 'google-libphonenumber';
  * @returns the formatted number with pattern like '+41 44 668 18 00';
  * or the original input, if the input is not a valid one.
  */
-export function formatPhoneNumber(inputNum, countryCode = 'SE') {
+export function phoneNumberFormatter(inputNum, countryCode = 'SE') {
   const phoneUtil = PhoneNumberUtil.getInstance();
 
   try {

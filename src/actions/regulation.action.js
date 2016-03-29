@@ -4,9 +4,6 @@ import { createOrUpdateProspect } from './';
 
 const CHANGE_REGULATION = 'CHANGE_REGULATION';
 const RECEIVED_REGULATION = 'RECEIVED_REGULATION';
-const CHANGE_PEP = 'CHANGE_PEP';
-const CHANGE_KYC = 'CHANGE_KYC';
-
 const header = { 'Content-type': 'application/json; charset=utf-8' };
 
 function createOrUpdateRegulation() {
@@ -102,30 +99,13 @@ function changeRegulation(fieldsToChange) {
   };
 }
 
-function changeKyc(fieldsToChange) {
-  return {
-    type: CHANGE_KYC,
-    fieldsToChange,
-  };
-}
-
-function changePep(fieldsToChange) {
-  return {
-    type: CHANGE_PEP,
-    fieldsToChange,
-  };
-}
 
 export default {
   changeRegulation,
-  changePep,
-  changeKyc,
   createOrUpdateRegulation,
   receivedRegulation,
   createRegulation,
   updateRegulation,
   CHANGE_REGULATION,
-  CHANGE_PEP,
-  CHANGE_KYC,
   RECEIVED_REGULATION,
 };
