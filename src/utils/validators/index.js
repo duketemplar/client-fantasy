@@ -1,6 +1,6 @@
 import combineValidators from './combine-validators';
 import lengthValidator from './length-validator';
-import isMandatory from './is-mandatory';
+import requiredFieldValidator from './required-field-validator';
 import emailValidator from './email-validator';
 import regexValidator from './regex-validator';
 import nationalRegistrationNumberValidator from './national-registration-number-validator';
@@ -11,7 +11,7 @@ import validatePhonenumber from './phone-number-validator';
 export {
   combineValidators,
   lengthValidator,
-  isMandatory,
+  requiredFieldValidator,
   emailValidator,
   regexValidator,
   nationalRegistrationNumberValidator,

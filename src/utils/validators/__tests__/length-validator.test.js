@@ -13,7 +13,10 @@ describe('Validate length', () => {
   it('It is NOT possible with 3 char and len 4', () => {
     expect(lengthValidator(4, errorMsg, 123)).to.equal(errorMsg);
   });
-  it('It is possible with boolean and whatever length!?', () => {
-    expect(lengthValidator(4, errorMsg, false)).to.equal(null);
+  it('It is NOT possible with value Boolean', () => {
+    expect(lengthValidator(4, errorMsg, false)).to.equal(errorMsg);
+  });
+  it('It is NOT possible with value undefined', () => {
+    expect(lengthValidator(4, errorMsg, undefined)).to.equal(errorMsg);
   });
 });

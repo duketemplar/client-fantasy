@@ -6,6 +6,7 @@ import { Button, Input } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { changeProspect, createOrUpdateProspect } from '../../actions';
+import { requiredFieldValidator } from '../../utils/validators';
 
 class IdentifyPage extends React.Component {
   constructor(props) {
@@ -25,10 +26,6 @@ class IdentifyPage extends React.Component {
     this.props.dispatch(changeProspect({
       nationalIdNumber: e.target.value,
     }));
-  }
-
-  notBlank(value) {
-    return value !== undefined && value !== null && value !== '';
   }
 
   hasErrors() {
@@ -54,7 +51,7 @@ class IdentifyPage extends React.Component {
                 value={ prospect.nationalIdNumber }
                 onChange={ this.handleChange }
                 hasError={ hasError }
-                hasSuccess={ !hasError && this.notBlank(prospect.nationalIdNumber) }
+                hasSuccess={ !hasError && requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
                 helpText={ prospectValidations.nationalIdNumber }
               />
               <Button className="identify__submit" primary type="submit">
