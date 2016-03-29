@@ -1,4 +1,4 @@
-import reducers from '../regulation.reducer';
+import reducers from '../pep.reducer';
 import { expect } from 'chai';
 import { Pep } from '../../models';
 import { changePep } from '../../actions';
