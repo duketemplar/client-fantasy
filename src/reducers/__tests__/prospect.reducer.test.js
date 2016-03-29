@@ -46,4 +46,26 @@ describe('prospect.reducer', () => {
 
     expect(reducers.prospectValidations(initialState, { type: '@@init' })).to.eql({});
   });
+
+  it('should validate changed prospect fields', () => {
+    const initialState = {};
+    const action = changeProspect({
+      nationalIdNumber: 'abc',
+      phoneNumber: '123456',
+      email: 'not@valid',
+      firstName: '123',
+      lastName: 'b',
+      citizen: null,
+      country: null,
+    });
+    expect(reducers.prospectValidations(initialState, action)).to.eql({
+      nationalIdNumber: 'Must be a real national registration number.',
+      phoneNumber: 'Must be a real phonenumber.',
+      email: 'Not a valid email.',
+      firstName: 'Must only contain letters.',
+      lastName: 'Must be at least 2 characters.',
+      citizen: 'Must be filled in.',
+      country: 'Must be filled in.',
+    });
+  });
 });
