@@ -52,7 +52,7 @@ describe('regulation.action', () => {
 
   it('should be able to create regulation', () => {
     const nnAPIPostStub = mockNNAPI({ id: 'new-id' }, 'post', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ regulation: { id: null }, kyc: {}, pep: {} });
+    const getStateStub = sandbox.stub().returns({ regulation: { id: null }, kyc: {}, pep: {}, taxInfo: {} });
     const action = createRegulation();
 
     action(getDispatch(getStateStub), getStateStub);
@@ -63,7 +63,7 @@ describe('regulation.action', () => {
 
   it('should be able to update regulation', () => {
     const nnAPIPutStub = mockNNAPI({ id: 'new-id' }, 'put', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ regulation: { id: 'id-yo' }, kyc: {}, pep: {} });
+    const getStateStub = sandbox.stub().returns({ regulation: { id: 'id-yo' }, kyc: {}, pep: {}, taxInfo: {} });
     const action = updateRegulation();
 
     action(getDispatch(getStateStub), getStateStub);
@@ -75,7 +75,7 @@ describe('regulation.action', () => {
   it('should call update if id is present', () => {
     const nnAPIPutStub = mockNNAPI({ id: 'new-id' }, 'put', sandbox, nnAPI);
     const nnAPIPostStub = mockNNAPI({ id: 'new-id' }, 'post', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ regulation: { id: 'id-yo' }, kyc: {}, pep: {} });
+    const getStateStub = sandbox.stub().returns({ regulation: { id: 'id-yo' }, kyc: {}, pep: {}, taxInfo: {} });
     const action = createOrUpdateRegulation();
 
     action(getDispatch(getStateStub), getStateStub);
@@ -89,7 +89,7 @@ describe('regulation.action', () => {
   it('should call create if no id is present', () => {
     const nnAPIPutStub = mockNNAPI({ id: 'new-id' }, 'put', sandbox, nnAPI);
     const nnAPIPostStub = mockNNAPI({ id: 'new-id' }, 'post', sandbox, nnAPI);
-    const getStateStub = sandbox.stub().returns({ regulation: { id: null }, kyc: {}, pep: {} });
+    const getStateStub = sandbox.stub().returns({ regulation: { id: null }, kyc: {}, pep: {}, taxInfo: {} });
     const action = createOrUpdateRegulation();
 
     action(getDispatch(getStateStub), getStateStub);

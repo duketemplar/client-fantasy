@@ -8,7 +8,7 @@ class Validation {
   validate() {
     let field;
     for (field in this.object) {
-      if (!typeof(field) !== 'function') {
+      if (typeof(field) !== 'function') {
         this.validateField(field);
       }
     }
