@@ -1,17 +1,13 @@
 import {
-  changeKyc,
-  changePep,
   changeRegulation,
   createRegulation,
   updateRegulation,
   createOrUpdateRegulation,
-  CHANGE_KYC,
-  CHANGE_PEP,
   CHANGE_REGULATION,
 } from '../';
 import sinon from 'sinon';
 import nnAPI from 'nordnet-next-api';
-import { expect, assert } from 'chai'; // ??
+import { expect, assert } from 'chai';
 import { CUSTOMERS_REGULATIONS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
 
@@ -24,22 +20,6 @@ describe('regulation.action', () => {
 
   afterEach(() => {
     sandbox.restore();
-  });
-
-  it('should be able to change kyc', () => {
-    const action = changeKyc({ savings_purpose: 'exterminate' });
-    expect(action).to.be.eql({
-      type: CHANGE_KYC,
-      fieldsToChange: { savings_purpose: 'exterminate' },
-    });
-  });
-
-  it('should be able to change pep', () => {
-    const action = changePep({ isPep: true });
-    expect(action).to.be.eql({
-      type: CHANGE_PEP,
-      fieldsToChange: { isPep: true },
-    });
   });
 
   it('should be able to change regulation', () => {

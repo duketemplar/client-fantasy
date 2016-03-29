@@ -1,3 +1,3 @@
-import phoneNumberFormatter from './phone-number-formatter';
+import { phoneNumberFormatter } from './phone-number-formatter';
 
 export { phoneNumberFormatter };

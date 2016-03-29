@@ -11,9 +11,14 @@ describe('Validate phone number', () => {
   let invalidNO;
   let invalidFI;
   let invalidDK;
+  const errorMessage = 'Some error message';
 
   beforeEach(() => {
     validSE = [
+      ['SE', null],
+      ['SE', undefined],
+      ['SE', ''],
+      ['', '+46707792456'], // defaults to SE
       ['SE', '+46707792456'],
       ['SE', '46707792456'],
       ['SE', '707792456'],
@@ -30,11 +35,13 @@ describe('Validate phone number', () => {
     ];
 
     invalidSE = [
+      ['SE', '0'],
       ['SE', '+44707792455'],
       ['DK', '+44707792455'],
     ];
     invalidFI = [
       ['FI', '355-010123-8221'],
+      ['', '020 198 5898'], // defaults to SE
     ];
     invalidNO = [
       ['NO', '+5520376-49749'],
@@ -45,14 +52,14 @@ describe('Validate phone number', () => {
   });
 
   it('should be a valid phone number', () => {
-    [...validSE, ...validNO, ...validFI, ...validDK].forEach((number) => {
-      expect(validatePhonenumber(number[1], number[0])).to.equal(true);
+    [...validSE, ...validNO, ...validFI, ...validDK].forEach((data) => {
+      expect(validatePhonenumber(errorMessage, data[1], data[0])).to.equal(null);
     });
   });
 
   it('Should be a falsy phone number', () => {
-    [...invalidSE, ...invalidNO, ...invalidFI, ...invalidDK].forEach((number) => {
-      expect(validatePhonenumber(number[1], number[0])).to.equal(false);
+    [...invalidSE, ...invalidNO, ...invalidFI, ...invalidDK].forEach((data) => {
+      expect(validatePhonenumber(errorMessage, data[1], data[0])).to.equal(errorMessage);
     });
   });
 });
