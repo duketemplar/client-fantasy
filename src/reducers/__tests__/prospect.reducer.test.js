@@ -52,7 +52,7 @@ describe('prospect.reducer', () => {
     const action = changeProspect({
       nationalIdNumber: 'abc',
       phoneNumber: '123456',
-      email: '@not',
+      email: 'not@valid',
       firstName: '123',
       lastName: 'b',
       citizen: null,

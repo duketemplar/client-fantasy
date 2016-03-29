@@ -26,10 +26,22 @@ describe('kyc.reducer', () => {
   it('should validate changed kyc fields', () => {
     const initialState = {};
     const action = changeKyc({
+      taxableOutsideJurisdiction: null,
+      USCitizen: null,
       employment: null,
+      income: null,
+      sourceOfFunds: null,
+      yearlyDeposits: null,
+      politicallyExposedPerson: null,
     });
     expect(reducers.kycValidations(initialState, action)).to.eql({
+      taxableOutsideJurisdiction: 'This question needs to be answered.',
+      USCitizen: 'This question needs to be answered.',
       employment: 'This question needs to be answered.',
+      income: 'This question needs to be answered.',
+      sourceOfFunds: 'This question needs to be answered.',
+      yearlyDeposits: 'This question needs to be answered.',
+      politicallyExposedPerson: 'This question needs to be answered.',
     });
   });
 });
