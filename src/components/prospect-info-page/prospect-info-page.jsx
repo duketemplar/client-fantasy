@@ -67,11 +67,11 @@ export class ProspectInfoPage extends React.Component {
             <Row>
               <Col xs={12}>
                 <div className="compliance__buttons">
-                  <Button className="compliance__submit" type="submit" primary disabled={this.hasError('phoneNumber') || this.hasError('email') || !this.props.prospect.phoneNumber || !this.props.prospect.email }>
-                    Submit
-                  </Button>
                   <Button secondary>
-                    Clear values
+                    Previous
+                  </Button>
+                  <Button className="compliance__button_continue" type="submit" primary disabled={this.hasError('phoneNumber') || this.hasError('email') || !this.props.prospect.phoneNumber || !this.props.prospect.email }>
+                    Continue
                   </Button>
                 </div>
               </Col>

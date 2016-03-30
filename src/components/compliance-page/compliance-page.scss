@@ -46,7 +46,9 @@ h2 {
 
 .compliance__buttons {
   margin-top: 20px;
-
+  .compliance__button_continue {
+    margin-left: 20px;
+  }
   .compliance__submit {
     margin-right: 20px;
   }
