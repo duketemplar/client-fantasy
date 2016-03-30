@@ -8,9 +8,7 @@ class AccountPicker extends React.Component {
   }
 
   handleSubmit() {
-    this.context.router.push({
-      pathname: "/register/sign",
-    });
+    // TODO
   }
 
   render() {
@@ -63,9 +61,5 @@ class AccountPicker extends React.Component {
     );
   }
 }
-
-AccountPicker.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
 
 export default AccountPicker;

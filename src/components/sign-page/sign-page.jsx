@@ -100,6 +100,7 @@ export default class SignPage extends React.Component {
   }
 }
 
+// TODO: Remove router from context or else stub it in tests
 SignPage.contextTypes = {
   router: React.PropTypes.func.isRequired,
 };

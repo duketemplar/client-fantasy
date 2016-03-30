@@ -210,10 +210,6 @@ CompliancePage.propTypes = {
   dispatch: React.PropTypes.func,
 };
 
-CompliancePage.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
-
 function select(state) {
   return {
     kyc: state.kyc,

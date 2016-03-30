@@ -106,10 +106,6 @@ PepPage.propTypes = {
   pep: React.PropTypes.object,
 };
 
-PepPage.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
-
 function select(state) {
   return {
     pep: state.pep,

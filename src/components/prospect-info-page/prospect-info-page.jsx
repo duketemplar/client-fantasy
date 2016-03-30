@@ -90,10 +90,6 @@ ProspectInfoPage.propTypes = {
   prospectValidations: React.PropTypes.object,
 };
 
-ProspectInfoPage.contextTypes = {
-  router: React.PropTypes.object.isRequired,
-};
-
 function select(state) {
   return {
     prospect: state.prospect,
