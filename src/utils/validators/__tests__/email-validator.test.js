@@ -9,7 +9,7 @@ describe('Validate email', () => {
   it('It is ok to be empty string', () => {
     expect(emailValidator(ErrorMessage, '')).to.equal(null);
   });
-  it('It is ok to be have value undefined', () => {
+  it('It is ok to have value undefined', () => {
     expect(emailValidator(ErrorMessage, undefined)).to.equal(null);
   });
   it('Is NOT a valid email', () => {

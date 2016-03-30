@@ -1,4 +1,6 @@
-import { changePep, CHANGE_PEP } from '../';
+import { changePep,
+  CHANGE_PEP,
+} from '../';
 import { expect } from 'chai';
 
 describe('pep.action', () => {
