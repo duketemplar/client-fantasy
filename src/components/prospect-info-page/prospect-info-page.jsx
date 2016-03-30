@@ -44,6 +44,7 @@ export class ProspectInfoPage extends React.Component {
           <form onSubmit={ this.submitForm } >
             <Col xs={6}>
               <Input
+                className="prospect__input_phone"
                 type="text"
                 label="Phone Number"
                 value={ this.props.prospect.phoneNumber }
@@ -53,6 +54,7 @@ export class ProspectInfoPage extends React.Component {
                 hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
               />
               <Input
+                className="prospect__input_email"
                 type="email"
                 label="E-mail"
                 value={ this.props.prospect.email }
@@ -65,7 +67,7 @@ export class ProspectInfoPage extends React.Component {
             <Row>
               <Col xs={12}>
                 <div className="compliance__buttons">
-                  <Button className="compliance__submit" type="submit" primary >
+                  <Button className="compliance__submit" type="submit" primary disabled={this.hasError('phoneNumber') || this.hasError('email') || !this.props.prospect.phoneNumber || !this.props.prospect.email }>
                     Submit
                   </Button>
                   <Button secondary>
@@ -99,4 +101,9 @@ function select(state) {
   };
 }
 
-export default connect(select)(ProspectInfoPage);
+const ProspectInfoPageConnected = connect(select)(ProspectInfoPage);
+
+export {
+  ProspectInfoPageConnected as default,
+  ProspectInfoPage,
+};
