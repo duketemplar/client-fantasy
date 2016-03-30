@@ -1,4 +1,4 @@
-import { formatPhoneNumber } from '../phone-number-formatter';
+import { phoneNumberFormatter } from '../phone-number-formatter';
 import { expect } from 'chai';
 
 describe('Phone number formatter', () => {
@@ -19,12 +19,12 @@ describe('Phone number formatter', () => {
 
   it('has a valid phone number format', () => {
     [...validSE].forEach((phoneDetails) => {
-      expect(formatPhoneNumber(phoneDetails[1], phoneDetails[0])).to.equal(phoneDetails[2]);
+      expect(phoneNumberFormatter(phoneDetails[1], phoneDetails[0])).to.equal(phoneDetails[2]);
     });
   });
   it('Is an invalid number format', () => {
     [...inValidSE].forEach((phoneDetails) => {
-      expect(formatPhoneNumber(phoneDetails[1], phoneDetails[0])).to.not.equal(phoneDetails[2]);
+      expect(phoneNumberFormatter(phoneDetails[1], phoneDetails[0])).to.not.equal(phoneDetails[2]);
     });
   });
 });

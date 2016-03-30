@@ -1,4 +1,4 @@
-import reducers from '../regulation.reducer';
+import reducers from '../kyc.reducer';
 import { expect } from 'chai';
 import { Kyc } from '../../models';
 import { changeKyc } from '../../actions';
