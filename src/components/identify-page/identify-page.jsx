@@ -7,7 +7,6 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { changeProspect, createOrUpdateProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
-
 class IdentifyPage extends React.Component {
   constructor(props) {
     super(props);
@@ -54,7 +53,7 @@ class IdentifyPage extends React.Component {
                 hasSuccess={ !hasError && !requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
                 helpText={ prospectValidations.nationalIdNumber }
               />
-              <Button className="identify__submit" primary type="submit">
+            <Button className="identify__submit" primary type="submit" disabled={ hasError || !this.props.prospect.nationalIdNumber }>
                 Submit
               </Button>
             </form>
@@ -83,4 +82,9 @@ function select(state) {
   };
 }
 
-export default connect(select)(IdentifyPage);
+const IdentifyPageConnected = connect(select)(IdentifyPage);
+
+export {
+  IdentifyPageConnected as default,
+  IdentifyPage,
+};
