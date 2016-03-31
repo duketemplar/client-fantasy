@@ -1,4 +1,4 @@
-.staticAccountPage {
+.account {
   height: 107px;
 
   .account__name {
@@ -11,7 +11,7 @@
     height: 101px;
     margin-top: 3px;
     margin-right: 20px;
-    .account__name--text {
+    .account__name__text {
       position: relative;
       margin-top: 50%;
       transform: translate(0, -50%);
@@ -24,7 +24,7 @@
   .account__description {
     float: left;
     clear: right;
-    .account__description--text {
+    .account__description__text {
       font-size: 1.5rem;
       margin-bottom: 5px;
     }
@@ -36,7 +36,7 @@
       float: left;
       padding-right: 3px;
     }
-    .account__usp--text {
+    .account__usp__text {
       font-size: 1.2rem;
       float: left;
       margin-right: 10px;

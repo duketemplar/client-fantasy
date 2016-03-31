@@ -1,65 +1,37 @@
 import React from 'react';
-import { Grid, Col, Row } from 'react-bem-grid';
-import { Checkbox, Button } from 'nordnet-ui-kit';
+import './account-picker.scss';
+import { Grid, Row, Col } from 'react-bem-grid';
 
-class AccountPicker extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handleSubmit() {
-    // TODO
-  }
-
+export default class AccountPicker extends React.Component {
   render() {
     return (
-      <Grid className="pick-account">
-        <Col xs={ 12 }>
-          <Row>
-            <h1> Pick account type </h1>
-          </Row>
-          <form onSubmit={ this.handleSubmit.bind(this) }>
-            <Row>
-              <Col xs={ 1 }>
-                <Checkbox className="pick-account__answer--isk" name="isk" label="" />
-              </Col>
-              <Col xs={ 11 }>
-                <h1> Investeringssparkonto </h1>
-              </Col>
-            </Row>
-            <Row xsMiddle>
-              <Col xs={ 1 }>
-                <Checkbox className="pick-account__answer--kf" name="kf" label="" />
-              </Col>
-              <Col xs={ 11 }>
-                <h1> Kapitalförsäkring </h1>
-              </Col>
-            </Row>
-            <Row xsMiddle>
-              <Col xs={ 1 }>
-                <Checkbox className="pick-account__answer--af"name="af" label="" />
-              </Col>
-              <Col xs={ 11 }>
-                <h1> Aktie & Fonddepå </h1>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <div className="compliance__buttons">
-                  <Button className="compliance__submit" type="submit" primary >
-                    Submit
-                  </Button>
-                  <Button secondary>
-                    Clear values
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </form>
-        </Col>
+      <Grid>
+        <h1>Konto</h1>
+        <Row className="account">
+          <Col xs={ 12 }>
+            <div className="account__name">
+              <div className="account__name__text">ISK</div>
+            </div>
+            <Col className="account__description" xs={ 8 }>
+              <div className="account__description__text">
+                As a new customer an investment savings account will be opened for you.
+              </div>
+              <div className="account__description__text">
+                Once you are logged in, you can easily open more accounts and other account types.
+              </div>
+            </Col>
+            <div className="account__usp">
+              <img src="../assets/images/shape.svg" /> <div className="account__usp__text">Our most popular account</div>
+              </div>
+              <div className="account__usp">
+              <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No account fees</div>
+            </div>
+              <div className="account__usp">
+              <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No declaration</div>
+            </div>
+          </Col>
+        </Row>
       </Grid>
     );
   }
 }
-
-export default AccountPicker;

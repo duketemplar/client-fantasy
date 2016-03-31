@@ -2,7 +2,7 @@ import React from 'react';
 import Section from './registration-section';
 import ProspectInfoPage from '../prospect-info-page';
 import CompliancePage from '../compliance-page';
-import StaticAccountPage from '../static-account-page';
+import AccountPicker from '../account-picker';
 import SignPage from '../sign-page';
 
 
@@ -15,7 +15,7 @@ export default class CustomerRegistration extends React.Component {
     return (
       <div className="customer-registration">
         <Section element={ ProspectInfoPage } />
-        <Section element={ StaticAccountPage } />
+        <Section element={ AccountPicker } />
         <Section element={ CompliancePage } />
         <Section element={ SignPage } />
       </div>
