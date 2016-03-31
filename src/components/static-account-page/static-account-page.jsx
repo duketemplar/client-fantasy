@@ -1,25 +1,37 @@
 import React from 'react';
+import './static-account-page.scss';
+import { Grid, Row, Col } from 'react-bem-grid';
 
 export default class StaticAccountPage extends React.Component {
   render() {
     return (
-      <div className="staticAccountPage">
-        <h1>ISK</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          feugiat augue mauris, sed sodales eros finibus in. Sed aliquet eu dolor
-          ornare bibendum. Cras bibendum euismod leo ut sagittis. Vestibulum ultrices
-          lobortis libero eget porttitor. Quisque commodo sapien eu ex sodales, ut
-          dapibus turpis hendrerit. Donec ac lacus non lacus eleifend porta. Maecenas
-          non odio ut ex venenatis tempor. Suspendisse libero ipsum, viverra a vestibulum
-          id, congue eget sem. Etiam egestas condimentum ex, id sodales nisl. Fusce
-          neque tellus, scelerisque a magna vel, commodo elementum velit. In non
-          tincidunt lectus. Etiam vitae augue in massa sollicitudin varius et a leo.
-          Proin turpis diam, mollis et accumsan ac, commodo eget dui. Mauris ac
-          faucibus velit, eu fringilla neque. Quisque fringilla lectus risus, non
-          cursus ligula pellentesque at.
-        </p>
-      </div>
+      <Grid>
+        <h1>Konto</h1>
+        <Row className="staticAccountPage">
+          <Col xs={ 12 }>
+            <div className="account__name">
+              <div className="account__name--text">ISK</div>
+            </div>
+            <Col className="account__description" xs={ 8 }>
+              <div className="account__description--text">
+                As a new customer an investment savings account will be opened for you.
+              </div>
+              <div className="account__description--text">
+                Once you are logged in, you can easily open more accounts and other account types.
+              </div>
+            </Col>
+            <div className="account__usp">
+              <img src="./shape.svg" /> <div className="account__usp--text">Our most popular account</div>
+              </div>
+              <div className="account__usp">
+              <img src="./shape.svg" /> <div className="account__usp--text">No account fees</div>
+            </div>
+              <div className="account__usp">
+              <img src="./shape.svg" /> <div className="account__usp--text">No declaration</div>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
