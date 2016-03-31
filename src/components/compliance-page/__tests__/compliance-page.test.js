@@ -1,9 +1,85 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers, maximumLineLength */
-import CompliancePage from '../compliance-page';
+import { CompliancePage } from '../compliance-page.jsx';
 import nnAPI from 'nordnet-next-api';
 import sinon from 'sinon';
 import store from '../../../store';
 import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import React from 'react';
+
+describe('Compliance', () => {
+  let wrapper;
+  let sandbox;
+
+  beforeEach(() => {
+    const props = {
+      kyc: {},
+      regulation: {},
+      pep: {},
+    };
+
+    sandbox = sinon.sandbox.create();
+    sandbox.stub(CompliancePage.prototype, 'handleChange', () => {});
+
+    wrapper = shallow(<CompliancePage { ...props } />);
+  });
+
+  afterEach(() => {
+    sandbox.restore();
+    wrapper = null;
+  });
+
+  describe('section has valid quesion answers', () => {
+    it('gives you two opions for taxable outside jurisdicion question.', () => {
+      const component = wrapper.find('.compliance__taxable-outside-jursdiction');
+
+      expect(component.prop('options')).to.have.length(2);
+    });
+
+    it('gives you two opions for the fatca question.', () => {
+      const component = wrapper.find('.compliance__question_taxable-in-usa');
+
+      expect(component.prop('options')).to.have.length(2);
+    });
+
+    it('gives you three opions for emplyment status.', () => {
+      const component = wrapper.find('.compliance__employment-status');
+
+      expect(component.prop('options')).to.have.length(3);
+    });
+
+    it('gives you three opions for yearly income.', () => {
+      const component = wrapper.find('.compliance__yearly-income');
+
+      expect(component.prop('options')).to.have.length(3);
+    });
+
+    it('gives you five opions for the purpose of the savings.', () => {
+      const component = wrapper.find('.checkbox__row').get(0);
+
+      expect(component.props.children).to.have.length(5);
+    });
+
+    it('gives you two opions for the origin of the finances.', () => {
+      const component = wrapper.find('.compliance__funds-and-securities-originate');
+
+      expect(component.prop('options')).to.have.length(2);
+    });
+
+    it('gives you three opions for the yearly deposit into the account.', () => {
+      const component = wrapper.find('.compliance__yearly-value-of-deposits');
+
+      expect(component.prop('options')).to.have.length(3);
+    });
+
+    it('gives you two opions if you are an exposed political person.', () => {
+      const component = wrapper.find('.compliance__politically-exposed-in-other-nation');
+
+      expect(component.prop('options')).to.have.length(2);
+    });
+  });
+});
+
 
 describe.skip('Compliance Page rest calls', () => {
   let sandbox;

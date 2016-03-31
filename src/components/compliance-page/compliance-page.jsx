@@ -225,4 +225,9 @@ function select(state) {
   };
 }
 
-export default connect(select)(CompliancePage);
+const CompliancePageConnected = connect(select)(CompliancePage);
+
+export default CompliancePageConnected;
+export {
+  CompliancePage,
+};
