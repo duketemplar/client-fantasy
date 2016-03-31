@@ -1,3 +1,9 @@
+h1 {
+  font-size: 2rem;
+}
+h2 {
+  font-size: 1.5rem;
+}
 
 .compliance {
   .horizontal-rule {
@@ -35,5 +41,15 @@
     margin-left: 24px;
     vertical-align: middle;
     transform: translate(0, -100%);
+  }
+}
+
+.compliance__buttons {
+  margin-top: 20px;
+  .compliance__button_continue {
+    margin-left: 20px;
+  }
+  .compliance__submit {
+    margin-right: 20px;
   }
 }

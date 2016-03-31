@@ -71,6 +71,7 @@ IdentifyPage.propTypes = {
   dispatch: React.PropTypes.func,
 };
 
+// TODO: Remove router from context or else stub it in tests
 IdentifyPage.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };

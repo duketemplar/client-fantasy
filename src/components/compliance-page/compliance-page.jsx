@@ -64,9 +64,12 @@ class CompliancePage extends React.Component {
   pepTitleText() {
     return (
       <p>
-        8. I have at present, or previously, held high political office in another nation, or have a close family member or associate who presently, or previously, has held such office in another nation?
+        8. Are you at present holding, or have previously held, a high political
+        or government office position, or have a close family member or associate
+        who presently, or previously, has held such office?
         <br /><br />
-        <span style={ { 'font-weight': 'normal' } }>For further information, please see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
+        <span style={ { 'font-weight': 'normal' } }>For further information, please
+        see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
       </p>
     );
   }
@@ -205,10 +208,6 @@ CompliancePage.propTypes = {
   regulation: React.PropTypes.object,
   pep: React.PropTypes.object,
   dispatch: React.PropTypes.func,
-};
-
-CompliancePage.contextTypes = {
-  router: React.PropTypes.object.isRequired,
 };
 
 function select(state) {

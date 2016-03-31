@@ -1,9 +1,7 @@
 import React from 'react';
 import Section from './registration-section';
-import IdentifyPage from '../identify-page';
 import ProspectInfoPage from '../prospect-info-page';
 import CompliancePage from '../compliance-page';
-import PepPage from '../pep-page';
 import AccountPicker from '../account-picker';
 import SignPage from '../sign-page';
 
