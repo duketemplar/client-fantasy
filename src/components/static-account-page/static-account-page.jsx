@@ -21,13 +21,13 @@ export default class StaticAccountPage extends React.Component {
               </div>
             </Col>
             <div className="account__usp">
-              <img src="./shape.svg" /> <div className="account__usp--text">Our most popular account</div>
+              <img src="../assets/images/shape.svg" /> <div className="account__usp--text">Our most popular account</div>
               </div>
               <div className="account__usp">
-              <img src="./shape.svg" /> <div className="account__usp--text">No account fees</div>
+              <img src="../assets/images/shape.svg" /> <div className="account__usp--text">No account fees</div>
             </div>
               <div className="account__usp">
-              <img src="./shape.svg" /> <div className="account__usp--text">No declaration</div>
+              <img src="../assets/images/shape.svg" /> <div className="account__usp--text">No declaration</div>
             </div>
           </Col>
         </Row>
