@@ -11,12 +11,11 @@ const preLoadersForCodeCoverage = [
     test: /\.jsx?$/,
     loader: 'babel-loader',
     query: {
-        presets: ['react', 'es2015', 'stage-2'],
-        plugins: ['add-module-exports']
+      presets: ['react', 'es2015', 'stage-2'],
+      plugins: ['add-module-exports'],
     },
     // exclude: /node_modules/,
     exclude: [
-      path.resolve('./src/'),
       path.resolve('./node_modules/'),
     ],
   },
@@ -31,14 +30,21 @@ const loadersWithoutSourceMap = [
   {
     test: /\.jsx?$/,
     loader: 'babel-loader',
-    exclude: /node_modules/,
-  }, {
+    query: {
+      presets: ['react', 'es2015', 'stage-2'],
+      plugins: ['add-module-exports'],
+    },
+
+    exclude: [
+      path.resolve('./node_modules/'),
+    ],
+  },
+  {
     test: /\.json$/,
     loader: 'json-loader',
     exclude: /node_modules/,
   },
 ];
-
 
 function createKarmaConfig(config) {
   // We can't have both coverage and source map at the same time ...

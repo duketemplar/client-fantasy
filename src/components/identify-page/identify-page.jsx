@@ -83,9 +83,7 @@ function select(state) {
   };
 }
 
-const IdentifyPageConnected = connect(select)(IdentifyPage);
-
+export default connect(select)(IdentifyPage);
 export {
-  IdentifyPageConnected as default,
   IdentifyPage,
 };
