@@ -21,7 +21,7 @@ class AccountPicker extends React.Component {
           <form onSubmit={ this.handleSubmit.bind(this) }>
             <Row>
               <Col xs={ 1 }>
-                <Checkbox name="isk" label="" />
+                <Checkbox className="pick-account__answer--isk" name="isk" label="" />
               </Col>
               <Col xs={ 11 }>
                 <h1> Investeringssparkonto </h1>
@@ -29,7 +29,7 @@ class AccountPicker extends React.Component {
             </Row>
             <Row xsMiddle>
               <Col xs={ 1 }>
-                <Checkbox name="kf" label="" />
+                <Checkbox className="pick-account__answer--kf" name="kf" label="" />
               </Col>
               <Col xs={ 11 }>
                 <h1> Kapitalförsäkring </h1>
@@ -37,7 +37,7 @@ class AccountPicker extends React.Component {
             </Row>
             <Row xsMiddle>
               <Col xs={ 1 }>
-                <Checkbox name="af" label="" />
+                <Checkbox className="pick-account__answer--af"name="af" label="" />
               </Col>
               <Col xs={ 11 }>
                 <h1> Aktie & Fonddepå </h1>
