@@ -53,7 +53,7 @@ class IdentifyPage extends React.Component {
                 hasSuccess={ !hasError && !requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
                 helpText={ prospectValidations.nationalIdNumber }
               />
-            <Button className="identify__submit" primary type="submit" disabled={ hasError || !this.props.prospect.nationalIdNumber }>
+              <Button className="identify__submit" primary type="submit" disabled={ hasError || !this.props.prospect.nationalIdNumber }>
                 Submit
               </Button>
             </form>
