@@ -91,7 +91,7 @@ export default class SignPage extends React.Component {
               { this.getContitionText() }
             </p>
             <Checkbox
-              className="terms-and-conditions__checkbox"
+              className="checkbox__terms-and-conditions"
               label="I have read and accepted the terms and conditions above."
               onClick={ handleAcceptTermsAndConditions }
             />

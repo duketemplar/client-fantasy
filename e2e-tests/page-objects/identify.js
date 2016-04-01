@@ -1,4 +1,4 @@
-const basePath = require('../utils/enviroment');
+import basePath from '../utils/enviroment';
 
 module.exports = (client) => {
   return {
