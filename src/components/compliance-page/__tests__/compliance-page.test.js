@@ -31,25 +31,25 @@ describe('Compliance', () => {
 
   describe('section has valid quesion answers', () => {
     it('gives you two opions for taxable outside jurisdicion question.', () => {
-      const component = wrapper.find('.compliance__taxable-outside-jursdiction');
+      const component = wrapper.find('.compliance__question__taxable-outside-jursdiction');
 
       expect(component.prop('options')).to.have.length(2);
     });
 
     it('gives you two opions for the fatca question.', () => {
-      const component = wrapper.find('.compliance__question_taxable-in-usa');
+      const component = wrapper.find('.compliance__question__taxable-in-usa');
 
       expect(component.prop('options')).to.have.length(2);
     });
 
     it('gives you three opions for emplyment status.', () => {
-      const component = wrapper.find('.compliance__employment-status');
+      const component = wrapper.find('.compliance__question__employment-status');
 
       expect(component.prop('options')).to.have.length(3);
     });
 
     it('gives you three opions for yearly income.', () => {
-      const component = wrapper.find('.compliance__yearly-income');
+      const component = wrapper.find('.compliance__question__yearly-income');
 
       expect(component.prop('options')).to.have.length(3);
     });
@@ -61,19 +61,19 @@ describe('Compliance', () => {
     });
 
     it('gives you two opions for the origin of the finances.', () => {
-      const component = wrapper.find('.compliance__funds-and-securities-originate');
+      const component = wrapper.find('.compliance__question__funds-and-securities-originate');
 
       expect(component.prop('options')).to.have.length(2);
     });
 
     it('gives you three opions for the yearly deposit into the account.', () => {
-      const component = wrapper.find('.compliance__yearly-value-of-deposits');
+      const component = wrapper.find('.compliance__question__yearly-value-of-deposits');
 
       expect(component.prop('options')).to.have.length(3);
     });
 
     it('gives you two opions if you are an exposed political person.', () => {
-      const component = wrapper.find('.compliance__politically-exposed-in-other-nation');
+      const component = wrapper.find('.compliance__question__politically-exposed-in-other-nation');
 
       expect(component.prop('options')).to.have.length(2);
     });

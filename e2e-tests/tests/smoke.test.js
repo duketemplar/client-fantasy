@@ -1,10 +1,10 @@
 describe('user', () => {
   it('becomes customer', (client) => {
+    const identify = client.page.identify();
     const personalInfo = client.page.personalInfo();
     const regulationInfo = client.page.regulationInfo();
-    const accountType = client.page.accountType();
     const termsAndConditions = client.page.termsAndConditions();
-    const identify = client.page.identify();
+
     identify.goTo();
     identify.nationalRegistrationNumber('19640117-8600');
     identify.isUrl('begin');
@@ -18,7 +18,6 @@ describe('user', () => {
     regulationInfo.selfAcquired();
     regulationInfo.depositsHigh();
     regulationInfo.isPoliticallyExposed();
-    accountType.pickKF();
     termsAndConditions.acceptTerms();
 
     client.end();
