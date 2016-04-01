@@ -15,8 +15,8 @@ export default class CustomerRegistration extends React.Component {
     return (
       <div className="customer-registration">
         <Section element={ ProspectInfoPage } />
-        <Section element={ CompliancePage } />
         <Section element={ AccountPicker } />
+        <Section element={ CompliancePage } />
         <Section element={ SignPage } />
       </div>
     );
