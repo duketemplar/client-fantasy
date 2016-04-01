@@ -1,3 +1,5 @@
+/* jscs:disable maximumLineLength */
+/* eslint-disable max-len */
 import React from 'react';
 
 import { Button, Checkbox } from 'nordnet-ui-kit';
@@ -17,7 +19,7 @@ export default class SignPage extends React.Component {
   getContitionText() {
     return (
       <span>
-        Many cryptographers would agree that, had it not been for the transistor, the refinement of Lamport clocks that would allow for further study into 32 bit architectures might never have occurred.
+        Many cryptographers would agree that, had it not been for the transistor, the refinement of Lamport clocks that would allow forfurther study into 32 bit architectures might never have occurred.
         In fact, few theorists would disagree with the exploration of web browsers. Continuing with this rationale, to put this in perspective, consider the fact that acclaimed statisticians regularly
         use I/O automata to answer this quagmire. Unfortunately, Lamport clocks alone is not able to fulfill the need for decentralized configurations. We introduce an analysis of DNS, which we call ChoroidCOD.
         The usual methods for the exploration of evolutionary programming do not apply in this area. We emphasize that ChoroidCOD can be synthesized to prevent the refinement of Scheme. Thus, we describe new
@@ -88,7 +90,11 @@ export default class SignPage extends React.Component {
             <p>
               { this.getContitionText() }
             </p>
-            <Checkbox className="terms-and-conditions__answer_accepted"label="I have read and accepted the terms and conditions above." onClick={ handleAcceptTermsAndConditions } />
+            <Checkbox
+              className="terms-and-conditions__checkbox"
+              label="I have read and accepted the terms and conditions above."
+              onClick={ handleAcceptTermsAndConditions }
+            />
           </Col>
         </Row>
         <Row xsEnd>

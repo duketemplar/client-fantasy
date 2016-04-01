@@ -90,7 +90,7 @@ class CompliancePage extends React.Component {
             <Row>
               <Col xs={6}>
                 <TitledSelect
-                  className="compliance__taxable-outside-jursdiction"
+                  className="compliance__question__taxable-outside-jursdiction"
                   title="1. Are you obligated to report tax outside of Sweden?"
                   value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
                   options={ yesNoOptions }
@@ -98,7 +98,7 @@ class CompliancePage extends React.Component {
                 />
 
                 <TitledSelect
-                  className="compliance__question_taxable-in-usa"
+                  className="compliance__question__taxable-in-usa"
                   title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
                   value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
                   onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
@@ -106,7 +106,7 @@ class CompliancePage extends React.Component {
                 />
 
                 <TitledSelect
-                  className="compliance__employment-status"
+                  className="compliance__question__employment-status"
                   title="3. What is your employment status?"
                   value={ this.props.kyc.employment_classification }
                   onChange={ this.buildHandleChange('employment_classification', changeKyc) }
@@ -117,7 +117,7 @@ class CompliancePage extends React.Component {
                   ]}
                 />
                 <TitledSelect
-                  className="compliance__yearly-income"
+                  className="compliance__question__yearly-income"
                   title="4. What is your yearly income?"
                   value={ this.props.kyc.yearly_income }
                   onChange={ this.buildHandleChange('yearly_income', changeKyc) }
@@ -130,23 +130,23 @@ class CompliancePage extends React.Component {
                   }
                 />
 
-              <Row className="compliance__purpose-of-saving checkbox__question">
+              <Row className="compliance__question__purpose-of-saving checkbox__question">
                   <h5>
                     5. What is the purpose of your savings with Nordnet?
                   </h5>
                 </Row>
                 <Row className="checkbox__row">
-                  <Checkbox className="compliance__anwser_financial-safety" label="Financial safety"/>
-                  <Checkbox className="compliance__anwser_private-consumption" label="Private consumption"/>
-                  <Checkbox className="compliance__anwser_for-next-of-kin" label="For next of kin, e.g. children"/>
-                  <Checkbox className="compliance__anwser_pension" label="Pension"/>
-                  <Checkbox className="compliance__anwser_trading" label="Trading"/>
+                  <Checkbox className="compliance__anwser__financial-safety" label="Financial safety"/>
+                  <Checkbox className="compliance__anwser__private-consumption" label="Private consumption"/>
+                  <Checkbox className="compliance__anwser__for-next-of-kin" label="For next of kin, e.g. children"/>
+                  <Checkbox className="compliance__anwser__pension" label="Pension"/>
+                  <Checkbox className="compliance__anwser__trading" label="Trading"/>
                 </Row>
               </Col>
 
               <Col xs={6}>
                 <TitledSelect
-                  className="compliance__funds-and-securities-originate"
+                  className="compliance__question__funds-and-securities-originate"
                   title="6. From where does your funds, and or securities, originate?"
                   value={ this.props.kyc.economic_origin }
                   onChange={ this.buildHandleChange('economic_origin', changeKyc) }
@@ -158,7 +158,7 @@ class CompliancePage extends React.Component {
                   }
                 />
                 <TitledSelect
-                  className="compliance__yearly-value-of-deposits"
+                  className="compliance__question__yearly-value-of-deposits"
                   title="7. What is the approximate yearly value of your deposits into this account?"
                   value={ this.props.kyc.yearly_insert }
                   onChange={ this.buildHandleChange('yearly_insert', changeKyc) }
@@ -172,7 +172,7 @@ class CompliancePage extends React.Component {
                 />
                 <TitledSelect
                   title={ this.pepTitleText() }
-                  className="compliance__politically-exposed-in-other-nation"
+                  className="compliance__question__politically-exposed-in-other-nation"
                   value={ this.safeBooleanToString(this.props.pep.isPep) }
                   onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
                   options={ yesNoOptions }
