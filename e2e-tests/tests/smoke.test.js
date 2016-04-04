@@ -14,7 +14,7 @@ describe('user', () => {
     regulationInfo.isNotObligatedToUSA();
     regulationInfo.isEmployed();
     regulationInfo.hasNormalIncome();
-    regulationInfo.isFinancialSafty();
+    regulationInfo.isFinancialSafety();
     regulationInfo.selfAcquired();
     regulationInfo.depositsHigh();
     regulationInfo.isPoliticallyExposed();
