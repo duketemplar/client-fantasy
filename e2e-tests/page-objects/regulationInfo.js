@@ -12,12 +12,12 @@ module.exports = (client) => {
 
     isObligatedToUSA() {
       return client
-        .click('.compliance__question__taxable-in-usa option[value=no]');
+        .click('.compliance__question__taxable-in-usa option[value=yes]');
     },
 
     isNotObligatedToUSA() {
       return client
-        .click('.compliance__question__taxable-in-usa option[value=yes]');
+        .click('.compliance__question__taxable-in-usa option[value=no]');
     },
 
     isEmployed() {
@@ -50,7 +50,7 @@ module.exports = (client) => {
         .click(".compliance__question__yearly-income option[value='500,000 SEK or more']");
     },
 
-    isFinancialSafty() {
+    isFinancialSafety() {
       return client
         .click('.compliance__anwser__financial-safety');
     },
