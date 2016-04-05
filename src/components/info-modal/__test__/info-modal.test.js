@@ -72,7 +72,7 @@ describe('info modal', () => {
   });
 
   it('trigger cancle callback when clicked outside modal', () => {
-    const outsideModal = wrapper.find('.info-modal__bkg');
+    const outsideModal = wrapper.find('.info-modal__background');
 
     wrapper.setProps({ show: true });
     outsideModal.simulate('click');

@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import InfoModal from '../../info-modal';
 
-describe.only('Compliance section redirects', () => {
+describe('Compliance section redirects', () => {
   let wrapper;
   let props;
 

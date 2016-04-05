@@ -19,24 +19,25 @@ class CompliancePage extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.resetRegulation = this.resetRegulation.bind(this);
   }
 
   getRedirectInfo() {
     return (
-      <div>
+      <div className="compliance__redirect-info">
         <h1>
           We need to know more about you!
         </h1>
-        <p className="compliance__info--text">
+        <p className="compliance__redirect-info__text">
           With the grounds that you have answered <b>Yes</b> to one of the questions
           below, we ask that you apply via the extended manual process so that
           we can get some more detailed information about you.
         </p>
         <ul>
-          <li className="compliance__list--crs">
+          <li className="compliance__redirect-info__crs">
             Are you a US citizen, tax or declaration obliged in other countries than Sweden?
           </li>
-          <li className="compliance__list--pep">
+          <li className="compliance__redirect-info__pep">
             Have you, or have you ever had: a high political or government office position
             or are a close family member or an employee of a person in the above position?
           </li>
@@ -101,7 +102,11 @@ class CompliancePage extends React.Component {
   }
 
   resetRegulation() {
-    changeRegulation({ taxableOutsideJurisdiction: undefined });
+    const resetValues = {
+      taxableOutsideJurisdiction: undefined,
+    };
+
+    this.props.dispatch(changeRegulation(resetValues));
   }
 
   render() {
@@ -110,7 +115,7 @@ class CompliancePage extends React.Component {
         <InfoModal
           onAccept={ this.redirectToManualFlow }
           onCancle={ this.resetRegulation }
-          content={ this.getRedirectInfo }
+          content={ this.getRedirectInfo() }
           show={ !!this.props.regulation.taxableOutsideJurisdiction }
         />
         <Row>
