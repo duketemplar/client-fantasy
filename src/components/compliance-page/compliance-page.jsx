@@ -8,6 +8,7 @@ import TitledSelect from './titled-select';
 import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import './compliance-page.scss';
 import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from '../../actions';
+import InfoModal from '../info-modal';
 
 const yesNoOptions = [
   { label: 'Yes', value: 'yes' },
@@ -20,19 +21,41 @@ class CompliancePage extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  submitForm() {
-    this.props.dispatch(createOrUpdateRegulation());
+  getRedirectInfo() {
+    return (
+      <div>
+        <h1>
+          We need to know more about you!
+        </h1>
+        <p className="compliance__info--text">
+          With the grounds that you have answered <b>Yes</b> to one of the questions
+          below, we ask that you apply via the extended manual process so that
+          we can get some more detailed information about you.
+        </p>
+        <ul>
+          <li className="compliance__list--crs">
+            Are you a US citizen, tax or declaration obliged in other countries than Sweden?
+          </li>
+          <li className="compliance__list--pep">
+            Have you, or have you ever had: a high political or government office position
+            or are a close family member or an employee of a person in the above position?
+          </li>
+        </ul>
+      </div>
+    );
   }
 
-  redirectToManualFlow() {
-    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-    return false;
-  }
-
-  handleChange(key, value, actionGenerator) {
-    const change = {};
-    change[key] = value;
-    this.props.dispatch(actionGenerator(change));
+  pepTitleText() {
+    return (
+      <p>
+        8. Are you at present holding, or have previously held, a high political
+        or government office position, or have a close family member or associate
+        who presently, or previously, has held such office?
+        <br /><br />
+        <span style={ { 'font-weight': 'normal' } }>For further information, please
+          see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
+      </p>
+    );
   }
 
   buildHandleChange(key, actionGenerator, transform) {
@@ -61,22 +84,35 @@ class CompliancePage extends React.Component {
     return ret;
   }
 
-  pepTitleText() {
-    return (
-      <p>
-        8. Are you at present holding, or have previously held, a high political
-        or government office position, or have a close family member or associate
-        who presently, or previously, has held such office?
-        <br /><br />
-        <span style={ { 'font-weight': 'normal' } }>For further information, please
-        see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
-      </p>
-    );
+
+  handleChange(key, value, actionGenerator) {
+    const change = {};
+    change[key] = value;
+    this.props.dispatch(actionGenerator(change));
+  }
+
+  redirectToManualFlow() {
+    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+    return false;
+  }
+
+  submitForm() {
+    this.props.dispatch(createOrUpdateRegulation());
+  }
+
+  resetRegulation() {
+    changeRegulation({ taxableOutsideJurisdiction: undefined });
   }
 
   render() {
     return (
       <Grid className="compliance">
+        <InfoModal
+          onAccept={ this.redirectToManualFlow }
+          onCancle={ this.resetRegulation }
+          content={ this.getRedirectInfo }
+          show={ !!this.props.regulation.taxableOutsideJurisdiction }
+        />
         <Row>
           <Col xs={ 12 }>
             <h1>
