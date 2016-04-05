@@ -8,7 +8,7 @@ class InfoModal extends React.Component {
   }
 
   render() {
-    const { show, content, onAccept, onCancle } = this.props;
+    const { show, content, onAccept, onCancel } = this.props;
 
     if (!show) {
       return null;
@@ -16,14 +16,14 @@ class InfoModal extends React.Component {
 
     return (
       <div>
-        <div className="info-modal__background" onClick={ onCancle }></div>
+        <div className="info-modal__background" onClick={ onCancel }></div>
         <div className="info-modal__container">
           <div className="info-modal__content">
             { content }
           </div>
           <div className="info-modal__action">
             <Button primary onClick={ onAccept }>Continue</Button>
-            <Button secondary onClick={ onCancle }>Cancel</Button>
+            <Button secondary onClick={ onCancel }>Cancel</Button>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@ InfoModal.propTypes = {
   show: React.PropTypes.bool.isRequired,
   content: React.PropTypes.element.isRequired,
   onAccept: React.PropTypes.func.isRequired,
-  onCancle: React.PropTypes.func.isRequired,
+  onCancel: React.PropTypes.func.isRequired,
 };
 
 export default InfoModal;

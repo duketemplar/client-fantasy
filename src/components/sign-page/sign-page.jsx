@@ -62,7 +62,7 @@ export default class SignPage extends React.Component {
     this.postSign();
   }
 
-  handleCancle() {
+  handleCancel() {
     this.context.router.push('/');
   }
 
@@ -72,7 +72,7 @@ export default class SignPage extends React.Component {
 
   render() {
     const handleSign = this.handleSign.bind(this);
-    const handleCancle = this.handleCancle.bind(this);
+    const handleCancel = this.handleCancel.bind(this);
     const handleAcceptTermsAndConditions = this.handleAcceptTermsAndConditions.bind(this);
 
     const signButtonProps = {};
@@ -98,7 +98,7 @@ export default class SignPage extends React.Component {
           </Col>
         </Row>
         <Row xsEnd>
-          <Button secondary onClick={ handleCancle } >Cancel</Button>
+          <Button secondary onClick={ handleCancel } >Cancel</Button>
           <Button onClick={ handleSign } { ...signButtonProps }>Sign</Button>
         </Row>
       </Grid>

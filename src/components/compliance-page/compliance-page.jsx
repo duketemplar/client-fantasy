@@ -28,16 +28,16 @@ class CompliancePage extends React.Component {
         <h1>
           We need to know more about you!
         </h1>
-        <p className="compliance__redirect-info__text">
+        <p>
           With the grounds that you have answered <b>Yes</b> to one of the questions
           below, we ask that you apply via the extended manual process so that
           we can get some more detailed information about you.
         </p>
         <ul>
-          <li className="compliance__redirect-info__crs">
+          <li>
             Are you a US citizen, tax or declaration obliged in other countries than Sweden?
           </li>
-          <li className="compliance__redirect-info__pep">
+          <li>
             Have you, or have you ever had: a high political or government office position
             or are a close family member or an employee of a person in the above position?
           </li>
@@ -114,7 +114,7 @@ class CompliancePage extends React.Component {
       <Grid className="compliance">
         <InfoModal
           onAccept={ this.redirectToManualFlow }
-          onCancle={ this.resetRegulation }
+          onCancel={ this.resetRegulation }
           content={ this.getRedirectInfo() }
           show={ !!this.props.regulation.taxableOutsideJurisdiction }
         />
