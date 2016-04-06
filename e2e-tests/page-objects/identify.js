@@ -3,7 +3,6 @@ import basePath from '../utils/enviroment';
 module.exports = (client) => {
   return {
     goTo() {
-      console.log(client.launch_url + basePath(client.launch_url));
       return client
         .url(client.launch_url + basePath(client.launch_url))
         .waitForElementVisible('#webapp-customer-registration', 1500);
@@ -23,7 +22,6 @@ module.exports = (client) => {
 
     isUrl(url) {
       return client
-        .waitForElementVisible('.create-customer', 5000)
         .assert.urlContains(url);
     },
   };

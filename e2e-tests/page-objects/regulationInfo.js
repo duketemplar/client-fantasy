@@ -12,7 +12,8 @@ module.exports = (client) => {
 
     isObligatedToUSA() {
       return client
-        .click('.compliance__question__taxable-in-usa option[value=yes]');
+        .click('.compliance__question__taxable-in-usa option[value=yes]')
+        .waitForElementPresent('.info-modal__container', 1500);
     },
 
     isNotObligatedToUSA() {
