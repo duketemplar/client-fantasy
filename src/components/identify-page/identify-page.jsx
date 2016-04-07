@@ -20,6 +20,12 @@ class IdentifyPage extends React.Component {
     this.resetProspect = this.resetProspect.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.prospect.automatic === true) {
+      this.context.router.push('/begin');
+    }
+  }
+
   getRedirectInfo() {
     return (
       <div className="oddity__redirect-info">
@@ -42,15 +48,12 @@ class IdentifyPage extends React.Component {
   }
 
   resetProspect() {
-    const resetValues = {
-      nationalIdNumber: '',
-    };
-    this.props.dispatch(changeProspect(resetValues));
+    // this.context.router.push('/'); // Doesn't work in Firefox
+    window.location = location.origin;
   }
 
   submitForm() {
     this.props.dispatch(createOrUpdateProspect());
-    this.context.router.push('/begin'); // TODO: wait for an answer that everything is ok...
   }
 
   handleChange(e) {
@@ -77,7 +80,7 @@ class IdentifyPage extends React.Component {
           content={ this.getRedirectInfo() }
           onAccept={ this.redirectToManualFlow }
           onCancel={ this.resetProspect }
-          show={ prospect.nationalIdNumber === '190001011332' }
+          show={ this.props.prospect.automatic === false }
         />
         <Row xsMiddle xsCenter>
           <Col xs={ 6 }>
