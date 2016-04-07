@@ -7,6 +7,9 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { changeProspect, createOrUpdateProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
+import InfoModal from '../info-modal';
+import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+
 class IdentifyPage extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +17,35 @@ class IdentifyPage extends React.Component {
     this.submitForm = this.submitForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.hasErrors = this.hasErrors.bind(this);
+    this.resetProspect = this.resetProspect.bind(this);
+  }
+
+  getRedirectInfo() {
+    return (
+      <div className="oddity__redirect-info">
+        <h1>
+          Oddity Encountered
+        </h1>
+        <p>
+          An oddity was encountered with the supplied national registration number,
+          unable to retreive personal information with the number supplied.
+          We ask that you apply via the extended manual process so that we can get
+          complete personal details for your application.
+        </p>
+      </div>
+    );
+  }
+
+  redirectToManualFlow() {
+    window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
+    return false;
+  }
+
+  resetProspect() {
+    const resetValues = {
+      nationalIdNumber: '',
+    };
+    this.props.dispatch(changeProspect(resetValues));
   }
 
   submitForm() {
@@ -41,6 +73,12 @@ class IdentifyPage extends React.Component {
 
     return (
       <Grid className="identify">
+        <InfoModal
+          content={ this.getRedirectInfo() }
+          onAccept={ this.redirectToManualFlow }
+          onCancel={ this.resetProspect }
+          show={ prospect.nationalIdNumber === '190001011332' }
+        />
         <Row xsMiddle xsCenter>
           <Col xs={ 6 }>
             <form onSubmit={ this.submitForm } >
