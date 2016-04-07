@@ -1,4 +1,4 @@
-describe('user', () => {
+describe('prospect', () => {
   it('becomes customer', (client) => {
     const identify = client.page.identify();
     const personalInfo = client.page.personalInfo();
@@ -19,6 +19,24 @@ describe('user', () => {
     regulationInfo.depositsHigh();
     regulationInfo.isPoliticallyExposed();
     termsAndConditions.acceptTerms();
+
+    client.end();
+  });
+
+  it('is crs/fatca obligated', (client) => {
+    const identify = client.page.identify();
+    const personalInfo = client.page.personalInfo();
+    const regulationInfo = client.page.regulationInfo();
+    const regulationInfoModal = client.page.regulationInfoModal();
+
+    identify.goTo();
+    identify.nationalRegistrationNumber('19640117-8600');
+    personalInfo.insertPhone();
+    personalInfo.insertEmail();
+    regulationInfo.isNotObligatedOutSweden();
+    regulationInfo.isObligatedToUSA();
+    regulationInfoModal.doContinue();
+    identify.isUrl('depa_typ=isk');
 
     client.end();
   });
