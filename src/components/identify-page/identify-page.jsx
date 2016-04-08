@@ -44,12 +44,10 @@ class IdentifyPage extends React.Component {
 
   redirectToManualFlow() {
     window.location = location.origin + MANUAL_FLOW_OPEN_ISK_PATH;
-    return false;
   }
 
   resetProspect() {
-    // this.context.router.push('/'); // Doesn't work in Firefox
-    window.location = location.origin;
+    window.location.reload();
   }
 
   submitForm() {
