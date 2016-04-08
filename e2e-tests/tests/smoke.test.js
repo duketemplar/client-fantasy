@@ -7,7 +7,7 @@ describe('prospect', () => {
 
     identify.goTo();
     identify.nationalRegistrationNumber('19640117-8600');
-    identify.isUrl('begin');
+    identify.isUrl('.customer-registration', 'begin');
     personalInfo.insertPhone();
     personalInfo.insertEmail();
     regulationInfo.isNotObligatedOutSweden();
@@ -36,7 +36,18 @@ describe('prospect', () => {
     regulationInfo.isNotObligatedOutSweden();
     regulationInfo.isObligatedToUSA();
     regulationInfoModal.doContinue();
-    identify.isUrl('depa_typ=isk');
+    identify.isUrl('.manualPageStub', 'depa_typ=isk');
+
+    client.end();
+  });
+
+  it('get oddity modal', (client) => {
+    const identify = client.page.identify();
+
+    identify.goTo();
+    identify.nationalRegistrationNumber('196002054234');
+    identify.getOddity();
+    identify.isUrl('.manualPageStub', 'depa_typ=isk');
 
     client.end();
   });

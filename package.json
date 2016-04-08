@@ -134,7 +134,7 @@
     "nordnet-release-plugin": "0.0.4",
     "npm-run-all": "1.2.6",
     "opn": "1.0.2",
-    "phantomjs": "1.9.18",
+    "phantomjs-prebuilt": "2.1.7",
     "postcss-loader": "0.4.3",
     "react-addons-test-utils": "0.14.2",
     "react-hot-loader": "1.2.7",
