@@ -24,6 +24,11 @@ let prospect = {
   /* jscs:enable requireCamelCaseOrUpperCaseIdentifiers */
 };
 
+const oddityProspect = {
+  prospect_id: 'd7145e77-7dc7-4325-bd70-488af0104008',
+  automatic: false,
+}
+
 const requiredParams = [
   'national_id_number',
   'national_id_number_country_code',
@@ -52,6 +57,9 @@ function* createProspect(next) {
   if (!hasRequiredParams || hasUnsupportedParams) {
     this.body = { createProspect: 'Failed on required parameter check', missing: requiredParams };
     this.status = 400;
+  } else if (requestBody.national_id_number === '196002054234') {
+    this.body = oddityProspect;
+    this.status = 200;
   } else {
     this.body = prospect;
     this.status = 200;

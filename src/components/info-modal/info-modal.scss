@@ -1,4 +1,9 @@
 .info-modal {
+  &__content p,
+  &__content span {
+    font-size: 1.5rem;
+  }
+
   &__background {
     display: block;
     position: fixed;
