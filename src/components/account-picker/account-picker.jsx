@@ -24,18 +24,18 @@ export default class AccountPicker extends React.Component {
                     Once you are logged in, you can easily open more accounts and other account types.
                   </div>
                 </Row>
-                <Row className="account__usp__row">
-                  <Col className="account__usp">
+                <Row className="account__usp">
+                  <Col className="account__usp__ticker">
                     <Row>
                       <img src="../assets/images/shape.svg" /> <div className="account__usp__text">Our most popular account</div>
                     </Row>
                   </Col>
-                  <Col className="account__usp">
+                  <Col className="account__usp__ticker">
                     <Row>
                       <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No account fees</div>
                     </Row>
                   </Col>
-                  <Col className="account__usp">
+                  <Col className="account__usp__ticker">
                     <Row>
                       <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No declaration</div>
                     </Row>
