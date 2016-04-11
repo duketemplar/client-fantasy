@@ -20,10 +20,12 @@ module.exports = (client) => {
         .click('button.identify__submit');
     },
 
-    isUrl(className, url) {
-      return client
-        .waitForElementVisible(className, 1500)
-        .assert.urlContains(url);
+    isUrl(url, className) {
+      let intermediateResult = client;
+      if (className !== undefined) {
+        intermediateResult = intermediateResult.waitForElementVisible(className, 1500);
+      }
+      return intermediateResult.assert.urlContains(url);
     },
 
     getOddity() {
