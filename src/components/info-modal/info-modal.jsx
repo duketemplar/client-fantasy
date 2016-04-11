@@ -15,15 +15,15 @@ class InfoModal extends React.Component {
     }
 
     return (
-      <div>
+      <div className="info-modal">
         <div className="info-modal__background" onClick={ onCancel }></div>
         <div className="info-modal__container">
           <div className="info-modal__content">
             { content }
           </div>
           <div className="info-modal__action">
-            <Button primary onClick={ onAccept }>Continue</Button>
-            <Button secondary onClick={ onCancel }>Cancel</Button>
+            <Button className="info-modal__continue" primary onClick={ onAccept }>Continue</Button>
+            <Button className="info-modal__cancel" secondary onClick={ onCancel }>Cancel</Button>
           </div>
         </div>
       </div>

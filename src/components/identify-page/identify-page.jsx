@@ -20,12 +20,6 @@ class IdentifyPage extends React.Component {
     this.resetProspect = this.resetProspect.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.prospect.automatic === true) {
-      this.context.router.push('/begin');
-    }
-  }
-
   getRedirectInfo() {
     return (
       <div className="oddity__redirect-info">
@@ -50,8 +44,9 @@ class IdentifyPage extends React.Component {
     window.location.reload();
   }
 
-  submitForm() {
-    this.props.dispatch(createOrUpdateProspect());
+  submitForm(e) {
+    e.preventDefault();
+    this.props.dispatch(createOrUpdateProspect('/begin', (data) => data.automatic === true));
   }
 
   handleChange(e) {

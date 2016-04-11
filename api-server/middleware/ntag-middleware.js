@@ -9,7 +9,7 @@ var GET = 'GET';
 var ntagMiddleware = function *(next) {
 
   if (this.method !== GET && this.get('ntag') !== state.getCurrentNtag()) {
-    this.throw(403, 'ntag does not match');
+    this.throw(401, 'ntag does not match');
   }
 
   if (this.method === GET && !this.get('ntag')) {

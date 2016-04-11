@@ -5,6 +5,7 @@ import regulation from './regulation.reducer.js';
 import kyc from './kyc.reducer.js';
 import pep from './pep.reducer.js';
 import taxInfo from './tax-info.reducer.js';
+import { routerReducer } from 'react-router-redux';
 
 export default combineReducers({
   ...prospect,
@@ -13,4 +14,5 @@ export default combineReducers({
   ...kyc,
   ...pep,
   ...taxInfo,
+  routing: routerReducer,
 });

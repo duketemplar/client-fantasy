@@ -10,6 +10,8 @@
 ## Local setup of end to end tests
 ### If you have not set up your local e2e test environment do:
 * `npm run e2e-test:install` to download the selenium server for the e2e tests.
+* In order to run tests in Chrome, download [the appropriate driver](http://chromedriver.storage.googleapis.com/index.html?path=2.21/).
+* All drivers should be placed in: [e2e-tests/server/]
 
 ### Run e2e tests
 1. `npm run e2e-test:server` start the selenium server

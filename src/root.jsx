@@ -20,13 +20,16 @@ import IdentifyPage from './components/identify-page';
 // Redux store
 import store from './store';
 import { Router, Route, hashHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+const history = syncHistoryWithStore(hashHistory, store);
 
 // Root application component
 class App extends React.Component {
 
   render() {
     return (
-      <Router history={ hashHistory }>
+      <Router history={ history }>
         <Route name="prospectcustomer-info-page" path="/" component={ IdentifyPage } key="identify-page" />
         <Route name="customer-registration" path="/begin" component={ CustomerRegistration } key="customer-registration" />
       </Router>

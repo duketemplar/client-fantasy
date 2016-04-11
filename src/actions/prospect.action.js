@@ -1,6 +1,7 @@
 import nordnetAPI from 'nordnet-next-api';
 import { CUSTOMERS_PROSPECTS_PATH } from '../utils/endpoints';
 import { Prospect } from '../models';
+import { push } from 'react-router-redux';
 
 const CREATE_PROSPECT = 'CREATE_PROSPECT';
 const RECEIVED_PROSPECT = 'RECEIVED_PROSPECT';
@@ -14,9 +15,9 @@ function changeProspect(fieldsToChange) {
   };
 }
 
-function createOrUpdateProspect() {
+function createOrUpdateProspect(afterSuccessRedirect, condition) {
   return function action(dispatch, getState) {
-    dispatch(getState().prospect.id ? updateProspect() : createProspect());
+    dispatch(getState().prospect.id ? updateProspect() : createProspect(afterSuccessRedirect, condition));
   };
 }
 
@@ -42,7 +43,7 @@ function updateProspect() {
   };
 }
 
-function createProspect() {
+function createProspect(afterSuccessRedirect, condition) {
   return function action(dispatch, getState) {
     const prospect = getState().prospect;
     const prospectData = {
@@ -58,6 +59,9 @@ function createProspect() {
       .then(({ status, data }) => {
         if (status === 200) {
           dispatch(receivedProspect(new Prospect(data)));
+          if (afterSuccessRedirect && (condition === undefined || condition(data))) {
+            dispatch(push(afterSuccessRedirect));
+          }
         }
       })
       .catch(error => {

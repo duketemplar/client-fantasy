@@ -20,9 +20,18 @@ module.exports = (client) => {
         .click('button.identify__submit');
     },
 
-    isUrl(url) {
+    isUrl(url, className) {
+      let intermediateResult = client;
+      if (className !== undefined) {
+        intermediateResult = intermediateResult.waitForElementVisible(className, 1500);
+      }
+      return intermediateResult.assert.urlContains(url);
+    },
+
+    getOddity() {
       return client
-        .assert.urlContains(url);
+        .waitForElementVisible('.info-modal', 1500)
+        .click('button.info-modal__continue');
     },
   };
 };
