@@ -111,140 +111,138 @@ class CompliancePage extends React.Component {
 
   render() {
     return (
-      <Grid className="compliance">
-        <InfoModal
-          onAccept={ this.redirectToManualFlow }
-          onCancel={ this.resetRegulation }
-          content={ this.getRedirectInfo() }
-          show={ !!this.props.regulation.taxableOutsideJurisdiction }
-        />
-        <Row>
-          <Col xs={ 12 }>
-            <h1>
-              Becoming a customer - Regulation Info
-            </h1>
-          </Col>
-        </Row>
-        <Row>
-            <form onSubmit={ this.submitForm }>
+      <Grid className="compliance__page">
+        <h1>
+          Becoming a customer - Regulation Info
+        </h1>
+        <Grid className="compliance__component">
+          <InfoModal
+            onAccept={ this.redirectToManualFlow }
+            onCancel={ this.resetRegulation }
+            content={ this.getRedirectInfo() }
+            show={ !!this.props.regulation.taxableOutsideJurisdiction }
+          />
+          <Row>
+              <form onSubmit={ this.submitForm }>
 
-            <Row>
-              <Col xs={6}>
-                <TitledSelect
-                  className="compliance__question__taxable-outside-jursdiction"
-                  title="1. Are you obligated to report tax outside of Sweden?"
-                  value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
-                  options={ yesNoOptions }
-                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
-                />
-
-                <TitledSelect
-                  className="compliance__question__taxable-in-usa"
-                  title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
-                  value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
-                  onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
-                  options={ yesNoOptions }
-                />
-
-                <TitledSelect
-                  className="compliance__question__employment-status"
-                  title="3. What is your employment status?"
-                  value={ this.props.kyc.employment_classification }
-                  onChange={ this.buildHandleChange('employment_classification', changeKyc) }
-                  options={ [
-                    { label: 'Unemployed', value: 'unemployed' },
-                    { label: 'Employed', value: 'employed' },
-                    { label: 'Self employed', value: 'self employed' },
-                  ]}
-                />
-                <TitledSelect
-                  className="compliance__question__yearly-income"
-                  title="4. What is your yearly income?"
-                  value={ this.props.kyc.yearly_income }
-                  onChange={ this.buildHandleChange('yearly_income', changeKyc) }
-                  options={
-                    [
-                      { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
-                      { label: '100,000 SEK - 500,000 SEK', value: '100,000 SEK - 500,000 SEK' },
-                      { label: '500,000 SEK or more', value: '500,000 SEK or more' },
-                    ]
-                  }
-                />
-
-              <Row className="compliance__question__purpose-of-saving checkbox__question">
-                  <h5>
-                    5. What is the purpose of your savings with Nordnet?
-                  </h5>
-                </Row>
-                <Row className="checkbox__row">
-                  <Checkbox className="compliance__anwser__financial-safety" label="Financial safety"/>
-                  <Checkbox className="compliance__anwser__private-consumption" label="Private consumption"/>
-                  <Checkbox className="compliance__anwser__for-next-of-kin" label="For next of kin, e.g. children"/>
-                  <Checkbox className="compliance__anwser__pension" label="Pension"/>
-                  <Checkbox className="compliance__anwser__trading" label="Trading"/>
-                </Row>
-              </Col>
-
-              <Col xs={6}>
-                <TitledSelect
-                  className="compliance__question__funds-and-securities-originate"
-                  title="6. From where does your funds, and or securities, originate?"
-                  value={ this.props.kyc.economic_origin }
-                  onChange={ this.buildHandleChange('economic_origin', changeKyc) }
-                  options={
-                    [
-                      { label: 'Inheritance', value: 'inheritance' },
-                      { label: 'Self acquired', value: 'self acquired' },
-                    ]
-                  }
-                />
-                <TitledSelect
-                  className="compliance__question__yearly-value-of-deposits"
-                  title="7. What is the approximate yearly value of your deposits into this account?"
-                  value={ this.props.kyc.yearly_insert }
-                  onChange={ this.buildHandleChange('yearly_insert', changeKyc) }
-                  options={
-                    [
-                      { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
-                      { label: '100,000 SEK - 500,000 SEK', value: '100,000 SEK - 500,000 SEK' },
-                      { label: '500,000 SEK or more', value: '500,000 SEK or more' },
-                    ]
-                  }
-                />
-                <TitledSelect
-                  title={ this.pepTitleText() }
-                  className="compliance__question__politically-exposed-in-other-nation"
-                  value={ this.safeBooleanToString(this.props.pep.isPep) }
-                  onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
-                  options={ yesNoOptions }
-                />
-              </Col>
-            </Row>
-            <Row>
               <Row>
-                <Col xs={ 12 } >
-                  <div className="horizontal-rule"></div>
-                  <Row className="checkbox__confirm">
-                    <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
+                <Col xs={6}>
+                  <TitledSelect
+                    className="compliance__question__taxable-outside-jursdiction"
+                    title="1. Are you obligated to report tax outside of Sweden?"
+                    value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
+                    options={ yesNoOptions }
+                    onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
+                  />
+
+                  <TitledSelect
+                    className="compliance__question__taxable-in-usa"
+                    title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
+                    value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
+                    onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
+                    options={ yesNoOptions }
+                  />
+
+                  <TitledSelect
+                    className="compliance__question__employment-status"
+                    title="3. What is your employment status?"
+                    value={ this.props.kyc.employment_classification }
+                    onChange={ this.buildHandleChange('employment_classification', changeKyc) }
+                    options={ [
+                      { label: 'Unemployed', value: 'unemployed' },
+                      { label: 'Employed', value: 'employed' },
+                      { label: 'Self employed', value: 'self employed' },
+                    ]}
+                  />
+                  <TitledSelect
+                    className="compliance__question__yearly-income"
+                    title="4. What is your yearly income?"
+                    value={ this.props.kyc.yearly_income }
+                    onChange={ this.buildHandleChange('yearly_income', changeKyc) }
+                    options={
+                      [
+                        { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
+                        { label: '100,000 SEK - 500,000 SEK', value: '100,000 SEK - 500,000 SEK' },
+                        { label: '500,000 SEK or more', value: '500,000 SEK or more' },
+                      ]
+                    }
+                  />
+
+                <Row className="compliance__question__purpose-of-saving checkbox__question">
+                    <h5>
+                      5. What is the purpose of your savings with Nordnet?
+                    </h5>
+                  </Row>
+                  <Row className="checkbox__row">
+                    <Checkbox className="compliance__anwser__financial-safety" label="Financial safety"/>
+                    <Checkbox className="compliance__anwser__private-consumption" label="Private consumption"/>
+                    <Checkbox className="compliance__anwser__for-next-of-kin" label="For next of kin, e.g. children"/>
+                    <Checkbox className="compliance__anwser__pension" label="Pension"/>
+                    <Checkbox className="compliance__anwser__trading" label="Trading"/>
                   </Row>
                 </Col>
-              </Row>
-            </Row>
 
-            <Row>
-              <Col xs={12}>
-                <div className="compliance__buttons">
-                  <Button className="compliance__submit" type="submit" primary >
-                    Submit
-                  </Button>
-                  <Button secondary>
-                    Clear values
-                  </Button>
-                </div>
-              </Col>
+                <Col xs={6}>
+                  <TitledSelect
+                    className="compliance__question__funds-and-securities-originate"
+                    title="6. From where does your funds, and or securities, originate?"
+                    value={ this.props.kyc.economic_origin }
+                    onChange={ this.buildHandleChange('economic_origin', changeKyc) }
+                    options={
+                      [
+                        { label: 'Inheritance', value: 'inheritance' },
+                        { label: 'Self acquired', value: 'self acquired' },
+                      ]
+                    }
+                  />
+                  <TitledSelect
+                    className="compliance__question__yearly-value-of-deposits"
+                    title="7. What is the approximate yearly value of your deposits into this account?"
+                    value={ this.props.kyc.yearly_insert }
+                    onChange={ this.buildHandleChange('yearly_insert', changeKyc) }
+                    options={
+                      [
+                        { label: '0 - 100,000 SEK', value: '0 - 100,000 SEK' },
+                        { label: '100,000 SEK - 500,000 SEK', value: '100,000 SEK - 500,000 SEK' },
+                        { label: '500,000 SEK or more', value: '500,000 SEK or more' },
+                      ]
+                    }
+                  />
+                  <TitledSelect
+                    title={ this.pepTitleText() }
+                    className="compliance__question__politically-exposed-in-other-nation"
+                    value={ this.safeBooleanToString(this.props.pep.isPep) }
+                    onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
+                    options={ yesNoOptions }
+                  />
+                </Col>
               </Row>
-            </form>
-          </Row>
+              <Row>
+                <Row>
+                  <Col xs={ 12 } >
+                    <div className="horizontal-rule"></div>
+                    <Row className="checkbox__confirm">
+                      <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
+                    </Row>
+                  </Col>
+                </Row>
+              </Row>
+
+              <Row>
+                <Col xs={12}>
+                  <div className="compliance__buttons">
+                    <Button className="compliance__submit" type="submit" primary >
+                      Submit
+                    </Button>
+                    <Button secondary>
+                      Clear values
+                    </Button>
+                  </div>
+                </Col>
+                </Row>
+              </form>
+            </Row>
+        </Grid>
       </Grid>
     );
   }

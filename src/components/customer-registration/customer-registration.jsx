@@ -4,7 +4,7 @@ import ProspectInfoPage from '../prospect-info-page';
 import CompliancePage from '../compliance-page';
 import AccountPicker from '../account-picker';
 import SignPage from '../sign-page';
-
+import './customer-registration.scss';
 
 export default class CustomerRegistration extends React.Component {
   constructor(props) {
