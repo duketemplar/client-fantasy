@@ -1,0 +1,43 @@
+@import '../../base';
+
+.prospect {
+  &__usp {
+    height: 245px;
+    width: 265px;
+    background-repeat: no-repeat;
+    position: relative;
+
+    &__content {
+      padding: 0 10% 0 10%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &__header {
+      color: $brightest-clr;
+      display: block;
+    }
+
+    &__items {
+      list-style: none;
+      display: block;
+      padding: 0;
+
+      li::before {
+        content: "• ";
+        color: $positive-clr;
+        vertical-align: middle;
+        font-size: 2.7rem;
+      }
+
+      li {
+        font-size: 1.1rem;
+        line-height: 1.1rem;
+        padding: 7px 0 7px 0;
+        color: $bright-clr;
+        white-space: nowrap;
+      }
+    }
+  }
+}
