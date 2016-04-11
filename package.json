@@ -42,7 +42,7 @@
     "pree2e-test:windows": "SET BABEL_ENV=e2e",
     "e2e-test:windows": "BABEL_ENV=e2e node nightwatch.js",
     "poste2e-test:windows": "SET BABEL_ENV=development",
-    "e2e-test:server": "java -jar e2e-tests/server/selenium-server-standalone-2.53.0.jar",
+    "e2e-test:server": "java -jar -Dwebdriver.chrome.driver=./e2e-tests/server/chromedriver e2e-tests/server/selenium-server-standalone-2.53.0.jar",
     "e2e-test:ci": "BABEL_ENV=e2e node nightwatch.js -e ci",
     "e2e-test:ff": "BABEL_ENV=e2e node nightwatch.js -e firefox",
     "e2e-test:ch": "BABEL_ENV=e2e node nightwatch.js -e chrome",
