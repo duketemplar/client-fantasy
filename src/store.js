@@ -6,10 +6,11 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-
+import { hashHistory } from 'react-router';
+import { routerMiddleware } from 'react-router-redux';
 import reducers from './reducers';
 
-const MIDDLEWARE = [thunkMiddleware];
+const MIDDLEWARE = [thunkMiddleware, routerMiddleware(hashHistory)];
 
 // creates Redux store
 function finalCreateStore(middleware) {

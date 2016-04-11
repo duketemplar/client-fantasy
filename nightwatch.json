@@ -7,13 +7,13 @@
   "globals_path": "",
 
   "selenium": {
-    "start_process": false,
+    "start_process": true,
     "server_path": "./e2e-tests/server/selenium-server-standalone-2.53.0.jar",
     "log_path": "e2e-tests/logs",
     "host": "localhost",
     "port": 4444,
     "cli_args": {
-      "webdriver.chrome.driver": "",
+      "webdriver.chrome.driver": "./e2e-tests/server/chromedriver",
       "webdriver.ie.driver": ""
     }
   },
@@ -55,6 +55,14 @@
     "firefox": {
       "desiredCapabilities": {
         "browserName": "firefox"
+      }
+    },
+    "chrome": {
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "chromeOptions" : {
+          "args" : ["start-fullscreen"]
+        }
       }
     }
   }
