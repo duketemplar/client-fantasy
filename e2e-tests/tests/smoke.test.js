@@ -36,7 +36,7 @@ describe('prospect', () => {
     regulationInfo.isNotObligatedOutSweden();
     regulationInfo.isObligatedToUSA();
     regulationInfoModal.doContinue();
-    identify.isUrl('depa_typ=isk', '.manualPageStub');
+    identify.isUrl('depa_typ=isk');
 
     client.end();
   });
@@ -47,7 +47,7 @@ describe('prospect', () => {
     identify.goTo();
     identify.nationalRegistrationNumber('196002054234');
     identify.getOddity();
-    identify.isUrl('depa_typ=isk', '.manualPageStub');
+    identify.isUrl('depa_typ=isk');
 
     client.end();
   });
