@@ -15,7 +15,7 @@
     }
 
     &__header {
-      color: $brightest-clr;
+      color: $nordnet-brightest-clr;
       display: block;
     }
 
@@ -26,7 +26,7 @@
 
       li::before {
         content: "• ";
-        color: $positive-clr;
+        color: $nordnet-success-clr;
         vertical-align: middle;
         font-size: 2.7rem;
       }
@@ -35,7 +35,7 @@
         font-size: 1.1rem;
         line-height: 1.1rem;
         padding: 7px 0 7px 0;
-        color: $bright-clr;
+        color: $nordnet-bright-clr;
         white-space: nowrap;
       }
     }

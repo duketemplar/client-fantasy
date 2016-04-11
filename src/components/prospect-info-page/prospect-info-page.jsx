@@ -40,8 +40,12 @@ export class ProspectInfoPage extends React.Component {
         <Row>
           <Col xs={ 6 }>
             <h1>
-              Enter your personal info
+              Hi!
             </h1>
+            <p>
+              Fun that you decided to try our service. Fill in your contact info and continue
+              downwards to open an account.
+            </p>
             <form onSubmit={ this.submitForm } >
               <Input
                 className="prospect__input_phone"
