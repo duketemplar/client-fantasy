@@ -14,6 +14,9 @@ export default class CustomerRegistration extends React.Component {
   render() {
     return (
       <div className="customer-registration">
+        <div className="customer-registration__header">
+          <img className="logo" src="../../assets/images/logo.svg" />
+        </div>
         <Section element={ ProspectInfoPage } />
         <Section element={ AccountPicker } />
         <Section element={ CompliancePage } />

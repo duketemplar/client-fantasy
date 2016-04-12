@@ -6,7 +6,7 @@ export default class AccountPicker extends React.Component {
   render() {
     return (
       <Grid className="account__page">
-        <h1>
+        <h1 className="category__title">
           Konto
         </h1>
         <Grid className="account__component">
