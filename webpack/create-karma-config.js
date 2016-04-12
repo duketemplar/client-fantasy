@@ -19,6 +19,10 @@ const commonLoaders = [
     loader: 'json-loader',
     exclude: /node_modules/,
   },
+  {
+    test: /\.jpe?g$|\.gif$|\.png$|\.ico|\.svg$|\.woff$|\.woff2$|\.eot$|\.ttf$/,
+    loader: 'file-loader?name=[path][name].[ext]',
+  },
 
 ];
 
