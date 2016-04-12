@@ -1,0 +1,41 @@
+@import '../../base';
+
+.prospect {
+  &__catcher {
+    display: flex;
+  }
+}
+.usp {
+  flex: 1;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__headline {
+    color: $nordnet-brightest-clr;
+    font-size: 1.6rem;
+    display: block;
+  }
+
+  &__items {
+    list-style: none;
+    display: block;
+    padding: 0;
+
+    li::before {
+      content: "• ";
+      color: $nordnet-success-clr;
+      vertical-align: middle;
+      font-size: 2.4rem;
+    }
+
+    li {
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      padding: .8rem 0 .8rem 0;
+      color: $nordnet-bright-clr;
+      white-space: nowrap;
+    }
+  }
+}

@@ -38,20 +38,4 @@ describe('in prospect-info component', () => {
 
     expect(handleChangeStub).to.have.been.calledOnce();
   });
-
-  it('disables continue button when no input pressent', () => {
-    const continueButton = wrapper.find('.compliance__button_continue');
-    expect(continueButton.props().disabled).to.equal(true, 'should be disabled initially');
-  });
-
-  it('enables continue button when valid input is supplied', () => {
-    wrapper.setProps({
-      prospect: {
-        phoneNumber: '070 - 123 45 67',
-        email: 'dummy@nordnet.se',
-      },
-    });
-    const continueButton = wrapper.find('.compliance__button_continue');
-    expect(continueButton.props().disabled).to.equal(false, 'should be enabled with valid input');
-  });
 });

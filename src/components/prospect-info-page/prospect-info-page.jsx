@@ -4,9 +4,11 @@
 import React from 'react';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
-import { Button, Input } from 'nordnet-ui-kit';
+import { Input } from 'nordnet-ui-kit';
 import { createOrUpdateProspect, changeProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
+import './prospect-info-page.scss';
+import UpsBackground from './flying-over-cloud--small.png';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -35,14 +37,16 @@ export class ProspectInfoPage extends React.Component {
   render() {
     return (
       <Grid className="create-customer">
-        <Col xs={12}>
-          <Row>
+        <Row>
+          <Col xs={ 7 }>
             <h1>
-              Enter your personal info
+              Hi!
             </h1>
-          </Row>
-          <form onSubmit={ this.submitForm } >
-            <Col xs={6}>
+            <p>
+              Fun that you decided to try our service. Fill in your contact info and continue
+              downwards to open an account.
+            </p>
+            <form onSubmit={ this.submitForm } >
               <Input
                 className="prospect__input_phone"
                 type="text"
@@ -63,21 +67,22 @@ export class ProspectInfoPage extends React.Component {
                 hasError={ this.hasError('email') }
                 hasSuccess={ !this.hasError('email') && !requiredFieldValidator('Must be filled in.', this.props.prospect.email) }
               />
-            </Col>
-            <Row>
-              <Col xs={12}>
-                <div className="compliance__buttons">
-                  <Button secondary>
-                    Previous
-                  </Button>
-                  <Button className="compliance__button_continue" type="submit" primary disabled={this.hasError('phoneNumber') || this.hasError('email') || !this.props.prospect.phoneNumber || !this.props.prospect.email }>
-                    Continue
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </form>
-        </Col>
+            </form>
+          </Col>
+          <Col xs={ 5 } className="prospect__catcher">
+            <div className="usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
+              <div>
+                <h2 className="usp__headline">It is easy as this:</h2>
+                <ul className="usp__items">
+                  <li>Fill in contact details</li>
+                  <li>Answer some questions</li>
+                  <li>Approve aggrements and conditions</li>
+                  <li>Sign with Bank Id or Mobile Bank Id</li>
+                </ul>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </Grid>
     );
   }
