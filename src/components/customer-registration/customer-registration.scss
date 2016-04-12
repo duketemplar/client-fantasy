@@ -1,5 +1,36 @@
+@import '../../base';
+
+body {
+  background-color: $nordnet-bright-clr;
+}
+
+.category__title {
+  font-family: $nordnet-default-font-family;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.category__description {
+  font-family: $nordnet-default-font-family;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.identify,
+.prospect-info__component,
+.account__component,
+.compliance__component,
+.sign__component {
+  background-color: $nordnet-brightest-clr;
+  padding: 4em;
+}
+
+.sign__page {
+  padding-bottom: 457px;
+}
+
 .customer-registration {
   .registration-section {
-    padding: 4em;
+    padding: 1em;
   }
 }

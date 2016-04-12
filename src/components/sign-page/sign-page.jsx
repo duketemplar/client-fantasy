@@ -83,24 +83,32 @@ export default class SignPage extends React.Component {
     }
 
     return (
-      <Grid>
-        <Row xsCenter>
-          <Col xs={ 12 }>
-            <h1>-- Terms & Conditions -- </h1>
-            <p>
-              { this.getContitionText() }
-            </p>
-            <Checkbox
-              className="checkbox__terms-and-conditions"
-              label="I have read and accepted the terms and conditions above."
-              onClick={ handleAcceptTermsAndConditions }
-            />
-          </Col>
-        </Row>
-        <Row xsEnd>
-          <Button secondary onClick={ handleCancel } >Cancel</Button>
-          <Button onClick={ handleSign } { ...signButtonProps }>Sign</Button>
-        </Row>
+      <Grid className="sign__page">
+        <h1 className="category__title">
+          Terms & conditions
+        </h1>
+        <p className="category__description">
+          These contain information about the account, risk of securities and guarantees
+          you as a customer of our bank. Please read and accept before you sign.
+        </p>
+        <Grid className="sign__component">
+          <Row xsCenter>
+            <Col xs={ 12 }>
+              <p>
+                { this.getContitionText() }
+              </p>
+              <Checkbox
+                className="checkbox__terms-and-conditions"
+                label="I have read and accepted the terms and conditions above."
+                onClick={ handleAcceptTermsAndConditions }
+              />
+            </Col>
+          </Row>
+          <Row xsEnd>
+            <Button secondary onClick={ handleCancel } >Cancel</Button>
+            <Button onClick={ handleSign } { ...signButtonProps }>Sign</Button>
+          </Row>
+        </Grid>
       </Grid>
     );
   }
