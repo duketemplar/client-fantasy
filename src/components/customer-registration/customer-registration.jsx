@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from './registration-section';
+import Header from '../header';
 import ProspectInfoPage from '../prospect-info-page';
 import CompliancePage from '../compliance-page';
 import AccountPicker from '../account-picker';
@@ -14,9 +15,7 @@ export default class CustomerRegistration extends React.Component {
   render() {
     return (
       <div className="customer-registration">
-        <div className="customer-registration__header">
-          <img className="logo" src="../../assets/images/logo.svg" />
-        </div>
+        <Section element={ Header } />
         <Section element={ ProspectInfoPage } />
         <Section element={ AccountPicker } />
         <Section element={ CompliancePage } />

@@ -1,5 +1,6 @@
 import React from 'react';
 import './account-picker.scss';
+import Checkmark from '../../assets/images/shape.svg';
 import { Grid, Row, Col } from 'react-bem-grid';
 
 export default class AccountPicker extends React.Component {
@@ -30,17 +31,17 @@ export default class AccountPicker extends React.Component {
                   <Row className="account__usp">
                     <Col className="account__usp__ticker">
                       <Row>
-                        <img src="../assets/images/shape.svg" /> <div className="account__usp__text">Our most popular account</div>
+                        <img src={ Checkmark } /> <div className="account__usp__text">Our most popular account</div>
                       </Row>
                     </Col>
                     <Col className="account__usp__ticker">
                       <Row>
-                        <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No account fees</div>
+                        <img src={ Checkmark } /> <div className="account__usp__text">No account fees</div>
                       </Row>
                     </Col>
                     <Col className="account__usp__ticker">
                       <Row>
-                        <img src="../assets/images/shape.svg" /> <div className="account__usp__text">No declaration</div>
+                        <img src={ Checkmark } /> <div className="account__usp__text">No declaration</div>
                       </Row>
                     </Col>
                   </Row>
