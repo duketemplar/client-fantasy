@@ -2,10 +2,17 @@
 
 .prospect {
   &__catcher {
+    position: relative;
     display: flex;
   }
 }
 .usp {
+  position: absolute;
+  height: 100%;
+  padding: 4em;
+  top: -4em;
+  right: -4em;
+  margin-right: 6px;
   flex: 1;
   background-size: cover;
   display: flex;

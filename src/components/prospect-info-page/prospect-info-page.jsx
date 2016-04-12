@@ -8,7 +8,7 @@ import { Input } from 'nordnet-ui-kit';
 import { createOrUpdateProspect, changeProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
 import './prospect-info-page.scss';
-import UpsBackground from './flying-over-cloud--small.png';
+import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -40,10 +40,10 @@ export class ProspectInfoPage extends React.Component {
         <Grid className="create-customer prospect-info__component">
           <Row>
             <Col xs={ 7 }>
-              <h1>
+              <h1 className="category__title">
                 Hi!
               </h1>
-              <p>
+              <p className="category__description">
                 Fun that you decided to try our service. Fill in your contact info and continue
                 downwards to open an account.
               </p>
