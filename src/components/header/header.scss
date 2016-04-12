@@ -1,10 +1,12 @@
+@import '../../base';
+
 .customer-registration__header {
   position: absolute;
   top: 0;
   left: 0;
   height: 48px;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: $nordnet-brightest-clr;
   box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.09);
   .logo {
     position: relative;
@@ -18,13 +20,14 @@
 }
 
 .customer-registration__page-title {
-  font-family: ValueNordnet-Bold, sans-serif;
+  font-family: $nordnet-default-font-family;
   font-size: 40px;
   line-height: 1;
+  padding-top: 1em;
 }
 
 .customer-registration__page-description {
-  font-family: ValueNordnet-Bold, sans-serif;
+  font-family: $nordnet-default-font-family;
   font-size: 18px;
   line-height: 1;
 }

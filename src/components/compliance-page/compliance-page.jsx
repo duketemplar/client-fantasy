@@ -129,8 +129,7 @@ class CompliancePage extends React.Component {
             show={ !!this.props.regulation.taxableOutsideJurisdiction }
           />
           <Row>
-              <form onSubmit={ this.submitForm }>
-
+            <form onSubmit={ this.submitForm }>
               <Row>
                 <Col xs={6}>
                   <TitledSelect
@@ -245,9 +244,9 @@ class CompliancePage extends React.Component {
                     </Button>
                   </div>
                 </Col>
-                </Row>
-              </form>
-            </Row>
+              </Row>
+            </form>
+          </Row>
         </Grid>
       </Grid>
     );

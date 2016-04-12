@@ -37,9 +37,6 @@ export class ProspectInfoPage extends React.Component {
   render() {
     return (
       <Grid className="prospect-info__page">
-        <h1>
-          Enter your personal info
-        </h1>
         <Grid className="create-customer prospect-info__component">
           <Row>
             <Col xs={ 7 }>
