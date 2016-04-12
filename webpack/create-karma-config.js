@@ -1,12 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const preLoadersForCodeCoverage = [
-  {
-    test: /\.jsx?$/,
-    include: path.resolve('./src'),
-    loader: 'isparta',
-  },
+const commonLoaders = [
   {
     test: /\.jsx?$/,
     loader: 'babel-loader',
@@ -24,27 +19,18 @@ const preLoadersForCodeCoverage = [
     loader: 'json-loader',
     exclude: /node_modules/,
   },
+
 ];
 
-const loadersWithoutSourceMap = [
+const preLoadersForCodeCoverage = [
   {
     test: /\.jsx?$/,
-    loader: 'babel-loader',
-    query: {
-      presets: ['react', 'es2015', 'stage-2'],
-      plugins: ['add-module-exports'],
-    },
+    include: path.resolve('./src'),
+    loader: 'isparta',
+  },
+].concat(commonLoaders);
 
-    exclude: [
-      path.resolve('./node_modules/'),
-    ],
-  },
-  {
-    test: /\.json$/,
-    loader: 'json-loader',
-    exclude: /node_modules/,
-  },
-];
+const loadersWithoutSourceMap = [].concat(commonLoaders);
 
 function createKarmaConfig(config) {
   // We can't have both coverage and source map at the same time ...

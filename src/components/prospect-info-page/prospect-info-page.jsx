@@ -38,7 +38,7 @@ export class ProspectInfoPage extends React.Component {
     return (
       <Grid className="create-customer">
         <Row>
-          <Col xs={ 6 }>
+          <Col xs={ 7 }>
             <h1>
               Hi!
             </h1>
@@ -69,15 +69,15 @@ export class ProspectInfoPage extends React.Component {
               />
             </form>
           </Col>
-          <Col xs={ 6 }>
-            <div className="prospect__usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
-              <div className="prospect__usp__content">
-                <h2 className="prospect__usp__header">It is easy as this:</h2>
-                <ul className="prospect__usp__items">
+          <Col xs={ 5 } className="prospect__catcher">
+            <div className="usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
+              <div>
+                <h2 className="usp__headline">It is easy as this:</h2>
+                <ul className="usp__items">
                   <li>Fill in contact details</li>
                   <li>Answer some questions</li>
                   <li>Approve aggrements and conditions</li>
-                  <li>Sign with BankId or Mobile Bank Id</li>
+                  <li>Sign with Bank Id or Mobile Bank Id</li>
                 </ul>
               </div>
             </div>

@@ -1,8 +1,3 @@
-*, body {
-  font-size: 11px;
-}
-
-
 $nordnet-default-clr: #00a9ec;
 $nordnet-alt-default-clr: #0096DC;
 $nordnet-dark-default-clr: #365299;
@@ -18,3 +13,12 @@ $nordnet-success-clr: #00BD76;
 $nordnet-warning-clr: #FFBD55;
 $nordnet-danger-clr: #EF472F;
 $nordnet-disabled-clr: #C5C5C5;
+
+$nordnet-normal-font-size: 12px;
+
+$nordnet-default-font-family: ValueNordnet ValueSans Antwerp;
+
+*, body {
+  font-size: $nordnet-normal-font-size;
+  font-family: $nordnet-default-font-family;
+}

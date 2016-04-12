@@ -1,43 +1,41 @@
 @import '../../base';
 
 .prospect {
-  &__usp {
-    height: 245px;
-    width: 265px;
-    background-repeat: no-repeat;
-    position: relative;
+  &__catcher {
+    display: flex;
+  }
+}
+.usp {
+  flex: 1;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &__content {
-      padding: 0 10% 0 10%;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+  &__headline {
+    color: $nordnet-brightest-clr;
+    font-size: 1.6rem;
+    display: block;
+  }
+
+  &__items {
+    list-style: none;
+    display: block;
+    padding: 0;
+
+    li::before {
+      content: "• ";
+      color: $nordnet-success-clr;
+      vertical-align: middle;
+      font-size: 2.4rem;
     }
 
-    &__header {
-      color: $nordnet-brightest-clr;
-      display: block;
-    }
-
-    &__items {
-      list-style: none;
-      display: block;
-      padding: 0;
-
-      li::before {
-        content: "• ";
-        color: $nordnet-success-clr;
-        vertical-align: middle;
-        font-size: 2.7rem;
-      }
-
-      li {
-        font-size: 1.1rem;
-        line-height: 1.1rem;
-        padding: 7px 0 7px 0;
-        color: $nordnet-bright-clr;
-        white-space: nowrap;
-      }
+    li {
+      font-size: 1.2rem;
+      line-height: 1.2rem;
+      padding: .8rem 0 .8rem 0;
+      color: $nordnet-bright-clr;
+      white-space: nowrap;
     }
   }
 }
