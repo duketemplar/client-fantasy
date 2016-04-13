@@ -77,12 +77,12 @@ export class ProspectInfoPage extends React.Component {
             <Col xs={ 5 } className="prospect__catcher">
               <div className="usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
                 <div>
-                  <h2 className="usp__headline">It is easy as this:</h2>
+                  <h2 className="usp__headline">{ this.props.getIntlMessage('PROSPECT_INFO.USB_HEADING') }</h2>
                   <ul className="usp__items">
-                    <li>Fill in contact details</li>
-                    <li>Answer some questions</li>
-                    <li>Approve aggrements and conditions</li>
-                    <li>Sign with Bank Id or Mobile Bank Id</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_1') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_2') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_3') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_4') }</li>
                   </ul>
                 </div>
               </div>
