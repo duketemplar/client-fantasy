@@ -9,6 +9,7 @@ import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import './compliance-page.scss';
 import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from '../../actions';
 import InfoModal from '../info-modal';
+import { translatable } from 'nordnet-i18n';
 
 const yesNoOptions = [
   { label: 'Yes', value: 'yes' },
@@ -269,7 +270,7 @@ function select(state) {
   };
 }
 
-const CompliancePageConnected = connect(select)(CompliancePage);
+const CompliancePageConnected = translatable(connect(select)(CompliancePage));
 
 export default CompliancePageConnected;
 export {

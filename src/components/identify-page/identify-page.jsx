@@ -9,6 +9,8 @@ import { changeProspect, createOrUpdateProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
 import InfoModal from '../info-modal';
 import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
+import { translatable } from 'nordnet-i18n';
+import { intlFormatter } from '../../utils/format';
 
 class IdentifyPage extends React.Component {
   constructor(props) {
@@ -66,6 +68,7 @@ class IdentifyPage extends React.Component {
     } = this.props;
 
     const hasError = this.hasErrors();
+    const invalidateMandatorySSN = requiredFieldValidator('COMMON.ERROR.MANDATORY', prospect.nationalIdNumber);
 
     return (
       <Grid className="identify">
@@ -80,12 +83,12 @@ class IdentifyPage extends React.Component {
             <form onSubmit={ this.submitForm } >
               <Input
                 type="text"
-                label="National registration number"
+                label={ this.props.getIntlMessage('INPUT.SSN.LABEL') }
                 value={ prospect.nationalIdNumber }
                 onChange={ this.handleChange }
                 hasError={ hasError }
-                hasSuccess={ !hasError && !requiredFieldValidator('This question needs to be answered.', prospect.nationalIdNumber) }
-                helpText={ prospectValidations.nationalIdNumber }
+                hasSuccess={ !hasError && !invalidateMandatorySSN }
+                helpText={ intlFormatter(this.props.getIntlMessage, prospectValidations.nationalIdNumber) }
               />
               <Button className="identify__submit" primary type="submit" disabled={ hasError || !this.props.prospect.nationalIdNumber }>
                 Submit
@@ -103,6 +106,7 @@ IdentifyPage.propTypes = {
   prospect: React.PropTypes.object,
   prospectValidations: React.PropTypes.object,
   dispatch: React.PropTypes.func,
+  getIntlMessage: React.PropTypes.func,
 };
 
 // TODO: Remove router from context or else stub it in tests
@@ -117,7 +121,7 @@ function select(state) {
   };
 }
 
-export default connect(select)(IdentifyPage);
+export default translatable(connect(select)(IdentifyPage));
 export {
   IdentifyPage,
 };
