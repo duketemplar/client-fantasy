@@ -11,52 +11,38 @@ import { changeRegulation, changeKyc, changePep, createOrUpdateRegulation } from
 import InfoModal from '../info-modal';
 import { translatable } from 'nordnet-i18n';
 
-const yesNoOptions = [
-  { label: 'Yes', value: 'yes' },
-  { label: 'No', value: 'no' },
-];
-
 class CompliancePage extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
     this.resetRegulation = this.resetRegulation.bind(this);
+    this.yesNoOptions = this.yesNoOptions.bind(this);
   }
+
 
   getRedirectInfo() {
     return (
       <div className="compliance__redirect-info">
         <h1>
-          We need to know more about you!
+          { this.props.getIntlMessage('COMPLIANCE.MODAL.REDIRECT.HEADER') }
         </h1>
         <p>
-          With the grounds that you have answered <b>Yes</b> to one of the questions
-          below, we ask that you apply via the extended manual process so that
-          we can get some more detailed information about you.
+          { this.props.getIntlMessage('COMPLIANCE.MODAL.REDIRECT.PREAMBLE') }
         </p>
-        <ul>
-          <li>
-            Are you a US citizen, tax or declaration obliged in other countries than Sweden?
-          </li>
-          <li>
-            Have you, or have you ever had: a high political or government office position
-            or are a close family member or an employee of a person in the above position?
-          </li>
-        </ul>
       </div>
     );
   }
-
+  yesNoOptions() {
+    return (
+      [
+        { label: this.props.getIntlMessage('COMMON.YES'), value: 'yes' },
+        { label: this.props.getIntlMessage('COMMON.NO'), value: 'no' },
+      ]
+    );
+  }
   pepTitleText() {
     return (
-      <p>
-        8. Are you at present holding, or have previously held, a high political
-        or government office position, or have a close family member or associate
-        who presently, or previously, has held such office?
-        <br /><br />
-        <span style={ { 'font-weight': 'normal' } }>For further information, please
-          see the form <a href="https://www.nordnet.se/pdf/se/pep.pdf">here</a>.</span>
-      </p>
+      <p> { this.props.getIntlMessage('COMPLIANCE.PEP.HEADER') }</p>
     );
   }
 
@@ -137,32 +123,32 @@ class CompliancePage extends React.Component {
                     className="compliance__question__taxable-outside-jursdiction"
                     title="1. Are you obligated to report tax outside of Sweden?"
                     value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
-                    options={ yesNoOptions }
+                    options={ this.yesNoOptions() }
                     onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
                   />
 
                   <TitledSelect
                     className="compliance__question__taxable-in-usa"
-                    title="2. Are you born in, obligated to report taxes in, or a citizen of, the United States of America?"
+                    title={ this.props.getIntlMessage('COMPLIANCE.TAXABLE_ABROAD.HEADER') }
                     value={ this.safeBooleanToString(this.props.regulation.taxableOutsideJurisdiction) }
                     onChange={ this.buildHandleChange('taxableOutsideJurisdiction', changeRegulation, (e) => e.target.value !== 'no') }
-                    options={ yesNoOptions }
+                    options={ this.yesNoOptions() }
                   />
 
                   <TitledSelect
                     className="compliance__question__employment-status"
-                    title="3. What is your employment status?"
+                    title={ this.props.getIntlMessage('COMPLIANCE.EMPLOYMENT.HEADER') }
                     value={ this.props.kyc.employment_classification }
                     onChange={ this.buildHandleChange('employment_classification', changeKyc) }
                     options={ [
-                      { label: 'Unemployed', value: 'unemployed' },
-                      { label: 'Employed', value: 'employed' },
-                      { label: 'Self employed', value: 'self employed' },
+                      { label: this.props.getIntlMessage('COMPLIANCE.EMPLOYMENT.OPTION_EMPLOYED'), value: 'employed' },
+                      { label: this.props.getIntlMessage('COMPLIANCE.EMPLOYMENT.OPTION_SELF_EMPLOYED'), value: 'self employed' },
+                      { label: this.props.getIntlMessage('COMPLIANCE.EMPLOYMENT.OPTION_UNEMPLOYED'), value: 'unemployed' },
                     ]}
                   />
                   <TitledSelect
                     className="compliance__question__yearly-income"
-                    title="4. What is your yearly income?"
+                    title={ this.props.getIntlMessage('COMPLIANCE.YEARLY_INCOME.HEADER') }
                     value={ this.props.kyc.yearly_income }
                     onChange={ this.buildHandleChange('yearly_income', changeKyc) }
                     options={
@@ -175,35 +161,33 @@ class CompliancePage extends React.Component {
                   />
 
                 <Row className="compliance__question__purpose-of-saving checkbox__question">
-                    <h5>
-                      5. What is the purpose of your savings with Nordnet?
-                    </h5>
-                  </Row>
-                  <Row className="checkbox__row">
-                    <Checkbox className="compliance__anwser__financial-safety" label="Financial safety"/>
-                    <Checkbox className="compliance__anwser__private-consumption" label="Private consumption"/>
-                    <Checkbox className="compliance__anwser__for-next-of-kin" label="For next of kin, e.g. children"/>
-                    <Checkbox className="compliance__anwser__pension" label="Pension"/>
-                    <Checkbox className="compliance__anwser__trading" label="Trading"/>
-                  </Row>
+                  <h3> { this.props.getIntlMessage('COMPLIANCE.PURPOSE.HEADER') } </h3>
+                </Row>
+                <Row className="checkbox__row">
+                  <Checkbox className="compliance__anwser__financial-safety" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_FINANCE') }/>
+                  <Checkbox className="compliance__anwser__private-consumption" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_PRIVATE') }/>
+                  <Checkbox className="compliance__anwser__pension" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_PENSION') }/>
+                  <Checkbox className="compliance__anwser__trading" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_TRADING') }/>
+                  <Checkbox className="compliance__anwser__for-next-of-kin" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_KIN') }/>
+                </Row>
                 </Col>
 
                 <Col xs={6}>
                   <TitledSelect
                     className="compliance__question__funds-and-securities-originate"
-                    title="6. From where does your funds, and or securities, originate?"
+                    title = { this.props.getIntlMessage('COMPLIANCE.FUND_ORIGIN.HEADER') }
                     value={ this.props.kyc.economic_origin }
                     onChange={ this.buildHandleChange('economic_origin', changeKyc) }
                     options={
                       [
-                        { label: 'Inheritance', value: 'inheritance' },
-                        { label: 'Self acquired', value: 'self acquired' },
+                        { label: this.props.getIntlMessage('COMPLIANCE.FUND_ORIGIN.OPTION_INHERIT'), value: 'inheritance' },
+                        { label: this.props.getIntlMessage('COMPLIANCE.FUND_ORIGIN.OPTION_SELF'), value: 'self acquired' },
                       ]
                     }
                   />
                   <TitledSelect
                     className="compliance__question__yearly-value-of-deposits"
-                    title="7. What is the approximate yearly value of your deposits into this account?"
+                    title = { this.props.getIntlMessage('COMPLIANCE.YEARLY_DEPOSIT.HEADER') }
                     value={ this.props.kyc.yearly_insert }
                     onChange={ this.buildHandleChange('yearly_insert', changeKyc) }
                     options={
@@ -219,7 +203,7 @@ class CompliancePage extends React.Component {
                     className="compliance__question__politically-exposed-in-other-nation"
                     value={ this.safeBooleanToString(this.props.pep.isPep) }
                     onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
-                    options={ yesNoOptions }
+                    options={ this.yesNoOptions() }
                   />
                 </Col>
               </Row>
@@ -232,19 +216,6 @@ class CompliancePage extends React.Component {
                     </Row>
                   </Col>
                 </Row>
-              </Row>
-
-              <Row>
-                <Col xs={12}>
-                  <div className="compliance__buttons">
-                    <Button className="compliance__submit" type="submit" primary >
-                      Submit
-                    </Button>
-                    <Button secondary>
-                      Clear values
-                    </Button>
-                  </div>
-                </Col>
               </Row>
             </form>
           </Row>
@@ -260,6 +231,7 @@ CompliancePage.propTypes = {
   regulation: React.PropTypes.object,
   pep: React.PropTypes.object,
   dispatch: React.PropTypes.func,
+  getIntlMessage: React.PropTypes.func,
 };
 
 function select(state) {

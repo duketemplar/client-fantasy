@@ -11,7 +11,9 @@
       "MANDATORY": "Must be filled in",
       "LENGTH": "Minimum 2 chars",
       "STRING": "Must be a string no numbers or other fancy stuff"
-    }
+    },
+    "YES": "Ja",
+    "NO": "Nej"
   },
   "INPUT": {
     "PHONE": {
@@ -50,7 +52,7 @@
         }
     },
     "PEP": {
-      "HEADER": "1. Är du en person i politiskt utsatt ställning (PEP)?"
+      "HEADER": "8. Är du en person i politiskt utsatt ställning (PEP)?"
     },
     "TAXABLE_USA": {
       "HEADER": "2. Är du amerikansk medborgare eller är du skatt-/deklarationsskyldig i annat land än Sverige?",
@@ -59,27 +61,29 @@
       "OPTION_YES:_ABROAD": "Ja, jag är skatt-/deklarationsskyldig i annat land än Sverige"
     },
     "TAXABLE_ABROAD": {
-      "HEADER": "3. Är du amerikansk medborgare eller är du skatt-/deklarationsskyldig i annat land än Sverige?",
+      "HEADER": "2. Är du amerikansk medborgare eller är du skatt-/deklarationsskyldig i annat land än Sverige?",
       "OPTION_NO": "Nej",
       "OPTION_YES": "Ja"
     },
     "EMPLOYMENT": {
-      "HEADER": "4. Vilken anställningsform har du?",
+      "HEADER": "3. Vilken anställningsform har du?",
       "OPTION_UNEMPLOYED": "Arbetslös",
       "OPTION_EMPLOYED": "Anställd",
       "OPTION_SELF_EMPLOYED": "Egen företagare"
     },
     "YEARLY_INCOME": {
-      "HEADER": "5. Vilken ungefärlig årsinkomst har du?"
+      "HEADER": "4. Vilken ungefärlig årsinkomst har du?"
     },
     "YEARLY_DEPOSIT": {
-      "HEADER": "6. Vilket värde kommer dina insättningar uppgå till, i genomsnitt, per år?"
+      "HEADER": "7. Vilket värde kommer dina insättningar uppgå till, i genomsnitt, per år?"
     },
     "FUND_ORIGIN": {
-      "HEADER": "7. Varifrån kommer de pengar och/eller värdepapper som du sätter in hos oss?"
+      "HEADER": "6. Varifrån kommer de pengar och/eller värdepapper som du sätter in hos oss?",
+      "OPTION_INHERIT": "Arv",
+      "OPTION_SELF": "Tjänat..."
     },
     "PURPOSE": {
-      "HEADER": "8. Vad är syftet med ditt sparande hos oss?",
+      "HEADER": "5. Vad är syftet med ditt sparande hos oss?",
       "OPTION_FINANCE": "Ekonomisk trygghet",
       "OPTION_PENSION": "Pension",
       "OPTION_KIN": "Till närstående, t ex barn",
