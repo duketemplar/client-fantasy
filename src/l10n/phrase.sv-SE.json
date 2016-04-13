@@ -19,7 +19,7 @@
     "PHONE": {
       "LABEL": "Telefon nummer",
       "HELP_TEXT": "Ska vara siffror...",
-      "ERROR": "Must be a real phone number"
+      "ERROR": "Ser konstigt ut, är det ditt nummer? "
     },
     "EMAIL": {
       "LABEL": "E-post",
@@ -41,6 +41,10 @@
     "PREAMBLE_MAIN": "Med e-legitimation kan du öppna ett konto direkt. ",
     "HEADING_SECONDARY": "Hej!",
     "PREAMBLE_SECONDARY": "Vad roligt att du vill prova vår tjänst. Fyll i dina kontaktuppgifter och fortsätt nedåt för att öppna ett konto."
+  },
+  "ACCOUNT_PICKER": {
+    "HEADING_MAIN": "Välkommen att bli kund",
+    "PREAMBLE_MAIN": "By law, we as a bank to make an assessment of the risk to be used for money laundering or contribute to the financing of terrorism. In addition, there are laws governing the exchange of account information between countries. Therefore we need to ask these questions."
   },
   "COMPLIANCE": {
     "HEADER_MAIN": "Kundkännedom",

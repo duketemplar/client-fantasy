@@ -1,7 +1,7 @@
 /* jscs:disable maximumLineLength */
 /* eslint-disable max-len */
 import React from 'react';
-import { Button, Checkbox } from 'nordnet-ui-kit';
+import { Checkbox } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import TitledSelect from './titled-select';

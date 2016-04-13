@@ -9,6 +9,8 @@ import { createOrUpdateProspect, changeProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
 import './prospect-info-page.scss';
 import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
+import { intlFormatter } from '../../utils/format';
+import { translatable } from 'nordnet-i18n';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -31,42 +33,44 @@ export class ProspectInfoPage extends React.Component {
   }
 
   hasError(key) {
-    return this.props.prospectValidations[key] !== null && this.props.prospectValidations[key] !== undefined;
+    return this.props.prospectValidations[key];
   }
 
   render() {
+    const invalidateMandatoryPhone = requiredFieldValidator('COMMON.ERROR.MANDATORY', this.props.prospect.phoneNumber);
+    const invalidateMandatoryEmail = requiredFieldValidator('COMMON.ERROR.MANDATORY', this.props.prospect.email);
+
     return (
       <Grid className="prospect-info__page">
         <Grid className="create-customer prospect-info__component">
           <Row>
             <Col xs={ 7 }>
               <h1 className="category__title">
-                Hi!
+                { this.props.getIntlMessage('PROSPECT_INFO.HEADING_SECONDARY') }
               </h1>
               <p className="category__description">
-                Fun that you decided to try our service. Fill in your contact info and continue
-                downwards to open an account.
+                { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
               </p>
               <form onSubmit={ this.submitForm } >
                 <Input
                   className="prospect__input_phone"
                   type="text"
-                  label="Phone Number"
+                  label={ this.props.getIntlMessage('INPUT.PHONE.LABEL') }
                   value={ this.props.prospect.phoneNumber }
                   onChange={ this.buildHandleChange('phoneNumber') }
-                  helpText={ this.props.prospectValidations.phoneNumber }
+                  helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.phoneNumber) }
                   hasError={ this.hasError('phoneNumber') }
-                  hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
+                  hasSuccess={ !this.hasError('phoneNumber') && !invalidateMandatoryPhone }
                 />
                 <Input
                   className="prospect__input_email"
                   type="email"
-                  label="E-mail"
+                  label={ this.props.getIntlMessage('INPUT.EMAIL.LABEL')}
                   value={ this.props.prospect.email }
                   onChange={ this.buildHandleChange('email') }
-                  helpText={ this.props.prospectValidations.email }
+                  helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.email) }
                   hasError={ this.hasError('email') }
-                  hasSuccess={ !this.hasError('email') && !requiredFieldValidator('Must be filled in.', this.props.prospect.email) }
+                  hasSuccess={ !this.hasError('email') && !invalidateMandatoryEmail }
                 />
               </form>
             </Col>
@@ -95,6 +99,7 @@ ProspectInfoPage.propTypes = {
   dispatch: React.PropTypes.func,
   prospect: React.PropTypes.object,
   prospectValidations: React.PropTypes.object,
+  getIntlMessage: React.PropTypes.func,
 };
 
 function select(state) {
@@ -104,7 +109,7 @@ function select(state) {
   };
 }
 
-const ProspectInfoPageConnected = connect(select)(ProspectInfoPage);
+const ProspectInfoPageConnected = translatable(connect(select)(ProspectInfoPage));
 
 export {
   ProspectInfoPageConnected as default,
