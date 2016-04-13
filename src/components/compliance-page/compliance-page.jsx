@@ -99,15 +99,8 @@ class CompliancePage extends React.Component {
   render() {
     return (
       <Grid className="compliance__page">
-        <h1 className="category__title">
-          Customer knowledge
-        </h1>
-        <p className="category__description">
-          By law, we as a bank to make an assessment of the risk to be used for money
-          laundering or contribute to the financing of terrorism. In addition, there
-          are laws governing the exchange of account information between countries.
-          Therefore we need to ask these questions.
-        </p>
+        <h1>{ this.props.getIntlMessage('COMPLIANCE.HEADER_MAIN') }</h1>
+        <p>{ this.props.getIntlMessage('COMPLIANCE.PREAMBLE') }</p>
         <Grid className="compliance__component">
           <InfoModal
             onAccept={ this.redirectToManualFlow }

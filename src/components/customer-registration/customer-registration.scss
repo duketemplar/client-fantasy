@@ -1,20 +1,4 @@
-@import '../../base';
-
-body {
-  background-color: $nordnet-bright-clr;
-}
-
-.category__title {
-  font-family: $nordnet-default-font-family;
-  font-size: 18px;
-  line-height: 1;
-}
-
-.category__description {
-  font-family: $nordnet-default-font-family;
-  font-size: 14px;
-  line-height: 1.2;
-}
+@import '../../variables';
 
 .identify,
 .prospect-info__component,

@@ -8,12 +8,9 @@ export class AccountPickerClass extends React.Component {
   render() {
     return (
       <Grid className="account__page">
-        <h1 className="customer-registration__page-title">
+        <h1>
           { this.props.getIntlMessage('ACCOUNT_PICKER.HEADING_MAIN') }
         </h1>
-        <p className="customer-registration__page-description">
-          { this.props.getIntlMessage('ACCOUNT_PICKER.PREAMBLE_MAIN') }
-        </p>
         <Grid className="account__component">
           <Row className="account">
             <Col xs={ 12 }>

@@ -48,8 +48,7 @@
     "USP_ITEM_4": "Signera med bankid!"
   },
   "ACCOUNT_PICKER": {
-    "HEADING_MAIN": "Välkommen att bli kund",
-    "PREAMBLE_MAIN": "By law, we as a bank to make an assessment of the risk to be used for money laundering or contribute to the financing of terrorism. In addition, there are laws governing the exchange of account information between countries. Therefore we need to ask these questions."
+    "HEADING_MAIN": "Konto"
   },
   "COMPLIANCE": {
     "HEADER_MAIN": "Kundkännedom",

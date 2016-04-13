@@ -1,24 +1,54 @@
-$nordnet-default-clr: #00a9ec;
-$nordnet-alt-default-clr: #0096DC;
-$nordnet-dark-default-clr: #365299;
-$nordnet-darkest-clr: #222222;
+@import 'variables';
 
-$nordnet-brightest-clr: #ffffff;
-$nordnet-bright-clr: #ECEBEB;
-$nordnet-dark-bright-clr: #C5C5C5;
-$nordnet-dark-clr: #969696;
-$nordnet-darkest-clr: #222222;
+html, body {
+  font: $font-alternative;
+  font-size: 62.5%;
+  margin: 0;
+  min-height: 100%;
+  background-color: $color-common;
+}
 
-$nordnet-success-clr: #00BD76;
-$nordnet-warning-clr: #FFBD55;
-$nordnet-danger-clr: #EF472F;
-$nordnet-disabled-clr: #C5C5C5;
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
 
-$nordnet-normal-font-size: 12px;
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 
-$nordnet-default-font-family: ValueNordnet-Bold, ValueSans, sans-serif;
+h1 {
+  clear: both;
+  text-align: left;
+  color: $color-header;
+  font-size: $size-primary-header;
+}
+h1 + p {
+  color: $color-text;
+  font-size: $size-main-preamble;
+}
 
-*, body {
-  font-size: $nordnet-normal-font-size;
-  font-family: $nordnet-default-font-family;
+h2 {
+  color: $color-header;
+  margin: 0px 0px 1rem 0px;
+  padding: 1rem 0 0 0;
+  font-size: $size-secondary-header;
+}
+h2 + p {
+  color: $color-text;
+  font-size: $size-common;
+}
+h3 {
+  color: $color-header;
+  margin: 0px 0px 1rem 0px;
+  padding: 1rem 0 0 0;
+  font-size: $size-alternative-header;
+}
+
+p {
+  font-size: $size-common;
+}
+a {
+  color: $color-common;
+  text-decoration: none;
 }

@@ -14,12 +14,14 @@ export default class CustomerRegistration extends React.Component {
 
   render() {
     return (
-      <div className="customer-registration">
+      <div>
         <Section element={ Header } />
-        <Section element={ ProspectInfoPage } />
-        <Section element={ AccountPicker } />
-        <Section element={ CompliancePage } />
-        <Section element={ SignPage } />
+        <div className="customer-registration">
+          <Section element={ ProspectInfoPage } />
+          <Section element={ AccountPicker } />
+          <Section element={ CompliancePage } />
+          <Section element={ SignPage } />
+        </div>
       </div>
     );
   }

@@ -45,10 +45,10 @@ export class ProspectInfoPage extends React.Component {
         <Grid className="create-customer prospect-info__component">
           <Row>
             <Col xs={ 7 }>
-              <h1 className="category__title">
+              <h2>
                 { this.props.getIntlMessage('PROSPECT_INFO.HEADING_SECONDARY') }
-              </h1>
-              <p className="category__description">
+              </h2>
+              <p>
                 { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
               </p>
               <form onSubmit={ this.submitForm } >

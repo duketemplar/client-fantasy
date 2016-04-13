@@ -1,9 +1,6 @@
-@import '../../base';
+@import '../../variables';
 
 .customer-registration__header {
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 48px;
   width: 100%;
   background-color: $nordnet-brightest-clr;
@@ -17,17 +14,4 @@
   	height: 27px;
   	object-fit: contain;
   }
-}
-
-.customer-registration__page-title {
-  font-family: $nordnet-default-font-family;
-  font-size: 40px;
-  line-height: 1;
-  padding-top: 1em;
-}
-
-.customer-registration__page-description {
-  font-family: $nordnet-default-font-family;
-  font-size: 18px;
-  line-height: 1;
 }

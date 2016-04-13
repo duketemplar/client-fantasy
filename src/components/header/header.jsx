@@ -14,10 +14,10 @@ export class HeaderClass extends React.Component {
         <Grid>
           <Row>
             <Col xs={ 12 } >
-              <h1 className="customer-registration__page-title">
+              <h1>
                 { this.props.getIntlMessage('PROSPECT_INFO.HEADING_MAIN') }
               </h1>
-              <p className="customer-registration__page-description">
+              <p>
                 { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_MAIN') }
               </p>
             </Col>
