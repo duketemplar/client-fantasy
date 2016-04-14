@@ -1,4 +1,4 @@
-import { isEmptyValue } from './is-empty-value';
+import { isEmptyValue } from './';
 // Empty values are handled by required-field-validator
 
 const emailValidator = (errorMessage, email) => {

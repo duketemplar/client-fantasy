@@ -84,10 +84,10 @@ export default class SignPage extends React.Component {
 
     return (
       <Grid className="sign__page">
-        <h1 className="category__title">
+        <h1>
           Terms & conditions
         </h1>
-        <p className="category__description">
+        <p>
           These contain information about the account, risk of securities and guarantees
           you as a customer of our bank. Please read and accept before you sign.
         </p>

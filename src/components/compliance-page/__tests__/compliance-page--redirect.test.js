@@ -13,6 +13,7 @@ describe('Compliance section redirects', () => {
       kyc: {},
       regulation: {},
       pep: {},
+      getIntlMessage: message => message,
     };
 
     wrapper = shallow(<CompliancePage { ...props } />);

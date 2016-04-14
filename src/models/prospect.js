@@ -21,31 +21,32 @@ Prospect.keyTranslations = {
 
 Prospect.validators = {
   nationalIdNumber: [
-    (value) => nationalRegistrationNumberValidator(getNationality(), 'Must be a real national registration number.', value),
-    (value) => requiredFieldValidator('Must be filled in.', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
+    (value) => nationalRegistrationNumberValidator(getNationality(), 'INPUT.SSN.ERROR', value),
   ],
   phoneNumber: [
-    (value) => requiredFieldValidator('Must be filled in.', value),
-    (value) => lengthValidator(7, 'Must be a real phonenumber.', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
+    (value) => lengthValidator(7, 'INPUT.PHONE.ERROR', value),
   ],
   email: [
-    (value) => requiredFieldValidator('Must be filled in.', value),
-    (value) => emailValidator('Not a valid email.', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
+    (value) => emailValidator('INPUT.EMAIL.ERROR', value),
   ],
   firstName: [
-    (value) => regexValidator(/^[a-zA-Z.\s]+$/, 'Must only contain letters.', value),
-    (value) => requiredFieldValidator('Must be filled in.', value),
-    (value) => lengthValidator(3, 'Must be at least 2 characters.', value),
+    (value) => regexValidator(/^[a-zA-Z.\s]+$/, 'COMMON.ERROR.STRING', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
+    (value) => lengthValidator(2, 'COMMON.ERROR.LENGTH', value),
   ],
   lastName: [
-    (value) => requiredFieldValidator('Must be filled in.', value),
-    (value) => lengthValidator(3, 'Must be at least 2 characters.', value),
+    (value) => regexValidator(/^[a-zA-Z.\s]+$/, 'COMMON.ERROR.STRING', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
+    (value) => lengthValidator(2, 'COMMON.ERROR.LENGTH', value),
   ],
   citizen: [
-    (value) => requiredFieldValidator('Must be filled in.', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
   ],
   country: [
-    (value) => requiredFieldValidator('Must be filled in.', value),
+    (value) => requiredFieldValidator('COMMON.ERROR.MANDATORY', value),
   ],
 };
 

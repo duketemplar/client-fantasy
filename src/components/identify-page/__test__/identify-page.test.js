@@ -15,6 +15,7 @@ describe('on identify identifyPage', () => {
     const props = {
       prospect: {},
       prospectValidations: {},
+      getIntlMessage: message => message,
     };
 
     sandbox = sinon.sandbox.create();

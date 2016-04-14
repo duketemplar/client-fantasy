@@ -59,13 +59,13 @@ describe('prospect.reducer', () => {
       country: null,
     });
     expect(reducers.prospectValidations(initialState, action)).to.eql({
-      nationalIdNumber: 'Must be a real national registration number.',
-      phoneNumber: 'Must be a real phonenumber.',
-      email: 'Not a valid email.',
-      firstName: 'Must only contain letters.',
-      lastName: 'Must be at least 2 characters.',
-      citizen: 'Must be filled in.',
-      country: 'Must be filled in.',
+      nationalIdNumber: 'INPUT.SSN.ERROR',
+      phoneNumber: 'INPUT.PHONE.ERROR',
+      email: 'INPUT.EMAIL.ERROR',
+      firstName: 'COMMON.ERROR.STRING',
+      lastName: 'COMMON.ERROR.LENGTH',
+      citizen: 'COMMON.ERROR.MANDATORY',
+      country: 'COMMON.ERROR.MANDATORY',
     });
   });
 });

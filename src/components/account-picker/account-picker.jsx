@@ -2,13 +2,14 @@ import React from 'react';
 import './account-picker.scss';
 import Checkmark from '../../assets/images/shape.svg';
 import { Grid, Row, Col } from 'react-bem-grid';
+import { translatable } from 'nordnet-i18n';
 
-export default class AccountPicker extends React.Component {
+class AccountPicker extends React.Component {
   render() {
     return (
       <Grid className="account__page">
-        <h1 className="category__title">
-          Konto
+        <h1>
+          { this.props.getIntlMessage('ACCOUNT_PICKER.HEADING_MAIN') }
         </h1>
         <Grid className="account__component">
           <Row className="account">
@@ -54,3 +55,9 @@ export default class AccountPicker extends React.Component {
     );
   }
 }
+
+AccountPicker.propTypes = {
+  getIntlMessage: React.PropTypes.func,
+};
+
+export default translatable(AccountPicker);

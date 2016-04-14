@@ -6,6 +6,7 @@ import regexValidator from './regex-validator';
 import nationalRegistrationNumberValidator from './national-registration-number-validator';
 import validate from './validation';
 import validatePhonenumber from './phone-number-validator';
+import { isEmptyValue } from './is-empty-value';
 
 
 export {
@@ -17,4 +18,5 @@ export {
   nationalRegistrationNumberValidator,
   validate,
   validatePhonenumber,
+  isEmptyValue,
 };

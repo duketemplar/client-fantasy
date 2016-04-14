@@ -6,9 +6,11 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { Input } from 'nordnet-ui-kit';
 import { createOrUpdateProspect, changeProspect } from '../../actions';
-import { requiredFieldValidator } from '../../utils/validators';
+import { isEmptyValue } from '../../utils/validators';
 import './prospect-info-page.scss';
 import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
+import { intlFormatter } from '../../utils/format';
+import { translatable } from 'nordnet-i18n';
 import ReactPhoneInput from 'react-phone-input';
 
 export class ProspectInfoPage extends React.Component {
@@ -38,7 +40,7 @@ export class ProspectInfoPage extends React.Component {
   }
 
   hasError(key) {
-    return this.props.prospectValidations[key] !== null && this.props.prospectValidations[key] !== undefined;
+    return this.props.prospectValidations[key];
   }
 
   render() {
@@ -47,16 +49,15 @@ export class ProspectInfoPage extends React.Component {
         <Grid className="create-customer prospect-info__component">
           <Row>
             <Col xs={ 7 }>
-              <h1 className="category__title">
-                Hi!
-              </h1>
-              <p className="category__description">
-                Fun that you decided to try our service. Fill in your contact info and continue
-                downwards to open an account.
+              <h2>
+                { this.props.getIntlMessage('PROSPECT_INFO.HEADING_SECONDARY') }
+              </h2>
+              <p>
+                { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
               </p>
               <form onSubmit={ this.submitForm } >
                 <div className="input prospect__input_phone">
-                  <label className="input__label" htmlFor="prospect-phone-number">Phone Number</label>
+                  <label className="input__label" htmlFor="prospect-phone-number">{ this.props.getIntlMessage('INPUT.PHONE.LABEL') }</label>
                   <ReactPhoneInput id="prospect-phone-number"
                     defaultCountry={'se'}
                     preferredCountries={ ['se', 'fi', 'no', 'dk'] }
@@ -66,24 +67,24 @@ export class ProspectInfoPage extends React.Component {
                 <Input
                   className="prospect__input_email"
                   type="email"
-                  label="E-mail"
+                  label={ this.props.getIntlMessage('INPUT.EMAIL.LABEL')}
                   value={ this.props.prospect.email }
                   onChange={ this.buildHandleChange('email') }
-                  helpText={ this.props.prospectValidations.email }
+                  helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.email) }
                   hasError={ this.hasError('email') }
-                  hasSuccess={ !this.hasError('email') && !requiredFieldValidator('Must be filled in.', this.props.prospect.email) }
+                  hasSuccess={ !this.hasError('email') && !isEmptyValue(this.props.prospect.email) }
                 />
               </form>
             </Col>
             <Col xs={ 5 } className="prospect__catcher">
               <div className="usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
                 <div>
-                  <h2 className="usp__headline">It is easy as this:</h2>
+                  <h2 className="usp__headline">{ this.props.getIntlMessage('PROSPECT_INFO.USB_HEADING') }</h2>
                   <ul className="usp__items">
-                    <li>Fill in contact details</li>
-                    <li>Answer some questions</li>
-                    <li>Approve aggrements and conditions</li>
-                    <li>Sign with Bank Id or Mobile Bank Id</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_1') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_2') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_3') }</li>
+                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_4') }</li>
                   </ul>
                 </div>
               </div>
@@ -100,6 +101,7 @@ ProspectInfoPage.propTypes = {
   dispatch: React.PropTypes.func,
   prospect: React.PropTypes.object,
   prospectValidations: React.PropTypes.object,
+  getIntlMessage: React.PropTypes.func,
 };
 
 function select(state) {
@@ -109,7 +111,7 @@ function select(state) {
   };
 }
 
-const ProspectInfoPageConnected = connect(select)(ProspectInfoPage);
+const ProspectInfoPageConnected = translatable(connect(select)(ProspectInfoPage));
 
 export {
   ProspectInfoPageConnected as default,
