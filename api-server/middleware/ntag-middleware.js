@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 var state = require('./state');
 
 var GET = 'GET';
