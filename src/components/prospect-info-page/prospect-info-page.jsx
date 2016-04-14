@@ -55,12 +55,14 @@ export class ProspectInfoPage extends React.Component {
                 downwards to open an account.
               </p>
               <form onSubmit={ this.submitForm } >
-                <label htmlFor="prospect-phone-number">Phone Number</label>
-                <ReactPhoneInput id="prospect-phone-number"
-                  defaultCountry={'se'}
-                  preferredCountries={ ['se', 'fi', 'no', 'dk'] }
-                  onChange={ this.handlePhoneNumberChange }
-                />
+                <div className="input prospect__input_phone">
+                  <label className="input__label" htmlFor="prospect-phone-number">Phone Number</label>
+                  <ReactPhoneInput id="prospect-phone-number"
+                    defaultCountry={'se'}
+                    preferredCountries={ ['se', 'fi', 'no', 'dk'] }
+                    onChange={ this.handlePhoneNumberChange }
+                  />
+                </div>
                 { /*
                   <Input
                     className="prospect__input_phone"
