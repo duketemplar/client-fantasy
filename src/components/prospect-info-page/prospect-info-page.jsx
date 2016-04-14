@@ -13,7 +13,6 @@ import { intlFormatter } from '../../utils/format';
 import { translatable } from 'nordnet-i18n';
 import ReactPhoneInput from 'react-phone-input';
 
-
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
