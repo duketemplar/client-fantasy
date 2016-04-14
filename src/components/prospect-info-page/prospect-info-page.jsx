@@ -63,19 +63,6 @@ export class ProspectInfoPage extends React.Component {
                     onChange={ this.handlePhoneNumberChange }
                   />
                 </div>
-                { /*
-                  <Input
-                    className="prospect__input_phone"
-                    type="text"
-                    label="Phone Number"
-                    value={ this.props.prospect.phoneNumber }
-                    onChange={ this.buildHandleChange('phoneNumber') }
-                    helpText={ this.props.prospectValidations.phoneNumber }
-                    hasError={ this.hasError('phoneNumber') }
-                    hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
-                  />
-                */
-                }
                 <Input
                   className="prospect__input_email"
                   type="email"
