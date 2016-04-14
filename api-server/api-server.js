@@ -7,7 +7,6 @@ const bodyParser = require('koa-bodyparser');
 const jsonFixtures = require('./fixtures/json-fixtures');
 
 const ntagMiddleware = require('./middleware/ntag-middleware');
-const authenticatedMiddleware = require('./middleware/authenticated-middleware');
 
 const routes = require('./routes');
 const pkg = require('./../package.json');
@@ -28,7 +27,6 @@ app
   .use(mount('/now/', serve(__dirname + '/now')))
   .use(mount('/mux/', serve(__dirname + '/mux')))
   .use(mount('/api', ntagMiddleware))
-  .use(mount('/api/2/accounts', authenticatedMiddleware))
   .use(jsonFixtures(__dirname + '/fixtures'))
   .use(router.routes())
   .use(router.allowedMethods());

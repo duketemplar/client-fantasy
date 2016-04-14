@@ -7,6 +7,9 @@
   <title>Customer Registration</title>
 </head>
 <body>
+  <iframe id="legacy-session" style="display: none;" src="">
+    <p>Session could not be created</p>
+  </iframe>
   <!-- Example container element -->
   <!-- When data-lang and data-country attributes are on set on the container element,
         application will try to load them from nExt API instead. This ensures that application always start with correct localization.
@@ -35,16 +38,35 @@
         Dynamically injects <script> tags on the page for all defined entry points. -->
   <script src="/sc/webapp-customer-registration/init/base.js"></script>
 
-  <!-- Application startup. Executes application initialization function once the rest of the application code is loaded. -->
   <script>
-    (function(window, document) {
-      var appName = 'webapp-customer-registration';
-      var domElement = document.getElementById(appName);
-      if (domElement && window.Nordnet[appName]) {
-        console.log('Initialising the app...');
-        window.Nordnet[appName](domElement);
+    (function(){
+      var sessionGenerator = document.getElementById('legacy-session');
+
+      var setSrcAttrToHostUrl = function(iframe) {
+
+        var hostUrl = location.protocol + '//' + location.host;
+        if (!location.host.includes('localhost')) {
+          sessionGenerator.setAttribute('src', hostUrl);
+        } else {
+          sessionGenerator.setAttribute('src', "");
+        }
       }
-    })(window, document);
+
+      var loadApplication = function(window, document) {
+        var appName = 'webapp-customer-registration';
+        var domElement = document.getElementById(appName);
+        if (domElement && window.Nordnet[appName]) {
+          console.log('Initialising the app...');
+          window.Nordnet[appName](domElement);
+        }
+      };
+
+      sessionGenerator.onload = function(){
+        loadApplication(window, document);
+      };
+
+      setSrcAttrToHostUrl(sessionGenerator);
+    })();
   </script>
 </body>
 </html>
