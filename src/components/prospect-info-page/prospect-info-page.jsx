@@ -9,11 +9,13 @@ import { createOrUpdateProspect, changeProspect } from '../../actions';
 import { requiredFieldValidator } from '../../utils/validators';
 import './prospect-info-page.scss';
 import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
+import ReactPhoneInput from 'react-phone-input';
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
   }
 
   submitForm() {
@@ -28,6 +30,11 @@ export class ProspectInfoPage extends React.Component {
 
   buildHandleChange(key) {
     return (e) => this.handleChange(key, e);
+  }
+
+  handlePhoneNumberChange(formattedNumber) {
+    const prospectData = { phoneNumber: formattedNumber };
+    this.props.dispatch(changeProspect(prospectData));
   }
 
   hasError(key) {
@@ -48,16 +55,25 @@ export class ProspectInfoPage extends React.Component {
                 downwards to open an account.
               </p>
               <form onSubmit={ this.submitForm } >
-                <Input
-                  className="prospect__input_phone"
-                  type="text"
-                  label="Phone Number"
-                  value={ this.props.prospect.phoneNumber }
-                  onChange={ this.buildHandleChange('phoneNumber') }
-                  helpText={ this.props.prospectValidations.phoneNumber }
-                  hasError={ this.hasError('phoneNumber') }
-                  hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
+                <label htmlFor="prospect-phone-number">Phone Number</label>
+                <ReactPhoneInput id="prospect-phone-number"
+                  defaultCountry={'se'}
+                  preferredCountries={ ['se', 'fi', 'no', 'dk'] }
+                  onChange={ this.handlePhoneNumberChange }
                 />
+                { /*
+                  <Input
+                    className="prospect__input_phone"
+                    type="text"
+                    label="Phone Number"
+                    value={ this.props.prospect.phoneNumber }
+                    onChange={ this.buildHandleChange('phoneNumber') }
+                    helpText={ this.props.prospectValidations.phoneNumber }
+                    hasError={ this.hasError('phoneNumber') }
+                    hasSuccess={ !this.hasError('phoneNumber') && !requiredFieldValidator('Must be filled in.', this.props.prospect.phoneNumber) }
+                  />
+                */
+                }
                 <Input
                   className="prospect__input_email"
                   type="email"
