@@ -4,7 +4,7 @@ import Checkmark from '../../assets/images/shape.svg';
 import { Grid, Row, Col } from 'react-bem-grid';
 import { translatable } from 'nordnet-i18n';
 
-export class AccountPickerClass extends React.Component {
+class AccountPicker extends React.Component {
   render() {
     return (
       <Grid className="account__page">
@@ -56,12 +56,8 @@ export class AccountPickerClass extends React.Component {
   }
 }
 
-AccountPickerClass.propTypes = {
+AccountPicker.propTypes = {
   getIntlMessage: React.PropTypes.func,
 };
 
-const AccountPicker = translatable(AccountPickerClass);
-
-export {
-  AccountPicker as default,
-};
+export default translatable(AccountPicker);

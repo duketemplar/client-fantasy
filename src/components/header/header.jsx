@@ -4,7 +4,7 @@ import './header.scss';
 import Logo from '../../assets/images/logo.svg';
 import { translatable } from 'nordnet-i18n';
 
-export class HeaderClass extends React.Component {
+class Header extends React.Component {
   render() {
     return (
       <div>
@@ -29,12 +29,8 @@ export class HeaderClass extends React.Component {
 }
 
 
-HeaderClass.propTypes = {
+Header.propTypes = {
   getIntlMessage: React.PropTypes.func,
 };
 
-const Header = translatable(HeaderClass);
-
-export {
-  Header as default,
-};
+export default translatable(Header);
