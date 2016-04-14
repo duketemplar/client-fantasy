@@ -11,11 +11,14 @@ import './prospect-info-page.scss';
 import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
 import { intlFormatter } from '../../utils/format';
 import { translatable } from 'nordnet-i18n';
+import ReactPhoneInput from 'react-phone-input';
+
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
     super(props);
     this.submitForm = this.submitForm.bind(this);
+    this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this);
   }
 
   submitForm() {
@@ -30,6 +33,11 @@ export class ProspectInfoPage extends React.Component {
 
   buildHandleChange(key) {
     return (e) => this.handleChange(key, e);
+  }
+
+  handlePhoneNumberChange(formattedNumber) {
+    const prospectData = { phoneNumber: formattedNumber };
+    this.props.dispatch(changeProspect(prospectData));
   }
 
   hasError(key) {
@@ -52,16 +60,14 @@ export class ProspectInfoPage extends React.Component {
                 { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
               </p>
               <form onSubmit={ this.submitForm } >
-                <Input
-                  className="prospect__input_phone"
-                  type="text"
-                  label={ this.props.getIntlMessage('INPUT.PHONE.LABEL') }
-                  value={ this.props.prospect.phoneNumber }
-                  onChange={ this.buildHandleChange('phoneNumber') }
-                  helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.phoneNumber) }
-                  hasError={ this.hasError('phoneNumber') }
-                  hasSuccess={ !this.hasError('phoneNumber') && !invalidateMandatoryPhone }
-                />
+                <div className="input prospect__input_phone">
+                  <label className="input__label" htmlFor="prospect-phone-number">{ this.props.getIntlMessage('INPUT.PHONE.LABEL') }</label>
+                  <ReactPhoneInput id="prospect-phone-number"
+                    defaultCountry={'se'}
+                    preferredCountries={ ['se', 'fi', 'no', 'dk'] }
+                    onChange={ this.handlePhoneNumberChange }
+                  />
+                </div>
                 <Input
                   className="prospect__input_email"
                   type="email"

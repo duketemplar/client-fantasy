@@ -9,6 +9,7 @@ describe('in prospect-info component', () => {
   let sandbox;
   let wrapper;
   let handleChangeStub;
+  let handlePhoneNumberChange;
 
   beforeEach(() => {
     const props = {
@@ -17,8 +18,11 @@ describe('in prospect-info component', () => {
     };
 
     sandbox = sinon.sandbox.create();
+
+    handleChangeStub = sandbox.stub(ProspectInfoPage.prototype, 'handleChange');
+    handlePhoneNumberChange = sandbox.stub(ProspectInfoPage.prototype, 'handlePhoneNumberChange');
+
     wrapper = shallow(React.createElement(ProspectInfoPage, props));
-    handleChangeStub = sandbox.stub(ProspectInfoPage.prototype, 'handleChange', () => console.log('handleChange() called!'));
   });
 
   afterEach(() => {
@@ -26,10 +30,10 @@ describe('in prospect-info component', () => {
   });
 
   it('entering a phone number updates the state', () => {
-    const input = wrapper.find('.prospect__input_phone');
+    const input = wrapper.find('#prospect-phone-number');
     input.simulate('change');
 
-    expect(handleChangeStub).to.have.been.calledOnce();
+    expect(handlePhoneNumberChange).to.have.been.calledOnce();
   });
 
   it('entering an e-mail updates the state', () => {
