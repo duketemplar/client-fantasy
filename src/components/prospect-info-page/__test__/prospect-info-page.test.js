@@ -15,6 +15,7 @@ describe('in prospect-info component', () => {
     const props = {
       prospect: {},
       prospectValidations: {},
+      getIntlMessage: message => message,
     };
 
     sandbox = sinon.sandbox.create();

@@ -4,9 +4,8 @@ $nordnet-default-font-family: "Value Nordnet", "Century Gothic", sans-serif;
 $nordnet-normal-font-size: 12px;
 
 /* naming conventions!
-  What if we want to change color of all borders having $nordnet-dark-bright-clr to something lighter.
-  Then we would have to chage all classes using $nordnet-dark-bright-clr.
-  Do we need to name them nordnet..?
+  We should name it for what it is, not what it looks like. Avoid large, red, bigger e.t.c.
+  For the eaze of reading and shorten classnames, we shouldnt name them anything with $nordnet..!?
 */
 $nordnet-default-clr: #00a9ec;
 $nordnet-alt-default-clr: #0096DC;

@@ -16,6 +16,7 @@ describe('Compliance', () => {
       kyc: {},
       regulation: {},
       pep: {},
+      getIntlMessage: message => message,
     };
 
     sandbox = sinon.sandbox.create();
