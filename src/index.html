@@ -7,7 +7,7 @@
   <title>Customer Registration</title>
 </head>
 <body>
-  <iframe id="legacy-session" style="display:none;" src="">
+  <iframe id="legacy-session" style="display: none;" src="">
     <p>Session could not be created</p>
   </iframe>
   <!-- Example container element -->
@@ -39,35 +39,34 @@
   <script src="/sc/webapp-customer-registration/init/base.js"></script>
 
   <script>
-    var sessionGenerator = document.getElementById('legacy-session');
+    (function(){
+      var sessionGenerator = document.getElementById('legacy-session');
 
-    var setIframeToThisDomain = function(iframe) {
-      if (!location.host.includes('localhost')) {
-        sessionGenerator.setAttribute('src', location.protocol + '//' + location.host);
+      var setSrcAttrToHostUrl = function(iframe) {
+
+        var hostUrl = location.protocol + '//' + location.host;
+        if (!location.host.includes('localhost')) {
+          sessionGenerator.setAttribute('src', hostUrl);
+        } else {
+          sessionGenerator.setAttribute('src', "");
+        }
       }
-    }
 
-    var loadApplication = function(window, document) {
-      var appName = 'webapp-customer-registration';
-      var domElement = document.getElementById(appName);
-      if (domElement && window.Nordnet[appName]) {
-        console.log('Initialising the app...');
-        window.Nordnet[appName](domElement);
-      }
-    };
+      var loadApplication = function(window, document) {
+        var appName = 'webapp-customer-registration';
+        var domElement = document.getElementById(appName);
+        if (domElement && window.Nordnet[appName]) {
+          console.log('Initialising the app...');
+          window.Nordnet[appName](domElement);
+        }
+      };
 
-    var isIframeLoaded = function(iframe, cb) {
-      var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+      sessionGenerator.onload = function(){
+        loadApplication(window, document);
+      };
 
-      if (iframeDoc.readyState  == 'complete' && iframe.src !== "") {
-        cb();
-      } else {
-        window.setTimeout(isIframeLoaded.bind(null, iframe, cb), 500);
-      }
-    }
-
-    setIframeToThisDomain(sessionGenerator);
-    isIframeLoaded(sessionGenerator, loadApplication.bind(null, window, document));
+      setSrcAttrToHostUrl(sessionGenerator);
+    })();
   </script>
 </body>
 </html>
