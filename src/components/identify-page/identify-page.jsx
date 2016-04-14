@@ -6,7 +6,7 @@ import { Button, Input } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { changeProspect, createOrUpdateProspect } from '../../actions';
-import { requiredFieldValidator } from '../../utils/validators';
+import { isEmptyValue } from '../../utils/validators';
 import InfoModal from '../info-modal';
 import { MANUAL_FLOW_OPEN_ISK_PATH } from '../../utils/endpoints';
 import { translatable } from 'nordnet-i18n';
@@ -68,8 +68,6 @@ class IdentifyPage extends React.Component {
     } = this.props;
 
     const hasError = this.hasErrors();
-    const invalidateMandatorySSN = requiredFieldValidator('COMMON.ERROR.MANDATORY', prospect.nationalIdNumber);
-
     return (
       <Grid className="identify">
         <InfoModal
@@ -87,7 +85,7 @@ class IdentifyPage extends React.Component {
                 value={ prospect.nationalIdNumber }
                 onChange={ this.handleChange }
                 hasError={ hasError }
-                hasSuccess={ !hasError && !invalidateMandatorySSN }
+                hasSuccess={ !hasError && !isEmptyValue(prospect.nationalIdNumber) }
                 helpText={ intlFormatter(this.props.getIntlMessage, prospectValidations.nationalIdNumber) }
               />
               <Button className="identify__submit" primary type="submit" disabled={ hasError || !this.props.prospect.nationalIdNumber }>

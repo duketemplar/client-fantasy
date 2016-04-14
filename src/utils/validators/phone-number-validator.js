@@ -1,6 +1,6 @@
 import libPhoneNumber from 'google-libphonenumber';
 const phoneUtil = libPhoneNumber.PhoneNumberUtil.getInstance();
-import { isEmptyValue } from './is-empty-value';
+import { isEmptyValue } from './';
 
 export function validatePhonenumber(errorMessage, number, countryCode = 'SE') {
   if (isEmptyValue(number)) {

@@ -1,4 +1,4 @@
-import { isEmptyValue } from './is-empty-value';
+import { isEmptyValue } from './';
 
 const requiredFieldValidator = (message, value) => {
   if (isEmptyValue(value)) {

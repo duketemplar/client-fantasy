@@ -6,7 +6,7 @@ import { Grid, Col, Row } from 'react-bem-grid';
 import { connect } from 'react-redux';
 import { Input } from 'nordnet-ui-kit';
 import { createOrUpdateProspect, changeProspect } from '../../actions';
-import { requiredFieldValidator } from '../../utils/validators';
+import { isEmptyValue } from '../../utils/validators';
 import './prospect-info-page.scss';
 import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
 import { intlFormatter } from '../../utils/format';
@@ -45,9 +45,6 @@ export class ProspectInfoPage extends React.Component {
   }
 
   render() {
-    const invalidateMandatoryPhone = requiredFieldValidator('COMMON.ERROR.MANDATORY', this.props.prospect.phoneNumber);
-    const invalidateMandatoryEmail = requiredFieldValidator('COMMON.ERROR.MANDATORY', this.props.prospect.email);
-
     return (
       <Grid className="prospect-info__page">
         <Grid className="create-customer prospect-info__component">
@@ -76,7 +73,7 @@ export class ProspectInfoPage extends React.Component {
                   onChange={ this.buildHandleChange('email') }
                   helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.email) }
                   hasError={ this.hasError('email') }
-                  hasSuccess={ !this.hasError('email') && !invalidateMandatoryEmail }
+                  hasSuccess={ !this.hasError('email') && !isEmptyValue(this.props.prospect.email) }
                 />
               </form>
             </Col>
