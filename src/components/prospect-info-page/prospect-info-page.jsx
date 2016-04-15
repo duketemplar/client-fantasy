@@ -56,15 +56,16 @@ export class ProspectInfoPage extends React.Component {
                 { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
               </p>
               <form onSubmit={ this.submitForm } >
-                <div className="input prospect__input_phone">
+                <div className="input prospect__input_phone" id="prospect-phone-number">
                   <label className="input__label" htmlFor="prospect-phone-number">{ this.props.getIntlMessage('INPUT.PHONE.LABEL') }</label>
-                  <ReactPhoneInput id="prospect-phone-number"
+                  <ReactPhoneInput
                     defaultCountry={'se'}
                     preferredCountries={ ['se', 'fi', 'no', 'dk'] }
                     onChange={ this.handlePhoneNumberChange }
                   />
                 </div>
                 <Input
+                  id="prospect-email"
                   className="prospect__input_email"
                   type="email"
                   label={ this.props.getIntlMessage('INPUT.EMAIL.LABEL')}
