@@ -80,6 +80,7 @@ class IdentifyPage extends React.Component {
           <Col xs={ 6 }>
             <form onSubmit={ this.submitForm } >
               <Input
+                id="national-registration-number"
                 type="text"
                 label={ this.props.getIntlMessage('INPUT.SSN.LABEL') }
                 value={ prospect.nationalIdNumber }
