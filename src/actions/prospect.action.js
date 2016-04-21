@@ -70,6 +70,23 @@ function createProspect(afterSuccessRedirect, condition) {
   };
 }
 
+function freezeProspect() {
+  return function action(dispatch, getState) {
+    const prospectId = getState().prospect.id;
+
+    nordnetAPI
+      .post(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}/freeze`, { })
+      .then(({ status }) => {
+        if (status === 204) {
+          dispatch(changeProspect({ frozen: true }));
+        }
+      })
+      .catch(error => {
+        console.error('Could not freeze the prospect:', error); // eslint-disable-line no-console
+      });
+  };
+}
+
 function receivedProspect(prospect) {
   return {
     type: RECEIVED_PROSPECT,
@@ -83,6 +100,7 @@ export default {
   receivedProspect,
   createOrUpdateProspect,
   changeProspect,
+  freezeProspect,
   CREATE_PROSPECT,
   RECEIVED_PROSPECT,
   CHANGE_PROSPECT,

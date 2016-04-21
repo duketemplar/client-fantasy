@@ -5,14 +5,15 @@ import React from 'react';
 import { Button, Checkbox } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
 import nordnetAPI from 'nordnet-next-api';
+import { connect } from 'react-redux';
+import { toggleAcceptedAggreements, freezeProspect } from '../../actions';
 
-export default class SignPage extends React.Component {
+class SignPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      waitingForSignicat: false,
-      termsAndConditionAccepted: false,
+      isSigning: false,
     };
   }
 
@@ -35,6 +36,7 @@ export default class SignPage extends React.Component {
   }
 
   postSign() {
+    /*
     const url = '/api/2/signicat/sign';
     const headers = {};
     const params = { signUrls: 'https://nordnet-agreements.pdf.nordnet.se/customer/retail' };
@@ -55,11 +57,15 @@ export default class SignPage extends React.Component {
     .catch((error) => {
       throw Error(`Could not post to ${url}: ${error.message}`);
     });
+    */
   }
 
   handleSign() {
-    this.setState({ waitingForSignicat: true });
-    this.postSign();
+    this.setState({
+      isSigning: true,
+    });
+
+    this.props.dispatch(freezeProspect());
   }
 
   handleCancel() {
@@ -67,20 +73,13 @@ export default class SignPage extends React.Component {
   }
 
   handleAcceptTermsAndConditions(event) {
-    this.setState({ termsAndConditionAccepted: event.target.checked });
+    this.props.dispatch(toggleAcceptedAggreements(event.target.checked));
   }
 
   render() {
     const handleSign = this.handleSign.bind(this);
     const handleCancel = this.handleCancel.bind(this);
     const handleAcceptTermsAndConditions = this.handleAcceptTermsAndConditions.bind(this);
-
-    const signButtonProps = {};
-    if (this.state.waitingForSignicat) {
-      Object.assign(signButtonProps, { secondary: true, disabled: true, type: 'success' });
-    } else {
-      Object.assign(signButtonProps, { primary: true, disabled: !this.state.termsAndConditionAccepted });
-    }
 
     return (
       <Grid className="sign__page">
@@ -100,13 +99,15 @@ export default class SignPage extends React.Component {
               <Checkbox
                 className="checkbox__terms-and-conditions"
                 label="I have read and accepted the terms and conditions above."
+                checked={ this.props.sign.acceptedAgreements }
                 onClick={ handleAcceptTermsAndConditions }
+                disabled={ this.state.isSigning }
               />
             </Col>
           </Row>
           <Row xsEnd>
             <Button secondary onClick={ handleCancel } >Cancel</Button>
-            <Button onClick={ handleSign } { ...signButtonProps }>Sign</Button>
+            <Button onClick={ handleSign } disabled={ !this.props.sign.acceptedAgreements || this.state.isSigning } primary>Sign</Button>
           </Row>
         </Grid>
       </Grid>
@@ -114,7 +115,20 @@ export default class SignPage extends React.Component {
   }
 }
 
+SignPage.propTypes = {
+  dispatch: React.PropTypes.func,
+  sign: React.PropTypes.object,
+};
+
 // TODO: Remove router from context or else stub it in tests
 SignPage.contextTypes = {
   router: React.PropTypes.func.isRequired,
 };
+
+function select(state) {
+  return {
+    sign: state.sign,
+  };
+}
+
+export default connect(select)(SignPage);

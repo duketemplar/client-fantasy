@@ -4,6 +4,7 @@ import {
   createProspect,
   updateProspect,
   receivedProspect,
+  freezeProspect,
   RECEIVED_PROSPECT,
   CHANGE_PROSPECT,
 } from '../';
@@ -112,5 +113,33 @@ describe('prospect actions', () => {
     },
       sinon.match.any
     );
+  });
+
+  it.skip('should freeze a prospect', () => {
+    const post = () => new Promise(resolve => {
+      resolve({ status: 204 });
+    });
+
+    const getState = () => {
+      return {
+        prospect: {
+          phone_number: 1231345,
+          id: 123,
+        },
+      };
+    };
+
+
+    const dispatch = () => {};
+
+    const nnApiStub = sandbox.stub(nnAPI, 'post', post);
+    const dispatchStub = sandbox.spy(dispatch);
+    const getStateStub = sandbox.spy(getState);
+
+    const actionCreator = freezeProspect();
+    actionCreator(dispatchStub, getStateStub);
+
+    assert(nnApiStub.calledWith(`${CUSTOMERS_PROSPECTS_PATH}/123/freeze`, { }), 'nn api called correct');
+    assert(dispatchStub.calledWith({ type: CHANGE_PROSPECT, fieldsToChange: { frozen: true } }), 'correct action was created');
   });
 });

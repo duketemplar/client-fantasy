@@ -4,6 +4,7 @@ import regulation from './regulation.action';
 import kyc from './kyc.action';
 import pep from './pep.action';
 import taxInfo from './tax-info.action';
+import sign from './sign.action';
 
 export default {
   ...customerCreation,
@@ -12,4 +13,5 @@ export default {
   ...taxInfo,
   ...kyc,
   ...pep,
+  ...sign,
 };
