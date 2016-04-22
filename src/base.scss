@@ -22,30 +22,39 @@ h1 {
   clear: both;
   text-align: left;
   color: $color-header;
-  font-size: $size-primary-header;
+  font-size: $size-header-primary;
 }
 h1 + p {
   color: $color-text;
-  font-size: $size-main-preamble;
+  font-size: $size-body-copy-large;
 }
 h2 {
   color: $color-header;
   margin: 0px 0px 1rem 0px;
   padding: 1rem 0 0 0;
-  font-size: $size-secondary-header;
+  font-size: $size-header-secondary;
 }
 h2 + p {
   color: $color-text;
-  font-size: $size-common;
+  font-size: $size-body-copy;
 }
 h3 {
   color: $color-header;
   margin: 0px 0px 1rem 0px;
   padding: 1rem 0 0 0;
-  font-size: $size-alternative-header;
+  font-size: $size-header-tertiary;
 }
-p {
-  font-size: $size-common;
+h4 {
+  font-size: $size-header-quinary;
+}
+h5 {
+  font-size: $size-header-quinary;
+}
+h6 {
+  font-size: $size-header-senary;
+}
+p, span {
+  font-size: $size-body-copy;
 }
 a {
   color: $color-common;
