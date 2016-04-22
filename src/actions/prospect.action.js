@@ -73,7 +73,6 @@ function createProspect(afterSuccessRedirect, condition) {
 function freezeProspect() {
   return function action(dispatch, getState) {
     const prospectId = getState().prospect.id;
-
     nordnetAPI
       .post(`${CUSTOMERS_PROSPECTS_PATH}/${prospectId}/freeze`, { })
       .then(({ status }) => {

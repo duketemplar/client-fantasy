@@ -13,6 +13,7 @@ import nnAPI from 'nordnet-next-api';
 import { expect, assert } from 'chai'; // ??
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
+import { createSuccessPromise } from '../../../test-helper';
 
 describe('prospect actions', () => {
   let sandbox;
@@ -115,31 +116,43 @@ describe('prospect actions', () => {
     );
   });
 
-  it.skip('should freeze a prospect', () => {
-    const post = () => new Promise(resolve => {
-      resolve({ status: 204 });
-    });
-
+  it('should update prospect freeze status when service answer 204', () => {
     const getState = () => {
       return {
         prospect: {
-          phone_number: 1231345,
           id: 123,
         },
       };
     };
 
-
-    const dispatch = () => {};
-
-    const nnApiStub = sandbox.stub(nnAPI, 'post', post);
-    const dispatchStub = sandbox.spy(dispatch);
-    const getStateStub = sandbox.spy(getState);
+    const nnApiStub = sandbox.stub(nnAPI, 'post', () => createSuccessPromise({ status: 204 }));
+    const getStateSpy = sandbox.spy(getState);
+    const dispatchSpy = sandbox.spy(getDispatch(getStateSpy));
 
     const actionCreator = freezeProspect();
-    actionCreator(dispatchStub, getStateStub);
+    actionCreator(dispatchSpy, getStateSpy);
 
     assert(nnApiStub.calledWith(`${CUSTOMERS_PROSPECTS_PATH}/123/freeze`, { }), 'nn api called correct');
-    assert(dispatchStub.calledWith({ type: CHANGE_PROSPECT, fieldsToChange: { frozen: true } }), 'correct action was created');
+    assert(dispatchSpy.calledWith({ type: CHANGE_PROSPECT, fieldsToChange: { frozen: true } }), 'correct action was created');
+  });
+
+  it('should not update prospect with freeze status when service answer other than 204', () => {
+    const getState = () => {
+      return {
+        prospect: {
+          id: 123,
+        },
+      };
+    };
+
+    const nnApiStub = sandbox.stub(nnAPI, 'post', () => createSuccessPromise({ status: 500 }));
+    const getStateSpy = sandbox.spy(getState);
+    const dispatchSpy = sandbox.spy(getDispatch(getStateSpy));
+
+    const actionCreator = freezeProspect();
+    actionCreator(dispatchSpy, getStateSpy);
+
+    assert(nnApiStub.calledWith(`${CUSTOMERS_PROSPECTS_PATH}/123/freeze`, { }), 'nn api called correct');
+    assert(!dispatchSpy.called, 'dispatch was called');
   });
 });

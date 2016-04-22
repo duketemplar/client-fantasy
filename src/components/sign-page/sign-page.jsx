@@ -4,7 +4,6 @@ import React from 'react';
 
 import { Button, Checkbox } from 'nordnet-ui-kit';
 import { Grid, Col, Row } from 'react-bem-grid';
-import nordnetAPI from 'nordnet-next-api';
 import { connect } from 'react-redux';
 import { toggleAcceptedAggreements, freezeProspect } from '../../actions';
 
@@ -97,6 +96,7 @@ class SignPage extends React.Component {
                 { this.getContitionText() }
               </p>
               <Checkbox
+                id="sign-read-agreement-and-conditions"
                 className="checkbox__terms-and-conditions"
                 label="I have read and accepted the terms and conditions above."
                 checked={ this.props.sign.acceptedAgreements }
@@ -107,7 +107,7 @@ class SignPage extends React.Component {
           </Row>
           <Row xsEnd>
             <Button secondary onClick={ handleCancel } >Cancel</Button>
-            <Button onClick={ handleSign } disabled={ !this.props.sign.acceptedAgreements || this.state.isSigning } primary>Sign</Button>
+            <Button id="sign-do-signing" onClick={ handleSign } disabled={ !this.props.sign.acceptedAgreements || this.state.isSigning } primary>Sign</Button>
           </Row>
         </Grid>
       </Grid>
@@ -130,5 +130,9 @@ function select(state) {
     sign: state.sign,
   };
 }
+const SignPageConnected = connect(select)(SignPage);
 
-export default connect(select)(SignPage);
+export default SignPageConnected;
+export {
+  SignPage,
+};
