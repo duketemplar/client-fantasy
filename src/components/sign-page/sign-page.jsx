@@ -4,10 +4,12 @@ import React from 'react';
 import { Button, Checkbox } from 'nordnet-ui-kit';
 import { Grid, Row, Col } from 'react-bem-grid';
 import { connect } from 'react-redux';
-import { toggleAcceptedAggreements, freezeProspect } from '../../actions';
+import { toggleAcceptedAggreements, freezeProspect, updateSign } from '../../actions';
 import './sign-page.scss';
 import UspBackground from './open-landscape-gazing.png';
 import DocumentIcon from './document-icon.svg';
+import InfoModal from '../info-modal';
+import { SIGNED_IN_PATH } from '../../utils/endpoints';
 
 class SignPage extends React.Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class SignPage extends React.Component {
     this.handleSign = this.handleSign.bind(this);
     this.handleAcceptTermsAndConditions = this.handleAcceptTermsAndConditions.bind(this);
     this.getTermsAndCondition = this.getTermsAndCondition.bind(this);
+    this.cancelSign = this.cancelSign.bind(this);
   }
 
   getTermsAndCondition() {
@@ -32,15 +35,25 @@ class SignPage extends React.Component {
     );
   }
 
+  getSignicatMock() {
+    return (
+      <div className="signicat__mock">
+        <h2>
+          Signicat
+        </h2>
+        <p>
+          This is a mock for signicat. Press Continue to sign.
+        </p>
+      </div>
+    );
+  }
+
   handleAcceptTermsAndConditions(event) {
     this.props.dispatch(toggleAcceptedAggreements(event.target.checked));
   }
 
   handleSign() {
-    this.setState({
-      isSigning: true,
-    });
-
+    this.props.dispatch(updateSign({ isSigning: true }));
     this.props.dispatch(freezeProspect());
   }
 
@@ -51,9 +64,23 @@ class SignPage extends React.Component {
     };
   }
 
+  redirectToSignedIn() {
+    window.location = location.origin + SIGNED_IN_PATH;
+  }
+
+  cancelSign() {
+    this.props.dispatch(updateSign({ isSigning: false }));
+  }
+
   render() {
     return (
       <Grid className="sign">
+        <InfoModal
+          content={ this.getSignicatMock() }
+          onAccept={ this.redirectToSignedIn }
+          onCancel={ this.cancelSign }
+          show={ this.props.sign.isSigning === true }
+        />
         <Row>
           <Col xs={ 12 }>
             <div className="sign__header">
@@ -97,12 +124,12 @@ class SignPage extends React.Component {
                     label={ this.getTermsAndCondition() }
                     checked={ this.props.sign.acceptedAgreements }
                     onClick={ this.handleAcceptTermsAndConditions }
-                    disabled={ this.state.isSigning }
+                    disabled={ this.props.sign.isSigning }
                   />
                 </div>
             </div>
             <div className="sign__action">
-              <Button id="sign-do-signing" onClick={ this.handleSign } disabled={ !this.props.sign.acceptedAgreements || this.state.isSigning } primary>Sign</Button>
+              <Button id="sign-do-signing" onClick={ this.handleSign } disabled={ !this.props.sign.acceptedAgreements || this.props.sign.isSigning } primary>Sign</Button>
             </div>
           </Col>
         </Row>
@@ -114,10 +141,12 @@ class SignPage extends React.Component {
 SignPage.propTypes = {
   dispatch: React.PropTypes.func,
   sign: React.PropTypes.object,
+  prospect: React.PropTypes.object,
 };
 
 function select(state) {
   return {
+    prospect: state.prospect,
     sign: state.sign,
   };
 }

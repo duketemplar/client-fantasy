@@ -34,7 +34,7 @@ describe('<SignPage/>', () => {
     wrapper.setProps({ regulation: { taxableOutsideJurisdiction: true } });
     expect(component.prop('show')).to.equal(false);
   */
-  it('sign button shoule initially be disabled', () => {
+  it('sign button should initially be disabled', () => {
     const component = wrapper.find('#sign-do-signing');
     assert(component.prop('disabled'), 'disabled is not true.');
   });
@@ -50,6 +50,7 @@ describe('<SignPage/>', () => {
     const component = () => wrapper.find('#sign-do-signing');
     wrapper.setProps({ sign: { acceptedAgreements: true } });
     component().simulate('click');
+    wrapper.setProps({ sign: { isSigning: true } });
 
     assert(component().prop('disabled'), 'disabled is not true.');
   });
@@ -66,6 +67,7 @@ describe('<SignPage/>', () => {
     const component = () => wrapper.find('#sign-do-signing');
     wrapper.setProps({ sign: { acceptedAgreements: true } });
     component().simulate('click');
+    wrapper.setProps({ sign: { isSigning: true } });
 
     assert(wrapper.find('#sign-read-agreement-and-conditions').prop('disabled'), 'checkbox not disabled');
   });
