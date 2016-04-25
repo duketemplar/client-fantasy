@@ -15,9 +15,9 @@ class TitledSelect extends React.Component {
 
     return (
       <span>
-        <h3>
+        <h5>
           { this.props.title }
-        </h3>
+        </h5>
         <Input type="select" options={ options } value={ value } label="" { ...rest } />
       </span>
     );

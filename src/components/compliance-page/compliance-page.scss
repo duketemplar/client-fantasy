@@ -1,9 +1,4 @@
-h1 {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 1.5rem;
-}
+@import '../../variables';
 
 .compliance {
   &__redirect-info {
@@ -18,6 +13,10 @@ h2 {
         font-size: 1.5rem;
       }
     }
+  }
+
+  &__question__purpose-of-saving h5 span{
+    font-size: $size-header-quinary;
   }
 }
 

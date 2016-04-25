@@ -84,9 +84,9 @@ class SignPage extends React.Component {
         <Row>
           <Col xs={ 12 }>
             <div className="sign__header">
-              <h1>
+              <h3>
                 Terms & conditions
-              </h1>
+              </h3>
               <p>
                 These contain information about the account, risk of securities and guarantees
                 you as a customer of our bank. Please read and accept before you sign.
