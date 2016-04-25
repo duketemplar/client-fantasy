@@ -104,29 +104,29 @@ class SignPage extends React.Component {
               </div>
             </div>
             <div className="terms-and-conditions">
-                <div>
-                  <Button
-                    className="terms-and-conditions__fetcher"
-                    secondary
-                    onClick={ this.alert('This will show some pdfs...') }
-                    style={ { backgroundImage: `url(${DocumentIcon})` } }
-                  >
-                    Agreements and Conditions (PDF)
-                  </Button>
-                  <p className="terms-and-conditions__agreements-and-conditions-info">
-                    All agreements and conditions will also be sent to your email.
-                  </p>
-                </div>
-                <div className="horizontal-rule"></div>
-                <div className="terms-and-conditions__accept">
-                  <Checkbox
-                    id="sign-read-agreement-and-conditions"
-                    label={ this.getTermsAndCondition() }
-                    checked={ this.props.sign.acceptedAgreements }
-                    onClick={ this.handleAcceptTermsAndConditions }
-                    disabled={ this.props.sign.isSigning }
-                  />
-                </div>
+              <div>
+                <Button
+                  className="terms-and-conditions__fetcher"
+                  secondary
+                  onClick={ this.alert('This will show some pdfs...') }
+                  style={ { backgroundImage: `url(${DocumentIcon})` } }
+                >
+                  Agreements and Conditions (PDF)
+                </Button>
+                <p className="terms-and-conditions__agreements-and-conditions-info">
+                  All agreements and conditions will also be sent to your email.
+                </p>
+              </div>
+              <div className="horizontal-rule"></div>
+              <div className="terms-and-conditions__accept">
+                <Checkbox
+                  id="sign-read-agreement-and-conditions"
+                  label={ this.getTermsAndCondition() }
+                  checked={ this.props.sign.acceptedAgreements }
+                  onClick={ this.handleAcceptTermsAndConditions }
+                  disabled={ this.props.sign.isSigning }
+                />
+              </div>
             </div>
             <div className="sign__action">
               <Button id="sign-do-signing" onClick={ this.handleSign } disabled={ !this.props.sign.acceptedAgreements || this.props.sign.isSigning } primary>Sign</Button>
