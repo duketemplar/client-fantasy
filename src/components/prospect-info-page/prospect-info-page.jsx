@@ -12,6 +12,8 @@ import UpsBackground from '../../assets/images/flying-over-cloud--small.png';
 import { intlFormatter } from '../../utils/format';
 import { translatable } from 'nordnet-i18n';
 import ReactPhoneInput from 'react-phone-input';
+import ListBox from '../list-box';
+
 
 export class ProspectInfoPage extends React.Component {
   constructor(props) {
@@ -43,55 +45,56 @@ export class ProspectInfoPage extends React.Component {
     return this.props.prospectValidations[key];
   }
 
+  constructUspTexts() {
+    return [
+      'PROSPECT_INFO.USP_ITEM_1',
+      'PROSPECT_INFO.USP_ITEM_2',
+      'PROSPECT_INFO.USP_ITEM_3',
+      'PROSPECT_INFO.USP_ITEM_4',
+    ].map(i18n => this.props.getIntlMessage(i18n));
+  }
+
   render() {
     return (
-      <Grid className="prospect-info__page">
-        <Grid className="create-customer prospect-info__component">
-          <Row>
-            <Col xs={ 7 }>
-              <h2>
-                { this.props.getIntlMessage('PROSPECT_INFO.HEADING_SECONDARY') }
-              </h2>
-              <p>
-                { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
-              </p>
-              <form onSubmit={ this.submitForm } >
-                <div className="input prospect__input_phone" id="prospect-phone-number">
-                  <label className="input__label" htmlFor="prospect-phone-number">{ this.props.getIntlMessage('INPUT.PHONE.LABEL') }</label>
-                  <ReactPhoneInput
-                    defaultCountry={'se'}
-                    preferredCountries={ ['se', 'fi', 'no', 'dk'] }
-                    onChange={ this.handlePhoneNumberChange }
-                  />
-                </div>
-                <Input
-                  id="prospect-email"
-                  className="prospect__input_email"
-                  type="email"
-                  label={ this.props.getIntlMessage('INPUT.EMAIL.LABEL')}
-                  value={ this.props.prospect.email }
-                  onChange={ this.buildHandleChange('email') }
-                  helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.email) }
-                  hasError={ this.hasError('email') }
-                  hasSuccess={ !this.hasError('email') && !isEmptyValue(this.props.prospect.email) }
+      <Grid className="prospect-info">
+        <Row>
+          <Col xs={ 12 } md={ 4 } mdLast className="prospect-info__usp">
+            <ListBox
+              header={ this.props.getIntlMessage('PROSPECT_INFO.USB_HEADING') }
+              itemTexts={ this.constructUspTexts() }
+              backgroundImage={ UpsBackground }
+            />
+          </Col>
+          <Col xs={ 12 } md={ 8 } className="prospect-info__input">
+            <h2>
+              { this.props.getIntlMessage('PROSPECT_INFO.HEADING_SECONDARY') }
+            </h2>
+            <p>
+              { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_SECONDARY') }
+            </p>
+            <form onSubmit={ this.submitForm } >
+              <div className="input prospect__input_phone" id="prospect-phone-number">
+                <label className="input__label" htmlFor="prospect-phone-number">{ this.props.getIntlMessage('INPUT.PHONE.LABEL') }</label>
+                <ReactPhoneInput
+                  defaultCountry={'se'}
+                  preferredCountries={ ['se', 'fi', 'no', 'dk'] }
+                  onChange={ this.handlePhoneNumberChange }
                 />
-              </form>
-            </Col>
-            <Col xs={ 5 } className="prospect__catcher">
-              <div className="usp" style={ { backgroundImage: `url(${ UpsBackground })` } }>
-                <div>
-                  <h2 className="usp__headline">{ this.props.getIntlMessage('PROSPECT_INFO.USB_HEADING') }</h2>
-                  <ul className="usp__items">
-                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_1') }</li>
-                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_2') }</li>
-                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_3') }</li>
-                    <li>{ this.props.getIntlMessage('PROSPECT_INFO.USP_ITEM_4') }</li>
-                  </ul>
-                </div>
               </div>
-            </Col>
-          </Row>
-        </Grid>
+              <Input
+                id="prospect-email"
+                className="prospect__input_email"
+                type="email"
+                label={ this.props.getIntlMessage('INPUT.EMAIL.LABEL')}
+                value={ this.props.prospect.email }
+                onChange={ this.buildHandleChange('email') }
+                helpText={ intlFormatter(this.props.getIntlMessage, this.props.prospectValidations.email) }
+                hasError={ this.hasError('email') }
+                hasSuccess={ !this.hasError('email') && !isEmptyValue(this.props.prospect.email) }
+              />
+            </form>
+          </Col>
+        </Row>
       </Grid>
     );
   }

@@ -1,0 +1,45 @@
+@import '../../variables';
+
+.list-box {
+  padding: 2rem 0 2rem 0;
+  background: rgba($nordnet-dark-default-clr, .9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__header {
+    color: $nordnet-brightest-clr;
+    font-weight: bold;
+  }
+
+  ul {
+    padding: 0;
+    list-style-position: inside;
+    list-style: none;
+  }
+
+  li {
+    padding: .8rem 0;
+  }
+
+  &__bullet {
+    background-color: $nordnet-dark-default-clr;
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+
+  &__item-text {
+    color: #ECEBEB;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    width: calc(100% - 1.8rem);
+  }
+}

@@ -9,6 +9,7 @@ import './sign-page.scss';
 import UspBackground from './open-landscape-gazing.png';
 import DocumentIcon from './document-icon.svg';
 import InfoModal from '../info-modal';
+import ListBox from '../list-box';
 import { SIGNED_IN_PATH } from '../../utils/endpoints';
 
 class SignPage extends React.Component {
@@ -73,6 +74,12 @@ class SignPage extends React.Component {
   }
 
   render() {
+    const itemTexts = [
+      'No account charges',
+      'When trading shares the courtage starts at 1BTC',
+      'When trading founds you only pay for the found companys yearly fee',
+      'Your accounts is secured by the state',
+    ];
     return (
       <Grid className="sign">
         <InfoModal
@@ -92,17 +99,11 @@ class SignPage extends React.Component {
                 you as a customer of our bank. Please read and accept before you sign.
               </p>
             </div>
-            <div className="usp-sign" style={ { backgroundImage: `url(${UspBackground})` } }>
-              <div className="usp-sign__container">
-                <h3>Comfortable and secure for you</h3>
-                <ul>
-                  <li>No account charges</li>
-                  <li>When trading shares the courtage starts at 1BTC</li>
-                  <li>When trading founds you only pay for the found companys yearly fee</li>
-                  <li>Your accounts is secured by the state</li>
-                </ul>
-              </div>
-            </div>
+            <ListBox
+              header="Comfortable and secure for you"
+              itemTexts={ itemTexts }
+              backgroundImage={ UspBackground }
+            />
             <div className="terms-and-conditions">
               <div>
                 <Button
