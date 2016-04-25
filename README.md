@@ -25,7 +25,8 @@ This panel can be enabled/disabled by CTRL+H.
 ## Coding guidelines
 ### Under development do:
 * Until the the i18n is implemented use only english so it gets easier to see where translations are needed
-* Id should be used for for elements that can be interacted with and is used for integration test
+* ID should be used for for elements that can be interacted with and is used for integration test.
+* ID should be named as <component>-what-it-does-and-not-what-it-is-in-kebab-case
 
 ### Naming
 * use camelCase for internal variables and snake_case for api props, e.i var apiData = { param_super: superValue }

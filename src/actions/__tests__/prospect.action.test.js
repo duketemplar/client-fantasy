@@ -4,6 +4,7 @@ import {
   createProspect,
   updateProspect,
   receivedProspect,
+  freezeProspect,
   RECEIVED_PROSPECT,
   CHANGE_PROSPECT,
 } from '../';
@@ -12,6 +13,7 @@ import nnAPI from 'nordnet-next-api';
 import { expect, assert } from 'chai'; // ??
 import { CUSTOMERS_PROSPECTS_PATH } from '../../utils/endpoints';
 import { mockNNAPI, getDispatch } from './mocking';
+import { createSuccessPromise } from '../../../test-helper';
 
 describe('prospect actions', () => {
   let sandbox;
@@ -112,5 +114,45 @@ describe('prospect actions', () => {
     },
       sinon.match.any
     );
+  });
+
+  it('should update prospect freeze status when service answer 204', () => {
+    const getState = () => {
+      return {
+        prospect: {
+          id: 123,
+        },
+      };
+    };
+
+    const nnApiStub = sandbox.stub(nnAPI, 'post', () => createSuccessPromise({ status: 204 }));
+    const getStateSpy = sandbox.spy(getState);
+    const dispatchSpy = sandbox.spy(getDispatch(getStateSpy));
+
+    const actionCreator = freezeProspect();
+    actionCreator(dispatchSpy, getStateSpy);
+
+    assert(nnApiStub.calledWith(`${CUSTOMERS_PROSPECTS_PATH}/123/freeze`, { }), 'nn api called correct');
+    assert(dispatchSpy.calledWith({ type: CHANGE_PROSPECT, fieldsToChange: { frozen: true } }), 'correct action was created');
+  });
+
+  it('should not update prospect with freeze status when service answer other than 204', () => {
+    const getState = () => {
+      return {
+        prospect: {
+          id: 123,
+        },
+      };
+    };
+
+    const nnApiStub = sandbox.stub(nnAPI, 'post', () => createSuccessPromise({ status: 500 }));
+    const getStateSpy = sandbox.spy(getState);
+    const dispatchSpy = sandbox.spy(getDispatch(getStateSpy));
+
+    const actionCreator = freezeProspect();
+    actionCreator(dispatchSpy, getStateSpy);
+
+    assert(nnApiStub.calledWith(`${CUSTOMERS_PROSPECTS_PATH}/123/freeze`, { }), 'nn api called correct');
+    assert(!dispatchSpy.called, 'dispatch was called');
   });
 });
