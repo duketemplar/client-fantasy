@@ -15,6 +15,10 @@ describe('prospect', () => {
     regulationInfo.isEmployed();
     regulationInfo.hasNormalIncome();
     regulationInfo.isFinancialSafety();
+    regulationInfo.isPrivateConsumption();
+    regulationInfo.isForNextOfKin();
+    regulationInfo.isPension();
+    regulationInfo.isTrading();
     regulationInfo.selfAcquired();
     regulationInfo.depositsHigh();
     regulationInfo.isPoliticallyExposed();
