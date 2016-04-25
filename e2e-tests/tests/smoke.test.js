@@ -19,6 +19,7 @@ describe('prospect', () => {
     regulationInfo.depositsHigh();
     regulationInfo.isPoliticallyExposed();
     termsAndConditions.acceptTerms();
+    termsAndConditions.doSigning();
     identify.isUrl('mux/web/user/overview.html');
 
     client.end();
