@@ -1,5 +1,12 @@
 @import '../../variables';
 
+.customer-registration {
+  background-size: cover;
+  .customer-registration__overlay {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
 .identify,
 .account__component,
 .compliance__component {
@@ -11,7 +18,8 @@
   padding-bottom: 457px;
 }
 
-.customer-registration {
+.customer-registration__container {
+  padding-bottom: 383px;
   .registration-section {
     padding: 1em;
   }
