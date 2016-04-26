@@ -6,6 +6,7 @@ import CompliancePage from '../compliance-page';
 import AccountPicker from '../account-picker';
 import SignPage from '../sign-page';
 import './customer-registration.scss';
+import Clouds from '../../assets/images/clouds.jpg';
 
 export default class CustomerRegistration extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class CustomerRegistration extends React.Component {
 
   render() {
     return (
-      <div className="customer-registration" style={ { backgroundImage: 'url(/assets/images/clouds.jpg)' } }>
+      <div className="customer-registration" style={ { backgroundImage: `url(${Clouds})` } }>
         <div className="customer-registration__overlay">
           <Section element={ Header } />
           <div className="customer-registration__container">
