@@ -1,10 +1,8 @@
 @import '../../variables';
 
 .identify,
-.prospect-info__component,
 .account__component,
-.compliance__component,
-.sign__component {
+.compliance__component {
   background-color: $nordnet-brightest-clr;
   padding: 4em;
 }

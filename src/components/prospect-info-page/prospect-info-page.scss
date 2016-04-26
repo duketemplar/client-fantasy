@@ -1,87 +1,63 @@
 @import '../../variables';
 
-.prospect {
-  &__catcher {
-    position: relative;
-    display: flex;
-  }
-}
-.usp {
-  position: absolute;
-  height: 100%;
-  padding: 4em;
-  top: -4em;
-  right: -4em;
-  margin-right: 6px;
-  flex: 1;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__headline {
-    color: $nordnet-brightest-clr;
-    font-size: 1.6rem;
-    display: block;
-  }
-
-  &__items {
-    list-style: none;
-    display: block;
-    padding: 0;
-
-    li::before {
-      content: "• ";
-      color: $nordnet-success-clr;
-      vertical-align: middle;
-      font-size: 2.4rem;
-    }
-
-    li {
-      font-size: 1.2rem;
-      line-height: 1.2rem;
-      padding: .8rem 0 .8rem 0;
-      color: $nordnet-bright-clr;
-      white-space: nowrap;
-    }
-  }
-}
-.input.prospect__input_phone {
-  padding-top: 20px;
-}
-
-div.react-tel-input {
-  input[type=tel] {
-    display: block;
-    background: none;
-    border: none;
-    border-bottom: .1rem solid $nordnet-disabled-clr;
-    width: 100%;
-    -webkit-transition: border-color .2s linear;
-    transition: border-color .2s linear;
-    line-height: 1.4;
-    border-radius: 0;
-    min-height: 4rem;
-    font-size: 1.6rem;
-    outline: none;
-    box-shadow: none;
-  }
-
-  .flag-dropdown {
+.prospect-info {
+  &__input {
     background-color: $nordnet-brightest-clr;
-    border: none;
-    bottom: 1px;
+    padding: 3rem 2rem;
+  }
 
-    .selected-flag {
-      z-index: 0;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translate(0, -50%);
+  &__usp {
+    padding: 0;
+    display: flex;
+
+    .list-box {
+      flex-grow: 1;
+      &__bullet {
+        background-color: $nordnet-success-clr;
+      }
     }
 
-    .country-list {
-      top: 37px;
+
+  }
+
+
+  .input.prospect__input_phone {
+    padding-top: 20px;
+  }
+
+  div.react-tel-input {
+    input[type=tel] {
+      display: block;
+      background: none;
+      border: none;
+      border-bottom: .1rem solid $nordnet-disabled-clr;
+      width: 100%;
+      -webkit-transition: border-color .2s linear;
+      transition: border-color .2s linear;
+      line-height: 1.4;
+      border-radius: 0;
+      min-height: 4rem;
+      font-size: 1.6rem;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .flag-dropdown {
+      background-color: $nordnet-brightest-clr;
+      border: none;
+      bottom: 1px;
+
+      .selected-flag {
+        z-index: 0;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+      }
+
+      .country-list {
+        top: 37px;
+      }
     }
   }
 }
