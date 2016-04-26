@@ -2,16 +2,13 @@
 
 
 .sign {
-  background: $nordnet-brightest-clr;
 
   &__header {
-    background: #EAE9E9;
     padding: 2rem 0;
   }
 
 
   &__action {
-    background: #EAE9E9;
     padding: 2rem 0;
     text-align: center;
 
@@ -27,6 +24,7 @@
 }
 
 .terms-and-conditions {
+  background: $nordnet-brightest-clr;
   padding: 2rem 0;
   text-align: center;
 

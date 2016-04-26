@@ -14,13 +14,15 @@ export default class CustomerRegistration extends React.Component {
 
   render() {
     return (
-      <div>
-        <Section element={ Header } />
-        <div className="customer-registration">
-          <Section element={ ProspectInfoPage } />
-          <Section element={ AccountPicker } />
-          <Section element={ CompliancePage } />
-          <Section element={ SignPage } />
+      <div className="customer-registration--background" style={ { backgroundImage: 'url(/assets/images/clouds.jpg)' } }>
+        <div className="customer-registration--layer">
+          <Section element={ Header } />
+          <div className="customer-registration">
+            <Section element={ ProspectInfoPage } />
+            <Section element={ AccountPicker } />
+            <Section element={ CompliancePage } />
+            <Section element={ SignPage } />
+          </div>
         </div>
       </div>
     );
