@@ -60,7 +60,7 @@ class SignPage extends React.Component {
   alert(msg) {
     return (event) => {
       event.preventDefault();
-      alert(msg); //eslint-disable-line no-alert
+      alert(msg); // eslint-disable-line no-alert
     };
   }
 

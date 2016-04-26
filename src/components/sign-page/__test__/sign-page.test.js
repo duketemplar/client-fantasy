@@ -30,10 +30,6 @@ describe('<SignPage/>', () => {
     wrapper = null;
   });
 
-  /* #sign-do-signing
-    wrapper.setProps({ regulation: { taxableOutsideJurisdiction: true } });
-    expect(component.prop('show')).to.equal(false);
-  */
   it('sign button should initially be disabled', () => {
     const component = wrapper.find('#sign-do-signing');
     assert(component.prop('disabled'), 'disabled is not true.');
@@ -46,13 +42,13 @@ describe('<SignPage/>', () => {
     assert(!componentSign.prop('disabled'), 'disabled is not false.');
   });
 
-  it('sing button should be disabled when clicked', () => {
-    const component = () => wrapper.find('#sign-do-signing');
-    wrapper.setProps({ sign: { acceptedAgreements: true } });
-    component().simulate('click');
-    wrapper.setProps({ sign: { isSigning: true } });
+  it('sign button should be disabled when clicked', () => {
+    const dispatchFake = sandbox.spy(() => wrapper.setProps({ sign: { isSigning: true } }));
+    const getComponent = () => wrapper.find('#sign-do-signing');
+    wrapper.setProps({ sign: { acceptedAgreements: true }, dispatch: dispatchFake });
+    getComponent().simulate('click');
 
-    assert(component().prop('disabled'), 'disabled is not true.');
+    assert(getComponent().prop('disabled'), 'disabled is not true.');
   });
 
   it('aggreement checkbox toggles the accepted agreement state', () => {
@@ -64,10 +60,10 @@ describe('<SignPage/>', () => {
   });
 
   it('agreement checkbox should be disabled when sign button clicked', () => {
-    const component = () => wrapper.find('#sign-do-signing');
-    wrapper.setProps({ sign: { acceptedAgreements: true } });
-    component().simulate('click');
-    wrapper.setProps({ sign: { isSigning: true } });
+    const dispatchFake = sandbox.spy(() => wrapper.setProps({ sign: { isSigning: true } }));
+    const getComponent = () => wrapper.find('#sign-do-signing');
+    wrapper.setProps({ sign: { acceptedAgreements: true }, dispatch: dispatchFake });
+    getComponent().simulate('click');
 
     assert(wrapper.find('#sign-read-agreement-and-conditions').prop('disabled'), 'checkbox not disabled');
   });
