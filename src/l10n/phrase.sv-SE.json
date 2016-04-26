@@ -38,8 +38,8 @@
     "INFO": "Fyll i ditt personnummer så guidar vi dig vidare."
   },
   "PROSPECT_INFO": {
-    "HEADING_MAIN": "Bli kund hos Nordnet",
-    "PREAMBLE_MAIN": "Med e-legitimation kan du öppna ett konto direkt. ",
+    "HEADING_MAIN": "Bli kund",
+    "PREAMBLE_MAIN": "Öppna ett konto med BankID på 3 minuter.",
     "HEADING_SECONDARY": "Hej!",
     "PREAMBLE_SECONDARY": "Vad roligt att du vill prova vår tjänst. Fyll i dina kontaktuppgifter och fortsätt nedåt för att öppna ett konto.",
     "USB_HEADING": "Så här enkelt är det!",

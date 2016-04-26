@@ -8,9 +8,9 @@ class AccountPicker extends React.Component {
   render() {
     return (
       <Grid className="account__page">
-        <h1>
+        <h3>
           { this.props.getIntlMessage('ACCOUNT_PICKER.HEADING_MAIN') }
-        </h1>
+        </h3>
         <Grid className="account__component">
           <Row className="account">
             <Col xs={ 12 }>

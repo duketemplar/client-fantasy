@@ -53,27 +53,27 @@ module.exports = (client) => {
 
     isFinancialSafety() {
       return client
-        .click('.compliance__anwser__financial-safety');
+        .click('.compliance__anwser__financial-safety .checkbox__input');
     },
 
     isPrivateConsumption() {
       return client
-        .click('.compliance__anwser__private-consumption');
+        .click('.compliance__anwser__private-consumption .checkbox__input');
     },
 
     isForNextOfKin() {
       return client
-        .click('.compliance__anwser__for-next-of-kin');
+        .click('.compliance__anwser__for-next-of-kin .checkbox__input');
     },
 
     isPension() {
       return client
-        .click('.compliance__anwser__pension');
+        .click('.compliance__anwser__pension .checkbox__input');
     },
 
     isTrading() {
       return client
-        .click('.compliance__anwser__trading');
+        .click('.compliance__anwser__trading .checkbox__input');
     },
 
     inharitance() {

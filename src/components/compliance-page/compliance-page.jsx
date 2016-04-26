@@ -23,9 +23,9 @@ class CompliancePage extends React.Component {
   getRedirectInfo() {
     return (
       <div className="compliance__redirect-info">
-        <h1>
+        <h2>
           { this.props.getIntlMessage('COMPLIANCE.MODAL.REDIRECT.HEADER') }
-        </h1>
+        </h2>
         <p>
           { this.props.getIntlMessage('COMPLIANCE.MODAL.REDIRECT.PREAMBLE') }
         </p>
@@ -38,11 +38,6 @@ class CompliancePage extends React.Component {
         { label: this.props.getIntlMessage('COMMON.YES'), value: 'yes' },
         { label: this.props.getIntlMessage('COMMON.NO'), value: 'no' },
       ]
-    );
-  }
-  pepTitleText() {
-    return (
-      <p> { this.props.getIntlMessage('COMPLIANCE.PEP.HEADER') }</p>
     );
   }
 
@@ -99,7 +94,7 @@ class CompliancePage extends React.Component {
   render() {
     return (
       <Grid className="compliance__page">
-        <h1>{ this.props.getIntlMessage('COMPLIANCE.HEADER_MAIN') }</h1>
+        <h3>{ this.props.getIntlMessage('COMPLIANCE.HEADER_MAIN') }</h3>
         <p>{ this.props.getIntlMessage('COMPLIANCE.PREAMBLE') }</p>
         <Grid className="compliance__component">
           <InfoModal
@@ -154,7 +149,7 @@ class CompliancePage extends React.Component {
                   />
 
                 <Row className="compliance__question__purpose-of-saving checkbox__question">
-                  <h3> { this.props.getIntlMessage('COMPLIANCE.PURPOSE.HEADER') } </h3>
+                  <h5> { this.props.getIntlMessage('COMPLIANCE.PURPOSE.HEADER') } </h5>
                 </Row>
                 <Row className="checkbox__row">
                   <Checkbox className="compliance__anwser__financial-safety" label={ this.props.getIntlMessage('COMPLIANCE.PURPOSE.OPTION_FINANCE') }/>
@@ -192,23 +187,13 @@ class CompliancePage extends React.Component {
                     }
                   />
                   <TitledSelect
-                    title={ this.pepTitleText() }
                     className="compliance__question__politically-exposed-in-other-nation"
+                    title={ this.props.getIntlMessage('COMPLIANCE.PEP.HEADER') }
                     value={ this.safeBooleanToString(this.props.pep.isPep) }
                     onChange={ this.buildHandleChange('isPep', changePep, (e) => e.target.value !== 'no') }
                     options={ this.yesNoOptions() }
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Row>
-                  <Col xs={ 12 } >
-                    <div className="horizontal-rule"></div>
-                    <Row className="checkbox__confirm">
-                      <Checkbox label="I confirm that the above information is correct. Should this information change, I affirm that I shall notify Nordnet by changing this information under the settings page." />
-                    </Row>
-                  </Col>
-                </Row>
               </Row>
             </form>
           </Row>

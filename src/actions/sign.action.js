@@ -15,5 +15,6 @@ function updateSign(data) {
 
 export default {
   UPDATE_SIGN,
+  updateSign,
   toggleAcceptedAggreements,
 };

@@ -17,9 +17,9 @@ class Header extends React.Component {
               <h1>
                 { this.props.getIntlMessage('PROSPECT_INFO.HEADING_MAIN') }
               </h1>
-              <p>
+              <h3>
                 { this.props.getIntlMessage('PROSPECT_INFO.PREAMBLE_MAIN') }
-              </p>
+              </h3>
             </Col>
           </Row>
         </Grid>
