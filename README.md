@@ -18,6 +18,9 @@
 * `npm start` to launch the application
 * `npm run e2e-test` nightwatch e2e tests, see [e2e-tests/tests]
 
+#### To get the ci configuration for the nightwatch test, clone the repo [jenkins-js-generator](https://scm.prod.nordnet.se/projects/PLATFORM/repos/jenkins-js-generator/browse)
+* `groovy jenkins-js-generator/scripts/convertNightwatchToCi.groovy` in the nightwatch.json folder, will change that file!
+
 ## Development help
 In DEBUG environment (npm start) there will be a [redux debug panel](https://github.com/gaearon/redux-devtools).
 This panel can be enabled/disabled by CTRL+H.
