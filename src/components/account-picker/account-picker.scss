@@ -1,40 +1,47 @@
-.account {
-  height: 107px;
+@import '../../variables';
 
-  .account__name {
-    background-color: #FFBD55;
-    position: relative;
-    width: 101px;
-    height: 101px;
-    border-radius: 50%;
-    margin-top: 3px;
-    .account__name__text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #FFFFFF;
-      font-family: sans-serif;
-      font-size: 4rem;
-    }
+
+.account-picker__body {
+  background: $nordnet-brightest-clr;
+  height: 10rem;
+  > div {
+    height: inherit;
   }
 
-  .account__description {
-    .account__description__text {
-      font-size: 1.5rem;
-      margin-bottom: 5px;
+  > div:first-child {
+    overflow: hidden; // hide first column on squeezed windows
+  }
+
+  .account-logo {
+    height: 18rem;
+    width: 18rem;
+    line-height: 18rem;
+    border-radius: 50%;
+    position: relative;
+    margin-left: 1rem;
+    background: $nordnet-warning-clr;
+    color: $nordnet-brightest-clr;
+    font-size: 8rem;
+    font-weight: bold;
+    text-align: center;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  .account-usp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__header {
+      font-size: 1.4rem;
+      padding-bottom: 1rem;
     }
-    .account__usp {
-      padding-left: 5px;
-      .account__usp__ticker {
-        padding-right: 15px;
-        img {
-          padding-right: 3px;
-        }
-        .account__usp__text {
-          font-size: 1.2rem;
-        }
-      }
+
+    &__item {
+      display: inline-block;
+      font-size: 1rem;
+      margin-right: 1rem;
     }
   }
 }
