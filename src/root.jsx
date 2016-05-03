@@ -15,8 +15,7 @@ import { Provider } from 'react-redux';
 
 // i18n function for adding localization support in react components
 import { i18n } from 'nordnet-i18n';
-import CustomerRegistration from './components/customer-registration';
-import IdentifyPage from './components/identify-page';
+import ClientFantasyContainer from './components/client-fantasy/client-fantasy-container';
 // Redux store
 import store from './store';
 import { Router, Route, hashHistory } from 'react-router';
@@ -30,8 +29,7 @@ class App extends React.Component {
   render() {
     return (
       <Router history={ history }>
-        <Route name="prospectcustomer-info-page" path="/" component={ IdentifyPage } key="identify-page" />
-        <Route name="customer-registration" path="/begin" component={ CustomerRegistration } key="customer-registration" />
+        <Route name="prospectcustomer-info-page" path="/" component={ ClientFantasyContainer } key="identify-page" />
       </Router>
     );
   }

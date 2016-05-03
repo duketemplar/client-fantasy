@@ -1,17 +1,7 @@
-import customerCreation from './prospect.action';
 import modal from './modal.action';
-import regulation from './regulation.action';
-import kyc from './kyc.action';
-import pep from './pep.action';
-import taxInfo from './tax-info.action';
-import sign from './sign.action';
+import getCaptainStat from './stat.action';
 
 export default {
-  ...customerCreation,
   ...modal,
-  ...regulation,
-  ...taxInfo,
-  ...kyc,
-  ...pep,
-  ...sign,
+  ...getCaptainStat,
 };
