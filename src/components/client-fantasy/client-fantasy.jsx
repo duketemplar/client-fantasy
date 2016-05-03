@@ -2,10 +2,8 @@
 /* eslint-disable max-len */
 import './client-fantasy.scss';
 import React from 'react';
-import { Button, Input } from 'nordnet-ui-kit';
+import { Button } from 'nordnet-ui-kit';
 import { Col, Row } from 'react-bem-grid';
-import { connect } from 'react-redux';
-import { translatable } from 'nordnet-i18n';
 import StatContainer from './stat-container';
 
 class ClientFantasy extends React.Component {
@@ -15,9 +13,8 @@ class ClientFantasy extends React.Component {
     this.filterCaptainPoints = this.filterCaptainPoints.bind(this);
   }
 
-  filterCaptainPoints(e) {
+  filterCaptainPoints() {
     this.props.getCaptainStat();
-    console.log(this.props);
   }
 
   render() {
@@ -25,22 +22,20 @@ class ClientFantasy extends React.Component {
       captainStat,
     } = this.props;
 
-    console.log('CS: ', captainStat);
     return (
         <Row className='status-section'>
           <Col sm={2} md={2} >
             <p>Captain points</p>
           </Col>
           <Col sm={1} md={1} >
-              <Button  onClick= { this.filterCaptainPoints } className="status-section__button" primary type="text" disabled={ false }>
-                Submit
-              </Button>
+            <Button onClick={this.filterCaptainPoints} className="status-section__button" primary type="text" disabled={false}>
+              Submit
+            </Button>
           </Col>
 
           <StatContainer
-            statData={ captainStat }
+            statData={captainStat}
           />
-
         </Row>
     );
   }
@@ -48,9 +43,11 @@ class ClientFantasy extends React.Component {
 
 ClientFantasy.propTypes = {
   getIntlMessage: React.PropTypes.func,
+  getCaptainStat: React.PropTypes.func,
+  captainStat: React.PropTypes.func,
 };
 ClientFantasy.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
 
-export default translatable(ClientFantasy);
+export default ClientFantasy;

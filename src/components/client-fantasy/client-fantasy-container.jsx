@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PureComponent from 'react-pure-render/component';
 import { getCaptainStat } from './../../actions';
-import ClientFantasy  from "./client-fantasy";
+import ClientFantasy from './client-fantasy';
 
 
 class ClientFantasyContainer extends PureComponent {
@@ -28,4 +28,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
- export default connect(mapStateToProps, mapDispatchToProps)(ClientFantasyContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ClientFantasyContainer);

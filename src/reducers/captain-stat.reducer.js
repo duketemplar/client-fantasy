@@ -7,47 +7,43 @@ export default function captainStat(state = {}, action) {
       const captain = getCaptainState(fullStat);
       return Object.assign({}, captain);
     default:
-    return state;
+      return state;
   }
 }
-
-
-
-function getCaptainState(fullState){
-  const newState = {};
-  let allScorers = [];
-
-  Object.keys(fullState).forEach(function(userId, index) {
-    let tmpObj = {};
-
-    newState[userId] = {};
-    Object.keys(fullState[userId]).forEach(function(gameweek, index) {
-      if(gameweek === 'username'){
-        return false;
-      }
-      const weeklyPoints = fullState[userId][gameweek]['captainpoints'];
-      if(weeklyPoints){ // TODO fix vice captaim
-        allScorers.push(weeklyPoints);
-      }
-      let tmpObj = {
-        'topscorer' : false,
-        'captainpoints' : weeklyPoints,
-      };
-      newState[userId][gameweek] = tmpObj;
-
-    });
-  });
-  return setTopScorer(newState, allScorers);
-}
-
-function setTopScorer(state, allScorers){
+function setTopScorer(state, allScorers) {
+  const newState = state;
   const highest = Math.max(...allScorers);
-  Object.keys(state).forEach(function(userId, index) {
-    Object.keys(state[userId]).forEach(function(week, index) {
-        if(state[userId][week]['captainpoints'] == highest){
-          state[userId][week]['topscorer'] = true;
-        }
+  Object.keys(newState).forEach(function(userId, index) {
+    Object.keys(newState[userId]).forEach(function(week, index) {
+      if (newState[userId][week]['captainpoints'] == highest) {
+        newState[userId][week]['topscorer'] = true;
+      }
     });
   });
   return state;
+}
+
+
+function getCaptainState(fullState) {
+  const newState = {};
+  const allScorers = [];
+
+  Object.keys(fullState).forEach(function(userId, index) {
+    newState[userId] = {};
+    Object.keys(fullState[userId]).forEach(function (gameweek, index) {
+      if (gameweek === 'username') {
+        return false;
+      }
+      const weeklyPoints = fullState[userId][gameweek]['captainpoints'];
+      if (weeklyPoints) { // TODO fix vice captaim
+        allScorers.push(weeklyPoints);
+      }
+      const tmpObj = {
+        topscorer: false,
+        captainpoints: weeklyPoints,
+      };
+      newState[userId][gameweek] = tmpObj;
+    });
+  });
+  return setTopScorer(newState, allScorers);
 }
