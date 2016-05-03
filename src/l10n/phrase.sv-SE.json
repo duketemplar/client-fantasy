@@ -1,0 +1,103 @@
+{
+  "LOADING": "Loading",
+  "COMMON":{
+    "BUTTON": {
+      "PREVOIUS": "Föregående",
+      "CONTINUE": "Gå vidare",
+      "EDIT": "Ändra",
+      "CLEAR": "Clear values",
+      "SUBMIT": "Gå vidare"
+    },
+    "ERROR": {
+      "MANDATORY": "Must be filled in",
+      "LENGTH": "Minimum 2 chars",
+      "STRING": "Must be a string no numbers or other fancy stuff"
+    },
+    "YES": "Ja",
+    "NO": "Nej"
+  },
+  "INPUT": {
+    "PHONE": {
+      "LABEL": "Telefon nummer",
+      "HELP_TEXT": "Ska vara siffror...",
+      "ERROR": "Ser konstigt ut, är det ditt nummer? "
+    },
+    "EMAIL": {
+      "LABEL": "E-post",
+      "HELP_TEXT": "Email helptext...",
+      "ERROR": "Email error"
+    },
+    "SSN": {
+      "LABEL": "Ditt personnummer",
+      "HELP_TEXT": "Fyll i ditt personnummer",
+      "ERROR": "SSN error"
+    }
+  },
+  "IDENTIFY_CUSTMONER": {
+    "HEADING_MAIN": "Välkommen att bli kund",
+    "INFO": "Fyll i ditt personnummer så guidar vi dig vidare."
+  },
+  "PROSPECT_INFO": {
+    "HEADING_MAIN": "Bli kund",
+    "PREAMBLE_MAIN": "Öppna ett konto med BankID på 3 minuter.",
+    "HEADING_SECONDARY": "Hej!",
+    "PREAMBLE_SECONDARY": "Vad roligt att du vill prova vår tjänst. Fyll i dina kontaktuppgifter och fortsätt nedåt för att öppna ett konto.",
+    "USB_HEADING": "Så här enkelt är det!",
+    "USP_ITEM_1": "Fyll i dina kontaktuppgifter",
+    "USP_ITEM_2": "Svara på frågorna",
+    "USP_ITEM_3": "Godkänn avtalen",
+    "USP_ITEM_4": "Signera med bankid!"
+  },
+  "ACCOUNT_PICKER": {
+    "HEADING_MAIN": "Konto"
+  },
+  "COMPLIANCE": {
+    "HEADER_MAIN": "Kundkännedom",
+    "PREAMBLE": "Enligt lag måste vi som bank göra en bedömning av risken för att utnyttjas för penningtvätt eller medverka till finansiering av terrorism. Dessutom finns lagar som reglerar utbyte av kontoupplysningar mellan länder. Därför behöver vi ställa dessa frågor.",
+    "MODAL": {
+        "REDIRECT": {
+          "HEADER": "Du kan tyvärr inte ansöka med e-leg",
+          "PREAMBLE": "Stats- eller regeringschef, minister eller vice/biträdande minister. Parlamentsledamot. Domare i högsta domstolen, konstitutionell domstol eller i andra rättsliga organ på hög nivå vilkas beslut endast undantagsvis kan överklagas. Högre tjänsteman vid revisionsmyndighet eller styrelseledamot i centralbank. Ambassadör, diplomatiskt sändebud eller hög officer i försvarsmakten. Person som ingår i statsägd företags förvaltnings-, lednings- eller kontrollorgan."
+        }
+    },
+    "PEP": {
+      "HEADER": "8. Är du en person i politiskt utsatt ställning (PEP)?"
+    },
+    "TAXABLE_USA": {
+      "HEADER": "2. Är du amerikansk medborgare eller är du skatt-/deklarationsskyldig i annat land än Sverige?",
+      "OPTION_NO": "Nej",
+      "OPTION_YES_USA": "Ja, jag är amerikansk medborgare",
+      "OPTION_YES:_ABROAD": "Ja, jag är skatt-/deklarationsskyldig i annat land än Sverige"
+    },
+    "TAXABLE_ABROAD": {
+      "HEADER": "2. Är du amerikansk medborgare eller är du skatt-/deklarationsskyldig i annat land än Sverige?",
+      "OPTION_NO": "Nej",
+      "OPTION_YES": "Ja"
+    },
+    "EMPLOYMENT": {
+      "HEADER": "3. Vilken anställningsform har du?",
+      "OPTION_UNEMPLOYED": "Arbetslös",
+      "OPTION_EMPLOYED": "Anställd",
+      "OPTION_SELF_EMPLOYED": "Egen företagare"
+    },
+    "YEARLY_INCOME": {
+      "HEADER": "4. Vilken ungefärlig årsinkomst har du?"
+    },
+    "YEARLY_DEPOSIT": {
+      "HEADER": "7. Vilket värde kommer dina insättningar uppgå till, i genomsnitt, per år?"
+    },
+    "FUND_ORIGIN": {
+      "HEADER": "6. Varifrån kommer de pengar och/eller värdepapper som du sätter in hos oss?",
+      "OPTION_INHERIT": "Arv",
+      "OPTION_SELF": "Tjänat..."
+    },
+    "PURPOSE": {
+      "HEADER": "5. Vad är syftet med ditt sparande hos oss?",
+      "OPTION_FINANCE": "Ekonomisk trygghet",
+      "OPTION_PENSION": "Pension",
+      "OPTION_KIN": "Till närstående, t ex barn",
+      "OPTION_PRIVATE": "Privat konsumtion",
+      "OPTION_TRADING": "Trading"
+    }
+  }
+}

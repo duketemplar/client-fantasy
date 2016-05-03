@@ -1,0 +1,17 @@
+@import '../../variables';
+
+.customer-registration__header {
+  height: 48px;
+  width: 100%;
+  background-color: $nordnet-brightest-clr;
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.09);
+  .logo {
+    position: relative;
+    top: 50%;
+    left: 10px;
+    transform: translate(0, -50%);
+  	width: 132px;
+  	height: 27px;
+  	object-fit: contain;
+  }
+}

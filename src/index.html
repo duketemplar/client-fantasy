@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Customer Registration</title>
+</head>
+<body>
+  <iframe id="legacy-session" style="display: none;" src="">
+    <p>Session could not be created</p>
+  </iframe>
+  <!-- Example container element -->
+  <!-- When data-lang and data-country attributes are on set on the container element,
+        application will try to load them from nExt API instead. This ensures that application always start with correct localization.
+        "id" on the container element should match your application name. -->
+  <div id="webapp-customer-registration"></div>
+
+  <!-- Example container that shows how data-lang and data-country attributes could be set. -->
+  <!-- <div id="nordnet-react-app" data-lang="fi" data-country="FI"></div> -->
+
+  <!-- Loads vendor bundle that includes main libraries which are used by all applications.
+        Ensures that those libraries are loaded only once on the page.
+
+        The following libraries are included in vendor bundle:
+          - react
+          - react-router
+          - intl
+          - react-intl
+          - redux
+          - react-redux
+
+        For specifics of which versions of these libraries are used see Platforms Confluence pages. -->
+  <script src="/sc/bundle/js-vendor-bundle/es5-shim.min.js"></script>
+  <script src="/sc/bundle/js-vendor-bundle/3508a7175752ad89902a1b2d69f988581e4b5996.18/vendor.bundle.3.0.0.js"></script>
+
+  <!-- Application loading with cache busting for new versions.
+        Dynamically injects <script> tags on the page for all defined entry points. -->
+  <script src="/sc/webapp-customer-registration/init/base.js"></script>
+
+  <script>
+    (function(){
+      var sessionGenerator = document.getElementById('legacy-session');
+
+      var setSrcAttrToHostUrl = function(iframe) {
+
+        var hostUrl = location.protocol + '//' + location.host;
+        if (!location.host.includes('localhost')) {
+          sessionGenerator.setAttribute('src', hostUrl);
+        } else {
+          sessionGenerator.setAttribute('src', "");
+        }
+      }
+
+      var loadApplication = function(window, document) {
+        var appName = 'webapp-customer-registration';
+        var domElement = document.getElementById(appName);
+        if (domElement && window.Nordnet[appName]) {
+          console.log('Initialising the app...');
+          window.Nordnet[appName](domElement);
+        }
+      };
+
+      sessionGenerator.onload = function(){
+        loadApplication(window, document);
+      };
+
+      setSrcAttrToHostUrl(sessionGenerator);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "accno": 5997085,
+    "bank_accno": "5997085 0001",
+    "type": "Stock- and mutual funds account",
+    "account_code": "DEP",
+    "default": true,
+    "alias": "Stora Webffdtyuå"
+  },
+  {
+    "accno": 8191678,
+    "bank_accno": "8191678 0001",
+    "type": "savings account",
+    "account_code": "SPARKONTO",
+    "default": false,
+    "alias": "Sparkonto"
+  }
+]

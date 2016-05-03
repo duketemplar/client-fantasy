@@ -1,0 +1,61 @@
+@import 'variables';
+@import 'style-components';
+
+html, body {
+  font: $font-alternative;
+  font-size: 62.5%;
+  margin: 0;
+  min-height: 100%;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1 {
+  clear: both;
+  text-align: left;
+  color: $color-header;
+  font-size: $size-header-primary;
+}
+h1 + p {
+  color: $color-text;
+  font-size: $size-body-copy-large;
+}
+h2 {
+  color: $color-header;
+  margin: 0px 0px 1rem 0px;
+  padding: 1rem 0 0 0;
+  font-size: $size-header-secondary;
+}
+h2 + p {
+  color: $color-text;
+  font-size: $size-body-copy;
+}
+h3 {
+  color: $color-header;
+  margin: 0px 0px 1rem 0px;
+  padding: 1rem 0 0 0;
+  font-size: $size-header-tertiary;
+}
+h4 {
+  font-size: $size-header-quinary;
+}
+h5 {
+  font-size: $size-header-quinary;
+}
+h6 {
+  font-size: $size-header-senary;
+}
+p, span {
+  font-size: $size-body-copy;
+}
+a {
+  color: $color-common;
+  text-decoration: none;
+}
