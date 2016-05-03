@@ -8,8 +8,6 @@ import { connect } from 'react-redux';
 import { translatable } from 'nordnet-i18n';
 import StatContainer from './stat-container';
 
-
-
 class ClientFantasy extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +16,6 @@ class ClientFantasy extends React.Component {
   }
 
   filterCaptainPoints(e) {
-
     this.props.getCaptainStat();
     console.log(this.props);
   }
@@ -31,10 +28,10 @@ class ClientFantasy extends React.Component {
     console.log('CS: ', captainStat);
     return (
         <Row className='status-section'>
-          <Col sm={2} >
+          <Col sm={2} md={2} >
             <p>Captain points</p>
           </Col>
-          <Col sm={1} >
+          <Col sm={1} md={1} >
               <Button  onClick= { this.filterCaptainPoints } className="status-section__button" primary type="text" disabled={ false }>
                 Submit
               </Button>
