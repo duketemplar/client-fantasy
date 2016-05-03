@@ -15,10 +15,11 @@ export default function captainStat(state = {}, action) {
 
 function getCaptainState(fullState){
   const newState = {};
+  let allScorers = [];
 
   Object.keys(fullState).forEach(function(userId, index) {
     let tmpObj = {};
-    let allScorers = [];
+
     newState[userId] = {};
     Object.keys(fullState[userId]).forEach(function(gameweek, index) {
       if(gameweek === 'username'){
@@ -29,21 +30,24 @@ function getCaptainState(fullState){
         allScorers.push(weeklyPoints);
       }
       let tmpObj = {
-        'topscorer' : isTopscorer(allScorers, weeklyPoints, index),
+        'topscorer' : false,
         'captainpoints' : weeklyPoints,
       };
       newState[userId][gameweek] = tmpObj;
 
     });
   });
-  console.log('newState', newState);
-  return newState;
+  return setTopScorer(newState, allScorers);
 }
 
-function isTopscorer(allScorers, current){
-  if(allScorers.length === 1){ // TODO fix first position
-    return false;
-  }
+function setTopScorer(state, allScorers){
   const highest = Math.max(...allScorers);
-  return current >= highest;
+  Object.keys(state).forEach(function(userId, index) {
+    Object.keys(state[userId]).forEach(function(week, index) {
+        if(state[userId][week]['captainpoints'] == highest){
+          state[userId][week]['topscorer'] = true;
+        }
+    });
+  });
+  return state;
 }
